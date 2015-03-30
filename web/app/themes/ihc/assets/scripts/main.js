@@ -1,81 +1,321 @@
-/* ========================================================================
- * DOM-based Routing
- * Based on http://goo.gl/EUTi53 by Paul Irish
- *
- * Only fires on body classes that match. If a body class contains a dash,
- * replace the dash with an underscore when adding it to the object below.
- *
- * .noConflict()
- * The routing is enclosed within an anonymous function so that you can
- * always reference jQuery with $, even when in .noConflict() mode.
- *
- * Google CDN, Latest jQuery
- * To use the default WordPress version of jQuery, go to lib/config.php and
- * remove or comment out: add_theme_support('jquery-cdn');
- * ======================================================================== */
+// IHC - Firebelly 2015
 
-(function($) {
+// good design for good reason for good namespace
+var IHC = (function($) {
 
-  // Use this variable to set up the common and page specific functions. If you
-  // rename this variable, you will also need to rename the namespace below.
-  var Sage = {
-    // All pages
-    'common': {
-      init: function() {
-        // JavaScript to be fired on all pages
-      },
-      finalize: function() {
-        // JavaScript to be fired on all pages, after page specific JS is fired
-      }
-    },
-    // Home page
-    'home': {
-      init: function() {
-        // JavaScript to be fired on the home page
-      },
-      finalize: function() {
-        // JavaScript to be fired on the home page, after the init JS
-      }
-    },
-    // About us page, note the change from about-us to about_us.
-    'about_us': {
-      init: function() {
-        // JavaScript to be fired on the about us page
-      }
-    }
-  };
+  var screen_width = 0,
+      is_desktop = false,
+      page_cache = [],
+      $content,
+      $backnav,
+      $body,
+      $document,
+      $nav,
+      History = window.History,
+      rootUrl = History.getRootUrl(),
+      loadingTimer;
 
-  // The routing fires all common scripts, followed by the page specific scripts.
-  // Add additional events for more control over timing e.g. a finalize event
-  var UTIL = {
-    fire: function(func, funcname, args) {
-      var fire;
-      var namespace = Sage;
-      funcname = (funcname === undefined) ? 'init' : funcname;
-      fire = func !== '';
-      fire = fire && namespace[func];
-      fire = fire && typeof namespace[func][funcname] === 'function';
+  function _init() {
+      // set screen size vars
+      _resize();
 
-      if (fire) {
-        namespace[func][funcname](args);
-      }
-    },
-    loadEvents: function() {
-      // Fire common init JS
-      UTIL.fire('common');
+      // init state
+      State = History.getState();
 
-      // Fire page-specific init JS, and then finalize JS
-      $.each(document.body.className.replace(/-/g, '_').split(/\s+/), function(i, classnm) {
-        UTIL.fire(classnm);
-        UTIL.fire(classnm, 'finalize');
+      $document = $(document);
+      $body = $('body');
+      $content = $('#main-content');
+      $nav = $('.site-nav');
+
+      // fit them vids!
+      $content.fitVids();
+
+      // init behavior for various sections
+      _initSearch();
+      _initNav();
+      _initAjaxLinks();
+      _initMenuToggle();
+      _initSliders();
+      _initMasonry();
+      _initLoadMore();
+
+      // initial nav update based on URL
+      _updateNav();
+
+      // Esc handlers
+      $(document).keyup(function(e) {
+        if (e.keyCode === 27) {
+          _hideSearch();
+        }
       });
 
-      // Fire common finalize JS
-      UTIL.fire('common', 'finalize');
+  }
+
+  function _scrollBody(element, duration, delay) {
+    if ($('#wpadminbar').length) {
+      wpOffset = $('#wpadminbar').height();
+    } else {
+      wpOffset = 0;
+    }
+    element.velocity("scroll", { 
+      duration: duration,
+      delay: delay,
+      offset: -wpOffset
+    }, "easeOutSine");
+  } 
+
+  function _initSearch() {
+    $('.search-toggle, .internal-search-toggle').on('click', function (e) {
+      e.preventDefault();
+      if (!$('.search-wrap').hasClass('active')) {
+        $('.search-wrap').addClass('active'); 
+        $('.search-form input').focus(); 
+      } else {
+        _hideSearch();
+      }
+    });
+
+    $body.on('click', '.search-container', function (e) {
+      if (!$(e.target).is('.search-field')) {
+        _hideSearch();
+      }
+    });
+  }
+
+  function _hideSearch() {
+    $('.search-wrap').removeClass('active');
+  }
+
+  // Ajaxify all internal links in content area
+  function _initAjaxLinks() {
+    $content.find('a:internal:not(.no-ajaxy)').each(function() {
+      var href = $(this).attr('href');
+      if (!href.match(/\.(jpg|png|gif|pdf)$/)) {
+        $(this).click(function(e) {
+          e.preventDefault();
+          History.pushState({}, '', href);
+        });
+      }
+    });
+  }
+
+  function _updateTitle() {
+    var title = $content.find('.content:first').data('post-title');
+    if (title === '' || title === 'Main') {
+      title = 'IHC';
+    } else {
+      title = title + ' | IHC';
+    }
+    // this bit also borrowed from Ajaxify
+    document.title = title;
+    try {
+      document.getElementsByTagName('title')[0].innerHTML = document.title.replace('<','&lt;').replace('>','&gt;').replace(' & ',' &amp; ');
+    } catch (Exception) {}
+  }
+
+  // handles main nav
+  function _initNav() {
+
+    $(window).bind('statechange',function(){
+      var State = History.getState(),
+          url = State.url,
+          relative_url = url.replace(rootUrl,''),
+          parent_li;
+
+      if (State.data.ignore_change) { return; }
+
+      if (!page_cache[encodeURIComponent(url)]) {
+        loadingTimer = setTimeout(function() { $content.addClass('loading'); }, 500);
+        $.post(
+          url,
+          function(res) {
+            page_cache[encodeURIComponent(url)] = res;
+            IHC.updateContent();
+          }
+        );
+      } else {
+        _updateContent();
+      }
+    });
+  }
+
+  function _updateContent() {
+    var State = History.getState();
+    var new_content = page_cache[encodeURIComponent(State.url)];
+    // $content.removeClass('fadeInRight').addClass('fadeOutRight');
+    setTimeout(function() {
+      $content.html(new_content);
+      // pull in body class from data attribute
+      $body.attr('class', $content.find('.content:first').data('body-class'));
+      if (loadingTimer) { clearTimeout(loadingTimer); }
+      $content.removeClass('loading');
+
+      _updateTitle();
+      _initAjaxLinks();
+      _initSliders();
+      _initMasonry();
+      $content.fitVids();
+
+      // scroll to top
+      _scrollBody($body, 250, 0);
+
+      // track page view in Analytics
+      _trackPage();
+
+    }, 150);
+  }
+
+  function _updateNav() {
+  }
+
+  function _initMenuToggle(){
+    $('.menu-toggle').on('click', function (e) {
+      e.preventDefault();
+      _toggleMobileMenu();
+    });
+  }
+
+  function _toggleMobileMenu() {
+    $('.menu-toggle-wrap').toggleClass('menu-open');
+    $('#sidebar').toggleClass('active');
+  }
+
+  function _initSliders(){
+    $('.slider').slick({
+      slide: '.slide-item',
+      autoplay: $('.home.page').length>0,
+      autoplaySpeed: 8000,
+      speed: 800,
+      appendArrows: $('.slide-wrap-inner'),
+      prevArrow:  '<svg class="slick-prev icon icon-arrow-left" role="img"><use xlink:href="#icon-arrow-left"></use></svg>',
+      nextArrow: '<svg class="slick-next icon icon-arrow-right" role="img"><use xlink:href="#icon-arrow-right"></use></svg>'
+    });
+  }
+
+  function _initFaq(){
+    $('.faq-answer').velocity('slideUp', { duration: 0 });
+    $document.on('click', '.faq-nav a', function(e) {
+      e.preventDefault();
+      var $this = $(this);
+      if ($this.closest('li').hasClass('active')) { return false; }
+      _showFaq($this.attr('href'), 1);
+    });
+    
+    // check if we're linking to #faq2 (not currently used)
+    if (location.hash !== '' && location.hash.match(/faq/)) {
+      _showFaq(location.hash);
+      // scroll to FAQ section
+      _scrollBody($('.faq'), 250, 0);
+    }
+    if ($('.faq-nav li.active').length === 0) {
+      // make first FAQ active if none selected
+      _showFaq($('.faq-nav li:first a').attr('href'));
+    }
+  }
+
+  function _showFaq(faq, update_url) {
+    $('.faq-nav li').removeClass('active');
+    $('.faq-nav li a[href="'+faq+'"]').closest('li').addClass('active');
+
+    var faq_answer = $(faq + '.faq-answer');
+
+    $('.faq-answer.active').velocity("slideUp", { duration: 150 });
+    faq_answer.addClass('active').velocity("slideDown", { delay: 200, duration: 400 });
+    if (typeof update_url !== 'undefined') {
+      History.replaceState({}, null, faq);
+    }
+  }
+
+  function _initMasonry(){
+    var $container = $('.masonry');
+    $container.masonry({
+      itemSelector: 'article',
+      transitionDuration: '.3s'
+    });
+  }
+
+  function _initLoadMore() {
+    $document.on('click', '.happenings .load-more a', function(e) {
+      e.preventDefault();
+      var load_more = $(this).closest('.load-more');
+      var page = parseInt(load_more.attr('data-page-at'));
+      var per_page = parseInt(load_more.attr('data-per-page'));
+      var masonry_container = load_more.parents('section').find('.masonry');
+      loadingTimer = setTimeout(function() { masonry_container.addClass('loading'); }, 500);
+      $.ajax({
+          url: wp_ajax_url,
+          method: 'post',
+          data: {
+              action: 'get_news_posts',
+              page: page + 1,
+              per_page: per_page
+          },
+          success: function(data) {
+            var $data = $(data);
+            if (loadingTimer) { clearTimeout(loadingTimer); }
+            masonry_container.append($data).removeClass('loading');
+            masonry_container.masonry('appended', $data, true);
+            load_more.attr('data-page-at', page+1);
+            _initAjaxLinks();
+
+            // hide load more if last page
+            if (load_more.attr('data-total-pages') === page + 1) {
+                load_more.addClass('hide');
+            }
+          }
+      });
+    });
+  }
+
+  // track ajax pages in Analytics
+  function _trackPage() {
+    if (typeof ga !== 'undefined') { ga('send', 'pageview', document.location.href); }
+  }
+
+  // track events in Analytics
+  function _trackEvent(category, action) {
+    if (typeof ga !== 'undefined') { ga('send', 'event', category, action); }
+  }
+
+  // called in quick succession as window is resized
+  function _resize() {
+    screenWidth = document.documentElement.clientWidth;
+    is_desktop = screenWidth > 768;
+  }
+
+
+  // public functions
+  return {
+    init: _init,
+    resize: _resize,
+    updateContent: _updateContent,
+    scrollBody: function(section, duration, delay) {
+      _scrollBody(section, duration, delay);
     }
   };
 
-  // Load Events
-  $(document).ready(UTIL.loadEvents);
+})(jQuery);
 
-})(jQuery); // Fully reference jQuery after this point.
+// fire up the mothership
+jQuery(document).ready(IHC.init);
+// zig-zag the mothership
+jQuery(window).resize(IHC.resize);
+
+
+(function($){
+  // Internal Helper (from Ajaxify)
+  $.expr[':'].internal = function(obj, index, meta, stack){
+    // Prepare
+    var
+      $this = $(obj),
+      url = $this.attr('href')||'',
+      isInternalLink,
+      rootUrl = History.getRootUrl();
+
+    // Check link
+    isInternalLink = url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
+    
+    // Ignore or Keep
+    return isInternalLink;
+  };
+})(jQuery);
