@@ -8,13 +8,13 @@
     },
     "main.css": {
       "files": [
-        "styles/main.less"
+        "styles/main.scss"
       ],
       "main": true
     },
     "editor-style.css": {
       "files": [
-        "styles/editor-style.less"
+        "styles/editor-style.scss"
       ]
     },
     "jquery.js": {
@@ -22,6 +22,12 @@
     },
     "modernizr.js": {
       "bower": ["modernizr"]
+    },
+    "respond.js": {
+      "bower": ["respond"]
+    },
+    "svg4everybody.js": {
+      "bower": ["svg4everybody"]
     }
   }
 }

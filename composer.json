@@ -43,11 +43,17 @@
     "php": ">=5.4",
     "composer/installers": "v1.0.12",
     "vlucas/phpdotenv": "1.0.9",
-    "johnpbloch/wordpress": "4.1.1"
+    "johnpbloch/wordpress": "4.1.1",
+    "wpackagist-plugin/post-thumbnail-editor" : "*",
+    "wpackagist-plugin/limit-login-attempts" : "*",
+    "wpackagist-plugin/wordpress-importer" : "*",
+    "wpackagist-plugin/intuitive-custom-post-order": "*",
+    "wpackagist-plugin/cmb2": ">=2.0.2",
+    "wpackagist-plugin/multiple-content-blocks": "3.2"
   },
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin", "roots/soil", "wpackagist-plugin/cmb2"],
       "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
       "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },

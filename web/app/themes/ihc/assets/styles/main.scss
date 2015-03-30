@@ -1,0 +1,13 @@
+// bower:sass
+// endbower
+
+@charset "UTF-8"; 
+
+body {
+	border: 20px solid #eee;
+	margin: 0;
+	padding: 20px;
+}
+
+// WP specifics
+@import 'wp-classes';
