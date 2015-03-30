@@ -23,8 +23,5 @@
     "modernizr.js": {
       "bower": ["modernizr"]
     }
-  },
-  "config": {
-    "devUrl": "http://example.dev"
   }
 }
