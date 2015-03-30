@@ -152,3 +152,39 @@ function get_total_pages($category, $per_page) {
   $num_pages = ceil($cat_info->count / $per_page);
   return $num_pages;
 }
+
+/**
+ * Get related resources
+ */
+function get_resources($post_id) {
+    $files = get_post_meta($post_id, '_cmb2_resources', 1);
+
+    foreach ((array)$files as $attachment_id => $attachment_url) {
+      echo '<div class="file-list-image">';
+      echo wp_get_attachment_image($attachment_id);
+      echo '</div>';
+    }
+}
+
+/**
+ * Get post options for CMB2 select
+ */
+function cmb2_get_post_options( $query_args ) {
+
+    $args = wp_parse_args( $query_args, array(
+        'post_type'   => 'post',
+        'numberposts' => 10,
+        'post_parent' => 0,
+    ) );
+
+    $posts = get_posts( $args );
+
+    $post_options = array();
+    if ( $posts ) {
+        foreach ( $posts as $post ) {
+          $post_options[ $post->ID ] = $post->post_title;
+        }
+    }
+
+    return $post_options;
+}

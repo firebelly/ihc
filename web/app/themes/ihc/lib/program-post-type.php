@@ -37,7 +37,7 @@ function post_type() {
     'label'               => 'program',
     'description'         => 'Programs',
     'labels'              => $labels,
-    'supports'            => array( 'title', 'thumbnail', ),
+    'supports'            => array( 'title', 'editor', 'thumbnail', ),
     'hierarchical'        => false,
     'public'              => true,
     'show_ui'             => true,
@@ -58,45 +58,38 @@ function post_type() {
 }
 add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
 
-// Register custom taxonomy for post type
-register_taxonomy( 'program_cat', 
-  array('program'),
+// Custom taxonomy Focus Areas
+register_taxonomy( 'focus_areas', 
+  array('program', 'page', 'post', 'thought'),
   array('hierarchical' => true, // if this is true, it acts like categories
     'labels' => array(
-      'name' => 'Program Sectors',
-      'singular_name' => 'Program Sector',
-      'search_items' =>  'Search Program Sectors',
-      'all_items' => 'All Program Sectors',
-      'parent_item' => 'Parent Program Sector',
-      'parent_item_colon' => 'Parent Program Sector:',
-      'edit_item' => 'Edit Program Sector',
-      'update_item' => 'Update Program Sector',
-      'add_new_item' => 'Add New Program Sector',
-      'new_item_name' => 'New Program Sector',
+      'name' => 'Focus Areas',
+      'singular_name' => 'Focus Area',
+      'search_items' =>  'Search Focus Areas',
+      'all_items' => 'All Focus Areas',
+      'parent_item' => 'Parent Focus Area',
+      'parent_item_colon' => 'Parent Focus Area:',
+      'edit_item' => 'Edit Focus Area',
+      'update_item' => 'Update Focus Area',
+      'add_new_item' => 'Add New Focus Area',
+      'new_item_name' => 'New Focus Area',
     ),
     'show_admin_column' => true, 
     'show_ui' => true,
     'query_var' => true,
     'rewrite' => array( 
-      'slug' => 'programs/sector', 
+      'slug' => 'focus-area',
       'with_front' => false 
     ),
   )
 );
-// remove category list from sidebar as we are using a custom CMB2 dropdown below
-function remove_program_cat_meta() {
-  remove_meta_box( 'program_catdiv', 'program', 'side' );
-}
-add_action( 'admin_menu' , __NAMESPACE__ . '\remove_program_cat_meta' );
 
 // Custom admin columns for post type
 function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
-    'taxonomy-program_cat' => 'Sector',
-    '_cmb2_program_year' => 'Year',
-    '_cmb2_url' => 'Url',
+    'taxonomy-focus_areas' => 'Focus Area(s)',
     'featured_image' => 'Image',
   );
   return $columns;
@@ -108,8 +101,6 @@ function custom_columns($column){
   if ( $post->post_type == 'program' ) {
     if ( $column == 'featured_image' )
       echo the_post_thumbnail('thumbnail');
-    elseif ( $column == 'content' )
-      echo Utils\get_excerpt($post);
     else {
       $custom = get_post_custom();
       if (array_key_exists($column, $custom))
@@ -132,10 +123,10 @@ function metaboxes( array $meta_boxes ) {
     'show_names'    => true, // Show field names on the left
     'fields'        => array(
       array(
-        'name' => 'Url',
-        'desc' => 'e.g. http://program-site.com/',
-        'id'   => $prefix . 'url',
-        'type' => 'text_url',
+        'name' => 'Resources',
+        // 'desc' => 'e.g. http://program-site.com/',
+        'id'   => $prefix . 'resources',
+        'type' => 'file_list',
       ),
     ),
   );
@@ -161,7 +152,7 @@ function shortcode($atts) {
   if ($sector != '') {
     $args['tax_query'] = array(
       array(
-        'taxonomy' => 'program_cat',
+        'taxonomy' => 'focus_areas',
         'field' => 'slug',
         'terms' => $sector
       )
@@ -184,7 +175,7 @@ function shortcode($atts) {
 
   foreach ($program_posts as $post):
     $year = get_post_meta($post->ID, '_cmb2_program_year', true);
-    if ($sector = Utils\get_first_term($post, 'program_cat')) {
+    if ($sector = Utils\get_first_term($post, 'focus_areas')) {
       $sector_slug = $sector->slug;
       $sector_name = $sector->name;
     } else {
@@ -221,7 +212,7 @@ function shortcode_filters($atts) {
     $output .= '<option value="' . $year . '"' . ($year==$years[0] ? ' selected' : '') . '>' . $year . '</option>';
   $output .= '</select></div> ';
 
-  $sectors = get_terms('program_cat');
+  $sectors = get_terms('focus_areas');
   $output .= '<div class="select-wrapper"><label>Sector:</label><select class="sector">';
   $output .= '<option value="">All</option>';
   foreach ($sectors as $sector)

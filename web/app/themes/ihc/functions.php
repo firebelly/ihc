@@ -30,6 +30,7 @@ $firebelly_includes = [
   'lib/post-meta-boxes.php',       // Extra CMB2 Post fields
   'lib/short-codes.php',           // Custom short codes
   'lib/program-post-type.php',     // Programs
+  'lib/thought-post-type.php',     // Thoughts
   'lib/ajax.php',                  // AJAX functions
 ];
 
