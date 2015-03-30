@@ -22,6 +22,19 @@ $sage_includes = [
   'lib/extras.php',                // Custom functions
 ];
 
+$firebelly_includes = [
+  'lib/disable-comments.php',      // Disables WP comments in admin and frontend
+  'lib/media.php',                 // Image sizes, etc
+  'lib/custom-functions.php',      // Rando utility functions
+  'lib/page-meta-boxes.php',       // Extra CMB2 Page fields
+  'lib/post-meta-boxes.php',       // Extra CMB2 Post fields
+  'lib/short-codes.php',           // Custom short codes
+  'lib/program-post-type.php',     // Programs
+  'lib/ajax.php',                  // AJAX functions
+];
+
+$sage_includes = array_merge($sage_includes, $firebelly_includes);
+
 foreach ($sage_includes as $file) {
   if (!$filepath = locate_template($file)) {
     trigger_error(sprintf(__('Error locating %s for inclusion', 'sage'), $file), E_USER_ERROR);

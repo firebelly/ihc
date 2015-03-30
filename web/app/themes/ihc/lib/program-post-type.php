@@ -1,0 +1,233 @@
+<?php
+/**
+ * Program post type
+ */
+
+namespace Firebelly\PostTypes\Program;
+use Firebelly\Utils;
+
+// Custom image size for post type?
+// add_image_size( 'programs-thumb', 300, 300, true );
+
+// Register Custom Post Type
+function post_type() {
+
+  $labels = array(
+    'name'                => 'Programs',
+    'singular_name'       => 'Program',
+    'menu_name'           => 'Programs',
+    'parent_item_colon'   => '',
+    'all_items'           => 'All Programs',
+    'view_item'           => 'View Program',
+    'add_new_item'        => 'Add New Program',
+    'add_new'             => 'Add New',
+    'edit_item'           => 'Edit Program',
+    'update_item'         => 'Update Program',
+    'search_items'        => 'Search Programs',
+    'not_found'           => 'Not found',
+    'not_found_in_trash'  => 'Not found in Trash',
+  );
+  $rewrite = array(
+    'slug'                => '',
+    'with_front'          => false,
+    'pages'               => false,
+    'feeds'               => false,
+  );
+  $args = array(
+    'label'               => 'program',
+    'description'         => 'Programs',
+    'labels'              => $labels,
+    'supports'            => array( 'title', 'thumbnail', ),
+    'hierarchical'        => false,
+    'public'              => true,
+    'show_ui'             => true,
+    'show_in_menu'        => true,
+    'show_in_nav_menus'   => true,
+    'show_in_admin_bar'   => true,
+    'menu_position'       => 20,
+    'menu_icon'           => 'dashicons-admin-post',
+    'can_export'          => false,
+    'has_archive'         => false,
+    'exclude_from_search' => false,
+    'publicly_queryable'  => true,
+    'rewrite'             => $rewrite,
+    'capability_type'     => 'page',
+  );
+  register_post_type( 'program', $args );
+
+}
+add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
+
+// Register custom taxonomy for post type
+register_taxonomy( 'program_cat', 
+  array('program'),
+  array('hierarchical' => true, // if this is true, it acts like categories
+    'labels' => array(
+      'name' => 'Program Sectors',
+      'singular_name' => 'Program Sector',
+      'search_items' =>  'Search Program Sectors',
+      'all_items' => 'All Program Sectors',
+      'parent_item' => 'Parent Program Sector',
+      'parent_item_colon' => 'Parent Program Sector:',
+      'edit_item' => 'Edit Program Sector',
+      'update_item' => 'Update Program Sector',
+      'add_new_item' => 'Add New Program Sector',
+      'new_item_name' => 'New Program Sector',
+    ),
+    'show_admin_column' => true, 
+    'show_ui' => true,
+    'query_var' => true,
+    'rewrite' => array( 
+      'slug' => 'programs/sector', 
+      'with_front' => false 
+    ),
+  )
+);
+// remove category list from sidebar as we are using a custom CMB2 dropdown below
+function remove_program_cat_meta() {
+  remove_meta_box( 'program_catdiv', 'program', 'side' );
+}
+add_action( 'admin_menu' , __NAMESPACE__ . '\remove_program_cat_meta' );
+
+// Custom admin columns for post type
+function edit_columns($columns){
+  $columns = array(
+    'cb' => '<input type="checkbox" />',
+    'title' => 'Title',
+    'taxonomy-program_cat' => 'Sector',
+    '_cmb2_program_year' => 'Year',
+    '_cmb2_url' => 'Url',
+    'featured_image' => 'Image',
+  );
+  return $columns;
+}
+add_filter('manage_program_posts_columns', __NAMESPACE__ . '\edit_columns');
+
+function custom_columns($column){
+  global $post;
+  if ( $post->post_type == 'program' ) {
+    if ( $column == 'featured_image' )
+      echo the_post_thumbnail('thumbnail');
+    elseif ( $column == 'content' )
+      echo Utils\get_excerpt($post);
+    else {
+      $custom = get_post_custom();
+      if (array_key_exists($column, $custom))
+        echo $custom[$column][0];
+    }
+  };
+}
+add_action('manage_posts_custom_column',  __NAMESPACE__ . '\custom_columns');
+
+// Custom CMB2 fields for post type
+function metaboxes( array $meta_boxes ) {
+  $prefix = '_cmb2_'; // Start with underscore to hide from custom fields list
+
+  $meta_boxes['program_metabox'] = array(
+    'id'            => 'program_metabox',
+    'title'         => __( 'Program Info', 'cmb2' ),
+    'object_types'  => array( 'program', ), // Post type
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+    'fields'        => array(
+      array(
+        'name' => 'Url',
+        'desc' => 'e.g. http://program-site.com/',
+        'id'   => $prefix . 'url',
+        'type' => 'text_url',
+      ),
+    ),
+  );
+
+  return $meta_boxes;
+}
+add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+
+// Shortcode [programs year=2014 sector=foobar]
+add_shortcode('programs', __NAMESPACE__ . '\shortcode');
+function shortcode($atts) {
+  extract(shortcode_atts(array(
+       'sector' => '',
+    ), $atts));
+  $output = '';
+  $args = array(
+    'numberposts' => -1,
+    'post_type' => 'program',
+    'orderby' => ['title' => 'ASC'],
+    // 'meta_key' => '_cmb2_program_year',
+    // 'orderby' => ['meta_value_num' => 'DESC', 'title' => 'ASC'],
+    );
+  if ($sector != '') {
+    $args['tax_query'] = array(
+      array(
+        'taxonomy' => 'program_cat',
+        'field' => 'slug',
+        'terms' => $sector
+      )
+    );
+  }
+  if ($year != '') {
+    $args['meta_query'] = array(
+      array(
+        'key' => '_cmb2_program_year',
+        'value' => $year,
+        'compare' => '=',
+      )
+    );
+  }
+
+  $program_posts = get_posts($args);
+  if (!$program_posts) return false;
+
+  $output = '<ul class="feature-grid grid external-links programs">';
+
+  foreach ($program_posts as $post):
+    $year = get_post_meta($post->ID, '_cmb2_program_year', true);
+    if ($sector = Utils\get_first_term($post, 'program_cat')) {
+      $sector_slug = $sector->slug;
+      $sector_name = $sector->name;
+    } else {
+      $sector_name = $sector_slug = '';
+    }
+
+    $output .= "<li data-year=\"{$year}\" data-sector=\"{$sector_slug}\" class=\"feature-item flex-item one-third\">";
+    ob_start();
+    include(locate_template('templates/article-program.php'));
+    $output .= ob_get_clean();
+    $output .= '</li>';
+  endforeach;
+
+  $output .= '</ul>';
+
+  return $output;
+}
+
+// Shortcode [programs_filters]
+add_shortcode('programs_filters', __NAMESPACE__ . '\shortcode_filters');
+function shortcode_filters($atts) {
+  global $wpdb;
+  $output = '<form class="program-filters" method="get"><label>Sort By</label> ';
+  $args = array(
+    'numberposts' => -1,
+    'post_type' => 'program',
+    'orderby' => 'menu_order',
+    );
+
+  $years = $wpdb->get_col( "SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_cmb2_program_year' GROUP BY meta_value ORDER BY meta_value DESC" );
+  $output .= '<div class="select-wrapper"><label>Year:</label><select class="year">';
+  $output .= '<option value="">All</option>';
+  foreach ($years as $year)
+    $output .= '<option value="' . $year . '"' . ($year==$years[0] ? ' selected' : '') . '>' . $year . '</option>';
+  $output .= '</select></div> ';
+
+  $sectors = get_terms('program_cat');
+  $output .= '<div class="select-wrapper"><label>Sector:</label><select class="sector">';
+  $output .= '<option value="">All</option>';
+  foreach ($sectors as $sector)
+    $output .= '<option value="' . $sector->slug . '">' . $sector->name . '</option>';
+  $output .= '</select></div> ';
+  $output .= '</form> ';
+
+  return $output;
+}
