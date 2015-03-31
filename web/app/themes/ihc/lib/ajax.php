@@ -33,3 +33,8 @@ function get_radar_posts() {
 
   die();
 }
+
+function wp_ajax_url() {
+  wp_localize_script('sage_js', 'wp_ajax_url', admin_url( 'admin-ajax.php'));
+}
+add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\wp_ajax_url', 100);

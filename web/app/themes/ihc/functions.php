@@ -24,14 +24,15 @@ $sage_includes = [
 
 $firebelly_includes = [
   'lib/disable-comments.php',      // Disables WP comments in admin and frontend
+  'lib/fb_assets.php',             // IE scripts, etc
   'lib/media.php',                 // Image sizes, etc
-  'lib/custom-functions.php',      // Rando utility functions
+  'lib/custom-functions.php',      // Rando utility functions and miscellany
+  'lib/ajax.php',                  // AJAX functions
   'lib/page-meta-boxes.php',       // Extra CMB2 Page fields
   'lib/post-meta-boxes.php',       // Extra CMB2 Post fields
   'lib/short-codes.php',           // Custom short codes
   'lib/program-post-type.php',     // Programs
   'lib/thought-post-type.php',     // Thoughts
-  'lib/ajax.php',                  // AJAX functions
 ];
 
 $sage_includes = array_merge($sage_includes, $firebelly_includes);

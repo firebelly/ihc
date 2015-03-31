@@ -8,7 +8,9 @@ namespace Firebelly\PostTypes\Thought;
 // Custom image size for post type?
 add_image_size( 'thought-thumb', 350, null, null );
 
-// Register Custom Post Type
+/**
+ * Register Custom Post Type
+ */
 function post_type() {
 
   $labels = array(
@@ -57,7 +59,9 @@ function post_type() {
 }
 add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
 
-// Custom admin columns for post type
+/**
+ * Custom admin columns for post type
+ */
 function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
@@ -86,7 +90,9 @@ function custom_columns($column){
 }
 add_action('manage_posts_custom_column',  __NAMESPACE__ . '\custom_columns');
 
-// Custom CMB2 fields for post type
+/**
+ * CMB2 custom fields
+ */
 function metaboxes( array $meta_boxes ) {
   $prefix = '_cmb2_'; // Start with underscore to hide from custom fields list
 
@@ -111,27 +117,9 @@ function metaboxes( array $meta_boxes ) {
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
-function icon_types() {
-  return [
-    'catalyst' => 'Catalyst',
-    'clock' => 'Clock',
-    'digital-learning' => 'Digital Learning',
-    'exclamation' => 'Exclamation',
-    'letter' => 'Letter',
-    'lightbulb' => 'Lightbulb',
-    'news' => 'News',
-    'pov' => 'Point Of View',
-    'question' => 'Question',
-    'radar' => 'Radar',
-    'strategy' => 'Strategy',
-    'team' => 'Team',
-    'triad' => 'Triad',
-    'tricircle' => 'Tricircle',
-  ];
-}
-
-// Shortcode [thoughts]
-add_shortcode('thoughts', __NAMESPACE__ . '\shortcode');
+/**
+ * Shortcode [thoughts]
+ */
 function shortcode($atts) {
   extract(shortcode_atts(array(
        'page' => '',
@@ -175,3 +163,32 @@ HTML;
 
   return $output;
 }
+add_shortcode('thoughts', __NAMESPACE__ . '\shortcode');
+
+/**
+ * Outputs a "Submit A Thought" submit form
+ */
+function submit_form() {
+?>
+  <form name="new_thought" method="post" action="" class="submit-thought">
+  <?php wp_nonce_field('new_thought', 'new_thought_nonce'); ?>
+  <input type="text" name="author-name">
+  <?php wp_dropdown_categories('show_option_none=Select Focus Area&taxonomy=focus_areas'); ?>
+  <button type="submit">Submit Thought</button>
+  </form>
+<?php
+}
+
+/**
+ * Handle a Thought submission
+ */
+function thought_submission() {
+  $retrieved_nonce = $_REQUEST['new_thought_nonce'];
+  if (!wp_verify_nonce($retrieved_nonce, 'new_thought')) die('Failed security check');
+
+
+  die();
+}
+add_action( 'wp_ajax_thought_submission', __NAMESPACE__ . '\\thought_submission' );
+add_action( 'wp_ajax_nopriv_thought_submission', __NAMESPACE__ . '\\thought_submission' );
+
