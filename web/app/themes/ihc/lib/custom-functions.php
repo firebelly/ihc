@@ -105,17 +105,21 @@ function get_page_content($slug) {
 }
 
 /**
- * Get program tag for post -- if post is tagged either SEL or Digital Learning, return that term object
+ * Get focus area for post
  */
-function get_program_tag($post) {
-  $return = false;
-  if ($terms = get_the_terms($post->ID, 'post_tag')) {
-    foreach($terms as $term) {
-      if (preg_match('/(social\-emotional\-learning|digital\-learning|catalyst)/',$term->slug))
-        $return = $term;
-    }
-  }
-  return $return;
+function get_focus_area($post) {
+  if ($focus_area = get_post_meta($post->ID, '_cmb2_focus_area', true)) {
+    return get_term($focus_area[0], 'focus_area');
+  } else return false;
+}
+
+/**
+ * Get category for post
+ */
+function get_category($post) {
+  if ($category = get_the_category($post)) {
+    return $category[0];
+  } else return false;
 }
 
 /**

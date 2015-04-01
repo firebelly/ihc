@@ -120,52 +120,41 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
- * Shortcode [thoughts]
+ * Get Thoughts
  */
-function shortcode($atts) {
-  extract(shortcode_atts(array(
-       'page' => '',
-    ), $atts));
-  $output = '';
-
+function get_thoughts($focus_area='') {
   $args = array(
-    'numberposts' => -1,
+    'numberposts' => 1,
     'post_type' => 'thought',
     'orderby' => 'menu_order',
     );
-  if ($page != '') {
-    $args['meta_query'] = array(
+  if ($focus_area != '') {
+    $args['tax_query'] = array(
         array(
-            'key' => '_cmb2_pages_visible',
-            'value' => array($page),
-            'compare' => 'IN',
+            'taxonomy' => 'focus_area',
+            'field' => 'slug',
+            'terms' => $focus_area,
         )
     );
   }
 
   $thought_posts = get_posts($args);
   if (!$thought_posts) return false;
-
+  $output = '<div class="thoughts">';
   foreach ($thought_posts as $post):
     $body = apply_filters('the_content', $post->post_content);
-    $thumb = get_the_post_thumbnail($post->ID, 'thought-thumb');
-    $icon = get_post_meta( $post->ID, '_cmb2_icon', true );
+    $author = get_post_meta( $post->ID, '_cmb2_author', true );
 
     $output .= <<<HTML
-     <div class="slide-item">
-       <div class="slider-content">
-         <div class="wrap-inner">
-           <h2 class="slide-title"><svg class="icon icon-{$icon}" role="img"><use xlink:href="#icon-{$icon}"></use></svg>{$post->post_title}</h2>
-           {$body}
-         </div>
-       </div>
-     </div>
+     <article class="thought">
+       <blockquote>{$body}</blockquote>
+       <cite>{$author}</cite>
+     </article>
 HTML;
   endforeach;
-
+  $output .= '</div>';
   return $output;
 }
-add_shortcode('thoughts', __NAMESPACE__ . '\shortcode');
 
 /**
  * Outputs a "Submit A Thought" submit form
