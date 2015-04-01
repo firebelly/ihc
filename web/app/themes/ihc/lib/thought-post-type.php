@@ -38,7 +38,7 @@ function post_type() {
     'label'               => 'thought',
     'description'         => 'Thoughts',
     'labels'              => $labels,
-    'supports'            => array( 'editor'),
+    'supports'            => array( 'title', 'editor'),
     'hierarchical'        => false,
     'public'              => true,
     'show_ui'             => true,
@@ -65,9 +65,10 @@ add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
 function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
-    'content' => 'Content',
+    'title' => 'Title',
+    'content' => 'Thought',
     '_cmb2_author' => 'Author',
-    'taxonomy-focus_areas' => 'Focus Area(s)',
+    'taxonomy-focus_area' => 'Focus Area(s)',
   );
   return $columns;
 }
@@ -80,7 +81,8 @@ function custom_columns($column){
     if ( $column == 'featured_image' )
       echo the_post_thumbnail( 'thought-thumb' );
     elseif ( $column == 'content' )
-      echo edit_post_link(get_the_content());
+      echo get_the_content();
+      // echo edit_post_link(get_the_content()) . ($post->post_status != 'publish' ? " - <strong class=\"post-status\">{$post->post_status}</strong>" : '');
     else {
       $custom = get_post_custom();
       if (array_key_exists($column, $custom))
@@ -171,10 +173,13 @@ add_shortcode('thoughts', __NAMESPACE__ . '\shortcode');
 function submit_form() {
 ?>
   <form name="new_thought" method="post" action="" class="submit-thought">
-  <?php wp_nonce_field('new_thought', 'new_thought_nonce'); ?>
-  <input type="text" name="author-name">
-  <?php wp_dropdown_categories('show_option_none=Select Focus Area&taxonomy=focus_areas'); ?>
-  <button type="submit">Submit Thought</button>
+    <textarea name="thought" required></textarea>
+    <input type="text" name="author" required>
+    <?php wp_dropdown_categories('show_option_none=Select Focus Area&taxonomy=focus_area'); ?>
+    <?php wp_nonce_field('new_thought'); ?>
+    <!-- die bots --><div style="position: absolute; left: -5000px;"><input type="text" name="die_bots_5000" tabindex="-1" value=""></div>
+    <input type="hidden" name="action" value="thought_submission">
+    <button type="submit">Submit Thought</button>
   </form>
 <?php
 }
@@ -183,12 +188,22 @@ function submit_form() {
  * Handle a Thought submission
  */
 function thought_submission() {
-  $retrieved_nonce = $_REQUEST['new_thought_nonce'];
-  if (!wp_verify_nonce($retrieved_nonce, 'new_thought')) die('Failed security check');
-
-
-  die();
+  if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'new_thought')) {
+    wp_send_json_error(['message' => 'Failed security check']);
+  } elseif (!empty($_REQUEST['die_bots_5000'])) {
+    wp_send_json_error(['message' => 'Failed bot check']);
+  } else {
+    $my_post = [
+      'post_title'    => sprintf('Submission from %s', $_REQUEST['author']),
+      'post_content'  => $_REQUEST['thought'],
+      'post_type'     => 'thought',
+      'post_author'   => 1,
+      'tax_input'     => ['focus_area' => $_REQUEST['cat']]
+    ];
+    $post_id = wp_insert_post($my_post);
+    update_post_meta($post_id, '_cmb2_author', $_REQUEST['author']);
+    wp_send_json_success(['message' => sprintf('Thought from %s added ok', $_REQUEST['author'])]);
+  }
 }
 add_action( 'wp_ajax_thought_submission', __NAMESPACE__ . '\\thought_submission' );
 add_action( 'wp_ajax_nopriv_thought_submission', __NAMESPACE__ . '\\thought_submission' );
-

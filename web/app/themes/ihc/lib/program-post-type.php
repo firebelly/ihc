@@ -59,7 +59,7 @@ function post_type() {
 add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
 
 // Custom taxonomy Focus Areas
-register_taxonomy( 'focus_areas', 
+register_taxonomy( 'focus_area', 
   array('program', 'page', 'post', 'thought'),
   array('hierarchical' => true, // if this is true, it acts like categories
     'labels' => array(
@@ -89,7 +89,7 @@ function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
-    'taxonomy-focus_areas' => 'Focus Area(s)',
+    'taxonomy-focus_area' => 'Focus Area(s)',
     'featured_image' => 'Image',
   );
   return $columns;
@@ -152,7 +152,7 @@ function shortcode($atts) {
   if ($sector != '') {
     $args['tax_query'] = array(
       array(
-        'taxonomy' => 'focus_areas',
+        'taxonomy' => 'focus_area',
         'field' => 'slug',
         'terms' => $sector
       )
@@ -175,7 +175,7 @@ function shortcode($atts) {
 
   foreach ($program_posts as $post):
     $year = get_post_meta($post->ID, '_cmb2_program_year', true);
-    if ($sector = Utils\get_first_term($post, 'focus_areas')) {
+    if ($sector = Utils\get_first_term($post, 'focus_area')) {
       $sector_slug = $sector->slug;
       $sector_name = $sector->name;
     } else {
@@ -212,7 +212,7 @@ function shortcode_filters($atts) {
     $output .= '<option value="' . $year . '"' . ($year==$years[0] ? ' selected' : '') . '>' . $year . '</option>';
   $output .= '</select></div> ';
 
-  $sectors = get_terms('focus_areas');
+  $sectors = get_terms('focus_area');
   $output .= '<div class="select-wrapper"><label>Sector:</label><select class="sector">';
   $output .= '<option value="">All</option>';
   foreach ($sectors as $sector)

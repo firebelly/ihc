@@ -31,6 +31,7 @@ var IHC = (function($) {
       $content.fitVids();
 
       // init behavior for various sections
+      _initThoughtSubmit();
       _initSearch();
       _initNav();
       _initAjaxLinks();
@@ -261,6 +262,27 @@ var IHC = (function($) {
             // hide load more if last page
             if (load_more.attr('data-total-pages') === page + 1) {
                 load_more.addClass('hide');
+            }
+          }
+      });
+    });
+  }
+
+  function _initThoughtSubmit() {
+    $document.on('submit', 'form.submit-thought', function(e) {
+      e.preventDefault();
+      var $form = $(this);
+      var data = $form.addClass('working').serialize();
+      $.ajax({
+          url: wp_ajax_url,
+          method: 'post',
+          data: data,
+          success: function(response) {
+            $form.removeClass('working');
+            if (response.success) {
+              $form.append(response.data.message);
+            } else {
+              alert(response.data.message);
             }
           }
       });
