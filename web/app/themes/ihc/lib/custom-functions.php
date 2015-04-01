@@ -72,32 +72,6 @@ function is_ajax() {
 }
 
 /**
- * Subpage nav
- */
-function page_nav($ancestor_id, $post) {
-  $nav_pages = get_posts(
-    array(
-      'post_parent' => $ancestor_id,
-      'orderby' => 'menu_order',
-      'post_type' => 'page',
-      'hierarchical' => false,
-      'numberposts' => -1,
-    )
-  );
-
-  $return = '<section class="page-nav"><ul>';
-  $i=1; 
-  foreach ($nav_pages as $page):
-    $return .= '<li data-page-id="' . $page->ID . '" class="' . ($i % 2 == 0 ? 'odd' : 'even') . ' ' . ($page->ID==$post->ID || in_array($page->ID, $post->ancestors) ? 'active' : '') . '">';
-      $return .= '<div class="title"><a href="' . get_permalink($page->ID) . '">' . $page->post_title . '</a></div>';
-    $return .= '</li>';
-    $i++; 
-  endforeach;
-  $return .= '</ul></section>';
-  return $return;
-}
-
-/**
  * Get top ancestor for post
  */
 function get_top_ancestor($post){
