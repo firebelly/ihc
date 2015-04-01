@@ -4,6 +4,10 @@
       "files": [
         "scripts/main.js"
       ],
+      "vendor": [
+        "bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js",
+        "bower_components/masonry/dist/masonry.pkgd.js"
+      ],
       "main": true
     },
     "main.css": {
