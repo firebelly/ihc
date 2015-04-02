@@ -205,6 +205,19 @@ function get_events($num, $focus_area='') {
   if (!$event_posts) return false;
   $output = '<div class="events">';
   foreach ($event_posts as $event_post):
+    $body = apply_filters('the_content', $event_post->post_content);
+    $start_time = get_post_meta($event_post->ID, '_cmb2_start_time', true);
+    $end_time = get_post_meta( $event_post->ID, '_cmb2_end_time', true);
+    $time_txt = $start_time . (!empty($end_time) ? '–'.$end_time : '');
+    $registration_url = get_post_meta($event_post->ID, '_cmb2_registration_url', true);
+    $address = get_post_meta($event_post->ID, '_cmb2_address', true);
+    $address = wp_parse_args($address, array(
+        'address-1' => '',
+        'address-2' => '',
+        'city'      => '',
+        'state'     => '',
+        'zip'       => '',
+     ));
     ob_start();
     include(locate_template('templates/article-event.php'));
     $output .= ob_get_clean();
