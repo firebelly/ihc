@@ -4,9 +4,14 @@
 @charset "UTF-8"; 
 
 body {
-	border: 20px solid #eee;
+	border: 1em solid #eee;
 	margin: 0;
-	padding: 20px;
+	padding: 1em;
+}
+article {
+	border: 1em solid #eee;
+	padding: 1em;
+	margin: 1em 0;
 }
 
 // WP specifics
