@@ -22,6 +22,8 @@ $add_to_calendar_url = admin_url('admin-ajax.php') . "?action=event_ics&amp;id={
   <div class="body"><?= $body ?></div>
 
   <aside>
+    <div id="map"></div>
+
     <h3>When:</h3>
     <?= date('l, F j, Y', $event_timestamp) ?>
     <br><?= $time_txt ?></p>

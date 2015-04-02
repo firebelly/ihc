@@ -16,7 +16,8 @@
     "svg4everybody": "~1.0.0",
     "velocity": "~1.2.2",
     "slick-carousel": "~1.4.1",
-    "masonry": "~3.2.2"
+    "masonry": "~3.2.2",
+    "mapbox.js": "~2.1.6"
   },
   "overrides": {
     "modernizr": {

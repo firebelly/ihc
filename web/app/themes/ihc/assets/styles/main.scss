@@ -13,6 +13,11 @@ article {
 	padding: 1em;
 	margin: 1em 0;
 }
+#map {
+	width: 300px;
+	height: 300px;
+	border: 1px solid blue;
+}
 
 // WP specifics
 @import 'wp-classes';

@@ -34,6 +34,7 @@ var IHC = (function($) {
       _initThoughtSubmit();
       _initSearch();
       _initNav();
+      _initMap();
       _initAjaxLinks();
       _initMenuToggle();
       _initSliders();
@@ -85,6 +86,13 @@ var IHC = (function($) {
 
   function _hideSearch() {
     $('.search-wrap').removeClass('active');
+  }
+
+  function _initMap() {
+    if ($('#map').length) {
+      L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
+      var map = L.mapbox.map('map', 'firebellydesign.lkh3a3i1').setView([40, -74.50], 9);
+    }
   }
 
   // Ajaxify all internal links in content area

@@ -14,6 +14,9 @@
       "files": [
         "styles/main.scss"
       ],
+      "vendor": [
+        "bower_components/mapbox.js/mapbox.uncompressed.css"
+      ],
       "main": true
     },
     "editor-style.css": {
@@ -23,6 +26,9 @@
     },
     "jquery.js": {
       "bower": ["jquery"]
+    },
+    "mapbox.js": {
+      "bower": ["mapbox.js"]
     },
     "modernizr.js": {
       "bower": ["modernizr"]
