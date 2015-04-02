@@ -66,9 +66,8 @@ function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
-    '_cmb2_event_date' => 'Date',
-    '_cmb2_start_time' => 'Start Time',
-    '_cmb2_venue' => 'Location',
+    '_cmb2_event_timestamp' => 'Date',
+    '_cmb2_venue' => 'Venue',
     'taxonomy-focus_area' => 'Focus Area(s)',
   );
   return $columns;
@@ -81,8 +80,9 @@ function custom_columns($column){
     $custom = get_post_custom();
     if ( $column == 'featured_image' )
       echo the_post_thumbnail( 'event-thumb' );
+    elseif ( $column == '_cmb2_event_timestamp' )
+      echo date( 'm/d/Y g:iA', $custom[$column][0] );
     else {
-      $custom = get_post_custom();
       if (array_key_exists($column, $custom))
         echo $custom[$column][0];
     }
@@ -106,13 +106,8 @@ function metaboxes( array $meta_boxes ) {
     'fields'        => array(
       array(
           'name'    => 'Start Date',
-          'id'      => $prefix . 'event_date',
-          'type'    => 'text_date',
-      ),
-      array(
-          'name'    => 'Start Time',
-          'id'      => $prefix . 'start_time',
-          'type'    => 'text_time',
+          'id'      => $prefix . 'event_timestamp',
+          'type'    => 'text_datetime_timestamp',
       ),
       array(
           'name'    => 'End Time',
@@ -185,12 +180,18 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
  * Get Events
  */
 function get_events($num, $focus_area='') {
-  $args = array(
+  $args = [
     'numberposts' => $num,
     'post_type' => 'event',
-    'meta_key' => '_cmb2_event_date',
-    'orderby' => 'meta_value',
-    );
+    'meta_key' => '_cmb2_event_timestamp',
+    'orderby' => 'meta_value_num',
+    'order' => 'ASC',
+    'meta_query' => [
+      'key' => '_cmb2_event_timestamp',
+      'value' => time(),
+      'compare' => '>'
+    ]
+  ];
   if ($focus_area != '') {
     $args['tax_query'] = array(
         array(
@@ -206,9 +207,10 @@ function get_events($num, $focus_area='') {
   $output = '<div class="events">';
   foreach ($event_posts as $event_post):
     $body = apply_filters('the_content', $event_post->post_content);
-    $start_time = get_post_meta($event_post->ID, '_cmb2_start_time', true);
+    $event_timestamp = get_post_meta($event_post->ID, '_cmb2_event_timestamp', true);
     $end_time = get_post_meta( $event_post->ID, '_cmb2_end_time', true);
-    $time_txt = $start_time . (!empty($end_time) ? '–'.$end_time : '');
+    $start_time = date('g:iA', $event_timestamp);
+    $time_txt = $start_time . (!empty($end_time) ? '–' . preg_replace('/(^0| )/','',$end_time) : '');
     $registration_url = get_post_meta($event_post->ID, '_cmb2_registration_url', true);
     $address = get_post_meta($event_post->ID, '_cmb2_address', true);
     $address = wp_parse_args($address, array(
@@ -245,9 +247,62 @@ function geocode_address($post_id, $post) {
     if(strcmp($status, 'OK') == 0):
         $lat = $xml->result->geometry->location->lat;
         $lng = $xml->result->geometry->location->lng;
-        update_post_meta($post_id, '_cmb2_lat', $lat);
-        update_post_meta($post_id, '_cmb2_lng', $lng);
+        update_post_meta($post_id, '_cmb2_lat', (string)$lat);
+        update_post_meta($post_id, '_cmb2_lng', (string)$lng);
     endif;
   endif;
 }
 add_action('save_post_event', __NAMESPACE__ . '\\geocode_address', 20, 2);
+
+
+
+/**
+ * Generate an iCalendar .ics file for event
+ */
+function event_ics() {
+  $event_id = preg_replace('/\D/', '', $_REQUEST['id']);
+  if (!$event_id) die('No ID sent');
+
+  $event_post = get_post($event_id);
+  if (!$event_post) die('No Event found');
+
+  if (!empty($_REQUEST['plaintext'])) { // for debugging
+      header('Content-Type: text/plain; charset=utf-8');
+  } else {
+      header('Content-Type: text/calendar; charset=utf-8');
+      header('Content-Disposition: attachment; filename="ihs-event-' . $event_post->post_name . '.ics"');
+  }
+
+  $event_timestamp = get_post_meta($event_post->ID, '_cmb2_event_timestamp', true);
+  $venue = get_post_meta($event_post->ID, '_cmb2_venue', true);
+  $end_time = get_post_meta( $event_post->ID, '_cmb2_end_time', true);
+  $start_time = date('g:iA', $event_timestamp);
+  $gmtOffset = 60 * 60 * get_option('gmt_offset');
+
+  $ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'METHOD:PUBLISH',
+    'CALSCALE:GREGORIAN',
+    'PRODID:-//IHC Events//1.0//EN',
+    'BEGIN:VEVENT',
+    "UID:event-{$event_id}@" . parse_url(get_option('home'), PHP_URL_HOST),
+    'SUMMARY:' . $event_post->post_title,
+    'URL:' . get_permalink($event_post->ID),
+    'LOCATION:' . $venue,
+    'DTSTART:' . date('YmdTHisZ', $event_timestamp - $gmtOffset),
+    // 'DTEND:' . date('YmdTHisZ', $event_end_timestamp - $gmtOffset),
+    'DTSTAMP:' . date('YmdTHisZ', strtotime($event_post->post_modified) - $gmtOffset),
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ];
+
+  foreach ($ics as $line) {
+    echo wordwrap("{$line}\n", 75, "\n\t", TRUE);
+  }
+
+  die();
+}
+ 
+add_action('wp_ajax_event_ics', __NAMESPACE__ . '\\event_ics');
+add_action('wp_ajax_nopriv_event_ics', __NAMESPACE__ . '\\event_ics');
