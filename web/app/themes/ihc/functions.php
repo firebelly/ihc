@@ -28,9 +28,11 @@ $firebelly_includes = [
   'lib/media.php',                 // Image sizes, etc
   'lib/custom-functions.php',      // Rando utility functions and miscellany
   'lib/ajax.php',                  // AJAX functions
+  'lib/cmb2-custom-fields.php',    // Add new fields to CMB2
   'lib/page-meta-boxes.php',       // Extra CMB2 Page fields
   'lib/post-meta-boxes.php',       // Extra CMB2 Post fields
   'lib/short-codes.php',           // Custom short codes
+  'lib/event-post-type.php',       // Events
   'lib/program-post-type.php',     // Programs
   'lib/thought-post-type.php',     // Thoughts
 ];

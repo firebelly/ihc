@@ -36,13 +36,8 @@ foreach ($focus_areas as $focus_area) {
 <h2>Attend an Event</h2>
 <div class="events">
 <?php 
-// Recent blog & news posts
-$news_posts = get_posts(['numberposts' => 4]);
-if ($news_posts):
-  foreach ($news_posts as $news_post) {
-    include(locate_template('templates/article-news.php'));
-  }
-endif;
+// Recent Events
+echo \Firebelly\PostTypes\Event\get_events(3);
 ?>
 </div>
 <p><a href="#" class="load-more" data-more-container="events">+ Load More</a></p>
@@ -51,7 +46,7 @@ endif;
 <h2>Blog &amp; News</h2>
 <div class="blog-and-news">
 <?php 
-// Recent blog & news posts
+// Recent Blog & News posts
 $news_posts = get_posts(['numberposts' => 4]);
 if ($news_posts):
   foreach ($news_posts as $news_post) {

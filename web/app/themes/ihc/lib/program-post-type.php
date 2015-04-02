@@ -60,7 +60,7 @@ add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
 
 // Custom taxonomy Focus Areas
 register_taxonomy( 'focus_area', 
-  array('program', 'page', 'post', 'thought'),
+  array('program', 'page', 'post', 'thought', 'event'),
   array('hierarchical' => true, // if this is true, it acts like categories
     'labels' => array(
       'name' => 'Focus Areas',
