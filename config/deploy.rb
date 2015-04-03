@@ -1,5 +1,9 @@
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'ihc'
+set :login, 'firebelly'
+set :repo_url, 'git@bitbucket.org:firebelly/ihc.git'
+
+# path to composer
+SSHKit.config.command_map[:composer] = "php54 /home/#{fetch(:login)}/bin/composer.phar"
 
 # Branch options
 # Prompts for the branch name (defaults to current branch)
@@ -9,7 +13,9 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # This could be overridden in a stage config file
 set :branch, :master
 
-set :deploy_to, -> { "/srv/www/#{fetch(:application)}" }
+set :deploy_to, -> { "/home/#{fetch(:login)}/webapps/#{fetch(:application)}" }
+
+set :tmp_dir, "/home/#{fetch(:login)}/tmp"
 
 # Use :debug for more verbose output when troubleshooting
 set :log_level, :info
@@ -17,7 +23,6 @@ set :log_level, :info
 # Apache users with .htaccess files:
 # it needs to be added to linked_files so it persists across deploys:
 set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess')
-set :linked_files, fetch(:linked_files, []).push('.env')
 set :linked_dirs, fetch(:linked_dirs, []).push('web/app/uploads')
 
 namespace :deploy do
@@ -26,6 +31,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :service, :nginx, :reload
+      # capture("#{deploy_to}/bin/restart")
     end
   end
 end
@@ -59,3 +65,42 @@ end
 # Note that you need to have WP-CLI installed on your server
 # Uncomment the following line to run it on deploys if needed
 # after 'deploy:publishing', 'deploy:update_option_paths'
+
+
+
+# GULP! compile production assets and copy to server, then UNGULP! to dev mode
+# borrowing from https://gist.github.com/christhesoul/3c38053971a7b786eff2 & https://gist.github.com/nateroling/22b51c0cfbe210b00698
+
+set :theme_path, Pathname.new('web/app/themes/ihc')
+set :local_app_path, Pathname.new(File.dirname(__FILE__)).join('../')
+set :local_theme_path, fetch(:local_app_path).join(fetch(:theme_path))
+ 
+namespace :deploy do
+  task :compile_assets do
+    run_locally do
+      within fetch(:local_theme_path) do
+        execute :gulp, '--production'
+      end
+    end
+  end
+ 
+  task :ungulp do
+    run_locally do
+      within fetch(:local_theme_path) do
+        execute :gulp, '--development'
+      end
+    end
+  end
+ 
+  task :copy_assets do
+    invoke 'deploy:compile_assets'
+ 
+    on roles(:web) do
+      upload! fetch(:local_theme_path).join('dist').to_s, release_path.join(fetch(:theme_path)), recursive: true
+    end
+
+    invoke 'deploy:ungulp'
+  end
+end
+ 
+before "deploy:updated", "deploy:copy_assets"
