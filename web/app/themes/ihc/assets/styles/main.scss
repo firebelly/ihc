@@ -16,7 +16,16 @@ article {
 #map {
 	width: 300px;
 	height: 300px;
-	border: 1px solid blue;
+	&.large {
+		width: 600px;
+		height: 400px;
+	}
+}
+.active {
+	background: yellow;
+}
+.hide {
+	display: none;
 }
 
 // WP specifics

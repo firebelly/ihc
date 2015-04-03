@@ -277,7 +277,12 @@ var IHC = (function($) {
   }
 
   function _initThoughtSubmit() {
-    $document.on('submit', 'form.submit-thought', function(e) {
+    $document.on('click', 'a.submit-thought', function(e) {
+      e.preventDefault();
+      $('.thought-wrapper').addClass('hide');
+      $('.submit-thought-wrapper').removeClass('hide');
+    });
+    $document.on('submit', 'form.new-thought-form', function(e) {
       e.preventDefault();
       var $form = $(this);
       var data = $form.addClass('working').serialize();

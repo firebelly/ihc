@@ -95,7 +95,7 @@ add_action('manage_posts_custom_column',  __NAMESPACE__ . '\custom_columns');
 /**
  * CMB2 custom fields
  */
-function metaboxes( array $meta_boxes ) {
+function metaboxes(array $meta_boxes) {
   $prefix = '_cmb2_'; // Start with underscore to hide from custom fields list
 
   $meta_boxes['thought_metabox'] = array(
@@ -122,11 +122,11 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get Thoughts
  */
-function get_thoughts($focus_area='') {
+function get_thought($focus_area='') {
   $args = array(
     'numberposts' => 1,
     'post_type' => 'thought',
-    'orderby' => 'menu_order',
+    'orderby' => 'rand',
     );
   if ($focus_area != '') {
     $args['tax_query'] = array(
@@ -161,7 +161,7 @@ HTML;
  */
 function submit_form() {
 ?>
-  <form name="new_thought" method="post" action="" class="submit-thought">
+  <form class="new-thought-form" method="post" action="">
     <textarea name="thought" required></textarea>
     <input type="text" name="author" required>
     <?php wp_dropdown_categories('show_option_none=Select Focus Area&taxonomy=focus_area'); ?>

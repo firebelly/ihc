@@ -10,17 +10,7 @@
 // echo apply_filters('the_content', $post->post_content);
 ?>
 
-
-<h2>Thought of the Day</h2>
-<?php 
-echo \Firebelly\PostTypes\Thought\get_thoughts();
-?>
-
-<?php
-// Submit a Thought form
-\Firebelly\PostTypes\Thought\submit_form();
-?>
-
+<?php include(locate_template('templates/thought-of-the-day.php')); ?>
 
 <h2>Our Focus Areas</h2>
 <ul class="focus-areas">
