@@ -29,10 +29,10 @@ function post_type() {
     'not_found_in_trash'  => 'Not found in Trash',
   );
   $rewrite = array(
-    'slug'                => '',
+    'slug'                => 'events',
     'with_front'          => false,
-    'pages'               => false,
-    'feeds'               => false,
+    'pages'               => true,
+    'feeds'               => true,
   );
   $args = array(
     'label'               => 'event',
@@ -48,7 +48,7 @@ function post_type() {
     'menu_position'       => 20,
     'menu_icon'           => 'dashicons-admin-post',
     'can_export'          => false,
-    'has_archive'         => false,
+    'has_archive'         => true,
     'exclude_from_search' => false,
     'publicly_queryable'  => true,
     'rewrite'             => $rewrite,
@@ -80,9 +80,10 @@ function custom_columns($column){
     $custom = get_post_custom();
     if ( $column == 'featured_image' )
       echo the_post_thumbnail( 'event-thumb' );
-    elseif ( $column == '_cmb2_event_timestamp' )
-      echo date( 'm/d/Y g:iA', $custom[$column][0] );
-    else {
+    elseif ( $column == '_cmb2_event_timestamp' ) {
+      $timestamp = $custom[$column][0];
+      echo date( 'm/d/Y g:iA', $timestamp ) . ($timestamp < time() ? ' - <strong class="post-state">Past Event</strong>' : '');
+    } else {
       if (array_key_exists($column, $custom))
         echo $custom[$column][0];
     }
@@ -142,7 +143,7 @@ function metaboxes( array $meta_boxes ) {
       //     'type'    => 'text_small',
       // ),
       // array(
-      //     'name'    => 'Lon',
+      //     'name'    => 'Lng',
       //     'id'      => $prefix . 'lng',
       //     'type'    => 'text_small',
       // ),
@@ -206,20 +207,6 @@ function get_events($num, $focus_area='') {
   if (!$event_posts) return false;
   $output = '<div class="events">';
   foreach ($event_posts as $event_post):
-    $body = apply_filters('the_content', $event_post->post_content);
-    $event_timestamp = get_post_meta($event_post->ID, '_cmb2_event_timestamp', true);
-    $end_time = get_post_meta( $event_post->ID, '_cmb2_end_time', true);
-    $start_time = date('g:iA', $event_timestamp);
-    $time_txt = $start_time . (!empty($end_time) ? '–' . preg_replace('/(^0| )/','',$end_time) : '');
-    $registration_url = get_post_meta($event_post->ID, '_cmb2_registration_url', true);
-    $address = get_post_meta($event_post->ID, '_cmb2_address', true);
-    $address = wp_parse_args($address, array(
-        'address-1' => '',
-        'address-2' => '',
-        'city'      => '',
-        'state'     => '',
-        'zip'       => '',
-     ));
     ob_start();
     include(locate_template('templates/article-event.php'));
     $output .= ob_get_clean();
@@ -303,6 +290,76 @@ function event_ics() {
 
   die();
 }
- 
 add_action('wp_ajax_event_ics', __NAMESPACE__ . '\\event_ics');
 add_action('wp_ajax_nopriv_event_ics', __NAMESPACE__ . '\\event_ics');
+
+// custom URLs like /events/2014/11/the-event-name
+// function event_rewrite_tag() {
+//   global $wp_rewrite;
+//   $event_structure = '/events/%year%/%monthnum%/%postname%';
+//   $wp_rewrite->add_rewrite_tag("%event%", '([^/]+)', "event=");
+//   $wp_rewrite->add_permastruct('event', $event_structure, true);
+// }
+// add_action('init', __NAMESPACE__ . '\\event_rewrite_tag', 10, 0);
+
+// add_filter('post_type_link', __NAMESPACE__ . '\\event_permalink', 10, 3);
+// // Adapted from get_permalink function in wp-includes/link-template.php
+// function event_permalink($permalink, $post_id, $leavename) {
+//     $post = get_post($post_id);
+//     $rewritecode = array(
+//         '%year%',
+//         '%monthnum%',
+//         '%day%',
+//         $leavename? '' : '%postname%',
+//         '%post_id%',
+//     );
+ 
+//     if ( '' != $permalink && !in_array($post->post_status, array('draft', 'pending', 'auto-draft')) ) {
+//         $unixtime = strtotime($post->post_date);
+     
+//         $date = explode(" ",date('Y m d H i s', $unixtime));
+//         $rewritereplace =
+//         array(
+//             $date[0],
+//             $date[1],
+//             $date[2],
+//             $post->post_name,
+//             $post->ID,
+//         );
+//         $permalink = str_replace($rewritecode, $rewritereplace, $permalink);
+//     } else { // if they're not using the fancy permalink option
+//     }
+//     return $permalink;
+// }
+
+/**
+ * Add query var "past_events"
+ */
+function add_query_vars_filter($vars){
+  $vars[] = "past_events";
+  return $vars;
+}
+add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
+
+/**
+ * Alter WP query for Event archive pages
+ * if "past_events" is set, only shows archived events
+ */
+function event_query($query){
+  global $wp_the_query;
+  if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
+    $meta_query = array(
+      array(
+        'key' => '_cmb2_event_timestamp',
+        'value' => time(),
+        'compare' => (get_query_var('past_events') ? '<=' : '>')
+      )
+    );
+    $query->set('meta_query', $meta_query);
+    $query->set('orderby', 'meta_value_num');
+    $query->set('meta_key', '_cmb2_event_timestamp');
+    // show events oldest->newest
+    $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
+  }
+}
+add_action('pre_get_posts', __NAMESPACE__ . '\\event_query');

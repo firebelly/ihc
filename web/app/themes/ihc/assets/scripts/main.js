@@ -11,6 +11,7 @@ var IHC = (function($) {
       $body,
       $document,
       $nav,
+      map,
       History = window.History,
       rootUrl = History.getRootUrl(),
       loadingTimer;
@@ -91,7 +92,46 @@ var IHC = (function($) {
   function _initMap() {
     if ($('#map').length) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
-      var map = L.mapbox.map('map', 'firebellydesign.lkh3a3i1').setView([40, -74.50], 9);
+      map = L.mapbox.map('map', 'firebellydesign.lkh3a3i1').setView([41.843, -88.075], 11);
+      
+      var featureLayer = L.mapbox.featureLayer().addTo(map);
+      var geoJSON = [];
+
+      // set custom icons
+      featureLayer.on('layeradd', function(e) {
+        var marker = e.layer,
+          feature = marker.feature;
+        marker.setIcon(L.icon(feature.properties.icon));
+      });
+
+      // any map-points on page? add to map
+      $('.map-point').each(function() {
+        var $point = $(this);
+        if ($point.data('lng')) {
+          geoJSON.push({
+              type: 'Feature',
+              geometry: {
+                  type: 'Point',
+                  coordinates: [ $point.data('lng'), $point.data('lat') ]
+              },
+              properties: {
+                  title: $point.data('title'),
+                  description: $point.data('desc'),
+                  icon: {
+                    "iconUrl": "/app/themes/ihc/dist/images/marker.png",
+                    "iconSize": [25, 40],
+                    "iconAnchor": [12, 40],
+                    "popupAnchor": [12, -25],
+                    "className": "marker"
+                  }
+              }
+          });
+        }
+      });
+      // add the array of point objects
+      featureLayer.setGeoJSON(geoJSON);
+      // set bounds to markers
+      map.fitBounds(featureLayer.getBounds());
     }
   }
 
