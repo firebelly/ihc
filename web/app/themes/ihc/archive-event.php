@@ -1,9 +1,12 @@
 <?php 
-/* 
-Events landing page
-*/
+/**
+ * Events landing page
+ */
 
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$paged = get_query_var('paged', 1);
+$per_page = get_option('posts_per_page');
+$total_events = wp_count_posts('event')->publish;
+$total_pages = ceil($total_events / $per_page);
 
 $page = get_page_by_path('/events');
 $page_content = apply_filters('the_content', $page->post_content);
@@ -12,8 +15,9 @@ $secondary_content = apply_filters('the_content', get_post_meta($page->ID, '_cmb
 
 <header>
 	<div class="user-content">
-		<?php echo apply_filters('the_content', $page->post_content); ?>
+		<?php echo $page_content; ?>
 	</div>
+	
 	<aside>
 		<?php include(locate_template('templates/thought-of-the-day.php')); ?>
 	</aside>
@@ -30,6 +34,9 @@ $secondary_content = apply_filters('the_content', get_post_meta($page->ID, '_cmb
 	<div class="events load-more-container">
 		<?php \Firebelly\Ajax\get_event_posts(); ?>
 	</div>
-	<div class="load-more events" data-page-at="1" data-past-events="<?= (get_query_var('past-events') ? 1 : 0) ?>" data-per-page="<?= 2 ?>" data-total-pages="<?= 2 ?>"><a class="no-ajaxy" href="#">+ Load More</a></div>
 	
+	<?php if($total_pages > 1): ?>
+		<div class="load-more events" data-page-at="<?= $paged ?>" data-past-events="<?= get_query_var('past-events', 0) ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">+ Load More</a></div>
+	<?php endif; ?>
+
 </section>

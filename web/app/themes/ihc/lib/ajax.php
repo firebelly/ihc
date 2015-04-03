@@ -10,14 +10,20 @@ function wp_ajax_url() {
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\wp_ajax_url', 100);
 
 /**
+ * Silly ajax helper, returns true if xmlhttprequest
+ */
+function is_ajax() {
+  return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+}
+
+/**
  * AJAX load more events
  */
 function get_event_posts() {
   $page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-  $per_page = !empty($_REQUEST['per_page']) ? $_REQUEST['per_page'] : 2; // get_option('posts_per_page');
+  $per_page = !empty($_REQUEST['per_page']) ? $_REQUEST['per_page'] : get_option('posts_per_page');
   $offset = ($page-1) * $per_page;
   $past_events = !empty($_REQUEST['past_events']) ? $_REQUEST['past_events'] : 0;
-  // die($page . $per_page . $offset . $past_events);
   $event_posts = get_posts([
     'meta_query' => [
       [
@@ -43,21 +49,3 @@ function get_event_posts() {
 }
 add_action( 'wp_ajax_get_event_posts', __NAMESPACE__ . '\\get_event_posts' );
 add_action( 'wp_ajax_nopriv_get_event_posts', __NAMESPACE__ . '\\get_event_posts' );
-
-/**
- * Silly ajax helper, returns true if xmlhttprequest
- */
-function is_ajax() {
-  return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
-}
-
-
-
-// add_action( 'wp_ajax_get_radar_posts', __NAMESPACE__ . '\\get_radar_posts' );
-// add_action( 'wp_ajax_nopriv_get_radar_posts', __NAMESPACE__ . '\\get_radar_posts' );
-
-// function get_radar_posts() {
-//   include(locate_template('templates/recent-radar-and-news.php'));
-
-//   die();
-// }

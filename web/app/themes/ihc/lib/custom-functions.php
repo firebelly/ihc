@@ -5,48 +5,13 @@ namespace Firebelly\Utils;
 /**
  * Bump up # search results
  */
-function cpt_search( $query ) {
+function search_queries( $query ) {
   if ( !is_admin() && is_search() ) {
     $query->set( 'posts_per_page', 100 );
   }
   return $query;
 }
-add_filter( 'pre_get_posts', __NAMESPACE__ . '\\cpt_search' );
-
-
-/**
- * Janky redirects of single posts to listing view
- */
-function custom_post_redirects() {
-  global $post;
-  if (is_page()) {
-    // check if page has parent, and doesn't have children, and redirect to parent if so
-    if (!empty($post->post_parent) && count(get_children($post->ID, 'ARRAY_A')) == 0) {
-      $redirect = get_the_permalink($post->post_parent) . '#' . $post->post_name;
-      wp_redirect($redirect, 301);
-    }
-  } else if (is_single() && $post->post_type != 'post') {
-    $redirect = get_funky_url($post);
-    if (!empty($redirect)) {
-      wp_redirect($redirect, 301);
-      exit();
-    }
-  }
-}
-add_action('template_redirect', __NAMESPACE__ . '\\custom_post_redirects');
-
-function get_funky_url($post) {
-  $url = false;
-  if ($post->post_type=='initiative') {
-    $term = get_first_term($post,'initiative_cat');
-    $url = '/what-we-do/' . $term->slug . '/#' . $post->post_name;
-  } elseif ($post->post_type=='grantee') {
-    $url = '/catalyst-grants/#' . $post->post_name;
-  } elseif ($post->post_type=='person') {
-    $url = '/who-we-are/#' . $post->post_name;
-  }
-  return $url;
-}
+add_filter( 'pre_get_posts', __NAMESPACE__ . '\\search_queries' );
 
 /**
  * Custom li'l excerpt function
@@ -135,27 +100,4 @@ function get_resources($post_id) {
       echo wp_get_attachment_image($attachment_id);
       echo '</div>';
     }
-}
-
-/**
- * Get post options for CMB2 select
- */
-function cmb2_get_post_options( $query_args ) {
-
-    $args = wp_parse_args( $query_args, array(
-        'post_type'   => 'post',
-        'numberposts' => 10,
-        'post_parent' => 0,
-    ) );
-
-    $posts = get_posts( $args );
-
-    $post_options = array();
-    if ( $posts ) {
-        foreach ( $posts as $post ) {
-          $post_options[ $post->ID ] = $post->post_title;
-        }
-    }
-
-    return $post_options;
 }
