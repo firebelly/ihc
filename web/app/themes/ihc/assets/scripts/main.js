@@ -121,7 +121,7 @@ var IHC = (function($) {
                     "iconUrl": "/app/themes/ihc/dist/images/marker.png",
                     "iconSize": [25, 40],
                     "iconAnchor": [12, 40],
-                    "popupAnchor": [12, -25],
+                    "popupAnchor": [0, -40],
                     "className": "marker"
                   }
               }
