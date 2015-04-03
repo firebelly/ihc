@@ -22,7 +22,7 @@ function metaboxes( array $meta_boxes ) {
       array(
         'name' => 'Secondary Content',
         'desc' => 'Used on several pages for secondary content areas',
-        'id'   => $prefix . 'extra_info',
+        'id'   => $prefix . 'secondary_content',
         'type' => 'wysiwyg',
       ),
     ),
