@@ -65,13 +65,6 @@ function get_excerpt( $post, $length=15, $force_content=false ) {
 }
 
 /**
- * Silly ajax helper, returns true if xmlhttprequest
- */
-function is_ajax() {
-  return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
-}
-
-/**
  * Get top ancestor for post
  */
 function get_top_ancestor($post){

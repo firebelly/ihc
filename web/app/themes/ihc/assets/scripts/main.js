@@ -12,6 +12,8 @@ var IHC = (function($) {
       $document,
       $nav,
       map,
+      mapFeatureLayer,
+      mapGeoJSON = [],
       History = window.History,
       rootUrl = History.getRootUrl(),
       loadingTimer;
@@ -40,7 +42,7 @@ var IHC = (function($) {
       _initMenuToggle();
       _initSliders();
       _initMasonry();
-      _initLoadMore();
+      _initLoadMoreEvents();
 
       // initial nav update based on URL
       _updateNav();
@@ -94,21 +96,40 @@ var IHC = (function($) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
       map = L.mapbox.map('map', 'firebellydesign.lkh3a3i1').setView([41.843, -88.075], 11);
       
-      var featureLayer = L.mapbox.featureLayer().addTo(map);
-      var geoJSON = [];
+      mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 
       // set custom icons
-      featureLayer.on('layeradd', function(e) {
+      mapFeatureLayer.on('layeradd', function(e) {
         var marker = e.layer,
           feature = marker.feature;
         marker.setIcon(L.icon(feature.properties.icon));
       });
 
+      _getMapPoints();
+    }
+  }
+
+  // Ajaxify all internal links in content area
+  function _initAjaxLinks() {
+    $content.find('a:internal:not(.no-ajaxy)').each(function() {
+      var href = $(this).attr('href');
+      if (!href.match(/\.(jpg|png|gif|pdf)$/)) {
+        $(this).click(function(e) {
+          e.preventDefault();
+          History.pushState({}, '', href);
+        });
+      }
+    });
+  }
+
+  function _getMapPoints() {
+    var $mapPoints = $('.map-point:not(.mapped)');
+    if ($mapPoints.length) {
       // any map-points on page? add to map
-      $('.map-point').each(function() {
-        var $point = $(this);
+      $mapPoints.each(function() {
+        var $point = $(this).addClass('mapped');
         if ($point.data('lng')) {
-          geoJSON.push({
+          mapGeoJSON.push({
               type: 'Feature',
               geometry: {
                   type: 'Point',
@@ -129,23 +150,10 @@ var IHC = (function($) {
         }
       });
       // add the array of point objects
-      featureLayer.setGeoJSON(geoJSON);
+      mapFeatureLayer.setGeoJSON(mapGeoJSON);
       // set bounds to markers
-      map.fitBounds(featureLayer.getBounds());
+      map.fitBounds(mapFeatureLayer.getBounds());
     }
-  }
-
-  // Ajaxify all internal links in content area
-  function _initAjaxLinks() {
-    $content.find('a:internal:not(.no-ajaxy)').each(function() {
-      var href = $(this).attr('href');
-      if (!href.match(/\.(jpg|png|gif|pdf)$/)) {
-        $(this).click(function(e) {
-          e.preventDefault();
-          History.pushState({}, '', href);
-        });
-      }
-    });
   }
 
   function _updateTitle() {
@@ -283,33 +291,36 @@ var IHC = (function($) {
     });
   }
 
-  function _initLoadMore() {
-    $document.on('click', '.happenings .load-more a', function(e) {
+  function _initLoadMoreEvents() {
+    $document.on('click', '.load-more.events a', function(e) {
       e.preventDefault();
-      var load_more = $(this).closest('.load-more');
-      var page = parseInt(load_more.attr('data-page-at'));
-      var per_page = parseInt(load_more.attr('data-per-page'));
-      var masonry_container = load_more.parents('section').find('.masonry');
-      loadingTimer = setTimeout(function() { masonry_container.addClass('loading'); }, 500);
+      var $load_more = $(this).closest('.load-more');
+      var page = parseInt($load_more.attr('data-page-at'));
+      var per_page = parseInt($load_more.attr('data-per-page'));
+      var past_events = parseInt($load_more.attr('data-past-events'));
+      var more_container = $load_more.parents('section').find('.load-more-container');
+      loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
       $.ajax({
           url: wp_ajax_url,
           method: 'post',
           data: {
-              action: 'get_news_posts',
+              action: 'get_event_posts',
               page: page + 1,
-              per_page: per_page
+              per_page: per_page,
+              past_events: past_events
           },
           success: function(data) {
             var $data = $(data);
             if (loadingTimer) { clearTimeout(loadingTimer); }
-            masonry_container.append($data).removeClass('loading');
-            masonry_container.masonry('appended', $data, true);
-            load_more.attr('data-page-at', page+1);
-            _initAjaxLinks();
+            more_container.append($data).removeClass('loading');
+            // more_container.masonry('appended', $data, true);
+            $load_more.attr('data-page-at', page+1);
+            // _initAjaxLinks();
+            _getMapPoints();
 
             // hide load more if last page
-            if (load_more.attr('data-total-pages') === page + 1) {
-                load_more.addClass('hide');
+            if ($load_more.attr('data-total-pages') === page + 1) {
+                $load_more.addClass('hide');
             }
           }
       });

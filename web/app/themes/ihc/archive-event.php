@@ -27,11 +27,9 @@ $secondary_content = apply_filters('the_content', get_post_meta($page->ID, '_cmb
 		<li><a class="<?= get_query_var('past_events') ? 'active' : '' ?>" href="/events/?past_events=1">Past Events</a></li>	
 	</ul>
 
-	<?php while (have_posts()) : the_post(); ?>
-		<?php $event_post = $post; ?>
-		<?php include(locate_template('templates/article-event.php')); ?>
-	<?php endwhile; ?>
-
-	<?php the_posts_navigation(); ?>
-
+	<div class="events load-more-container">
+		<?php \Firebelly\Ajax\get_event_posts(); ?>
+	</div>
+	<div class="load-more events" data-page-at="1" data-past-events="<?= (get_query_var('past-events') ? 1 : 0) ?>" data-per-page="<?= 2 ?>" data-total-pages="<?= 2 ?>"><a class="no-ajaxy" href="#">+ Load More</a></div>
+	
 </section>

@@ -342,6 +342,39 @@ function add_query_vars_filter($vars){
 add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
 
 /**
+ * Helper function to populate event object for listings & single view
+ */
+function get_event_details($post) {
+  $event = [
+    'ID' => $post->ID,
+    'title' => $post->post_title,
+    'body' => apply_filters('the_content', $post->post_content),
+    'event_timestamp' => get_post_meta($post->ID, '_cmb2_event_timestamp', true),
+    'venue' => get_post_meta($post->ID, '_cmb2_venue', true),
+    'cost' => get_post_meta($post->ID, '_cmb2_cost', true),
+    'end_time' => get_post_meta( $post->ID, '_cmb2_end_time', true),
+    'registration_url' => get_post_meta($post->ID, '_cmb2_registration_url', true),
+    'lat' => get_post_meta($post->ID, '_cmb2_lat', true),
+    'lng' => get_post_meta($post->ID, '_cmb2_lng', true),
+    'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time()
+  ];
+  $event['start_time'] = date('g:iA', $event['event_timestamp']);
+  $event['time_txt'] = $event['start_time'] . (!empty($event['end_time']) ? '–' . preg_replace('/(^0| )/','',$event['end_time']) : '');
+  $event['desc'] = date('M d, Y @ ', $event['event_timestamp']) . $event['time_txt'];
+  $event['year'] = date('Y', $event['event_timestamp']);
+
+  $address = get_post_meta($post->ID, '_cmb2_address', true);
+  $event['address'] = wp_parse_args($address, array(
+      'address-1' => '',
+      'address-2' => '',
+      'city'      => '',
+      'state'     => '',
+      'zip'       => '',
+   ));
+  return (object)$event;
+}
+
+/**
  * Alter WP query for Event archive pages
  * if "past_events" is set, only shows archived events
  */
@@ -357,6 +390,7 @@ function event_query($query){
     );
     $query->set('meta_query', $meta_query);
     $query->set('orderby', 'meta_value_num');
+$query->set('posts_per_page', '2');
     $query->set('meta_key', '_cmb2_event_timestamp');
     // show events oldest->newest
     $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
