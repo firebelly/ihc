@@ -178,19 +178,41 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
+ * Get Num Events, past or future
+ */
+function get_num_events($past='') {
+  global $wpdb;
+  $count = $wpdb->get_var($wpdb->prepare(
+    "
+    SELECT COUNT(*) FROM `wp_posts` wp
+    INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_timestamp')
+    WHERE wp.post_status = 'publish' 
+    AND wp.post_type = 'event'
+    AND wm.meta_value " . ($past ? '<=' : '>') . " %s
+    ",
+    time()
+  ));
+  return $count;
+}
+
+/**
  * Get Events
  */
-function get_events($num, $focus_area='') {
+function get_events($num_posts='', $focus_area='') {
+  if (!$num_posts) $num_posts = get_option('posts_per_page');
   $args = [
-    'numberposts' => $num,
+    'numberposts' => $num_posts,
     'post_type' => 'event',
     'meta_key' => '_cmb2_event_timestamp',
     'orderby' => 'meta_value_num',
-    'order' => 'ASC',
-    'meta_query' => [
+  ];
+  // make sure we're only pulling upcoming or past events
+  $args['order'] = !empty($_REQUEST['past_events']) ? 'DESC' : 'ASC';
+  $args['meta_query'] = [
+    [
       'key' => '_cmb2_event_timestamp',
       'value' => time(),
-      'compare' => '>'
+      'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
     ]
   ];
   if ($focus_area != '') {
@@ -205,13 +227,12 @@ function get_events($num, $focus_area='') {
 
   $event_posts = get_posts($args);
   if (!$event_posts) return false;
-  $output = '<div class="events">';
+  $output = '';
   foreach ($event_posts as $event_post):
     ob_start();
     include(locate_template('templates/article-event.php'));
     $output .= ob_get_clean();
   endforeach;
-  $output .= '</div>';
   return $output;
 }
 
@@ -264,7 +285,7 @@ function event_ics() {
   $venue = get_post_meta($event_post->ID, '_cmb2_venue', true);
   $end_time = get_post_meta( $event_post->ID, '_cmb2_end_time', true);
   $start_time = date('g:iA', $event_timestamp);
-  $gmtOffset = 60 * 60 * get_option('gmt_offset');
+  // $gmtOffset = 60 * 60 * get_option('gmt_offset');
 
   $ics = [
     'BEGIN:VCALENDAR',
@@ -277,9 +298,9 @@ function event_ics() {
     'SUMMARY:' . $event_post->post_title,
     'URL:' . get_permalink($event_post->ID),
     'LOCATION:' . $venue,
-    'DTSTART:' . date('YmdTHisZ', $event_timestamp - $gmtOffset),
-    // 'DTEND:' . date('YmdTHisZ', $event_end_timestamp - $gmtOffset),
-    'DTSTAMP:' . date('YmdTHisZ', strtotime($event_post->post_modified) - $gmtOffset),
+    'DTSTART:' . get_ical_date($event_timestamp),
+    // 'DTEND:' . get_ical_date($event_end_timestamp),
+    'DTSTAMP:' . get_ical_date(strtotime($event_post->post_modified)),
     'END:VEVENT',
     'END:VCALENDAR',
   ];
@@ -292,6 +313,10 @@ function event_ics() {
 }
 add_action('wp_ajax_event_ics', __NAMESPACE__ . '\\event_ics');
 add_action('wp_ajax_nopriv_event_ics', __NAMESPACE__ . '\\event_ics');
+
+function get_ical_date($time, $incl_time=true){
+  return $incl_time ? date('Ymd\THis', $time) : date('Ymd', $time);
+}
 
 // custom URLs like /events/2014/11/the-event-name
 // function event_rewrite_tag() {

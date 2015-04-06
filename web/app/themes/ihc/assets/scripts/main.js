@@ -4,7 +4,10 @@
 var IHC = (function($) {
 
   var screen_width = 0,
-      is_desktop = false,
+      breakpoint_small = false,
+      breakpoint_medium = false,
+      breakpoint_large = false,
+      breakpoint_huge = false,
       page_cache = [],
       $content,
       $backnav,
@@ -39,10 +42,11 @@ var IHC = (function($) {
       _initNav();
       _initMap();
       _initAjaxLinks();
-      _initMenuToggle();
+      // _initMenuToggle();
       _initSliders();
       _initMasonry();
-      _initLoadMoreEvents();
+      _initLoadMore();
+      _initShareLinks();
 
       // initial nav update based on URL
       _updateNav();
@@ -68,6 +72,12 @@ var IHC = (function($) {
       offset: -wpOffset
     }, "easeOutSine");
   } 
+
+  function _initShareLinks() {
+    stLight.options({
+      publisher:'dbad2b1b-8495-4b41-8b76-b44ed1a6e940'
+    });
+  }
 
   function _initSearch() {
     $('.search-toggle, .internal-search-toggle').on('click', function (e) {
@@ -172,6 +182,9 @@ var IHC = (function($) {
 
   // handles main nav
   function _initNav() {
+
+    // SEO-useless nav toggler
+    $('body').prepend('<div class="menu-toggle"><a href="#"><span>Menu</span></a></div>');
 
     $(window).bind('statechange',function(){
       var State = History.getState(),
@@ -284,27 +297,30 @@ var IHC = (function($) {
   }
 
   function _initMasonry(){
-    var $container = $('.masonry');
-    $container.masonry({
-      itemSelector: 'article',
-      transitionDuration: '.3s'
-    });
+    if (breakpoint_medium) {
+      $('.masonry').masonry({
+        itemSelector: 'article',
+        transitionDuration: '.3s'
+      });
+    }
   }
 
-  function _initLoadMoreEvents() {
-    $document.on('click', '.load-more.events a', function(e) {
+  function _initLoadMore() {
+    $document.on('click', '.load-more a', function(e) {
       e.preventDefault();
       var $load_more = $(this).closest('.load-more');
+      var post_type = $load_more.hasClass('events') ? 'event' : 'news';
       var page = parseInt($load_more.attr('data-page-at'));
       var per_page = parseInt($load_more.attr('data-per-page'));
-      var past_events = parseInt($load_more.attr('data-past-events'));
+      var past_events = (post_type==='events') ? parseInt($load_more.attr('data-past-events')) : 0;
       var more_container = $load_more.parents('section').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
       $.ajax({
           url: wp_ajax_url,
           method: 'post',
           data: {
-              action: 'get_event_posts',
+              action: 'load_more_posts',
+              post_type: post_type,
               page: page + 1,
               per_page: per_page,
               past_events: past_events
@@ -319,7 +335,7 @@ var IHC = (function($) {
             _getMapPoints();
 
             // hide load more if last page
-            if ($load_more.attr('data-total-pages') === page + 1) {
+            if ($load_more.attr('data-total-pages') <= page + 1) {
                 $load_more.addClass('hide');
             }
           }
@@ -366,14 +382,24 @@ var IHC = (function($) {
   // called in quick succession as window is resized
   function _resize() {
     screenWidth = document.documentElement.clientWidth;
-    is_desktop = screenWidth > 768;
+    breakpoint_small = (screenWidth > 480);
+    breakpoint_medium = (screenWidth > 768);
+    breakpoint_large = (screenWidth > 1024);
+    breakpoint_huge = (screenWidth > 3000);
   }
 
+  // called periodically for more intensive resize tasks
+  function _delayed_resize() {
+    // if (!breakpoint_medium) {
+    //   $('.masonry').masonry('destroy');
+    // } 
+  }
 
   // public functions
   return {
     init: _init,
     resize: _resize,
+    delayed_resize: _delayed_resize,
     updateContent: _updateContent,
     scrollBody: function(section, duration, delay) {
       _scrollBody(section, duration, delay);
@@ -386,6 +412,15 @@ var IHC = (function($) {
 jQuery(document).ready(IHC.init);
 // zig-zag the mothership
 jQuery(window).resize(IHC.resize);
+
+jQuery(window).resize(function($){
+    // instant resize functions
+    IHC.resize();
+
+    // delayed resize for more intensive tasks
+    if(IHC.delayed_resize_timer) { clearTimeout(IHC.delayed_resize_timer); }
+    IHC.delayed_resize_timer = setTimeout(IHC.delayed_resize, 150);
+});
 
 
 (function($){

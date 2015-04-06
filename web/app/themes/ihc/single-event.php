@@ -1,7 +1,7 @@
 <?php 
 $event = \Firebelly\PostTypes\Event\get_event_details($post);
 ?>
-<article class="event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
+<article class="post event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
   <h1><?= $post->post_title ?></h1>
   <div class="body"><?= $event->body ?></div>
 

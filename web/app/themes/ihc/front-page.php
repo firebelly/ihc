@@ -2,6 +2,9 @@
 /**
  * Template Name: Homepage
  */
+
+$total_events = \Firebelly\PostTypes\Event\get_num_events();
+$total_news = wp_count_posts('post')->publish;
 ?>
 
 <?php 
@@ -22,19 +25,19 @@ foreach ($focus_areas as $focus_area) {
 ?>
 </ul>
 
+<div id="map" class="large"></div>
 
-<h2>Attend an Event</h2>
-<div class="events">
-<?php 
-// Recent Events
-echo \Firebelly\PostTypes\Event\get_events(3);
-?>
+<section class="events">
+<div class="events load-more-container article-list masonry">
+	<?php echo \Firebelly\PostTypes\Event\get_events(3); ?>
 </div>
-<p><a href="#" class="load-more" data-more-container="events">+ Load More</a></p>
+<div class="load-more events" data-page-at="1" data-past-events="0" data-per-page="3" data-total-pages="<?= ceil($total_events/3) ?>"><a class="no-ajaxy" href="#">+ Load More</a></div>
+<p><a href="/events/" class="view-all">View All Events</a></p>
+</section>
 
-
+<section class="news">
 <h2>Blog &amp; News</h2>
-<div class="blog-and-news">
+<div class="load-more-container article-list masonry">
 <?php 
 // Recent Blog & News posts
 $news_posts = get_posts(['numberposts' => 4]);
@@ -45,4 +48,6 @@ if ($news_posts):
 endif;
 ?>
 </div>
-<p><a href="#" class="load-more" data-more-container="blog-and-news">+ Load More</a></p>
+<div class="load-more" data-page-at="1" data-per-page="4" data-total-pages="<?= ceil($total_news/4) ?>"><a class="no-ajaxy" href="#">+ Load More</a></div>
+<p><a href="/news/" class="view-all">All Articles</a></p>
+</section>

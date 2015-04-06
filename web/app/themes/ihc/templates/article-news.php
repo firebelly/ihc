@@ -8,7 +8,7 @@ $focus_area = Utils\get_focus_area($news_post);
   $thumb = wp_get_attachment_url(get_post_thumbnail_id($news_post->ID));
   echo '<a href="'.get_the_permalink($news_post).'" class="article-thumb" style="background-image:url('.$thumb.');"><span class="clip"></span></a>';
 } ?>
-<time class="article-date" datetime="<?= date('c', strtotime($news_post->post_date)); ?>"><?= date('m/d', strtotime($news_post->post_date)); ?></time>
+<time class="article-date" datetime="<?= date('c', strtotime($news_post->post_date)); ?>"><?= date('j/n', strtotime($news_post->post_date)); ?></time>
   <div class="article-content">
     <div class="article-content-wrap">
       <header class="article-header">

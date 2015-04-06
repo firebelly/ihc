@@ -45,7 +45,7 @@ function get_top_ancestor($post){
 /**
  * Get first term for post
  */
-function get_first_term($post, $taxonomy='') {
+function get_first_term($post, $taxonomy='category') {
   $return = false;
   if ($terms = get_the_terms($post->ID, $taxonomy))
     $return = array_pop($terms);
@@ -69,6 +69,15 @@ function get_focus_area($post) {
   if ($focus_area = get_post_meta($post->ID, '_cmb2_focus_area', true)) {
     return get_term($focus_area[0], 'focus_area');
   } else return false;
+}
+
+function get_focus_area_and_tags($post) {
+  $return = false;
+  if ($focus_area = get_focus_area($post)) {
+    $return = '<a href="'.get_term_link($focus_area).'">'.$focus_area->name.'</a>';
+  }
+  // todo: pull tags also and prepend focus area to list
+  return $return;
 }
 
 /**
