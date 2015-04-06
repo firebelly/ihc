@@ -1,0 +1,101 @@
+// Base styles
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  background: $green;
+  color: $blue;
+  font-size: 16px; //Em base unit
+  font-size: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: $sans;
+}
+
+h2 {
+  font-size: .75em;
+}
+
+p {
+  em {
+    font-style: italic;
+  }
+}
+
+a {
+	color: inherit;
+}
+
+img {
+	max-width: 100%;
+  height: auto;
+}
+
+// Browser alert
+.alert-warning {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  color: $black;
+  padding: 50px;
+  text-align: center;
+  background: $brand-secondary;
+}
+
+// Disable scrolling when modals are active
+.no-scroll {
+  overflow: hidden;
+}
+
+// Utility classes
+.hide {
+  display: none;
+}
+
+.loading {
+  opacity: .5;
+}
+
+.at {
+  // bottom: 2px;
+  // position: relative;
+}
+
+.wrap {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  position: relative;
+  @include clearfix();
+  @include min-screen($breakpoint-medium) {
+  }
+}
+
+.content {
+  z-index: 1;
+  width: 100%;
+  position: relative;
+}
+
+.alert {
+  padding: 50px;
+  background: #fff;
+}
+
+.posts-navigation {
+  text-align: center;
+  h2 {
+    display: none;
+  }
+  .nav-links {
+    a {
+    }
+  }
+}

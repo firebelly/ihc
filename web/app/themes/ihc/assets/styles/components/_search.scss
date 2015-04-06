@@ -1,0 +1,35 @@
+// Search form
+
+// wp admin bar push
+.admin-bar {}
+
+.search-toggle {}
+
+.search-close {
+  @include min-screen($breakpoint-medium) {}
+
+  @include min-screen($breakpoint-large) {}
+}
+
+.search-form {
+  input {
+    border: none;
+    color: $black;
+    border-radius: 0;
+    padding: .5em;
+    background: $white;
+    &:focus, &:active {
+      border: none;
+      outline: none;
+      -webkit-appearance: none;
+    }
+    &[type=search] {
+      box-sizing: border-box;
+    }
+  }
+
+  @include min-screen($breakpoint-medium) {
+    input {
+    }
+  }
+}

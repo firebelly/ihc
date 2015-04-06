@@ -3,51 +3,40 @@
 
 @charset "UTF-8"; 
 
-body {
-	border: 1em solid #eee;
-	margin: 0;
-	padding: 1em;
-}
-article {
-	border: 1em solid #eee;
-	padding: 1em;
-	margin: 1em 0;
-}
-#map {
-	width: 300px;
-	height: 300px;
-	&.large {
-		width: 600px;
-		height: 400px;
-	}
-}
-.active {
-	background: yellow;
-}
-.hide {
-	display: none;
-}
+// Reset
+@import "vendor/normalize";
+
+// Helpers and Variables
+@import "helpers/mixins";
+@import "helpers/variables";
+@import "helpers/typography";
+@import "helpers/animations";
+@import "helpers/accessibility";
+@import "helpers/ie";
+
+// Vendor
+
+// Components
+@import "components/base";
+@import "components/user-content";
+@import "components/header";
+@import "components/nav";
+@import "components/search";
+@import "components/forms";
+@import "components/maps";
+@import "components/main-section";
+@import "components/article-list";
+@import "components/footer";
+
+// Pages
+@import "pages/home";
+@import "pages/about-us";
+@import "pages/our-work";
+@import "pages/events";
+@import "pages/blog";
+@import "pages/support-us";
+@import "pages/single-post";
+@import "pages/search-results";
 
 // WP specifics
 @import 'wp-classes';
-
-
-// silly tmp mapbox fix
-.leaflet-control-attribution:after,
-.leaflet-control-zoom-in,
-.leaflet-control-zoom-out,
-.leaflet-popup-close-button,
-.leaflet-control-layers-toggle,
-.leaflet-container.dark .map-tooltip .close,
-.map-tooltip .close,
-.mapbox-icon {
-  background-image:url(../images/icons-000000@2x.png);
-  }
-.leaflet-container.dark .leaflet-control-attribution:after,
-.mapbox-button-icon:before,
-.leaflet-container.dark .leaflet-control-zoom-in,
-.leaflet-container.dark .leaflet-control-zoom-out,
-.leaflet-container.dark .leaflet-control-layers-toggle,
-.leaflet-container.dark .mapbox-icon {
-  background-image:url(../images/icons-ffffff@2x.png);
-}

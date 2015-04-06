@@ -1,0 +1,78 @@
+// Animations
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+.fadeIn {
+  animation-name: fadeIn;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+.fadeInRight {
+  animation-name: fadeInRight;
+}
+
+@keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+.fadeOutRight {
+  animation-name: fadeOutRight;
+}
+
+@include min-screen($breakpoint-medium) {
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      transform: translate3d(2%, 0, 0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes fadeOutRight {
+    0% {
+      opacity: 1;
+      transform: none;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate3d(2%, 0, 0);
+    }
+  }
+}

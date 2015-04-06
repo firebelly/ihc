@@ -1,0 +1,22 @@
+// Typography
+
+// Fonts
+$sans: Helvetica, sans-serif;
+$serif: Georgia, serif;
+
+@mixin font-sans() {
+  font-weight: 600;
+  font-family: $sans;
+  letter-spacing: .125em;
+  text-transform: uppercase;
+}
+
+// Hide fonts while loading from Typekit
+.wf-loading {
+  visibility: hidden;
+}
+
+//sizes
+$small: 0.5em;
+$med: 1em;
+$big: 3em;

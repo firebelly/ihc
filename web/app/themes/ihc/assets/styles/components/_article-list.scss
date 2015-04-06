@@ -1,0 +1,44 @@
+// Article lists
+
+// share buttons
+.share span {
+ cursor: pointer;
+}
+
+// time tags
+time {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  padding: 1em;
+  background: $blue;
+  color: $white;
+  font-size: .75em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.article-list {
+  article {
+    position: relative;
+    background: $white;
+    padding: 1em;
+    margin-bottom: 1em;
+    @include min-screen($breakpoint-medium) {
+      width: 33.3%;
+      float: left;
+    }
+    .article-tag {
+      color: $gray;
+      font-family: $sans;
+      text-transform: uppercase;
+      a {
+        text-decoration: none;
+        transition: color .1s ease-out;
+        &:hover, &:active {
+          color: $black;
+        }
+      }
+    }
+  }
+}
