@@ -1,6 +1,6 @@
 set :application, 'ihc'
 set :login, 'firebelly'
-set :repo_url, 'git@bitbucket.org:firebelly/ihc.git'
+set :repo_url, 'git@github.com:firebelly/ihc.git'
 
 # path to composer
 SSHKit.config.command_map[:composer] = "php54 /home/#{fetch(:login)}/bin/composer.phar"
