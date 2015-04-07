@@ -12,6 +12,12 @@
       <header>
         <h1 class="entry-title"><?php the_title(); ?></h1>
       </header>
+
+      <?php if ($byline_area = get_post_meta($post->ID, '_cmb2_post_byline', true)): ?>
+        <div class="byline-area user-content">
+          <?php echo apply_filters('the_content', $byline_area); ?>
+        </div>
+      <?php endif; ?>
       <div class="entry-content user-content">
         <?php the_content(); ?>
       </div>
