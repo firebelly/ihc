@@ -126,7 +126,7 @@ function metaboxes(array $meta_boxes) {
 
   return $meta_boxes;
 }
-add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+add_filter('cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes');
 
 /**
  * Get Thoughts
@@ -153,6 +153,8 @@ function get_thought_of_the_day() {
     
     if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
       $author .= '<br>'.$focus->name;
+    else 
+      $author .= '<br>Humanities';
 
     $output .= <<<HTML
      <article class="thought">
@@ -203,8 +205,8 @@ function thought_submission() {
     wp_send_json_success(['message' => sprintf('Thought from %s added ok', $_REQUEST['author'])]);
   }
 }
-add_action( 'wp_ajax_thought_submission', __NAMESPACE__ . '\\thought_submission' );
-add_action( 'wp_ajax_nopriv_thought_submission', __NAMESPACE__ . '\\thought_submission' );
+add_action('wp_ajax_thought_submission', __NAMESPACE__ . '\\thought_submission');
+add_action('wp_ajax_nopriv_thought_submission', __NAMESPACE__ . '\\thought_submission');
 
 
 /**
@@ -221,4 +223,4 @@ function check_thought_of_day( $post_id ) {
   }
 
 }
-add_action( 'save_post', __NAMESPACE__ . '\check_thought_of_day' );
+add_action('save_post', __NAMESPACE__ . '\check_thought_of_day');
