@@ -149,7 +149,7 @@ var IHC = (function($) {
                   title: $point.data('title'),
                   description: $point.data('desc'),
                   icon: {
-                    "iconUrl": "/app/themes/ihc/dist/images/marker.png",
+                    "iconUrl": "/app/themes/ihc/dist/images/mapbox/marker.png",
                     "iconSize": [25, 40],
                     "iconAnchor": [12, 40],
                     "popupAnchor": [0, -40],
