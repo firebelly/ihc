@@ -3,10 +3,12 @@ $event = \Firebelly\PostTypes\Event\get_event_details($post);
 $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
 ?>
 <article class="post event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
-  
-  <h3 class="banner"><?= $banner_text ?></h3>
-  <h1><?= $post->post_title ?></h1>
-  <div class="body"><?= $event->body ?></div>
+
+  <section class="main">
+    <h3 class="banner"><?= $banner_text ?></h3>
+    <h1><?= $post->post_title ?></h1>
+    <div class="entry-content user-content"><?= $event->body ?></div>
+  </section>  
 
   <aside>
     <div id="map"></div>
@@ -41,4 +43,5 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
       </ul>
     <?php endif; ?>
   </aside>
+
 </article>

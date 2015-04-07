@@ -110,3 +110,25 @@ function get_resources($post_id) {
       echo '</div>';
     }
 }
+
+/**
+ * Get Related Event (unfinished)
+ */
+function get_related_event_post($post) {
+  // todo: get focus area of post and use to find associated event
+  return \Firebelly\PostTypes\Event\get_events(1);
+}
+
+/**
+ * Get Related News Post (unfinished)
+ */
+function get_related_news_post($post) {
+  global $news_post;
+  // todo: get focus area of post and use to find associated news post
+  $posts = get_posts('numberposts=1');
+  ob_start();
+  foreach ($posts as $news_post)
+    include(locate_template('templates/article-news.php'));
+  $output = ob_get_clean();
+  return $output;
+}
