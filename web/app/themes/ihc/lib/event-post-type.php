@@ -385,6 +385,7 @@ function get_event_details($post) {
   ];
   $event['start_time'] = date('g:iA', $event['event_timestamp']);
   $event['time_txt'] = $event['start_time'] . (!empty($event['end_time']) ? '–' . preg_replace('/(^0| )/','',$event['end_time']) : '');
+  $event['archived'] = ($event['event_timestamp'] < time());
   $event['desc'] = date('M d, Y @ ', $event['event_timestamp']) . $event['time_txt'];
   $event['year'] = date('Y', $event['event_timestamp']);
 
@@ -415,7 +416,6 @@ function event_query($query){
     );
     $query->set('meta_query', $meta_query);
     $query->set('orderby', 'meta_value_num');
-$query->set('posts_per_page', '2');
     $query->set('meta_key', '_cmb2_event_timestamp');
     // show events oldest->newest
     $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
