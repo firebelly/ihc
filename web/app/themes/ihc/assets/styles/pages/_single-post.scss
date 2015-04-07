@@ -23,7 +23,7 @@
           text-decoration: none;
           transition: color .1s ease-out;
           &:hover, &:focus {
-            color: $brand-primary;
+            color: $primary-color;
           }
         }
       }
