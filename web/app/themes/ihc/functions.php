@@ -31,6 +31,7 @@ $firebelly_includes = [
   'lib/cmb2-custom-fields.php',    // Add new fields to CMB2
   'lib/page-meta-boxes.php',       // Extra CMB2 Page fields
   'lib/post-meta-boxes.php',       // Extra CMB2 Post fields
+  'lib/taxonomy-meta-boxes.php',   // Extra CMB2 Taxonomy fields
   'lib/short-codes.php',           // Custom short codes
   'lib/event-post-type.php',       // Events
   'lib/program-post-type.php',     // Programs
