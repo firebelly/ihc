@@ -20,11 +20,30 @@ function metaboxes( array $meta_boxes ) {
       
       // General page fields
       array(
-        'name' => 'Secondary Content',
-        'desc' => 'Used on several pages for secondary content areas',
-        'id'   => $prefix . 'secondary_content',
+        'name' => 'Header Banner Text',
+        'desc' => 'Shows in banner above Header Text',
+        'id'   => $prefix . 'header_banner_text',
+        'type' => 'text',
+      ),
+      array(
+        'name' => 'Header Text',
+        'desc' => 'Shows at top of page behind featured image',
+        'id'   => $prefix . 'header_text',
         'type' => 'wysiwyg',
       ),
+      array(
+        'name' => 'Secondary Header Text',
+        'desc' => 'Shows below Header Text (as image caption on homepage)',
+        'id'   => $prefix . 'secondary_header_text',
+        'type' => 'wysiwyg',
+      ),
+      array(
+        'name' => 'Content Banner Text',
+        'desc' => 'Shows in banner above content',
+        'id'   => $prefix . 'content_banner_text',
+        'type' => 'text',
+      ),
+
     ),
   );
 
