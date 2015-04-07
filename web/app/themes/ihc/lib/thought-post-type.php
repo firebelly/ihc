@@ -67,8 +67,9 @@ function edit_columns($columns){
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
     'content' => 'Thought',
+    '_cmb2_thought_of_the_day' => 'Thought of the Day?',
     '_cmb2_author' => 'Author',
-    'taxonomy-focus_area' => 'Focus Area(s)',
+    'taxonomy-focus_area' => 'Focus Area',
   );
   return $columns;
 }
@@ -83,6 +84,8 @@ function custom_columns($column){
     elseif ( $column == 'content' )
       echo get_the_content();
       // echo edit_post_link(get_the_content()) . ($post->post_status != 'publish' ? " - <strong class=\"post-status\">{$post->post_status}</strong>" : '');
+    elseif ( $column == '_cmb2_thought_of_the_day' )
+      if (!empty($custom[$column][0])) echo '✓';
     else {
       $custom = get_post_custom();
       if (array_key_exists($column, $custom))
@@ -112,6 +115,12 @@ function metaboxes(array $meta_boxes) {
           'id'      => $prefix . 'author',
           'type'    => 'text',
       ),
+      array(
+          'name'    => 'Thought of the Day',
+          'desc'    => 'When checked will clear out any previous Thought of the Day',
+          'id'      => $prefix . 'thought_of_the_day',
+          'type'    => 'checkbox',
+      ),
     ),
   );
 
@@ -122,21 +131,18 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get Thoughts
  */
-function get_thought($focus_area='') {
+function get_thought_of_the_day() {
   $args = array(
     'numberposts' => 1,
     'post_type' => 'thought',
-    'orderby' => 'rand',
-    );
-  if ($focus_area != '') {
-    $args['tax_query'] = array(
-        array(
-            'taxonomy' => 'focus_area',
-            'field' => 'slug',
-            'terms' => $focus_area,
-        )
-    );
-  }
+    'meta_query' => [
+      [
+        'key' => '_cmb2_thought_of_the_day',
+        'value' => 'on',
+        'compare' => '='
+      ]
+    ],
+  );
 
   $thought_posts = get_posts($args);
   if (!$thought_posts) return false;
@@ -144,6 +150,9 @@ function get_thought($focus_area='') {
   foreach ($thought_posts as $post):
     $body = apply_filters('the_content', $post->post_content);
     $author = get_post_meta( $post->ID, '_cmb2_author', true );
+    
+    if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
+      $author .= '<br>'.$focus->name;
 
     $output .= <<<HTML
      <article class="thought">
@@ -196,3 +205,20 @@ function thought_submission() {
 }
 add_action( 'wp_ajax_thought_submission', __NAMESPACE__ . '\\thought_submission' );
 add_action( 'wp_ajax_nopriv_thought_submission', __NAMESPACE__ . '\\thought_submission' );
+
+
+/**
+ * Check if Thought of the Day is checked, clear out previous featured Thoughts if so
+ */
+function check_thought_of_day( $post_id ) {
+  global $wpdb;
+  if ( wp_is_post_revision( $post_id ) )
+    return;
+
+  if (!empty($_REQUEST['_cmb2_thought_of_the_day'])) {
+    $wpdb->query("DELETE FROM wp_postmeta WHERE meta_key='_cmb2_thought_of_the_day'");
+    $wpdb->query("INSERT INTO wp_postmeta SET meta_key='_cmb2_thought_of_the_day', meta_value='on', post_id={$post_id}");
+  }
+
+}
+add_action( 'save_post', __NAMESPACE__ . '\check_thought_of_day' );
