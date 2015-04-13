@@ -1,5 +1,40 @@
 // Mixins
 
+// Font-styles
+@mixin font-style1($color) {
+  font-family: $sans;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size:$small;
+  color: $color;
+}
+
+@mixin font-style2($color) {
+  font-family:$sans;
+  font-size:$med;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: $color;
+}
+
+@mixin font-style3 {
+  font-family:$serif;
+  font-weight: 700;
+  color: $white;
+  text-transform: italic;
+}
+
+// Button style
+@mixin button-style {
+  @include font-style1($dk-blue);
+    min-width:150px;
+    border:3px solid $dk-blue;
+    padding:5px;
+    display:inline-block;
+    text-align:center;
+}
+
 // Support for styling input placeholder text
 @mixin placeholder {
   &.placeholder {
@@ -131,7 +166,7 @@
   only screen and (min-resolution: #{round($ratio*96)}dpi),
   only screen and (min-resolution: #{$ratio}dppx)
   {
-    @content;
+    @content; 
   }
 }
 

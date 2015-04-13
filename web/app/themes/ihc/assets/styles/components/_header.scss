@@ -1,9 +1,38 @@
 // Header
 
-.site-header {
-  @include min-screen($breakpoint-small) {
-  }
+.page-header{
+	width:86.26%;
+	overflow:hidden;
+	background:url(http://bit.ly/IRW4MS) 50% 50% no-repeat scroll;
+	background-size:cover;
+	padding:50px 0 0 50px;
+	margin-left:-4.54%;
+	z-index:1;
 
-  @include min-screen($breakpoint-medium) {
-  }
+	& h1{
+		width:56.4%;
+		font-size:$xxl;
+		font-weight:100;
+		color:$white;
+		margin-top:70px;
+		text-transform:none; 
+	}
+
+	& h2{
+		top:50px;
+	}
+	& p{
+		@include font-style1($lt-orange);
+		margin-bottom:60px;
+		font-size:$small;
+	}
+}
+
+.navbar-header .navbar-brand{
+	width:200px;
+	height:80px;
+	float:right;
+	margin-right:8.332%;
+	background:$white;
+	z-index:5;
 }

@@ -1,2 +1,66 @@
 // Main Section
+main[role="main"]{
+	@include clearfix;
+}
+
+//thought of the day
+section.thought {
+	top:-260px;
+	min-width:22.7%;
+	min-height:150px;
+	float:right;
+	border:1px blue solid;
+	z-index:10;
+
+	& p{
+		@include font-style3
+	}
+
+	& cite{
+		@include font-style2($dk-blue);
+		font-size:$small;
+	}
+
+	.submit-thought{
+		@include button-style;
+		margin-top: 40px;
+	}
+}
+
+//focus area
+section.focus-areas{
+	top:0;
+	left:18.16%;
+	max-width:500px;
+	z-index:10;
+}
+	.focus-list{
+		background: #fff;
+  		list-style-type: none;
+  		height: 100%;
+  		margin: 0;
+  		padding: 20px 25px;
+  		line-height: 3em;
+
+		& li{
+			 width:100%;
+			a{
+				@include font-style1($dk-blue);
+				letter-spacing:0.1em;
+				border-bottom: 3px $dk-blue solid;
+				font-size:1.75em;
+			}
+		}
+	}
+
+#map{
+	position:relative;
+	top:0;
+	left:-50px;
+	float:left;
+	width:58.324%;
+	z-index:1;
+}
+
+
 

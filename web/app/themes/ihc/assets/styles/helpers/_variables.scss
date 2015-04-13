@@ -1,10 +1,13 @@
 // Variables
 
 // Colors
-$blue: #46617e;
-$green: #b9ddbb;
-$orange: #fa983b;
-$red: #d45057;
+$lt-blue: #009bdb; //cerulean
+$green: #4ca847; //grass	
+$lt-orange: #fc992b; //tangerine
+$red: #d64f54; //brick
+$aqua: #66bc99; //sea
+$dk-orange: #e56638; //blood orange
+$dk-blue: #44607f;
 
 $black: #202020;
 $black-lite: #444648;
@@ -13,12 +16,31 @@ $gray-lite: #DCDCDC;
 $gray: #969696;
 $gray-dark: #555;
 
-// Brand Swatches
-$primary-color: $red;
-$secondary-color: $blue;
+// Background Swatches
+$bg-blue: #c1d6d8; //pastel blue
+$bg-green: #b7ddba; //pastel green
+$bg-pink: #edbaba; 
+$bg-beige: #e5d3be;
+$bg-grey: #c6c9cc;
+$bg-peach:#eac6af;
+
+//color transitions
+$color-accent:$lt-orange;
+$color-bg:$bg-green;
 
 // Breakpoints
 $breakpoint-small: 480px;
 $breakpoint-medium: 768px;
 $breakpoint-large: 1024px;
 $breakpoint-huge: 3000px;
+
+//font-sizes
+$small: 12px; //12px
+$med: 14px; //14px
+$lg: 21px; //21px
+$xl: 28px; //28px
+$xxl: 56px; //56px
+
+// Fonts
+$sans: "museo-sans", Helvetica, sans-serif;
+$serif: "minion-pro", serif;

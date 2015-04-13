@@ -1,3 +1,4 @@
+<section class="thought">
 <h2>Thought of the Day</h2>
 <div class="thought-wrapper">
 	<?= \Firebelly\PostTypes\Thought\get_thought_of_the_day(!empty($focus_area) ? $focus_area : ''); ?>
@@ -7,3 +8,4 @@
 <div class="submit-thought-wrapper hide">
 	<?= \Firebelly\PostTypes\Thought\submit_form(); ?>
 </div>
+</section>

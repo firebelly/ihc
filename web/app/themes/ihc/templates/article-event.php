@@ -11,5 +11,5 @@ $event = \Firebelly\PostTypes\Event\get_event_details($event_post);
   <?php if (!empty($event->registration_url)): ?>
     <a class="register" href="<?= $event->registration_url ?>">Register</a>
   <?php endif; ?>
-  <p class="more"><a href="<?= get_permalink($event->ID); ?>">+ More Details</a></p>
+  <p class="more"><a href="<?= get_permalink($event->ID); ?>">More Details</a></p>
 </article>

@@ -11,34 +11,141 @@ time {
   top: 0;
   right: 0;
   z-index: 1;
-  padding: 1em;
-  background: $blue;
-  color: $white;
-  font-size: .75em;
+  background: $bg-green;
   -webkit-font-smoothing: antialiased;
+} 
+
+.article {
+	width: 250px;
+	background:$white;
+	min-height:260px;
+	padding:20px 50px 20px 20px;
+	margin:4px;
 }
 
-.article-list {
-  article {
-    position: relative;
-    background: $white;
-    padding: 1em;
-    margin-bottom: 1em;
-    @include min-screen($breakpoint-medium) {
-      width: 33.3%;
-      float: left;
-    }
-    .article-tag {
-      color: $gray;
-      font-family: $sans;
-      text-transform: uppercase;
-      a {
-        text-decoration: none;
-        transition: color .1s ease-out;
-        &:hover, &:active {
-          color: $black;
-        }
+//events
+section.event-cal{
+	top: 0;
+	right:160px;
+	min-width:500px;
+	float:right;
+	margin:0 4.54% 80px 0;
+	z-index: 20;
+}
+	 
+.event {
+		@extend .article;
+		background:$dk-blue;
+
+		h1 a {
+			@include font-style2($color-bg);
+			text-transform:capitalize;
+			border-bottom:1px solid $color-bg;
+			font-size:$lg;
+		}
+
+		h3, 
+		p, 
+		.more a, 
+		.register  {
+			@include font-style1($bg-green);
+		}
+		
+		.more a::before {
+			content:'+ ';
+		}
+
+		.register::before {
+			content:'›› ';
+		}
+
+	& time {
+		width: 50px;
+  		height: 60px;
+  		padding:7px 13px;
+		.month {
+			@include font-style1($dk-blue);
+		}
+
+		.day {
+			@include font-style2($dk-blue);
+			font-size:$lg;
+		}
+
+      	&::after {
+        	top: 100%;
+        	right: 0;
+        	position: absolute;
+        	width: 0;
+        	height: 0;
+        	content: '';
+        	border-top: 20px solid $color-bg;
+        	border-right: 25px solid transparent;
       }
     }
-  }
 }
+
+.load-more {
+		a{
+			@include button-style;
+
+			&::before{
+				content:'+ ';
+			}
+		}
+	}
+
+	.view-all{
+		@include button-style;
+	}
+
+
+//blog & news
+section.news {
+	width:100%;
+	margin-top:80px;
+	clear:both;
+	z-index:20;
+	
+	& .article-list {
+		margin-bottom:40px;
+	
+		.article-date {
+			@include font-style1($white);
+			background:$color-bg;
+			width:50px;
+			height:30px;
+			padding:10px 15px;
+		}
+
+		.article-tag a{
+			@include font-style1($dk-blue);
+			}
+
+		.article-title a{
+			@include font-style2($dk-blue);
+			font-size:$lg;
+			text-transform:capitalize;
+			border-bottom:1px $dk-blue solid;
+			line-height:1.5em;
+		}
+
+		.article-excerpt p{
+			@include font-style2($dk-blue);
+			line-height:1.5em;
+		}
+	}
+
+	& .news-buttons {
+		position:relative;
+		margin:0 36.32% 50px;
+
+		.load-more, .all-articles{
+			margin:0;
+			display:inline-block;
+		}
+
+	}
+}	
+	
+
