@@ -2,7 +2,7 @@
 
 <footer class="main" role="contentinfo">
   <div class="container">
-    <div class="contact-info">
+    <ul class="contact-info">
       <li class="address">
         <address class="vcard"> 
           <span class="org">Illinois Humanities</span><br>
@@ -26,8 +26,8 @@
       <li class="source-org copyright">
         &copy; Copyright <?php echo date('Y'); ?> Illinois Humanities Council
       </li>
-    </div>
-    
+    </ul>
+
     <div class="footer-meta">
      <nav role="navigation">
        <?php
