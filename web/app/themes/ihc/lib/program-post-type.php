@@ -135,12 +135,10 @@ function metaboxes( array $meta_boxes ) {
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
-// Shortcode [programs year=2014 sector=foobar]
-add_shortcode('programs', __NAMESPACE__ . '\shortcode');
-function shortcode($atts) {
-  extract(shortcode_atts(array(
-       'sector' => '',
-    ), $atts));
+/**
+ * Get Programs matching focus_area
+ */
+function get_programs($focus_area='') {
   $output = '';
   $args = array(
     'numberposts' => -1,
@@ -149,44 +147,32 @@ function shortcode($atts) {
     // 'meta_key' => '_cmb2_program_year',
     // 'orderby' => ['meta_value_num' => 'DESC', 'title' => 'ASC'],
     );
-  if ($sector != '') {
+  if ($focus_area != '') {
     $args['tax_query'] = array(
       array(
         'taxonomy' => 'focus_area',
         'field' => 'slug',
-        'terms' => $sector
+        'terms' => $focus_area
       )
     );
   }
-  if ($year != '') {
-    $args['meta_query'] = array(
-      array(
-        'key' => '_cmb2_program_year',
-        'value' => $year,
-        'compare' => '=',
-      )
-    );
-  }
+  // if ($year != '') {
+  //   $args['meta_query'] = array(
+  //     array(
+  //       'key' => '_cmb2_program_year',
+  //       'value' => $year,
+  //       'compare' => '=',
+  //     )
+  //   );
+  // }
 
   $program_posts = get_posts($args);
   if (!$program_posts) return false;
 
-  $output = '<ul class="feature-grid grid external-links programs">';
+  $output = '<ul class="programs">';
 
   foreach ($program_posts as $post):
-    $year = get_post_meta($post->ID, '_cmb2_program_year', true);
-    if ($sector = Utils\get_first_term($post, 'focus_area')) {
-      $sector_slug = $sector->slug;
-      $sector_name = $sector->name;
-    } else {
-      $sector_name = $sector_slug = '';
-    }
-
-    $output .= "<li data-year=\"{$year}\" data-sector=\"{$sector_slug}\" class=\"feature-item flex-item one-third\">";
-    ob_start();
-    include(locate_template('templates/article-program.php'));
-    $output .= ob_get_clean();
-    $output .= '</li>';
+    $output .= '<li><a href="' . get_permalink($post->ID) . '">' . $post->post_title . '</a></li>';
   endforeach;
 
   $output .= '</ul>';
@@ -222,3 +208,4 @@ function shortcode_filters($atts) {
 
   return $output;
 }
+
