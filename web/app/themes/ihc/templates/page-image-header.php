@@ -6,8 +6,12 @@ if (has_post_thumbnail($post->ID)) {
   $header_bg = ' style="background-image:url('.$background_image.');"';
 }
 
-// custom fields
-$header_banner_text = get_post_meta($post->ID, '_cmb2_header_banner_text', true);
+// Programs use title for banner text
+if ($post->post_type == 'program')
+  $header_banner_text = $post->post_title;
+else
+  $header_banner_text = get_post_meta($post->ID, '_cmb2_header_banner_text', true);
+// Custom fields for header text
 $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 ?>
