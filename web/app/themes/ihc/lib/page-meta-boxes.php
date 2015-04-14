@@ -12,7 +12,7 @@ function metaboxes( array $meta_boxes ) {
   $meta_boxes['page_metabox'] = array(
     'id'            => 'page_metabox',
     'title'         => __( 'Extra Fields', 'cmb2' ),
-    'object_types'  => array( 'page', ), // Post type
+    'object_types'  => array( 'page', 'program' ), // Post types to show these fields on
     'context'       => 'normal',
     'priority'      => 'high',
     'show_names'    => true, // Show field names on the left
@@ -21,7 +21,7 @@ function metaboxes( array $meta_boxes ) {
       // General page fields
       array(
         'name' => 'Header Banner Text',
-        'desc' => 'Shows in banner above Header Text',
+        'desc' => 'Shows in banner above Header Text for Pages',
         'id'   => $prefix . 'header_banner_text',
         'type' => 'text',
       ),
@@ -50,3 +50,4 @@ function metaboxes( array $meta_boxes ) {
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+
