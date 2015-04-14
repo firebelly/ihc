@@ -3,7 +3,7 @@ $header_class = $header_bg = '';
 if (has_post_thumbnail($post->ID)) {
   $background_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'full', true);
   $header_class = 'with-image';
-  $header_bg = ' style="background-image:url('.$thumb.');"';
+  $header_bg = ' style="background-image:url('.$background_image.');"';
 }
 
 // custom fields

@@ -112,23 +112,40 @@ function get_resources($post_id) {
 }
 
 /**
- * Get Related Event (unfinished)
+ * Get Related Event
+ * @param  [Object or String] $post_or_focus_area [$post object or $focus_area slug]
  */
-function get_related_event_post($post) {
-  // todo: get focus area of post and use to find associated event
-  return \Firebelly\PostTypes\Event\get_events(1);
+function get_related_event_post($post_or_focus_area) {
+  if (is_object($post_or_focus_area)) {
+    $focus_area = get_focus_area($post_or_focus_area);
+  } else {
+    $focus_area = $post_or_focus_area;
+  }
+  $output = '<div class="related related-events">';
+  $output = '<h3 class="banner">Attend an Event</h3>';
+  $output .= \Firebelly\PostTypes\Event\get_events(1, $focus_area);
+  $output .= '<p class="more"><a href="/events/">View All Events</a></p>';
+  $output .= '</div>';
 }
 
 /**
- * Get Related News Post (unfinished)
+ * Get Related News Post
  */
-function get_related_news_post($post) {
+function get_related_news_post($post_or_focus_area) {
   global $news_post;
-  // todo: get focus area of post and use to find associated news post
-  $posts = get_posts('numberposts=1');
+  if (is_object($post_or_focus_area)) {
+    $focus_area = get_focus_area($post_or_focus_area);
+  } else {
+    $focus_area = $post_or_focus_area;
+  }
+  $posts = get_posts('numberposts=1&focus_area='.$focus_area);
+  $output = '<div class="related related-news">';
+  $output = '<h3 class="banner">Blog &amp; News</h3>';
   ob_start();
   foreach ($posts as $news_post)
     include(locate_template('templates/article-news.php'));
-  $output = ob_get_clean();
+  $output .= ob_get_clean();
+  $output .= '<p class="more"><a href="/news/">View All Articles</a></p>';
+  $output .= '</div>';
   return $output;
 }

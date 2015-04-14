@@ -167,17 +167,8 @@ function get_programs($focus_area='') {
   // }
 
   $program_posts = get_posts($args);
-  if (!$program_posts) return false;
-
-  $output = '<ul class="programs">';
-
-  foreach ($program_posts as $post):
-    $output .= '<li><a href="' . get_permalink($post->ID) . '">' . $post->post_title . '</a></li>';
-  endforeach;
-
-  $output .= '</ul>';
-
-  return $output;
+  // if (!$program_posts) return false;
+  return $program_posts;
 }
 
 // Shortcode [programs_filters]
