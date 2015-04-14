@@ -101,14 +101,17 @@ function get_total_pages($category, $per_page) {
 /**
  * Get related resources
  */
-function get_resources($post_id) {
-    $files = get_post_meta($post_id, '_cmb2_resources', 1);
+function get_resources($post) {
+  $files = get_post_meta($post->ID, '_cmb2_resources', true);
+  if (empty($files)) return false;
 
-    foreach ((array)$files as $attachment_id => $attachment_url) {
-      echo '<div class="file-list-image">';
-      echo wp_get_attachment_image($attachment_id);
-      echo '</div>';
-    }
+  $output = '<ul class="resources">';
+  foreach ((array)$files as $attachment_id => $attachment_url) {
+    $post = get_post($attachment_id);
+    $output .= '<li><a target="_blank" href="' . $attachment_url . '">' . $post->post_title . '</a></li>';
+  }
+  $output .= '</ul>';
+  return $output;
 }
 
 /**
