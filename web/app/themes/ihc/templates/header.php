@@ -7,6 +7,7 @@
 <header class="banner navbar navbar-default navbar-static-top" role="banner">
 <?php get_search_form(); ?>
   <div class="container">
+    <h1 class="logo"><a href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a></h1>
     <nav class="collapse navbar-collapse" role="navigation">
       <?php
       if (has_nav_menu('primary_navigation')) :
