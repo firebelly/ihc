@@ -7,18 +7,18 @@ namespace Firebelly\PostTypes\Pages;
 
 // Custom CMB2 fields for post type
 function metaboxes( array $meta_boxes ) {
-  $prefix = '_cmb2_'; // Start with underscore to hide from custom fields list
+  $prefix = '_cmb2_';
 
   $meta_boxes['page_metabox'] = array(
     'id'            => 'page_metabox',
-    'title'         => __( 'Extra Fields', 'cmb2' ),
-    'object_types'  => array( 'page', 'program' ), // Post types to show these fields on
+    'title'         => __( 'Header Fields', 'cmb2' ),
+    'object_types'  => array( 'page', 'program' ),
     'context'       => 'normal',
     'priority'      => 'high',
-    'show_names'    => true, // Show field names on the left
+    'show_names'    => true,
     'fields'        => array(
       
-      // General page fields
+      // Header fields
       array(
         'name' => 'Header Banner Text',
         'desc' => 'Shows in banner above Header Text for Pages',
@@ -30,12 +30,18 @@ function metaboxes( array $meta_boxes ) {
         'desc' => 'Shows at top of page behind featured image',
         'id'   => $prefix . 'header_text',
         'type' => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 4,
+        ),
       ),
       array(
         'name' => 'Secondary Header Text',
         'desc' => 'Shows below Header Text (as image caption on homepage)',
         'id'   => $prefix . 'secondary_header_text',
         'type' => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 4,
+        ),
       ),
       array(
         'name' => 'Content Banner Text',
@@ -50,4 +56,3 @@ function metaboxes( array $meta_boxes ) {
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
-

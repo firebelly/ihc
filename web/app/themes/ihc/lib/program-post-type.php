@@ -169,6 +169,9 @@ function metaboxes( array $meta_boxes ) {
       'name' => 'Body',
       'id'   => 'body',
       'type' => 'wysiwyg',
+      'options' => array(
+        'textarea_rows' => 4,
+      ),
   ) );
 
 
