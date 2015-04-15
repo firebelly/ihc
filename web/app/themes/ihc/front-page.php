@@ -13,11 +13,10 @@ $total_news = wp_count_posts('post')->publish;
 ?>
 <div class="page-header">
 <h2>Year-round & State-wide</h2>
-<h1>Beginning the conversation.<br>
+<h1>Beginning the conversation.
 We fuel inquiry through conversation in ways that strengthen society.</h1>
 <p>image caption/link to event to bring it front and center for instant access.</p>
 </div>
-<?php include(locate_template('templates/thought-of-the-day.php')); ?>
 <section class="focus-areas">
 <h2>Our Focus Areas</h2>
 <ul class="focus-list">
@@ -39,7 +38,6 @@ foreach ($focus_areas as $focus_area) {
 <div class="load-more events" data-page-at="1" data-past-events="0" data-per-page="3" data-total-pages="<?= ceil($total_events/3) ?>"><a class="no-ajaxy" href="#">Load More</a></div>
 <p><a href="/events/" class="view-all">View All Events</a></p>
 </section>
-
 <section class="news">
 <h2>Blog &amp; News</h2>
 <div class="load-more-container article-list masonry">
@@ -58,3 +56,4 @@ endif;
 <p class="all-articles"><a href="/news/" class="view-all">All Articles</a></p>
 </div>
 </section>
+<?php include(locate_template('templates/thought-of-the-day.php')); ?>

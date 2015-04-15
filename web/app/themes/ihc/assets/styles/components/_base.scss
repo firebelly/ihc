@@ -18,17 +18,7 @@ body {
   font-family: $sans;
 }
 
-a {
-	text-decoration:none;
-}
 
-img {
-	max-width: 100%;
-  height: auto;
-}
-section{
-  position:relative;
-}
 // Browser alert
 .alert-warning {
   top: 0;
@@ -50,6 +40,15 @@ section{
 .hide {
   display: none;
 }
+//visually hide, accessibility-friendly
+.viz-hide {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  display: inline-block;
+}
 
 .loading {
   opacity: .5;
@@ -63,31 +62,166 @@ section{
 .wrap {
   width: 100%;
   margin: 0 auto;
-  padding:0 4.166%;
   position: relative;
+  overflow:hidden;
   @include clearfix();
-  @include min-screen($breakpoint-medium) {
-  }
 }
 
 .content {
   z-index: 1;
   width: 100%;
   position: relative;
+  @include respond-to(medium-screens) {
+    padding:0 4.166%;
+  }
 }
-
 .alert {
   padding: 50px;
   background: $white;
 }
 
-.posts-navigation {
-  text-align: center;
-  h2 {
-    display: none;
+//.posts-navigation {
+//  text-align: center;
+//  h2 {
+//  display: none;
+//}
+//.nav-links {
+//  a {
+//  }
+//}
+//}
+
+h1{
+  font-weight:100;
+  font-family:$sans;
+  font-size:$xl;
+  color:$white;
+  text-transform: none;
+  line-height:30px;
+}
+
+h2{
+    @include font-style1($white);
+    background:$color-accent;
+    display: inline-block;
+    position:absolute;
+    height:30px;
+    bottom:100%;
+    padding:5px 5%;//padding:10px 15px;
+    z-index:100;
+      
+      &::after {
+        top: 100%;
+        right: 0;
+        height: 0;
+        content: '';
+        border-top: 20px solid $color-accent;
+        border-right: 25px solid transparent;
+      }
+}
+
+ul{
+  list-style-type:none;
+  padding:0;
+  margin:0;
+}
+
+a {
+  text-decoration:none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+section{
+  position:relative;
+  width:100%;
+  margin-bottom:70px;
+  padding:0 6.249%;
+}
+
+//footer
+footer{
+  background:$dk-blue;
+  height:550px;
+  width:100%;
+  padding:40px 6.249% 0;
+  
+  .disclaimer{
+    float:left;
+    margin-right:15px;
   }
-  .nav-links {
-    a {
+  
+  #menu-footer-links li{
+    display:inline-block;
+    margin-right:15px;
+  }
+  #menu-footer-links li a,
+  .small-only{
+      @include font-style2($color-bg);
+      font-size:$small;
+      text-transform: uppercase;
+      text-decoration: underline; 
+  }
+
+  nav {
+
+    li {
+      display:inline-block;
+      margin-right:15px;
+    }
+
+      a{
+        @include font-style1($color-bg);
+      }
+
+    .menu-donate-now,
+    .menu-get-il-humanities-news-events{
+      visibility: hidden;
+    }
+  }
+
+  .copyright{
+    @include font-style2($color-bg);
+    font-size:$small;
+    text-transform: capitalize;
+  }
+  
+  .contact-info{
+    @include font-style1($color-bg);
+
+    .address a,
+    .contact a{
+      @include font-style1($color-bg);
+      border-bottom: 1px solid $color-bg;
+    }
+    
+    .vcard{
+      clear:both;
+      font-style:normal;
+      margin:50px 0;
+    }
+
+    .contact{
+      margin-bottom:50px;
+    }
+
+    .social{
+      margin-bottom:30px;
+  
+      p{
+        @include font-style1($color-bg);
+        text-transform: uppercase;
+      }
+  
+      .icon-facebook,
+      .icon-twitter,
+      .icon-instagram{
+        color:$color-bg;
+        font-size:$xl;
+        margin-right:15px;
+      }
     }
   }
 }

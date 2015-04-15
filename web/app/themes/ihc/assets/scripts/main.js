@@ -42,11 +42,11 @@ var IHC = (function($) {
       _initNav();
       _initMap();
       _initAjaxLinks();
-      // _initMenuToggle();
+      _initMenuToggle();
       _initSliders();
-      _initMasonry();
+      //_initMasonry();
       _initLoadMore();
-      _initShareLinks();
+      // _initShareLinks();
 
       // initial nav update based on URL
       _updateNav();
@@ -184,7 +184,7 @@ var IHC = (function($) {
   function _initNav() {
 
     // SEO-useless nav toggler
-    $('body').prepend('<div class="menu-toggle"><a href="#"><span>Menu</span></a></div>');
+    $('body').prepend('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>');
 
     $(window).bind('statechange',function(){
       var State = History.getState(),
@@ -223,7 +223,7 @@ var IHC = (function($) {
       _updateTitle();
       _initAjaxLinks();
       _initSliders();
-      _initMasonry();
+      //_initMasonry();
       $content.fitVids();
 
       // scroll to top
@@ -246,8 +246,8 @@ var IHC = (function($) {
   }
 
   function _toggleMobileMenu() {
-    $('.menu-toggle-wrap').toggleClass('menu-open');
-    $('#sidebar').toggleClass('active');
+    $('.menu-toggle').toggleClass('menu-open');
+    $('.site-nav').toggleClass('active');
   }
 
   function _initSliders(){

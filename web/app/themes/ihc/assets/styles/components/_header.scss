@@ -1,10 +1,23 @@
 // Header
-
 .page-header{
-	width:86.26%;
-	overflow:hidden;
+	width:100%;
+	min-height:400px;
 	background:url(http://bit.ly/IRW4MS) 50% 50% no-repeat scroll;
 	background-size:cover;
+	padding:110px 6.249% 30px;
+
+	& h2{
+		top:50px;
+	}
+
+	& p{
+		@include font-style1($lt-orange);
+		margin:50px 0 30px;
+	}
+
+@include respond-to(medium-screens) { 
+	width:86.26%;
+	overflow:hidden;
 	padding:50px 0 0 50px;
 	margin-left:-4.54%;
 	z-index:1;
@@ -19,15 +32,14 @@
 	}
 
 	& h2{
-		top:50px;
+		top:0px;
 	}
 	& p{
-		@include font-style1($lt-orange);
 		margin-bottom:60px;
-		font-size:$small;
-	}
+	}	
+	
 }
-
+}
 .navbar-header .navbar-brand{
 	width:200px;
 	height:80px;
