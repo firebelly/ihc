@@ -32,7 +32,7 @@ $secondary_content = apply_filters('the_content', get_post_meta($page->ID, '_cmb
 		<li><a class="<?= $past_events ? 'active' : '' ?>" href="/events/?past_events=1">Past Events</a></li>	
 	</ul>
 
-	<div class="events load-more-container">
+	<div class="events load-more-container article-list masonry">
 		<?php echo \Firebelly\PostTypes\Event\get_events(); ?>
 	</div>
 	
