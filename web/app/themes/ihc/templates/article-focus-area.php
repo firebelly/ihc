@@ -13,7 +13,10 @@
   if ($related_programs):
   ?>
     <h3>Program(s):</h3>
-    <?= $related_programs ?>
+    <ul class="programs">
+    <?php foreach ($related_programs as $program_post): ?>
+      <li><a href="<?= get_permalink($program_post->ID) ?>"><?= $program_post->post_title ?></a></li>
+    <?php endforeach; ?>
   <?php endif; ?>
   </div>
 </article>

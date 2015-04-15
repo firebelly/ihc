@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1f371431ef1b08c152f1ff206d1db4f6",
+    "hash": "dfcec4a77428fab34bbad7622e3a5739",
     "packages": [
         {
             "name": "composer/installers",
@@ -174,16 +174,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v1.0.9",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "56c252d48dce336da97926591aed71805203815b"
+                "reference": "732d2adb7d916c9593b9d58c3b0d9ebefead07aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/56c252d48dce336da97926591aed71805203815b",
-                "reference": "56c252d48dce336da97926591aed71805203815b",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/732d2adb7d916c9593b9d58c3b0d9ebefead07aa",
+                "reference": "732d2adb7d916c9593b9d58c3b0d9ebefead07aa",
                 "shasum": ""
             },
             "require": {
@@ -221,7 +221,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2014-10-16 14:50:21"
+            "time": "2014-12-05 15:19:21"
         },
         {
             "name": "wpackagist-plugin/cmb2",
@@ -285,7 +285,7 @@
         },
         {
             "name": "wpackagist-plugin/multiple-content-blocks",
-            "version": "3.2",
+            "version": "3.2.1",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/multiple-content-blocks/",

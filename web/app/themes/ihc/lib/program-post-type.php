@@ -37,7 +37,7 @@ function post_type() {
     'label'               => 'program',
     'description'         => 'Programs',
     'labels'              => $labels,
-    'supports'            => array( 'title', 'editor', 'thumbnail', ),
+    'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail', ),
     'hierarchical'        => false,
     'public'              => true,
     'show_ui'             => true,
@@ -116,20 +116,64 @@ function metaboxes( array $meta_boxes ) {
 
   $meta_boxes['program_metabox'] = array(
     'id'            => 'program_metabox',
-    'title'         => __( 'Program Info', 'cmb2' ),
-    'object_types'  => array( 'program', ), // Post type
+    'title'         => __( 'Program Sidebar Blocks', 'cmb2' ),
+    'object_types'  => array( 'program', ),
     'context'       => 'normal',
-    'priority'      => 'high',
-    'show_names'    => true, // Show field names on the left
+    'priority'      => 'low',
+    'show_names'    => true,
     'fields'        => array(
       array(
         'name' => 'Resources',
-        // 'desc' => 'e.g. http://program-site.com/',
+        'desc' => 'Downloadable files e.g. PDFs',
         'id'   => $prefix . 'resources',
         'type' => 'file_list',
       ),
+      array(
+        'name' => 'Additional Info',
+        'desc' => 'Partners, Program Directors, etc',
+        'id'   => $prefix . 'addl_info',
+        'type' => 'wysiwyg',
+      ),
     ),
   );
+
+  /**
+   * Repeating blocks
+   */
+  $cmb_group = new_cmb2_box( array(
+      'id'           => $prefix . 'metabox',
+      'title'        => __( 'Program Page Blocks', 'cmb2' ),
+      'priority'      => 'low',
+      'object_types' => array( 'program', ),
+    ) );
+
+  $group_field_id = $cmb_group->add_field( array(
+      'id'          => $prefix . 'page_blocks',
+      'type'        => 'group',
+      // 'description' => __( 'Main Page Blocks', 'cmb' ),
+      'options'     => array(
+          'group_title'   => __( 'Block {#}', 'cmb' ),
+          'add_button'    => __( 'Add Another Block', 'cmb' ),
+          'remove_button' => __( 'Remove Block', 'cmb' ),
+          'sortable'      => true, // beta
+      ),
+  ) );
+
+  $cmb_group->add_group_field( $group_field_id, array(
+      'name' => 'Block Title',
+      'id'   => 'title',
+      'type' => 'text',
+  ) );
+
+  $cmb_group->add_group_field( $group_field_id, array(
+      'name' => 'Body',
+      'id'   => 'body',
+      'type' => 'wysiwyg',
+      'options' => array(
+        'textarea_rows' => 4,
+      ),
+  ) );
+
 
   return $meta_boxes;
 }
@@ -167,17 +211,8 @@ function get_programs($focus_area='') {
   // }
 
   $program_posts = get_posts($args);
-  if (!$program_posts) return false;
-
-  $output = '<ul class="programs">';
-
-  foreach ($program_posts as $post):
-    $output .= '<li><a href="' . get_permalink($post->ID) . '">' . $post->post_title . '</a></li>';
-  endforeach;
-
-  $output .= '</ul>';
-
-  return $output;
+  // if (!$program_posts) return false;
+  return $program_posts;
 }
 
 // Shortcode [programs_filters]

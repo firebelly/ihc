@@ -236,6 +236,9 @@ function get_events($num_posts='', $focus_area='') {
   return $output;
 }
 
+/**
+ * Geocode address for event and save in custom fields
+ */
 function geocode_address($post_id, $post) {
   $address = get_post_meta($post_id, '_cmb2_address', 1);
   $address = wp_parse_args($address, array(
@@ -261,8 +264,6 @@ function geocode_address($post_id, $post) {
   endif;
 }
 add_action('save_post_event', __NAMESPACE__ . '\\geocode_address', 20, 2);
-
-
 
 /**
  * Generate an iCalendar .ics file for event
