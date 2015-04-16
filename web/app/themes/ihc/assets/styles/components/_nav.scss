@@ -69,10 +69,10 @@ nav .navbar-nav{
 // mobile menu toggle
 .menu-toggle {
 	position: absolute;
-	top:40px;
-	margin:0 6.249%;
+	top: 37px;
+	margin: 0 6.249%;
 	padding: 6px 0;
-	z-index:250;
+	z-index: 95;
 
   &:before, &:after {
   	position: absolute;
@@ -100,9 +100,9 @@ nav .navbar-nav{
 }
 
 .menu-open{
-	left: 83%;
 	top:40px;
-	width: 100%;
+	left: 83%;
+	z-index:175;
 
 	.menu-bar {
 		display: none;
@@ -117,21 +117,19 @@ nav .navbar-nav{
 	}
 }
 
-.site-nav{
+nav.site-nav{
   position:absolute;
   top:0;
-  right:100%;
   width:100%;
-  height:auto;
-  z-index:1;
-}
-  .active{
-    position:absolute;
-    top:0;
-    right:0;
-    height:640px;
-    width:100%;
-    background:$color-bg;
-    padding:40px 6.249%;
-    z-index:200; 
+  z-index:5;
+  right:100%;
+  z-index:150;
+
+	&.active{
+		height:640px;
+		right: 0;
+		padding: 40px 6.249%;
+		background:$color-bg;
+		padding:40px 6.249%;
+	}
 }

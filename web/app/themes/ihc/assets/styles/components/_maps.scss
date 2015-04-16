@@ -1,7 +1,7 @@
 // Maps
 
 #map {
-	@include respond-to(handhelds) {
+	@include phone {
 		display:none;
 	}
  position:relative;

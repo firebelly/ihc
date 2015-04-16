@@ -29,12 +29,15 @@
 // Button style
 @mixin button-style {
   @include font-style1($dk-blue);
-    width:100%;
-    //min-width:150px;
+    min-width:150px;
     border:3px solid $dk-blue;
     padding:5px;
     display:inline-block;
     text-align:center;
+
+  @include phone{
+    width:100%;
+  }
 }
 
 // Support for styling input placeholder text
@@ -104,63 +107,18 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // --- screen ----------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
-@mixin respond-to($media) {
-  @if $media == handhelds {
-
-@media only screen and (max-width: $breakpoint-small) { @content; }
-  }
-  @else if $media == medium-screens {
-    @media only screen and (min-width: $breakpoint-small) and (max-width: $breakpoint-medium) { @content; }
-  }
-  @else if $media == wide-screens {
-    @media only screen and (min-width: $breakpoint-large) and (max-width: $breakpoint-huge) { @content; }
-  }
+@mixin phone{
+  @media (max-width: #{$breakpoint-small}){
+    @content;
 }
-
-@mixin screen($res-min, $res-max)
-{
-  @media screen and ( min-width: $res-min ) and ( max-width: $res-max )
-  {
+}
+@mixin tablet {
+  @media (min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large}){
     @content;
   }
 }
-
-@mixin max-screen($res)
-{
-  @media screen and ( max-width: $res )
-  {
-    @content;
-  }
-}
-
-@mixin min-screen($res)
-{
-  @media screen and ( min-width: $res )
-  {
-    @content;
-  }
-}
-
-@mixin screen-height($res-min, $res-max)
-{
-  @media screen and ( min-height: $res-min ) and ( max-height: $res-max )
-  {
-    @content;
-  }
-}
-
-@mixin max-screen-height($res)
-{
-  @media screen and ( max-height: $res )
-  {
-    @content;
-  }
-}
-
-@mixin min-screen-height($res)
-{
-  @media screen and ( min-height: $res )
-  {
+@mixin desktop {
+  @media (min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-huge}){
     @content;
   }
 }

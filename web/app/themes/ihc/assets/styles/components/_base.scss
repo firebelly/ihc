@@ -71,7 +71,7 @@ body {
   z-index: 1;
   width: 100%;
   position: relative;
-  @include respond-to(medium-screens) {
+  @include tablet {
     padding:0 4.166%;
   }
 }
@@ -107,7 +107,7 @@ h2{
     position:absolute;
     height:30px;
     bottom:100%;
-    padding:5px 5%;//padding:10px 15px;
+    padding:5px 2%;//padding:10px 15px;
     z-index:100;
       
       &::after {
@@ -134,11 +134,21 @@ img {
   max-width: 100%;
   height: auto;
 }
+
 section{
   position:relative;
   width:100%;
   margin-bottom:70px;
   padding:0 6.249%;
+
+@include desktop{
+  position:relative;
+  padding:0;
+}
+@include tablet{
+  position:relative;
+  padding:0;
+}
 }
 
 //footer

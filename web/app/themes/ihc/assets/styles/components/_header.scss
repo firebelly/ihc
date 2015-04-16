@@ -15,30 +15,49 @@
 		margin:50px 0 30px;
 	}
 
-@include respond-to(medium-screens) { 
-	width:86.26%;
-	overflow:hidden;
-	padding:50px 0 0 50px;
-	margin-left:-4.54%;
-	z-index:1;
-
-	& h1{
-		width:56.4%;
-		font-size:$xxl;
-		font-weight:100;
-		color:$white;
-		margin-top:70px;
-		text-transform:none; 
-	}
-
-	& h2{
-		top:0px;
-	}
-	& p{
-		margin-bottom:60px;
-	}	
-	
+@include tablet {
+	width:79.166%;
+	min-height:560px;
+	margin-left: -4.54%;
 }
+
+@include desktop{
+	width:79.166%;
+	min-height:560px;
+	margin-left: -4.54%;
+
+	h1{
+		font-size:$xxl;
+		line-height:60px;
+		padding-right:18.16%
+	}
+
+	h2{
+		padding:10px 15px;
+	}
+}
+//	padding:50px 0 0;
+//	margin-left:-4.54%;
+
+
+//	& h1{
+//		width:56.4%;
+//		font-size:$xxl;
+//		font-weight:100;
+//		line-height:50px;
+//		color:$white;
+//		margin-top:70px;
+//		text-transform:none; 
+//	}
+
+//	& h2{
+//		top:0px;
+//	}
+//	& p{
+//		margin-bottom:60px;
+//	}	
+	
+//}
 }
 .navbar-header .navbar-brand{
 	width:200px;

@@ -51,28 +51,28 @@
   animation-name: fadeOutRight;
 }
 
-@include min-screen($breakpoint-medium) {
-  @keyframes fadeInRight {
-    0% {
-      opacity: 0;
-      transform: translate3d(2%, 0, 0);
-    }
+//@include min-screen($breakpoint-medium) {
+//  @keyframes fadeInRight {
+//  0% {
+//    opacity: 0;
+//    transform: translate3d(2%, 0, 0);
+//  }
 
-    100% {
-      opacity: 1;
-      transform: none;
-    }
-  }
+//  100% {
+//    opacity: 1;
+//    transform: none;
+//  }
+//}
 
-  @keyframes fadeOutRight {
-    0% {
-      opacity: 1;
-      transform: none;
-    }
+//@keyframes fadeOutRight {
+//  0% {
+//    opacity: 1;
+//    transform: none;
+//  }
 
-    100% {
-      opacity: 0;
-      transform: translate3d(2%, 0, 0);
-    }
-  }
-}
+//  100% {
+//    opacity: 0;
+//    transform: translate3d(2%, 0, 0);
+//  }
+//}
+//}

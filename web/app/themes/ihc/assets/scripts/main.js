@@ -80,25 +80,15 @@ var IHC = (function($) {
   }
 
   function _initSearch() {
-    $('.search-toggle, .internal-search-toggle').on('click', function (e) {
+    $('.search-toggle, .search-close').on('click', function (e) {
       e.preventDefault();
-      if (!$('.search-wrap').hasClass('active')) {
-        $('.search-wrap').addClass('active'); 
-        $('.search-form input').focus(); 
-      } else {
         _hideSearch();
-      }
-    });
-
-    $body.on('click', '.search-container', function (e) {
-      if (!$(e.target).is('.search-field')) {
-        _hideSearch();
-      }
     });
   }
 
   function _hideSearch() {
-    $('.search-wrap').removeClass('active');
+    $('.search-toggle').toggleClass('search-open');
+    $('.search-form').toggleClass('active');
   }
 
   function _initMap() {
@@ -329,7 +319,7 @@ var IHC = (function($) {
             var $data = $(data);
             if (loadingTimer) { clearTimeout(loadingTimer); }
             more_container.append($data).removeClass('loading');
-            more_container.masonry('appended', $data, true);
+            // more_container.masonry('appended', $data, true);
             $load_more.attr('data-page-at', page+1);
             // _initAjaxLinks();
             _getMapPoints();
