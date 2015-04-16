@@ -66,7 +66,7 @@ function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
-    '_cmb2_event_timestamp' => 'Date',
+    '_cmb2_event_start' => 'Date',
     '_cmb2_venue' => 'Venue',
     'taxonomy-focus_area' => 'Focus Area(s)',
   );
@@ -80,7 +80,7 @@ function custom_columns($column){
     $custom = get_post_custom();
     if ( $column == 'featured_image' )
       echo the_post_thumbnail( 'event-thumb' );
-    elseif ( $column == '_cmb2_event_timestamp' ) {
+    elseif ( $column == '_cmb2_event_start' ) {
       $timestamp = $custom[$column][0];
       echo date( 'm/d/Y g:iA', $timestamp ) . ($timestamp < time() ? ' - <strong class="post-state">Past Event</strong>' : '');
     } else {
@@ -107,14 +107,14 @@ function metaboxes( array $meta_boxes ) {
     'fields'        => array(
       array(
           'name'    => 'Start Date',
-          'id'      => $prefix . 'event_timestamp',
+          'id'      => $prefix . 'event_start',
           'type'    => 'text_datetime_timestamp',
       ),
       array(
           'name'    => 'End Time',
           'desc'    => '(Optional)',
-          'id'      => $prefix . 'end_time',
-          'type'    => 'text_time',
+          'id'      => $prefix . 'event_end',
+          'type'    => 'text_datetime_timestamp',
       ),
     ),
   );
@@ -137,16 +137,21 @@ function metaboxes( array $meta_boxes ) {
           'id'      => $prefix . 'address',
           'type'    => 'address',
       ),
-      // array(
-      //     'name'    => 'Lat',
-      //     'id'      => $prefix . 'lat',
-      //     'type'    => 'text_small',
-      // ),
-      // array(
-      //     'name'    => 'Lng',
-      //     'id'      => $prefix . 'lng',
-      //     'type'    => 'text_small',
-      // ),
+      array(
+          'name'    => 'Sponsor Organization',
+          'id'      => $prefix . 'sponsor',
+          'type'    => 'text',
+      ),
+      array(
+          'name'    => 'Lat',
+          'id'      => $prefix . 'lat',
+          'type'    => 'text_small',
+      ),
+      array(
+          'name'    => 'Lng',
+          'id'      => $prefix . 'lng',
+          'type'    => 'text_small',
+      ),
     ),
   );
 
@@ -162,13 +167,31 @@ function metaboxes( array $meta_boxes ) {
           'name'    => 'Cost',
           'desc'    => 'Leave blank or set to 0 to show "Free. Open to the public."',
           'id'      => $prefix . 'cost',
-          'type'    => 'text_small',
+          'type'    => 'text',
       ),
       array(
           'name'    => 'Registration URL',
           'desc'    => 'If set, shows "Register for Event" link.',
           'id'      => $prefix . 'registration_url',
           'type'    => 'text_url',
+      ),
+    ),
+  );
+
+  $meta_boxes['event_program'] = array(
+    'id'            => 'event_program',
+    'title'         => __( 'Event Program', 'cmb2' ),
+    'object_types'  => array( 'event', ),
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true,
+    'fields'        => array(
+      array(
+          'name'    => 'Related Program',
+          'desc'    => 'If set, shows in sidebar, otherwise uses Focus Area',
+          'id'      => $prefix . 'event_program',
+          'type'    => 'pw_select',
+          'options' => \Firebelly\CMB2\get_post_options(['post_type' => 'program', 'numberposts' => -1]),
       ),
     ),
   );
@@ -185,7 +208,7 @@ function get_num_events($past='') {
   $count = $wpdb->get_var($wpdb->prepare(
     "
     SELECT COUNT(*) FROM `wp_posts` wp
-    INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_timestamp')
+    INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_start')
     WHERE wp.post_status = 'publish' 
     AND wp.post_type = 'event'
     AND wm.meta_value " . ($past ? '<=' : '>') . " %s
@@ -203,14 +226,14 @@ function get_events($num_posts='', $focus_area='') {
   $args = [
     'numberposts' => $num_posts,
     'post_type' => 'event',
-    'meta_key' => '_cmb2_event_timestamp',
+    'meta_key' => '_cmb2_event_start',
     'orderby' => 'meta_value_num',
   ];
   // make sure we're only pulling upcoming or past events
   $args['order'] = !empty($_REQUEST['past_events']) ? 'DESC' : 'ASC';
   $args['meta_query'] = [
     [
-      'key' => '_cmb2_event_timestamp',
+      'key' => '_cmb2_event_start',
       'value' => time(),
       'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
     ]
@@ -282,10 +305,10 @@ function event_ics() {
       header('Content-Disposition: attachment; filename="ihs-event-' . $event_post->post_name . '.ics"');
   }
 
-  $event_timestamp = get_post_meta($event_post->ID, '_cmb2_event_timestamp', true);
+  $event_start = get_post_meta($event_post->ID, '_cmb2_event_start', true);
+  $event_end = get_post_meta( $event_post->ID, '_cmb2_event_end', true);
   $venue = get_post_meta($event_post->ID, '_cmb2_venue', true);
-  $end_time = get_post_meta( $event_post->ID, '_cmb2_end_time', true);
-  $start_time = date('g:iA', $event_timestamp);
+  $start_time = date('g:iA', $event_start);
   // $gmtOffset = 60 * 60 * get_option('gmt_offset');
 
   $ics = [
@@ -299,7 +322,7 @@ function event_ics() {
     'SUMMARY:' . $event_post->post_title,
     'URL:' . get_permalink($event_post->ID),
     'LOCATION:' . $venue,
-    'DTSTART:' . get_ical_date($event_timestamp),
+    'DTSTART:' . get_ical_date($event_start),
     // 'DTEND:' . get_ical_date($event_end_timestamp),
     'DTSTAMP:' . get_ical_date(strtotime($event_post->post_modified)),
     'END:VEVENT',
@@ -375,20 +398,20 @@ function get_event_details($post) {
     'ID' => $post->ID,
     'title' => $post->post_title,
     'body' => apply_filters('the_content', $post->post_content),
-    'event_timestamp' => get_post_meta($post->ID, '_cmb2_event_timestamp', true),
+    'event_start' => get_post_meta($post->ID, '_cmb2_event_start', true),
+    'event_end' => get_post_meta( $post->ID, '_cmb2_event_end', true),
     'venue' => get_post_meta($post->ID, '_cmb2_venue', true),
     'cost' => get_post_meta($post->ID, '_cmb2_cost', true),
-    'end_time' => get_post_meta( $post->ID, '_cmb2_end_time', true),
     'registration_url' => get_post_meta($post->ID, '_cmb2_registration_url', true),
     'lat' => get_post_meta($post->ID, '_cmb2_lat', true),
     'lng' => get_post_meta($post->ID, '_cmb2_lng', true),
     'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time()
   ];
-  $event['start_time'] = date('g:iA', $event['event_timestamp']);
-  $event['time_txt'] = $event['start_time'] . (!empty($event['end_time']) ? '–' . preg_replace('/(^0| )/','',$event['end_time']) : '');
-  $event['archived'] = ($event['event_timestamp'] < time());
-  $event['desc'] = date('M d, Y @ ', $event['event_timestamp']) . $event['time_txt'];
-  $event['year'] = date('Y', $event['event_timestamp']);
+  $event['start_time'] = date('g:iA', $event['event_start']);
+  $event['time_txt'] = $event['start_time'] . (!empty($event['event_end']) ? '–' . preg_replace('/(^0| )/','',$event['event_end']) : '');
+  $event['archived'] = ($event['event_start'] < time());
+  $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt'];
+  $event['year'] = date('Y', $event['event_start']);
 
   $address = get_post_meta($post->ID, '_cmb2_address', true);
   $event['address'] = wp_parse_args($address, array(
@@ -410,14 +433,14 @@ function event_query($query){
   if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
     $meta_query = array(
       array(
-        'key' => '_cmb2_event_timestamp',
+        'key' => '_cmb2_event_start',
         'value' => time(),
         'compare' => (get_query_var('past_events') ? '<=' : '>')
       )
     );
     $query->set('meta_query', $meta_query);
     $query->set('orderby', 'meta_value_num');
-    $query->set('meta_key', '_cmb2_event_timestamp');
+    $query->set('meta_key', '_cmb2_event_start');
     // show events oldest->newest
     $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
   }

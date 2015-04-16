@@ -2,7 +2,7 @@
 $event = \Firebelly\PostTypes\Event\get_event_details($event_post);
 ?>
 <article class="event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
-  <time datetime="<?= date('c', $event->event_timestamp); ?>"><span class="month"><?= date('M', $event->event_timestamp) ?></span> <span class="day"><?= date('d', $event->event_timestamp) ?></span><?= ($event->year != date('Y') ? ' <span class="day">'.$event->year.'</span>' : '') ?></time>
+  <time datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="day">'.$event->year.'</span>' : '') ?></time>
   <h1><a href="<?= get_permalink($event->ID); ?>"><?= $event->title ?></a></h1>
   <h3><?= $event->time_txt ?></h3>
   <?php if (!empty($event->address['city'])): ?>

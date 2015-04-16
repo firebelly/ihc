@@ -14,7 +14,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
     <div id="map"></div>
 
     <h3>When:</h3>
-    <?= date('l, F j, Y', $event->event_timestamp) ?>
+    <?= date('l, F j, Y', $event->event_start) ?>
     <br><?= $event->time_txt ?></p>
 
     <h3>Where:</h3>
