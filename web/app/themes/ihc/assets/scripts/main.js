@@ -42,11 +42,11 @@ var IHC = (function($) {
       _initNav();
       _initMap();
       _initAjaxLinks();
-      // _initMenuToggle();
+      _initMenuToggle();
       _initSliders();
-      _initMasonry();
+      //_initMasonry();
       _initLoadMore();
-      _initShareLinks();
+      // _initShareLinks();
 
       // initial nav update based on URL
       _updateNav();
@@ -80,25 +80,15 @@ var IHC = (function($) {
   }
 
   function _initSearch() {
-    $('.search-toggle, .internal-search-toggle').on('click', function (e) {
+    $('.search-toggle, .search-close').on('click', function (e) {
       e.preventDefault();
-      if (!$('.search-wrap').hasClass('active')) {
-        $('.search-wrap').addClass('active'); 
-        $('.search-form input').focus(); 
-      } else {
         _hideSearch();
-      }
-    });
-
-    $body.on('click', '.search-container', function (e) {
-      if (!$(e.target).is('.search-field')) {
-        _hideSearch();
-      }
     });
   }
 
   function _hideSearch() {
-    $('.search-wrap').removeClass('active');
+    $('.search-toggle').toggleClass('search-open');
+    $('.search-form').toggleClass('active');
   }
 
   function _initMap() {
@@ -184,7 +174,7 @@ var IHC = (function($) {
   function _initNav() {
 
     // SEO-useless nav toggler
-    $('body').prepend('<div class="menu-toggle"><a href="#"><span>Menu</span></a></div>');
+    $('body').prepend('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>');
 
     $(window).bind('statechange',function(){
       var State = History.getState(),
@@ -223,7 +213,7 @@ var IHC = (function($) {
       _updateTitle();
       _initAjaxLinks();
       _initSliders();
-      _initMasonry();
+      //_initMasonry();
       $content.fitVids();
 
       // scroll to top
@@ -246,8 +236,8 @@ var IHC = (function($) {
   }
 
   function _toggleMobileMenu() {
-    $('.menu-toggle-wrap').toggleClass('menu-open');
-    $('#sidebar').toggleClass('active');
+    $('.menu-toggle').toggleClass('menu-open');
+    $('.site-nav').toggleClass('active');
   }
 
   function _initSliders(){
@@ -329,7 +319,7 @@ var IHC = (function($) {
             var $data = $(data);
             if (loadingTimer) { clearTimeout(loadingTimer); }
             more_container.append($data).removeClass('loading');
-            more_container.masonry('appended', $data, true);
+            // more_container.masonry('appended', $data, true);
             $load_more.attr('data-page-at', page+1);
             // _initAjaxLinks();
             _getMapPoints();

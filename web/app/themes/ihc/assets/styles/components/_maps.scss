@@ -1,12 +1,20 @@
 // Maps
 
 #map {
- width: 300px;
- height: 300px;
+	@include phone {
+		display:none;
+	}
+ position:relative;
+ top:0;
+ left:-4.54%;
+ float:left;
+ width:74.64%;
+ z-index:2;
  margin: 2em 0;
+
  &.large {
-   width: 600px;
-   height: 400px;
+   width: 700px;
+   height: 1000px;
  }
 }
 

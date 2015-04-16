@@ -3,33 +3,72 @@
 // wp admin bar push
 .admin-bar {}
 
-.search-toggle {}
-
-.search-close {
-  @include min-screen($breakpoint-medium) {}
-
-  @include min-screen($breakpoint-large) {}
+.search-toggle {
+  position: absolute;
+  z-index: 150;
 }
 
-.search-form {
-  input {
-    border: none;
-    color: $black;
-    border-radius: 0;
-    padding: .5em;
-    background: $white;
-    &:focus, &:active {
-      border: none;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    &[type=search] {
-      box-sizing: border-box;
-    }
+.icon-search.search-open{
+  display:none;
   }
 
-  @include min-screen($breakpoint-medium) {
-    input {
+.search-open{
+  top:10px;
+  left:6.249%;
+  z-index: 300;
+}
+
+.search-form{
+  position:absolute;
+  top:0;
+  right:100%;
+  width:100%;
+  z-index:200;
+
+  .search-close{
+    &:before, &:after{
+      content:'';
+      position:absolute;
+      left:0;
+      width: 20px;
+      height: 2px;
+      background: $dk-blue;
+      margin: 12px 0 0 4%;
     }
+
+    &:before {
+      top: 15px;
+      transform: rotate(45deg);
+    }
+    &:after{
+      top:15px;
+      transform: rotate(-45deg);
   }
 }
+
+   input{
+    width:89%;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom:1px solid $dk-blue;
+    margin:15px 0;
+    background:$color-bg;
+   }
+
+    &.active{
+      top:0;
+      right:0;
+      height:60px;
+      margin:0;
+      background:$color-bg;
+      padding:0 6.249% 0 12%;  
+    }
+}
+
+button.search-submit{
+  color:$dk-blue;
+  border: none;
+  padding:0 2px;
+  background:$color-bg;
+} 

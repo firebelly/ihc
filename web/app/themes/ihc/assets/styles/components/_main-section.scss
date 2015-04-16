@@ -1,17 +1,9 @@
 // Main Section
-main[role="main"]{
-	@include clearfix;
-}
 
 //thought of the day
 section.thought {
-	top:-260px;
-	min-width:22.7%;
-	min-height:150px;
-	float:right;
-	border:1px blue solid;
-	z-index:10;
-
+	margin-bottom:80px;
+	
 	& p{
 		@include font-style3
 	}
@@ -25,42 +17,70 @@ section.thought {
 		@include button-style;
 		margin-top: 40px;
 	}
+@include tablet{
+	min-width:22.7%;
+	margin-right: 4.166%;
+	z-index: 400;
+	padding: 0 6.249%;
+	min-height:150px;
+	float:right;
+	z-index:10;
+
+}
 }
 
 //focus area
 section.focus-areas{
+	background: #fff;
+	top: -16px;
+	margin-bottom: 40px;
+
+	.focus-list{
+	padding: 20px 0;
+	width: 100%;
+
+	& li a{
+			@include font-style1($dk-blue);
+			border-bottom:3px $dk-blue solid;
+			font-size:$lg;
+			line-height:40px;
+	}
+}
+
+@include desktop{
 	top:0;
 	left:18.16%;
-	max-width:500px;
+	width: 500px;
 	z-index:10;
-}
-	.focus-list{
-		background: #fff;
-  		list-style-type: none;
-  		height: 100%;
-  		margin: 0;
-  		padding: 20px 25px;
-  		line-height: 3em;
 
-		& li{
-			 width:100%;
-			a{
-				@include font-style1($dk-blue);
-				letter-spacing:0.1em;
-				border-bottom: 3px $dk-blue solid;
-				font-size:1.75em;
-			}
+	.focus-list{
+		padding:20px 0 20px 25px;
+
+		& li a{
+			font-size:$xl;
+			line-height:50px;
 		}
 	}
-
-#map{
-	position:relative;
-	top:0;
-	left:-50px;
-	float:left;
-	width:58.324%;
-	z-index:1;
 }
+@include tablet{
+	top:0;
+	left: 18.16%;
+	width: 500px;
+	z-index:10;
+	
+	.focus-list{
+		padding: 20px 0 20px 25px;
+
+	& li a{
+		font-size:$xl;
+		line-height:50px;
+	}
+	}
+}
+}
+		
+
+		
 
 
 

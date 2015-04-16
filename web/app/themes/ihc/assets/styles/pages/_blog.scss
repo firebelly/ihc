@@ -1,6 +1,6 @@
 // Blog (what we're learning) Page
 
-@include min-screen($breakpoint-medium) {
+@include tablet {
   .page-header {
     h1 {
     }
