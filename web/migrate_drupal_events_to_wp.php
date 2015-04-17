@@ -13,7 +13,7 @@ $drupal_db = new PDO('mysql:host=127.0.0.1;dbname=ihc_old;charset=utf8', 'root',
 $prefix = '_cmb2_';
 $start = !empty($_GET['start']) ? $_GET['start'] : '0';
 $num = !empty($_GET['num']) ? $_GET['num'] : '100';
-$next_url = '/migrate_drupal_to_wp.php?start='.($start+$num).'&num='.$num;
+$next_url = '/migrate_drupal_events_to_wp.php?start='.($start+$num).'&num='.$num;
 
 // timestamp was 6 hours ahead on drupal site
 $time_offset = -(6 * 3600);
