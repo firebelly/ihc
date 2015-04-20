@@ -28,6 +28,15 @@ function metaboxes( array $meta_boxes ) {
         'desc' => 'Shows above main post content',
         'id'   => $prefix . 'post_byline',
         'type' => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 4,
+        ),
+      ),
+      array(
+        'name' => 'Publication Date',
+        'desc' => 'Overrides Post Date if set (migrated from old news posts)',
+        'id'   => $prefix . 'publication_date',
+        'type' => 'text_date',
       ),
     ),
   );

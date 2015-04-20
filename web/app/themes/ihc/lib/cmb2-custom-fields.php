@@ -94,7 +94,6 @@ function cmb2_render_address_field_callback( $field_object, $value, $object_id, 
             'name'  => $field_type_object->_name( '[zip]' ),
             'id'    => $field_type_object->_id( '_zip' ),
             'value' => $value['zip'],
-            'type'  => 'number',
         ) ); ?>
     </div>
     <?php
