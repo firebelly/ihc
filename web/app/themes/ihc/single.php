@@ -1,10 +1,15 @@
 <?php while (have_posts()) : the_post(); ?>
+<?php 
+// support legacy publication_dates via custom field
+$publication_date = get_post_meta($post->ID, '_cmb2_publication_date', true);
+$post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($post->post_date);
+?>
   <article <?php post_class(); ?>>
     <section class="main">
       <?php if ($category = \Firebelly\Utils\get_first_term($post)): ?>
         <h3 class="category-name"><a href="<?= get_term_link($category); ?>"><?php echo $category->cat_name; ?></a></h3>
       <?php endif; ?>
-      <time class="article-date" datetime="<?php echo date('c', strtotime($post->post_date)); ?>"><?php echo date('j/n', strtotime($post->post_date)); ?></time>
+      <time class="article-date" datetime="<?php echo date('c', $post_date_timestamp); ?>"><?php echo date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
       <?php if (has_post_thumbnail()) {
         $thumb = wp_get_attachment_url(get_post_thumbnail_id());
         echo '<div class="article-thumb" style="background-image:url('.$thumb.');"><img class="hide" src="'.$thumb.'"></div>';
