@@ -6,9 +6,10 @@ define('BASE_PATH', dirname(__FILE__).'/wp/');
 define('WP_USE_THEMES', false);
 require_once(BASE_PATH . 'wp-load.php');
 require_once(BASE_PATH . 'wp-admin/includes/image.php');
+require_once('migrate_func.php');
 global $wpdb;
 
-// map drupal categories to new wp
+// Map drupal categories to new wp
 $category_conversions = [
 	'IHC in the News' => 'In The News',
 	'Press Release'   => 'Press Release'
@@ -22,13 +23,12 @@ $start = !empty($_GET['start']) ? $_GET['start'] : '0';
 $num = !empty($_GET['num']) ? $_GET['num'] : '10';
 $next_url = '/migrate_drupal_news_to_wp.php?start='.($start+$num).'&num='.$num;
 
-// timestamp was 6 hours ahead on drupal site
+// Timestamp was 6 hours ahead on drupal site
 $time_offset = -(6 * 3600);
 
-$stmt = $drupal_db->prepare("SELECT * FROM ihc_node WHERE type=? AND status=? LIMIT ?,?");
+$stmt = $drupal_db->prepare("SELECT * FROM ihc_node WHERE type=? AND status=? ORDER BY nid DESC LIMIT ?,?");
 $stmt->execute(['news', 1, $start, $num]);
 $nodes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!doctype html>
@@ -71,7 +71,7 @@ foreach($nodes as $node) {
 		$body_sql->execute([ $node['nid'] ]);
 		$body_row = $body_sql->fetch();
 		$body = $body_row['body'];
-		$teaser = $body_row['teaser'];
+		// $teaser = $body_row['teaser'];
 
 		// Insert basic data into WP
 		$post_id = wp_insert_post([
@@ -79,7 +79,7 @@ foreach($nodes as $node) {
 			'post_type' => 'post',
 			'post_author' => 1,
 			'post_content' => $body,
-			'post_excerpt' => $teaser,
+			// 'post_excerpt' => $teaser,
 			'post_title' => $node['title'],
 			'post_date' => date('Y-m-d H:i:s', $node['created']),
 		]);
@@ -101,17 +101,30 @@ foreach($nodes as $node) {
 				update_post_meta($post_id, $prefix.'publication_date', date('m/d/Y', strtotime($publication_date_value)));
 			}
 
-			// Replace images!
+			// Featured image?
+			if (!empty($news_row['field_news_photo_fid']) && $news_row['field_news_photo_fid']>0) {
+				echo '<h3>featured image: ' . $news_row['field_news_photo_fid'] . '</h3>';
+				$image_sql = $drupal_db->prepare("SELECT * FROM ihc_files WHERE fid=?");
+				$image_sql->execute([ $news_row['field_news_photo_fid'] ]);
+				$image_row = $image_sql->fetch();
+				print_r($image_row);
+				if ($image_row) {
+					// import external image to wordpress and return new URL
+					$new_img = import_image_to_wordpress('http://www.prairie.org/' . $image_row['filepath'], $post_id, $image_row['filename'], 1);
+				}
+			}
 
-			// [img_assist|nid=29337|title=|desc=|link=none|align=center|width=318|height=159]
-			$teaser_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $teaser);
-			$body_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $body);
+			// Import + replace Drupal shortcode images
+
+			// [img_assist|nid=29337|title=|desc=|link=none|align=center|width=318|height=159] & [img_assist|nid=29349|title=|desc=|link=url|url=http://chiwrimo.org/|align=center|width=100|height=100]
+			// $teaser_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $teaser);
+			$body_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)(\|url=([^|]+))?\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $body);
 
 			// Were there any images? Update post_content if so
-			if ($body_with_new_images != $body || $teaser_with_new_images != $teaser) {
+			if ($body_with_new_images != $body) { // || $teaser_with_new_images != $teaser
 				wp_update_post([
 					'ID'           => $post_id,
-					'post_excerpt' => $teaser_with_new_images,
+					// 'post_excerpt' => $teaser_with_new_images,
 					'post_content' => $body_with_new_images,
 				]);
 			}
@@ -125,118 +138,5 @@ foreach($nodes as $node) {
 	} // if post already imported
 } // foreach nodes
 
-
-//////////////////////////
-
-
-// [0] => [img_assist|nid=29061|title=|desc=|link=none|align=left|width=300|height=360]
-// [1] => 29061
-// [2] => none
-// [3] => left
-// [4] => 300
-// [5] => 360
-
-/**
- * replace dumb drupal img shorttags
- */
-function replace_dumb_drupal_img_tags($matches) {
-	$nid = $matches[1];
-	$new_img = get_drupal_image($nid);
-	return '<img src="' . $new_img . '" data-link="' . $matches[2] . '"  data-align="' . $matches[3] . '" data-width="' . $matches[4] . '" data-height="' . $matches[5] . '">';
-}
-
-// ihc_files.nid 
-// ihc_files.filename = '_original' 
-// ihc_files.filepath = 'files/ihc/images/Rahm-Chuy-Debate.jpg'
-// http://www.prairie.org/files/ihc/images/Rahm-Chuy-Debate.jpg
-
-/**
- * get old drupal image from ihc_node & ihc_files
- */
-function get_drupal_image($nid) {
-	global $drupal_db, $post_id;
-
-	$node_sql = $drupal_db->prepare("SELECT * FROM ihc_node WHERE nid=?");
-	$node_sql->execute([ $nid ]);
-	$node_row = $node_sql->fetch();
-	$title = $node_row['title'];
-
-	$image_sql = $drupal_db->prepare("SELECT * FROM ihc_files WHERE nid=? AND filename='_original'");
-	$image_sql->execute([ $nid ]);
-	$image_row = $image_sql->fetch();
-	// import external image to wordpress and return new URL
-	$new_img = import_image_to_wordpress('http://www.prairie.org/' . $image_row['filepath'], $post_id, $title);
-	return $new_img;
-}
-
-/**
- * import an external image into wordpress media library
- */
-function import_image_to_wordpress($file_url, $post_id, $title='') {
-	global $wpdb;
-	$site_url = get_option('siteurl');
-
-	if(!$post_id) {
-		return false;
-	}
-
-	// Directory to import to	
-	$import_dir = '/app/uploads/migrated_media/';
-
-	// If the directory doesn't exist, create it	
-	if(!file_exists(dirname(__FILE__) . $import_dir)) {
-		mkdir(dirname(__FILE__) . $import_dir);
-	}
-
-	// Get filename from url
-	$tmp_arr = explode('/', $file_url);
-	$new_filename = array_pop($tmp_arr);
-	$new_file_url = $site_url . $import_dir . $new_filename;
-
-	if (@fclose(@fopen($file_url, 'r'))) { // Make sure the remote file actually exists
-		copy($file_url, dirname(__FILE__) . $import_dir . $new_filename);
-
-		$file_info = getimagesize(dirname(__FILE__) . $import_dir . $new_filename);
-		$file_title = (!empty($title)) ? $title : $new_filename;
-
-		// Create an array of attachment data to insert into wp_posts table
-		$image_data = [
-			'post_author' => 1, 
-			'post_date' => current_time('mysql'),
-			'post_date_gmt' => current_time('mysql'),
-			'post_title' => $file_title, 
-			'post_status' => 'inherit',
-			'comment_status' => 'closed',
-			'ping_status' => 'closed',
-			'post_name' => sanitize_title_with_dashes(str_replace('_', '-', $new_filename), '', 'save'),
-			'post_modified' => current_time('mysql'),
-			'post_modified_gmt' => current_time('mysql'),
-			'post_parent' => $post_id,
-			'post_type' => 'attachment',
-			'guid' => $new_file_url,
-			'post_mime_type' => $file_info['mime'],
-			'post_excerpt' => '',
-			'post_content' => ''
-		];
-
-		$uploads = wp_upload_dir();
-		$save_path = $uploads['basedir'] . '/migrated_media/' . $new_filename;
-
-		// Insert the database record
-		$attach_id = wp_insert_attachment($image_data, $save_path, $post_id);
-
-		// Generate metadata and thumbnails
-		if ($attach_data = wp_generate_attachment_metadata($attach_id, $save_path)) {
-			wp_update_attachment_metadata($attach_id, $attach_data);
-		}
-
-		// Optional make it the featured image of the post it's attached to
-		// $rows_affected = $wpdb->insert($wpdb->prefix.'postmeta', array('post_id' => $post_id, 'meta_key' => '_thumbnail_id', 'meta_value' => $attach_id));
-	} else {
-		return false;
-	}
-
-	return $new_file_url;
-}
 ?>
 </body></html>

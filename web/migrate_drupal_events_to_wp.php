@@ -4,7 +4,9 @@
 // Bootstrap WP
 define('BASE_PATH', dirname(__FILE__).'/wp/');
 define('WP_USE_THEMES', false);
-require(BASE_PATH . 'wp-load.php');
+require_once(BASE_PATH . 'wp-load.php');
+require_once(BASE_PATH . 'wp-admin/includes/image.php');
+require_once('migrate_func.php');
 global $wpdb;
 
 // Connect to old Drupal db
@@ -18,7 +20,7 @@ $next_url = '/migrate_drupal_events_to_wp.php?start='.($start+$num).'&num='.$num
 // timestamp was 6 hours ahead on drupal site
 $time_offset = -(6 * 3600);
 
-$stmt = $drupal_db->prepare("SELECT * FROM ihc_node WHERE type=? AND status=? LIMIT ?,?");
+$stmt = $drupal_db->prepare("SELECT * FROM ihc_node WHERE type=? AND status=? ORDER BY nid DESC LIMIT ?,?");
 $stmt->execute(['event', 1, $start, $num]);
 $nodes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -47,7 +49,7 @@ foreach($nodes as $node) {
 	print_r($node);
 
 	// Check if post already imported
-	$imported = $wpdb->get_var( "SELECT COUNT(*) FROM wp_postmeta WHERE meta_key='_nid' AND meta_value=".$node['nid'] );
+	$imported = 0; // $wpdb->get_var( "SELECT COUNT(*) FROM wp_postmeta WHERE meta_key='_nid' AND meta_value=".$node['nid'] );
 
 	if ($imported) {
 		echo '<h2>Post already imported!</h2>';
@@ -74,7 +76,7 @@ foreach($nodes as $node) {
 		$body .= "\n\n" . $event_row['field_event_scheduling_notes_value'];
 
 		// Insert basic data into WP as post_type=event
-		$event_post_id = wp_insert_post([
+		$post_id = wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => 'event',
 			'post_author' => 1,
@@ -83,20 +85,32 @@ foreach($nodes as $node) {
 			'post_date' => date('Y-m-d H:i:s', $node['created']),
 		]);
 
-		if($event_post_id) {
-			echo '<h2>Post inserted ok: <a href="/wp/wp-admin/post.php?post='.$event_post_id.'&action=edit">'.$event_post_id.'</a> <small><a href="http://www.prairie.org/node/'.$node['nid'].'/edit">Old</a></small></h2>';
+		if($post_id) {
+			echo '<h2>Post inserted ok: <a href="/wp/wp-admin/post.php?post='.$post_id.'&action=edit">'.$post_id.'</a> <small><a href="http://www.prairie.org/node/'.$node['nid'].'/edit">Old</a></small></h2>';
 			// Store nid to avoid duplicate imports
-			update_post_meta($event_post_id, '_nid', $node['nid']);
+			update_post_meta($post_id, '_nid', $node['nid']);
 			
 			// Set various fields from ihc_content_type_event (set above) if not blank
 			if ($sponsor)
-				update_post_meta($event_post_id, $prefix.'sponsor', $sponsor);
+				update_post_meta($post_id, $prefix.'sponsor', $sponsor);
 			if ($cost)
-				update_post_meta($event_post_id, $prefix.'cost', $cost);
+				update_post_meta($post_id, $prefix.'cost', $cost);
 			if ($county)
-				update_post_meta($event_post_id, $prefix.'county', $county);
+				update_post_meta($post_id, $prefix.'county', $county);
 			if ($registration_url)
-				update_post_meta($event_post_id, $prefix.'registration_url', $registration_url);
+				update_post_meta($post_id, $prefix.'registration_url', $registration_url);
+
+			// Import + replace Drupal shortcode images
+			// [img_assist|nid=29061|title=|desc=|link=none|align=left|width=300|height=360] & [img_assist|nid=29349|title=|desc=|link=url|url=http://chiwrimo.org/|align=center|width=100|height=100]   
+			$body_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)(\|url=([^|]+))?\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $body);
+
+			// Were there any images? Update post_content if so
+			if ($body_with_new_images != $body) {
+				wp_update_post([
+					'ID'           => $post_id,
+					'post_content' => $body_with_new_images,
+				]);
+			}
 
 			try {
 				// Get event timestamps
@@ -104,11 +118,11 @@ foreach($nodes as $node) {
 				$times_sql->execute([ $node['nid'] ]);
 				$times_row = $times_sql->fetch();
 
-				update_post_meta($event_post_id, $prefix.'event_start', $times_row['event_start'] + $time_offset);
+				update_post_meta($post_id, $prefix.'event_start', $times_row['event_start'] + $time_offset);
 				if ($times_row['event_end'] != $times_row['event_start']) {
-					update_post_meta($event_post_id, $prefix.'event_end', $times_row['event_end'] + $time_offset);
+					update_post_meta($post_id, $prefix.'event_end', $times_row['event_end'] + $time_offset);
 				}
-				echo '<p>Timestamps added ok</p>';
+				echo '<h3>Timestamps added ok</h3>';
 			} catch(PDOException $ex) {
 				echo "Unable to get timestamps: " . $ex->getMessage();
 			}
@@ -120,7 +134,7 @@ foreach($nodes as $node) {
 				$location_sql->execute([ $node['vid'] ]);
 				$location_row = $location_sql->fetch();
 
-				update_post_meta($event_post_id, $prefix.'venue', $location_row['name']);
+				update_post_meta($post_id, $prefix.'venue', $location_row['name']);
 				$address = [
 					'address-1' => $location_row['street'],
 					'address-2' => $location_row['additional'],
@@ -129,15 +143,16 @@ foreach($nodes as $node) {
 					'zip' => $location_row['postal_code'],
 				];
 				print_r($address);
-				update_post_meta($event_post_id, $prefix.'address', $address);
-				update_post_meta($event_post_id, $prefix.'lat', $location_row['latitude']);
-				update_post_meta($event_post_id, $prefix.'lng', $location_row['longitude']);
-				echo '<p>Location added ok</p>';
+				update_post_meta($post_id, $prefix.'address', $address);
+				update_post_meta($post_id, $prefix.'lat', $location_row['latitude']);
+				update_post_meta($post_id, $prefix.'lng', $location_row['longitude']);
+				echo '<h3>Location added ok</h3>';
 			} catch(PDOException $ex) {
 				echo "Unable to get location: " . $ex->getMessage();
 			}
 		} // if post inserted ok
 	} // if post already imported
 } // foreach nodes
+
 ?>
 </body></html>

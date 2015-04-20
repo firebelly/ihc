@@ -111,7 +111,7 @@ function metaboxes( array $meta_boxes ) {
           'type'    => 'text_datetime_timestamp',
       ),
       array(
-          'name'    => 'End Time',
+          'name'    => 'End Date',
           'desc'    => '(Optional)',
           'id'      => $prefix . 'event_end',
           'type'    => 'text_datetime_timestamp',
