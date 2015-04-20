@@ -319,7 +319,7 @@ var IHC = (function($) {
             var $data = $(data);
             if (loadingTimer) { clearTimeout(loadingTimer); }
             more_container.append($data).removeClass('loading');
-            // more_container.masonry('appended', $data, true);
+            more_container.masonry('appended', $data, true);
             $load_more.attr('data-page-at', page+1);
             // _initAjaxLinks();
             _getMapPoints();
