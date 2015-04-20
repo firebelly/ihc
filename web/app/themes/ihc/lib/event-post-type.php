@@ -323,7 +323,7 @@ function event_ics() {
     'URL:' . get_permalink($event_post->ID),
     'LOCATION:' . $venue,
     'DTSTART:' . get_ical_date($event_start),
-    // 'DTEND:' . get_ical_date($event_end_timestamp),
+    'DTEND:' . (!empty($event_end) ? get_ical_date($event_end) : ''),
     'DTSTAMP:' . get_ical_date(strtotime($event_post->post_modified)),
     'END:VEVENT',
     'END:VCALENDAR',
@@ -408,7 +408,7 @@ function get_event_details($post) {
     'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time()
   ];
   $event['start_time'] = date('g:iA', $event['event_start']);
-  $event['time_txt'] = $event['start_time'] . (!empty($event['event_end']) ? '–' . preg_replace('/(^0| )/','',$event['event_end']) : '');
+  $event['time_txt'] = $event['start_time'] . (!empty($event['event_end']) ? '–' . date('g:iA', $event['event_end']) : '');
   $event['archived'] = ($event['event_start'] < time());
   $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt'];
   $event['year'] = date('Y', $event['event_start']);
