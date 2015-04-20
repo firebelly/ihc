@@ -30,7 +30,7 @@ $nodes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Import-O-Matic</title>
+  <title>Import-O-Matic (<?= $start.'-'.($start+$num) ?>)</title>
 </head>
 <body>
 
