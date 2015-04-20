@@ -36,9 +36,6 @@ $nodes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="utf-8">
   <title>News Import-O-Matic</title>
-  <?php if (!empty($_GET['autostart']) && count($nodes)>0): ?>
-  	<meta http-equiv="refresh" content="5; url=<?= $next_url ?>&autostart=1">
-  <?php endif; ?>
 </head>
 <body>
 
@@ -51,7 +48,7 @@ echo '<hr>';
 if (count($nodes)==0) die('No more posts found.');
 
 foreach($nodes as $node) {
-	print_r($node);
+	// print_r($node);
 
 	// Check if post already imported
 	$imported = $wpdb->get_var( "SELECT COUNT(*) FROM wp_postmeta WHERE meta_key='_nid' AND meta_value=".$node['nid'] );
@@ -95,7 +92,7 @@ foreach($nodes as $node) {
 			$news_sql = $drupal_db->prepare("SELECT * FROM ihc_content_type_news WHERE nid=? AND vid=?");
 			$news_sql->execute([ $node['nid'], $node['vid'] ]);
 			$news_row = $news_sql->fetch();
-			print_r($news_row);
+			// print_r($news_row);
 			$publication_date_value = $news_row['field_news_publication_date_value'];
 			if ($publication_date_value) {
 				update_post_meta($post_id, $prefix.'publication_date', date('m/d/Y', strtotime($publication_date_value)));
@@ -107,7 +104,7 @@ foreach($nodes as $node) {
 				$image_sql = $drupal_db->prepare("SELECT * FROM ihc_files WHERE fid=?");
 				$image_sql->execute([ $news_row['field_news_photo_fid'] ]);
 				$image_row = $image_sql->fetch();
-				print_r($image_row);
+				// print_r($image_row);
 				if ($image_row) {
 					// import external image to wordpress and return new URL
 					$new_img = import_image_to_wordpress('http://www.prairie.org/' . $image_row['filepath'], $post_id, $image_row['filename'], 1);
@@ -115,10 +112,7 @@ foreach($nodes as $node) {
 			}
 
 			// Import + replace Drupal shortcode images
-
-			// [img_assist|nid=29337|title=|desc=|link=none|align=center|width=318|height=159] & [img_assist|nid=29349|title=|desc=|link=url|url=http://chiwrimo.org/|align=center|width=100|height=100]
-			// $teaser_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $teaser);
-			$body_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)(\|url=([^|]+))?\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $body);
+			$body_with_new_images = replace_dumb_drupal_img_tags($body);
 
 			// Were there any images? Update post_content if so
 			if ($body_with_new_images != $body) { // || $teaser_with_new_images != $teaser
@@ -139,4 +133,13 @@ foreach($nodes as $node) {
 } // foreach nodes
 
 ?>
+
+<?php if (!empty($_GET['autostart']) && count($nodes)>0): ?>
+	<script>
+	setTimeout(function() {
+		location.href = "<?= $next_url ?>&autostart=1";
+	}, 1000);
+	</script>
+<?php endif; ?>
+
 </body></html>

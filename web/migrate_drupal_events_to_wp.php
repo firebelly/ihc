@@ -31,9 +31,6 @@ $nodes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
   <meta charset="utf-8">
   <title>Import-O-Matic</title>
-  <?php if (!empty($_GET['autostart']) && count($nodes)>0): ?>
-  	<meta http-equiv="refresh" content="5; url=<?= $next_url ?>&autostart=1">
-  <?php endif; ?>
 </head>
 <body>
 
@@ -46,10 +43,10 @@ echo '<hr>';
 if (count($nodes)==0) die('No more posts found.');
 
 foreach($nodes as $node) {
-	print_r($node);
+	// print_r($node);
 
 	// Check if post already imported
-	$imported = 0; // $wpdb->get_var( "SELECT COUNT(*) FROM wp_postmeta WHERE meta_key='_nid' AND meta_value=".$node['nid'] );
+	$imported = $wpdb->get_var( "SELECT COUNT(*) FROM wp_postmeta WHERE meta_key='_nid' AND meta_value=".$node['nid'] );
 
 	if ($imported) {
 		echo '<h2>Post already imported!</h2>';
@@ -66,7 +63,7 @@ foreach($nodes as $node) {
 		$event_sql = $drupal_db->prepare("SELECT * FROM ihc_content_type_event WHERE nid=? AND vid=?");
 		$event_sql->execute([ $node['nid'], $node['vid'] ]);
 		$event_row = $event_sql->fetch();
-		print_r($event_row);
+		// print_r($event_row);
 		$sponsor = $event_row['field_event_site_org_value'];
 		$cost = $event_row['field_event_fee_value'];
 		$county = $event_row['field_event_county_value'];
@@ -101,8 +98,7 @@ foreach($nodes as $node) {
 				update_post_meta($post_id, $prefix.'registration_url', $registration_url);
 
 			// Import + replace Drupal shortcode images
-			// [img_assist|nid=29061|title=|desc=|link=none|align=left|width=300|height=360] & [img_assist|nid=29349|title=|desc=|link=url|url=http://chiwrimo.org/|align=center|width=100|height=100]   
-			$body_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=\|desc=\|link=([^|]+)(\|url=([^|]+))?\|align=([^|]+)\|width=([^|]+)\|height=([^|]+)\]/', 'replace_dumb_drupal_img_tags', $body);
+			$body_with_new_images = replace_dumb_drupal_img_tags($body);
 
 			// Were there any images? Update post_content if so
 			if ($body_with_new_images != $body) {
@@ -142,7 +138,7 @@ foreach($nodes as $node) {
 					'state' => $location_row['province'],
 					'zip' => $location_row['postal_code'],
 				];
-				print_r($address);
+				// print_r($address);
 				update_post_meta($post_id, $prefix.'address', $address);
 				update_post_meta($post_id, $prefix.'lat', $location_row['latitude']);
 				update_post_meta($post_id, $prefix.'lng', $location_row['longitude']);
@@ -155,4 +151,13 @@ foreach($nodes as $node) {
 } // foreach nodes
 
 ?>
+
+<?php if (!empty($_GET['autostart']) && count($nodes)>0): ?>
+	<script>
+	setTimeout(function() {
+		location.href = "<?= $next_url ?>&autostart=1";
+	}, 1000);
+	</script>
+<?php endif; ?>
+
 </body></html>
