@@ -30,7 +30,7 @@ var IHC = (function($) {
 
       $document = $(document);
       $body = $('body');
-      $content = $('#main-content');
+      $content = $('section.main');
       $nav = $('.site-nav');
 
       // fit them vids!
@@ -46,7 +46,7 @@ var IHC = (function($) {
       _initSliders();
       //_initMasonry();
       _initLoadMore();
-      // _initShareLinks();
+      _initShareLinks();
 
       // initial nav update based on URL
       _updateNav();
