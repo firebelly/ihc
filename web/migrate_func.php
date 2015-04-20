@@ -3,17 +3,12 @@
  * Misc functions for imports
  */
 
-// [0] => [img_assist|nid=29061|title=|desc=|link=none|align=left|width=300|height=360]
-// [1] => 29061
-// [2] => none
-// [3] => left
-// [4] => 300
-// [5] => 360
-
-// [img_assist|nid=22074|title=|desc=|link=none|align=right|width=175|height=236]
-// [img_assist|nid=29261|title=|desc=Photo by Victor G. Jeffreys II|link=none|align=left|width=197|height=250]
 /**
- * Replace dumb drupal img shorttags
+ * Replace dumb drupal img_assist shorttags
+ * e.g.
+ * [img_assist|nid=22074|title=|desc=|link=none|align=right|width=175|height=236]
+ * [img_assist|nid=29261|title=|desc=Photo by Victor G. Jeffreys II|link=none|align=left|width=197|height=250]
+ * [img_assist|nid=29349|title=|desc=|link=url|url=http://chiwrimo.org/|align=center|width=100|height=100]   
  */
 function replace_dumb_drupal_img_tags($body) {
 	$body_with_new_images = preg_replace_callback('/\[img_assist\|nid=(\d+)\|title=([^|]+)?\|desc=([^|]+)?\|link=([^|]+)(\|url=([^|]+))?\|align=([^|]+)\|width=([^|]+)\|height=([^\]]+)\]/', 'replace_dumb_drupal_img_tags_callback', $body);
@@ -21,8 +16,9 @@ function replace_dumb_drupal_img_tags($body) {
 }
 function replace_dumb_drupal_img_tags_callback($matches) {
 	$nid = $matches[1];
-	// import image
+	// get image info from Drupal & import to wordpress, returns new image URL
 	$new_img = get_drupal_image($nid);
+	// align image?
 	$alignclass = !empty($matches[7]) ? ' align' . $matches[7] : '';
 	$img_tag = '<img alt="'.esc_html($matches[3]).'" src="' . $new_img . '" class="size-full' . $alignclass . '" width="' . $matches[8] . '" height="' . $matches[9] . '">';
 	// is there a link URL?
@@ -144,8 +140,7 @@ function import_image_to_wordpress($file_url, $post_id, $title='', $featured='')
 	return $new_file_url;
 }
 
-function slugify($text)
-{ 
+function slugify($text) {
   // replace non letter or digits by -
   $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
 
@@ -161,8 +156,7 @@ function slugify($text)
   // remove unwanted characters
   $text = preg_replace('~[^-\w]+~', '', $text);
 
-  if (empty($text))
-  {
+  if (empty($text)) {
     return 'n-a';
   }
 
