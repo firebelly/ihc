@@ -70,8 +70,12 @@ body {
 .content {
   z-index: 1;
   width: 100%;
-  position: relative;
+  height:auto;
+
   @include tablet {
+    padding:0 4.166%;
+  }
+  @include desktop{
     padding:0 4.166%;
   }
 }
@@ -107,9 +111,9 @@ h2{
     position:absolute;
     height:30px;
     bottom:100%;
-    padding:5px 2%;//padding:10px 15px;
+    padding-top:5px;
     z-index:100;
-      
+    text-align:center;
       &::after {
         top: 100%;
         right: 0;
@@ -118,12 +122,23 @@ h2{
         border-top: 20px solid $color-accent;
         border-right: 25px solid transparent;
       }
+
+@include phone{
+  padding-left: 10px;
+  padding-right: 10px;
+  width:auto;
+}
 }
 
 ul{
   list-style-type:none;
   padding:0;
   margin:0;
+}
+
+p{
+  margin:0;
+  padding:0;
 }
 
 a {
@@ -136,10 +151,7 @@ img {
 }
 
 section{
-  position:relative;
-  width:100%;
   margin-bottom:70px;
-  padding:0 6.249%;
 
 @include desktop{
   position:relative;
@@ -149,89 +161,8 @@ section{
   position:relative;
   padding:0;
 }
+@include phone{
+  padding:0 6.249%;
+}
 }
 
-//footer
-footer{
-  background:$dk-blue;
-  height:550px;
-  width:100%;
-  padding:40px 6.249% 0;
-  
-  .disclaimer{
-    float:left;
-    margin-right:15px;
-  }
-  
-  #menu-footer-links li{
-    display:inline-block;
-    margin-right:15px;
-  }
-  #menu-footer-links li a,
-  .small-only{
-      @include font-style2($color-bg);
-      font-size:$small;
-      text-transform: uppercase;
-      text-decoration: underline; 
-  }
-
-  nav {
-
-    li {
-      display:inline-block;
-      margin-right:15px;
-    }
-
-      a{
-        @include font-style1($color-bg);
-      }
-
-    .menu-donate-now,
-    .menu-get-il-humanities-news-events{
-      visibility: hidden;
-    }
-  }
-
-  .copyright{
-    @include font-style2($color-bg);
-    font-size:$small;
-    text-transform: capitalize;
-  }
-  
-  .contact-info{
-    @include font-style1($color-bg);
-
-    .address a,
-    .contact a{
-      @include font-style1($color-bg);
-      border-bottom: 1px solid $color-bg;
-    }
-    
-    .vcard{
-      clear:both;
-      font-style:normal;
-      margin:50px 0;
-    }
-
-    .contact{
-      margin-bottom:50px;
-    }
-
-    .social{
-      margin-bottom:30px;
-  
-      p{
-        @include font-style1($color-bg);
-        text-transform: uppercase;
-      }
-  
-      .icon-facebook,
-      .icon-twitter,
-      .icon-instagram{
-        color:$color-bg;
-        font-size:$xl;
-        margin-right:15px;
-      }
-    }
-  }
-}

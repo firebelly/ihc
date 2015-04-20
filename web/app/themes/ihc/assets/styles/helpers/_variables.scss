@@ -34,9 +34,6 @@ $breakpoint-medium: 768px;
 $breakpoint-large: 1024px;
 $breakpoint-huge: 3000px;
 
-//screens
-$tablet: ("min-width:$breakpoint-medium") and ("max-width:$breakpoint-large");
-$desktop:("min-width:$breakpoint-large") and ("max-width:$breakpoint-huge");
 //font-sizes
 $small: 12px; //12px
 $med: 14px; //14px

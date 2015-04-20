@@ -1,9 +1,66 @@
 // Main Section
+//focus area
+section.focus-areas{
+	top:0;
+	margin:0 0 0 18.16%;
+	width: 45.4%;
+	z-index:10;
+	background: #fff;
+	@include clearfix;
+	
 
+	& h2{
+		width:40%;
+	}
+
+	& .focus-list{
+	width: 100%;
+	padding:40px 0 40px 25px;
+
+		& li a{
+			@include font-style1($dk-blue);
+			border-bottom:3px $dk-blue solid;
+			font-size:$xl;
+			line-height:50px;
+		}
+	}
+
+@include phone{
+	position:relative;
+	top: -16px;
+	width:100%;
+	margin:0 0 40px;
+	height:260px;
+
+	& h2{
+		width:auto;
+	}
+
+	.focus-list{
+		padding: 20px 0;
+
+		& li a{
+			font-size:$lg;
+			line-height:40px;	
+		}
+	}
+}
+}
 //thought of the day
 section.thought {
-	margin-bottom:80px;
+	position: absolute;
+  	top: 330px;
+	width:22.7%;
+  	right:0;
+  	z-index: 400;
+  	border:1px solid blue;
+	margin-right:4.25%;
+  	@include clearfix;
 	
+	& h2 {
+		width:80%;
+	}
+
 	& p{
 		@include font-style3
 	}
@@ -11,76 +68,55 @@ section.thought {
 	& cite{
 		@include font-style2($dk-blue);
 		font-size:$small;
+		font-style: normal;
 	}
 
 	.submit-thought{
 		@include button-style;
 		margin-top: 40px;
-	}
-@include tablet{
-	min-width:22.7%;
-	margin-right: 4.166%;
-	z-index: 400;
-	padding: 0 6.249%;
-	min-height:150px;
-	float:right;
-	z-index:10;
 
-}
-}
-
-//focus area
-section.focus-areas{
-	background: #fff;
-	top: -16px;
-	margin-bottom: 40px;
-
-	.focus-list{
-	padding: 20px 0;
-	width: 100%;
-
-	& li a{
-			@include font-style1($dk-blue);
-			border-bottom:3px $dk-blue solid;
-			font-size:$lg;
-			line-height:40px;
-	}
-}
-
-@include desktop{
-	top:0;
-	left:18.16%;
-	width: 500px;
-	z-index:10;
-
-	.focus-list{
-		padding:20px 0 20px 25px;
-
-		& li a{
-			font-size:$xl;
-			line-height:50px;
+		& a:active{
+			background:$white;
+			width:31.78%;
+			height:350px;
 		}
 	}
-}
-@include tablet{
-	top:0;
-	left: 18.16%;
-	width: 500px;
-	z-index:10;
-	
-	.focus-list{
-		padding: 20px 0 20px 25px;
 
-	& li a{
-		font-size:$xl;
-		line-height:50px;
+//section.thought{
+//	width:31.78%;
+//	margin:0;
+//	background:$white;
+
+//		.submit-thought-wrapper{
+//			width: 100%;
+//			height: 350px;
+		// 	padding: 40px 4.54% 50%;
+
+		// 	.new-thought-form textarea{
+		// 		@include font-style3;
+		// 		width:100%;
+		// 		border:none;
+		// 		color:$dk-blue;
+
+		// 		input{
+		// 			@include font-style1($dk-blue);
+		// 			width:100%;
+		// 			height:30px;
+		// 			margin:10px 0;
+		// 			background:$color-bg;
+		// 		}
+		// 	}
+		// }
+
+@include phone{
+	top: 2534px;
+ 	min-height: 490px;
+ 	width: 100%;
+ 	padding: 0 6.249%;
+ 	margin:0;
+
+	& h2{
+		width:auto;
 	}
-	}
 }
 }
-		
-
-		
-
-
-

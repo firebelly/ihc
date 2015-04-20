@@ -1,64 +1,60 @@
 // Header
 .page-header{
-	width:100%;
-	min-height:400px;
+	@include clearfix;
+	width:86.26%;
+	min-height:560px;
+	margin-left: -4.54%;
+	padding:120px 0 0 4.54%;
 	background:url(http://bit.ly/IRW4MS) 50% 50% no-repeat scroll;
 	background-size:cover;
+	z-index:1;
+	
+	& h1{
+		font-size:$xxl;
+		line-height:60px;
+		padding-right:18.16%;
+	}
+	
+	& h2{
+		top:50px;
+		width:20.43%;
+	}
+	
+	p{
+		@include font-style1($lt-orange);
+		bottom:60px;
+
+		&::before{
+			content:'›› '
+		}
+	}
+	
+
+@include phone{
+	width:100%;
+	min-height:400px;
 	padding:110px 6.249% 30px;
+	margin:0;
+	z-index:1;
+
+	& h1{
+		font-size:$xl;
+		line-height:30px;
+		padding:0;
+	}
 
 	& h2{
 		top:50px;
+		width:77.18%;
 	}
 
 	& p{
-		@include font-style1($lt-orange);
+		
 		margin:50px 0 30px;
 	}
-
-@include tablet {
-	width:79.166%;
-	min-height:560px;
-	margin-left: -4.54%;
+}
 }
 
-@include desktop{
-	width:79.166%;
-	min-height:560px;
-	margin-left: -4.54%;
-
-	h1{
-		font-size:$xxl;
-		line-height:60px;
-		padding-right:18.16%
-	}
-
-	h2{
-		padding:10px 15px;
-	}
-}
-//	padding:50px 0 0;
-//	margin-left:-4.54%;
-
-
-//	& h1{
-//		width:56.4%;
-//		font-size:$xxl;
-//		font-weight:100;
-//		line-height:50px;
-//		color:$white;
-//		margin-top:70px;
-//		text-transform:none; 
-//	}
-
-//	& h2{
-//		top:0px;
-//	}
-//	& p{
-//		margin-bottom:60px;
-//	}	
-	
-//}
-}
 .navbar-header .navbar-brand{
 	width:200px;
 	height:80px;

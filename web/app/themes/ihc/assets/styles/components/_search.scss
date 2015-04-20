@@ -25,6 +25,10 @@
   width:100%;
   z-index:200;
 
+  .active{
+    padding: 0 6.249% 0 4.25%;
+  }
+
   .search-close{
     &:before, &:after{
       content:'';
@@ -33,27 +37,38 @@
       width: 20px;
       height: 2px;
       background: $dk-blue;
-      margin: 12px 0 0 4%;
+      margin:30px 0 0 1.5%;
     }
 
     &:before {
       top: 15px;
       transform: rotate(45deg);
     }
+
     &:after{
       top:15px;
       transform: rotate(-45deg);
+    }
+
+@include phone{
+
+  .active{
+    padding: 0 6.249% 0 10%;
   }
+
+  .search-close:before,
+  .search-close:after{
+    margin: 17px 0 0 16px;
+    }
+}
 }
 
    input{
-    width:89%;
-    border-top:none;
-    border-left:none;
-    border-right:none;
-    border-bottom:1px solid $dk-blue;
-    margin:15px 0;
-    background:$color-bg;
+    @include font-style3;
+    width: 33.25%;
+    border: none;
+    margin:25px 0 0 2px;
+    background: #b7ddba;
    }
 
     &.active{
@@ -62,8 +77,18 @@
       height:60px;
       margin:0;
       background:$color-bg;
-      padding:0 6.249% 0 12%;  
+      padding:0 6.249% 0 4.166%;  
     }
+
+@include phone{
+  input{
+    width:80%;
+    margin-left:30px;
+  }
+  .active{
+  padding: 0 6.249% 0 12%;
+  }
+}
 }
 
 button.search-submit{

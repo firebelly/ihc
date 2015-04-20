@@ -11,6 +11,7 @@ $total_news = wp_count_posts('post')->publish;
 // echo $post->post_title;
 // echo apply_filters('the_content', $post->post_content);
 ?>
+<?php include(locate_template('templates/thought-of-the-day.php')); ?>
 <div class="page-header">
 <h2>Year-round & State-wide</h2>
 <h1>Beginning the conversation.
@@ -56,4 +57,3 @@ endif;
 <p class="all-articles"><a href="/news/" class="view-all">All Articles</a></p>
 </div>
 </section>
-<?php include(locate_template('templates/thought-of-the-day.php')); ?>

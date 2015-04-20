@@ -18,17 +18,21 @@ time {
 
 //events
 section.event-cal{
-}
+		@include clearfix;
+		top:0;
+		width: 45.5%;
+  		margin-left: 49.94%;
+  		padding:0 5px;
+		z-index: 20;
 
 	& .event {
-		background:$dk-blue;
 		position: relative;
-  		width: 100%;
-  		min-height: 205px;
-  		margin:0 4px 4px 0;
-  		padding:20px 20px 25px;
-  		
-		
+		background:$dk-blue;
+		width: 50%;
+		min-height: 250px;
+		float: left;
+		padding:20px 50px 30px 25px;
+		margin-bottom:5px;
 
 		h1 a {
 			@include font-style2($color-bg);
@@ -36,6 +40,10 @@ section.event-cal{
 			border-bottom:1px solid $color-bg;
 			font-size:$lg;
 			line-height:1.5em;
+		}
+
+		h2{
+			width:30%;
 		}
 
 		h3, 
@@ -52,8 +60,8 @@ section.event-cal{
 		.register::before {
 			content:'›› ';
 		}
-	
-		time {
+	}
+	& time {
 		 	position:absolute;
 		 	width: 50px;
 		 	height: 60px;
@@ -82,56 +90,63 @@ section.event-cal{
         		border-right: 25px solid transparent;
       		}
 		}
-@include desktop{
-	clear:both;
-	top: 0;
-	padding-right:4.54%;
-	width:508px;
-	float:right;
-	margin:0 4px 4px 0;
-	z-index: 20;
 
-	&.event{
-		width: 250px;
-		min-height: 250px;
-		float: left;
-		padding: 20px 50px 25px;
+@include phone{
+	position:relative;
+	width:100%;
+	margin:0;
+	padding:0 6.249%;
+	.event{
+		width: 100%;
+  		min-height: 205px;
+  		margin:0 4px 4px 0;
+  		padding:20px 20px 25px;
 	}
 }
 }
 
-	.load-more a{
+.load-more a{
 			@include button-style;
-			margin-top:35px;
+			margin:35px 4.54% 0;
 
 				&::before{
 				content:'+ ';
 				}
-		}
+@include phone{
+	margin:35px 0 10px;
+}
+}
+.view-all{
+	@include button-style;
+	margin:30px 4.54% 0;
 
-		.view-all{
-			@include button-style;
-			margin-top: 10px;
-		}
+@include phone{
+	margin:0 0 100px;
+} 
+}
 
 //blog & news
 section.news {
-	clear:both;
+	@include clearfix;
+	width:100%;
+	padding:0 4.54%;
+	z-index:20;
+	margin-right:0;
 
 .article{
 		position:relative;
-		width:100%;//width:250px;
-		min-height:205px;//min-height:250px;
 		background:$white;
-		//float:left;
-		margin: 0 4px 4px 0;
+		float: left;
+		width:25%;
+		min-height:250px;
+		padding:0 0 5px 5px;
 	
 		.article-date {
 			@include font-style1($white);
 			background:$color-bg;
 			width:50px;
 			height:30px;
-			padding: 5px 15px;
+			padding:5px 15px;
   			float: right;
   			margin-left: 4px;
 		}
@@ -169,32 +184,41 @@ section.news {
 
 	.news-buttons {
 		position:relative;
-		width:100%;
+		margin: 0 31.78% 50px;
+		@include clearfix;
 
 		.load-more , .all-articles{
-			width:100%;
 			margin:0;
 			display:inline-block;
 		}
-}
+	}
 
-@include desktop{
-	width:90.8%;
-	margin-bottom:70px;
-	padding: 0 6.249%;
-	margin:0 auto;
-	clear:both;
-	z-index:20;
+@include phone{
+	position: relative;
+	margin: 0;
+	width: 100%;
 
 	.article{
-		width:250px;
-		min-height:250px;
-		float:left;
+		width:100%;
+		min-height:205px;
+		margin: 0 4px 4px 0;
+		padding:0;
+		float:none;	
 	}
+
 	.news-buttons{
-		margin:0 36.32% 0;
-		clear:both;
+		width:100%;
+		margin:0;
+
+		.load-more{
+			margin: 35px 0 10px;
+			width:100%;
+		}
+		.all-articles{
+			width:100%;
+			margin-bottom:100px;
+		}
 	}
-}	
+}
 }
 

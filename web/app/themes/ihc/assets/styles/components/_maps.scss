@@ -1,21 +1,23 @@
 // Maps
 
 #map {
-	@include phone {
-		display:none;
-	}
+display:none;
  position:relative;
  top:0;
  left:-4.54%;
  float:left;
  width:74.64%;
- z-index:2;
+ z-index:1;
  margin: 2em 0;
 
  &.large {
    width: 700px;
    height: 1000px;
  }
+
+@include phone {
+		display:none;
+	}
 }
 
 // tmp mapbox fix

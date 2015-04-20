@@ -44,7 +44,7 @@ var IHC = (function($) {
       _initAjaxLinks();
       _initMenuToggle();
       _initSliders();
-      //_initMasonry();
+      _initMasonry();
       _initLoadMore();
       // _initShareLinks();
 
