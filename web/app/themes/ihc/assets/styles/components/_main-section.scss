@@ -1,5 +1,5 @@
 // Main Section
-//focus area
+//focus areas
 section.focus-areas{
 	top:0;
 	margin:0 0 0 18.16%;
@@ -15,13 +15,18 @@ section.focus-areas{
 
 	& .focus-list{
 	width: 100%;
-	padding:40px 0 40px 25px;
+	padding:26px 0 40px 25px;
 
 		& li a{
 			@include font-style1($dk-blue);
 			border-bottom:3px $dk-blue solid;
 			font-size:$xl;
 			line-height:50px;
+
+			&:hover{
+				color:$color-bg;
+				border-bottom:3px $color-bg solid;
+			}
 		}
 	}
 
@@ -82,14 +87,16 @@ section.thought {
 		}
 	}
 
-//section.thought{
-//	width:31.78%;
-//	margin:0;
-//	background:$white;
+.active{
+	width:31.78%;
+	margin:0;
+	background:$white;
 
-//		.submit-thought-wrapper{
-//			width: 100%;
-//			height: 350px;
+		.submit-thought-wrapper{
+			width: 100%;
+			height: 350px;
+		}
+}
 		// 	padding: 40px 4.54% 50%;
 
 		// 	.new-thought-form textarea{
@@ -106,7 +113,7 @@ section.thought {
 		// 			background:$color-bg;
 		// 		}
 		// 	}
-		// }
+		
 
 @include phone{
 	top: 2534px;
