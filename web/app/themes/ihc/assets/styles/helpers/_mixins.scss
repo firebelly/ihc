@@ -112,22 +112,22 @@
 // --- screen ----------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 @mixin phone {
-  @media (max-width: #{$breakpoint-small}){
+  @media screen and (max-width: #{$breakpoint-small}){
     @content;
   }
 }
 @mixin tablet-only {
-  @media (min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1px}){
+  @media screen and (min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1px}){
     @content;
   }
 }
 @mixin tablet {
-  @media (min-width: #{$breakpoint-medium}) {
+  @media screen and (min-width: #{$breakpoint-medium}) {
     @content;
   }
 }
 @mixin desktop {
-  @media (min-width: #{$breakpoint-large}) {
+  @media screen and (min-width: #{$breakpoint-large}) {
     @content;
   }
 }

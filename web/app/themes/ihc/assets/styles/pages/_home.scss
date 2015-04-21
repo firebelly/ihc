@@ -1,14 +1,20 @@
 // Home page
 
 .home.page {
-	.thought-of-the-day {
-		@include tablet {
-		  position: absolute;
-		  top: 330px;
-		  width: 22.7%;
-		  right: 0;
-		  z-index: 400;
-		  margin-right: 4.25%;
-		}
-	}
+  .thought-of-the-day {
+    @include tablet {
+      position: absolute;
+      top: 330px;
+      width: #{$column*5}%;
+      right: 0;
+      z-index: 400;
+      margin-right: #{$column}%;
+    }
+    &.submitting-thought {
+      @include tablet {
+        width: #{$column*7}%;
+        margin-right: 0;
+      }
+    }
+  }
 }
