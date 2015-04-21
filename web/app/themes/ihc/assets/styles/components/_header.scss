@@ -30,7 +30,8 @@
     bottom: 60px;
 
     &:before {
-      content: "» ";
+      // tmp commenting out so source maps work!
+      // content: "›› ";
     }
   }
   

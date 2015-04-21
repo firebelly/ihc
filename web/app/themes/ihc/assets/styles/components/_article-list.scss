@@ -1,11 +1,11 @@
 // Article lists
 
-// share buttons
+// Share buttons
 .share span {
   cursor: pointer;
 }
 
-// time tags
+// Time tags
 time {
   position:relative;
   top: 0;
@@ -16,7 +16,7 @@ time {
 } 
 
 
-//events
+// Events
 section.event-cal {
   @include clearfix;
   top:0;
@@ -26,13 +26,16 @@ section.event-cal {
   z-index: 20;
 
   .event {
-    position: relative;
-    background:$dk-blue;
+    .article-content {
+      min-height: 250px;
+      position: relative;
+      margin: 0 5px 0 0;
+      background: $dk-blue;
+      padding: 20px 50px 30px 25px;
+    }
     width: 50%;
-    min-height: 250px;
     float: left;
-    padding:20px 50px 30px 25px;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 
     h1 a {
       @include font-style2($color-bg);
@@ -58,6 +61,7 @@ section.event-cal {
     }
 
     .register::before {
+      // tmp commenting out so source maps work!
       // content:'›› ';
     }
   }
@@ -91,12 +95,12 @@ section.event-cal {
     }
   }
 
-  @include phone{
+  @include phone {
     position: relative;
     width: 100%;
     margin: 0;
     padding: 0 6.249%;
-    .event{
+    .event {
       width: 100%;
       min-height: 205px;
       margin: 0 4px 4px 0;
@@ -112,7 +116,7 @@ section.event-cal {
   &:before{
     content: '+ ';
   }
-  @include phone{
+  @include phone {
     margin: 35px 0 10px;
   }
 }
@@ -120,12 +124,12 @@ section.event-cal {
   @include button-style;
   margin: 30px 4.54% 0;
 
-  @include phone{
+  @include phone {
     margin: 0 0 100px;
   } 
 }
 
-//blog & news
+// Blog & News
 section.news {
   @include clearfix;
   width:100%;
@@ -133,34 +137,37 @@ section.news {
   z-index:20;
   margin-right:0;
 
-.article{
-    position:relative;
-    background:$white;
+  .article {
     float: left;
-    width:25%;
-    min-height:250px;
-    padding:0 0 5px 5px;
-  
+    width: 25%;
+    margin-bottom: 5px;
+
+    .article-content {
+      min-height: 250px;
+      margin: 0 5px 0 0;
+      background: $white;
+      position: relative;
+    }
+
     .article-date {
       @include font-style1($white);
       background:$color-bg;
       width:50px;
       height:30px;
       padding:5px 15px;
-        float: right;
-        margin-left: 4px;
+      float: right;
+      margin-left: 4px;
     }
     
-    .article-content-wrap{
+    .article-content-wrap {
       padding: 30px 50px 30px 25px;
-
     }
     
-    .article-tag{
+    .article-tag {
       margin-bottom: 5px;
 
-      a{
-      @include font-style1($dk-blue);
+      a {
+        @include font-style1($dk-blue);
       }
     }
 
