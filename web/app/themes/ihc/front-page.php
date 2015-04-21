@@ -12,7 +12,7 @@ $total_news = wp_count_posts('post')->publish;
 // echo apply_filters('the_content', $post->post_content);
 ?>
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
-<div class="page-header">
+<div class="page-header with-image">
 <h2>Year-round & State-wide</h2>
 <h1>Beginning the conversation.
 We fuel inquiry through conversation in ways that strengthen society.</h1>
