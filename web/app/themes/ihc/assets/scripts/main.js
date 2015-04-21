@@ -339,6 +339,7 @@ var IHC = (function($) {
       $('.thought-wrapper').addClass('hide');
       $('.submit-thought-wrapper').removeClass('hide');
     });
+    // handle ajax submit of new thought
     $document.on('submit', 'form.new-thought-form', function(e) {
       e.preventDefault();
       var $form = $(this);

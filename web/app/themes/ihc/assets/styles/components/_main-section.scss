@@ -1,129 +1,103 @@
 // Main Section
 //focus areas
 section.focus-areas{
-	top:0;
-	margin:0 0 0 18.16%;
-	width: 45.4%;
-	z-index:10;
-	background: #fff;
-	@include clearfix;
-	
+  top:0;
+  margin:0 0 0 18.16%;
+  width: 45.4%;
+  z-index:10;
+  background: #fff;
+  @include clearfix;
+  
 
-	& h2{
-		width:40%;
-	}
+  & h2{
+    width:40%;
+  }
 
-	& .focus-list{
-	width: 100%;
-	padding:26px 0 40px 25px;
+  & .focus-list{
+  width: 100%;
+  padding:26px 0 40px 25px;
 
-		& li a{
-			@include font-style1($dk-blue);
-			border-bottom:3px $dk-blue solid;
-			font-size:$xl;
-			line-height:50px;
+    & li a{
+      @include font-style1($dk-blue);
+      border-bottom:3px $dk-blue solid;
+      font-size:$xl;
+      line-height:50px;
 
-			&:hover{
-				color:$color-bg;
-				border-bottom:3px $color-bg solid;
-			}
-		}
-	}
+      &:hover{
+        color:$color-bg;
+        border-bottom:3px $color-bg solid;
+      }
+    }
+  }
 
 @include phone{
-	position:relative;
-	top: -16px;
-	width:100%;
-	margin:0 0 40px;
-	height:260px;
+  position:relative;
+  top: -16px;
+  width:100%;
+  margin:0 0 40px;
+  height:260px;
 
-	& h2{
-		width:auto;
-	}
+  & h2{
+    width:auto;
+  }
 
-	.focus-list{
-		padding: 20px 0;
+  .focus-list{
+    padding: 20px 0;
 
-		& li a{
-			font-size:$lg;
-			line-height:40px;	
-		}
-	}
+    & li a{
+      font-size:$lg;
+      line-height:40px; 
+    }
+  }
 }
 }
-//thought of the day
+
+// Thought of the Day
 section.thought {
-	position: absolute;
-  	top: 330px;
-	width:22.7%;
-  	right:0;
-  	z-index: 400;
-  	border:1px solid blue;
-	margin-right:4.25%;
-  	@include clearfix;
-	
-	& h2 {
-		width:80%;
-	}
+  position: absolute;
+  top: 330px;
+  width: 22.7%;
+  right: 0;
+  z-index: 400;
+  margin-right: 4.25%;
+  @include clearfix;
 
-	& p{
-		@include font-style3
-	}
+  blockquote {
+    margin: 40px 0 10px;
+    @extend .smooth;
+  }
 
-	& cite{
-		@include font-style2($dk-blue);
-		font-size:$small;
-		font-style: normal;
-	}
+  h2 {
+    padding: 5px 30px 0;
+    white-space: nowrap;
+  }
 
-	.submit-thought{
-		@include button-style;
-		margin-top: 40px;
+  p {
+    @include font-style3;
+  }
 
-		& a:active{
-			background:$white;
-			width:31.78%;
-			height:350px;
-		}
-	}
+  cite {
+    margin: 20px 0 30px;
+    display: block;
+    @include font-style2($dk-blue);
+    line-height: 1.6;
+    font-size: $small;
+    font-style: normal;
+  }
 
-.active{
-	width:31.78%;
-	margin:0;
-	background:$white;
+  .submit-thought {
+    @include button-style;
+  }
 
-		.submit-thought-wrapper{
-			width: 100%;
-			height: 350px;
-		}
-}
-		// 	padding: 40px 4.54% 50%;
+  // &.active{
+  //   width:31.78%;
+  //   margin:0;
+  //   background:$white;
 
-		// 	.new-thought-form textarea{
-		// 		@include font-style3;
-		// 		width:100%;
-		// 		border:none;
-		// 		color:$dk-blue;
-
-		// 		input{
-		// 			@include font-style1($dk-blue);
-		// 			width:100%;
-		// 			height:30px;
-		// 			margin:10px 0;
-		// 			background:$color-bg;
-		// 		}
-		// 	}
-		
-
-@include phone{
-	top: 2534px;
- 	min-height: 490px;
- 	width: 100%;
- 	padding: 0 6.249%;
- 	margin:0;
-
-	& h2{
-		width:auto;
-	}
-}
+  //     .submit-thought-wrapper{
+  //       width: 100%;
+  //       height: 350px;
+  //     }
+   
+  // }
 }
