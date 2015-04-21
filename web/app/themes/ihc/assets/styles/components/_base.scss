@@ -36,10 +36,16 @@ body {
   overflow: hidden;
 }
 
+.smooth {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 // Utility classes
 .hide {
   display: none;
 }
+
 //visually hide, accessibility-friendly
 .viz-hide {
   width: 0;
@@ -55,8 +61,6 @@ body {
 }
 
 .at {
-  // bottom: 2px;
-  // position: relative;
 }
 
 .wrap {
@@ -95,7 +99,7 @@ body {
 //}
 //}
 
-h1{
+h1 {
   font-weight:100;
   font-family:$sans;
   font-size:$xl;
@@ -104,7 +108,7 @@ h1{
   line-height:30px;
 }
 
-h2{
+h2 {
     @include font-style1($white);
     background:$color-accent;
     display: inline-block;
@@ -123,26 +127,26 @@ h2{
         border-right: 25px solid transparent;
       }
 
-@include phone{
-  padding-left: 10px;
-  padding-right: 10px;
-  width:auto;
-}
-}
-
-ul{
-  list-style-type:none;
-  padding:0;
-  margin:0;
+  @include phone {
+    padding-left: 10px;
+    padding-right: 10px;
+    width:auto;
+  }
 }
 
-p{
-  margin:0;
-  padding:0;
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 a {
-  text-decoration:none;
+  text-decoration: none;
 }
 
 img {
@@ -150,19 +154,19 @@ img {
   height: auto;
 }
 
-section{
-  margin-bottom:70px;
+section {
+  margin-bottom: 70px;
 
-@include desktop{
-  position:relative;
-  padding:0;
-}
-@include tablet{
-  position:relative;
-  padding:0;
-}
-@include phone{
-  padding:0 6.249%;
-}
+  @include desktop {
+    position: relative;
+    padding: 0;
+  }
+  @include tablet {
+    position: relative;
+    padding: 0;
+  }
+  @include phone {
+    padding: 0 6.249%;
+  }
 }
 
