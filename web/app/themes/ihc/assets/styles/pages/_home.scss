@@ -1,4 +1,14 @@
 // Home page
 
 .home.page {
+	.thought-of-the-day {
+		@include tablet {
+		  position: absolute;
+		  top: 330px;
+		  width: 22.7%;
+		  right: 0;
+		  z-index: 400;
+		  margin-right: 4.25%;
+		}
+	}
 }

@@ -179,7 +179,7 @@ function submit_form() {
     <?php wp_nonce_field('new_thought'); ?>
     <!-- die bots --><div style="position: absolute; left: -5000px;"><input type="text" name="die_bots_5000" tabindex="-1" value=""></div>
     <input type="hidden" name="action" value="thought_submission">
-    <button type="submit">Submit Thought</button>
+    <button type="submit" class="button">Submit Thought</button>
   </form>
 <?php
 }

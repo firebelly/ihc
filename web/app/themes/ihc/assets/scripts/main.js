@@ -58,6 +58,13 @@ var IHC = (function($) {
         }
       });
 
+      // homepage
+      if ($('.home.page').length) {
+        // duplicate thought of the day for mobile
+        var mobileThought = $('.thought-of-the-day').addClass('show-for-medium-up').clone();
+        mobileThought.removeClass('show-for-medium-up').addClass('hide-for-medium-up').appendTo('.content');
+      }
+
   }
 
   function _scrollBody(element, duration, delay) {
@@ -243,7 +250,7 @@ var IHC = (function($) {
   function _initSliders(){
     $('.slider').slick({
       slide: '.slide-item',
-      autoplay: $('.home.page').length>0,
+      // autoplay: $('.home.page').length>0,
       autoplaySpeed: 8000,
       speed: 800,
       appendArrows: $('.slide-wrap-inner'),

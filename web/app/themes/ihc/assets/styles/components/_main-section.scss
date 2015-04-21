@@ -53,13 +53,7 @@ section.focus-areas{
 }
 
 // Thought of the Day
-section.thought {
-  position: absolute;
-  top: 330px;
-  width: 22.7%;
-  right: 0;
-  z-index: 400;
-  margin-right: 4.25%;
+.thought-of-the-day {
   @include clearfix;
 
   blockquote {
@@ -83,10 +77,6 @@ section.thought {
     line-height: 1.6;
     font-size: $small;
     font-style: normal;
-  }
-
-  .submit-thought {
-    @include button-style;
   }
 
   // &.active{
