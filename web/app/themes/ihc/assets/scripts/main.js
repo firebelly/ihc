@@ -343,8 +343,7 @@ var IHC = (function($) {
   function _initThoughtSubmit() {
     $document.on('click', 'a.submit-thought', function(e) {
       e.preventDefault();
-      $('.thought-wrapper').addClass('hide');
-      $('.submit-thought-wrapper').removeClass('hide');
+      $('.thought-of-the-day').addClass('submitting-thought');
     });
     // handle ajax submit of new thought
     $document.on('submit', 'form.new-thought-form', function(e) {

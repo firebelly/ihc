@@ -7,17 +7,26 @@
     padding: 0;
     position: relative;
     &:after {
-      right: 10px;
-      height: 8px;
-      width: 13px;
-      content: '';
-      bottom: 14px;
       position: absolute;
+      top: 0;
+      right: 0;
+      height: 30px;
+      width: 30px;
+      content: '';
+      border-left: 1px solid $white;
       pointer-events: none;
-      // background: url("../images/icon-arrow-down-pink.svg") no-repeat right center;
+      background: url("../images/icon-arrow-down.svg") no-repeat center center;
       background-size: 13px 8px;
     }
 }
+
+// General form hooha
+form {
+  .actions {
+    margin-top: 20px;
+  }
+}
+
 
 .select-wrapper select {
     border: none;
