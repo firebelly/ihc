@@ -1,4 +1,4 @@
-<section class="thought">
+<section class="thought active">
 <div class="thought-wrapper">
 	<h2>Thought of the Day</h2>
 	<?= \Firebelly\PostTypes\Thought\get_thought_of_the_day(!empty($focus_area) ? $focus_area : ''); ?>
