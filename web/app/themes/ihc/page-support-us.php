@@ -30,7 +30,7 @@ $body_content = apply_filters('the_content', $post->post_content);
   </div>
 </section>
 <aside>
-  <?php include(locate_template('templates/thought-of-the-day.php')); ?>
+<?php include(locate_template('templates/thought-of-the-day.php')); ?>
   <div class="voter-voice">
   <?= get_the_block('Support Us Sidebar') ?>
   </div>

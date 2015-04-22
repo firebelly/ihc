@@ -12,13 +12,6 @@ section.main{
   height:auto;
 }
 
-aside{
-  float:right;
-  width:31.78%;
-  padding-left:4.54%;
-  margin-right:-4.54%;
-}
-
 h2{
   @include font-style1($dk-blue);
   font-size:$lg;
@@ -30,7 +23,6 @@ h2{
 p{
   @include font-style2($dk-blue);
   margin:0 0 30px;
-  line-height: 20px;
 }
 
 .make-donation{
@@ -61,25 +53,26 @@ p{
   }
 }
 
-.voter-voice{
-  width:92.86%;
-  margin-top:250px;
-  background:$dk-blue;
-  padding:30px 4.54% 40px 2.27%;
+aside{
+float:right;
+height:100%;
+width:31.78%;
+margin:-270px -4.54% 0 0;
+padding-left:4.54%;
+
+  .voter-voice{
+  width: 100%;
+  background: $dk-blue;
+  padding: 30px 4.54% 40px 25px;
+  margin-left: -2.27%;
 
   h3{
     @include font-style1($lt-orange);
-    padding-left:2.27%;
   }
 
   a{
     color:$white;
+    text-decoration: underline;
+  }
   }
 }
-//thought-of-day
-//position: relative;
-// top: -270px;
-// width: 71.43%;
-// right: 0;
-// z-index: 400;
-//margin: 0 4.166%;
