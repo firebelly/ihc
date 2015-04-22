@@ -17,4 +17,47 @@
       }
     }
   }
+
+  section.news {
+    @include clearfix;
+    width:100%;
+    padding:0 4.54%;
+    z-index:20;
+    margin-right:0;
+
+    .news-buttons {
+      position: relative;
+      margin: 0 31.78% 50px;
+      @include clearfix;
+
+      .load-more, 
+      .all-articles {
+        margin: 0;
+        display: inline-block;
+      }
+
+      @include phone {
+        width: 100%;
+        margin: 0;
+
+        .load-more {
+          margin: 35px 0 10px;
+          width: 100%;
+        }
+        .all-articles {
+          width: 100%;
+          margin-bottom: 100px;
+        }
+      }
+    }
+  }
+
+  .article-list {
+    .article {
+      @include tablet {
+        width: 25%;
+      }
+    }
+  }
 }
+
