@@ -130,18 +130,15 @@ section.event-cal {
 }
 
 // Blog & News
-section.news {
-  @include clearfix;
-  width:100%;
-  padding:0 4.54%;
-  z-index:20;
-  margin-right:0;
-
+.article-list {
   .article {
-    float: left;
-    width: 25%;
     margin-bottom: 5px;
 
+    @include tablet {
+      float: left;
+      width: 33%;
+    }
+    
     .article-content {
       min-height: 250px;
       margin: 0 5px 0 0;
@@ -186,46 +183,6 @@ section.news {
     .article-excerpt p{
       @include font-style2($dk-blue);
       line-height:1.5em;
-    }
-  }
-
-  .news-buttons {
-    position: relative;
-    margin: 0 31.78% 50px;
-    @include clearfix;
-
-    .load-more, 
-    .all-articles {
-      margin: 0;
-      display: inline-block;
-    }
-  }
-
-  @include phone {
-    position: relative;
-    margin: 0;
-    width: 100%;
-
-    .article {
-      width: 100%;
-      min-height: 205px;
-      margin: 0 4px 4px 0;
-      padding: 0;
-      float: none; 
-    }
-
-    .news-buttons {
-      width: 100%;
-      margin: 0;
-
-      .load-more {
-        margin: 35px 0 10px;
-        width: 100%;
-      }
-      .all-articles {
-        width: 100%;
-        margin-bottom: 100px;
-      }
     }
   }
 }
