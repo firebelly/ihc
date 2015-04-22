@@ -11,8 +11,8 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
   $thumb = wp_get_attachment_url(get_post_thumbnail_id($news_post->ID));
   echo '<a href="'.get_the_permalink($news_post).'" class="article-thumb" style="background-image:url('.$thumb.');"><span class="clip"></span></a>';
 } ?>
-<time class="article-date" datetime="<?= date('c', $post_date_timestamp); ?>"><?= date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
   <div class="article-content">
+    <time class="article-date" datetime="<?= date('c', $post_date_timestamp); ?>"><?= date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
     <div class="article-content-wrap">
       <header class="article-header">
         <?php if ($category): ?><div class="article-tag"><a href="<?= get_term_link($category); ?>"><?= $category->name; ?></a></div><?php endif; ?>

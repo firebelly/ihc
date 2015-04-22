@@ -173,13 +173,15 @@ HTML;
 function submit_form() {
 ?>
   <form class="new-thought-form" method="post" action="">
-    <textarea name="thought" required></textarea>
-    <input type="text" name="author" required>
-    <?php wp_dropdown_categories('show_option_none=Humanities&taxonomy=focus_area'); ?>
+    <textarea name="thought" required placeholder="Type your thought..."></textarea>
+    <input type="text" name="author" required placeholder="Your Name">
+    <div class="select-wrapper"><?php wp_dropdown_categories('show_option_none=Humanities&taxonomy=focus_area'); ?></div>
     <?php wp_nonce_field('new_thought'); ?>
     <!-- die bots --><div style="position: absolute; left: -5000px;"><input type="text" name="die_bots_5000" tabindex="-1" value=""></div>
     <input type="hidden" name="action" value="thought_submission">
-    <button type="submit">Submit Thought</button>
+    <div class="actions">
+      <button type="submit" class="button">Submit Thought</button>
+    </div>
   </form>
 <?php
 }

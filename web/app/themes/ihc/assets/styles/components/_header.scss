@@ -1,17 +1,17 @@
 // Header
-.page-header{
+.page-header {
   @include clearfix;
-  width:86.26%;
-  min-height:560px;
+  width: 86.26%;
+  min-height: 560px;
   margin-left: -4.54%;
-  padding:120px 0 0 4.54%;
-  background:url(http://bit.ly/IRW4MS) 50% 50% no-repeat scroll;
-  background-size:cover;
-  z-index:1;
+  padding: 120px 0 0 4.54%;
+  background: url(http://bit.ly/IRW4MS) 50% 50% no-repeat scroll;
+  background-size: cover;
+  z-index: 1;
   
   h1 {
-    font-size:$xxl;
-    line-height:60px;
+    font-size: $xxl;
+    line-height: 60px;
     padding-right: 27.24%;
     span {
       background-repeat: repeat-x;
@@ -20,49 +20,55 @@
     }
   }
   
+<<<<<<< HEAD
   h4.flag {
     top:50px;
+=======
+  h2 {
+    top: 50px;
+    padding: 5px 30px 0;
+>>>>>>> c094dd4943460775c976614be88a1697b9951d84
   }
   
   p {
     @include font-style1($lt-orange);
-    bottom:60px;
+    bottom: 60px;
 
-    &::before{
-      content:'›› '
+    &:before {
+      // tmp commenting out so source maps work!
+      // content: "›› ";
     }
   }
   
-  @include phone{
-    width:100%;
-    min-height:400px;
-    padding:110px 6.249% 30px;
-    margin:0;
-    z-index:1;
+  @include phone {
+    width: 100%;
+    min-height: 400px;
+    padding: 110px 6.249% 30px;
+    margin: 0;
+    z-index: 1;
 
     h1 {
-      font-size:$xl;
-      line-height:30px;
-      padding:0;
+      font-size: $xl;
+      line-height: 30px;
+      padding: 0;
     }
 
     h2 {
-      top:50px;
-      width:77.18%;
+      top: 50px;
+      width: 77.18%;
     }
 
     p {
-      
-      margin:50px 0 30px;
+      margin: 50px 0 30px;
     }
   }
 }
 
-.navbar-header .navbar-brand{
-  width:200px;
-  height:80px;
-  float:right;
-  margin-right:8.332%;
-  background:$white;
-  z-index:5;
+.navbar-header .navbar-brand {
+  width: 200px;
+  height: 80px;
+  float: right;
+  margin-right: 8.332%;
+  background: $white;
+  z-index: 5;
 }

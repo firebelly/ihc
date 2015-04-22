@@ -46,6 +46,23 @@ body {
   display: none;
 }
 
+.button {
+  @include button-style;
+}
+
+// visibility classes (borrowing nomenclature from Foundation)
+.show-for-medium-up {
+  display: none;
+  @include tablet {
+    display: block;
+  }
+}
+.hide-for-medium-up {
+  @include tablet {
+    display: none;
+  }
+}
+
 //visually hide, accessibility-friendly
 .viz-hide {
   width: 0;
@@ -67,20 +84,17 @@ body {
   width: 100%;
   margin: 0 auto;
   position: relative;
-  overflow:hidden;
+  overflow: hidden;
   @include clearfix();
 }
 
 .content {
   z-index: 1;
   width: 100%;
-  height:auto;
+  height: auto;
 
   @include tablet {
-    padding:0 4.166%;
-  }
-  @include desktop{
-    padding:0 4.166%;
+    padding: 0 4.166%;
   }
 }
 .alert {
@@ -97,6 +111,44 @@ body {
 //  a {
 //  }
 //}
+<<<<<<< HEAD
+=======
+//}
+
+h1 {
+  font-weight:100;
+  font-family:$sans;
+  font-size:$xl;
+  color:$white;
+  text-transform: none;
+  line-height:30px;
+}
+
+h2 {
+    @include font-style1($white);
+    background: $color-accent;
+    display: inline-block;
+    position: absolute;
+    height: 30px;
+    bottom: 100%;
+    padding-top: 5px;
+    z-index: 100;
+    text-align: center;
+      &::after {
+        top: 100%;
+        right: 0;
+        height: 0;
+        content: '';
+        border-top: 20px solid $color-accent;
+        border-right: 25px solid transparent;
+      }
+
+  @include phone {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+  }
+>>>>>>> c094dd4943460775c976614be88a1697b9951d84
 }
   
 
@@ -124,10 +176,6 @@ section {
   margin-bottom: 70px;
 
   @include desktop {
-    position: relative;
-    padding: 0;
-  }
-  @include tablet {
     position: relative;
     padding: 0;
   }

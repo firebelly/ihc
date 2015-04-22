@@ -6,14 +6,14 @@
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-size:$small;
-  line-height:20px;
+  font-size: $small;
+  line-height: 20px;
   color: $color;
 }
 
 @mixin font-style2($color) {
-  font-family:$sans;
-  font-size:$med;
+  font-family: $sans;
+  font-size: $med;
   font-weight: 300;
   letter-spacing: 0.04em;
   color: $color;
@@ -29,9 +29,10 @@
   @include font-style1($dk-blue);
   min-width: 150px;
   border: 3px solid $dk-blue;
-  padding: 5px;
+  padding: 3px 5px 2px;
   display: inline-block;
   text-align: center;
+  background: none;
 
   &:hover {
     background: $dk-blue;
@@ -110,18 +111,23 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // --- screen ----------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
-@mixin phone{
-  @media (max-width: #{$breakpoint-small}){
+@mixin phone {
+  @media screen and (max-width: #{$breakpoint-small}){
     @content;
+  }
 }
+@mixin tablet-only {
+  @media screen and (min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large - 1px}){
+    @content;
+  }
 }
 @mixin tablet {
-  @media (min-width: #{$breakpoint-medium}) and (max-width: #{$breakpoint-large}){
+  @media screen and (min-width: #{$breakpoint-medium}) {
     @content;
   }
 }
 @mixin desktop {
-  @media (min-width: #{$breakpoint-large}) and (max-width: #{$breakpoint-huge}){
+  @media screen and (min-width: #{$breakpoint-large}) {
     @content;
   }
 }
