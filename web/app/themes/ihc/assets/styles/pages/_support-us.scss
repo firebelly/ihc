@@ -6,6 +6,9 @@
 	display:none;
 }
 section.main{
+  width:100%;
+
+.entry-content{
   float:left;
   width: 72.64%;
   padding-right:4.54%;
@@ -14,7 +17,6 @@ section.main{
 
 h2{
   @include font-style1($dk-blue);
-  display:inline-block;
   font-size:$lg;
   border-bottom:3px $dk-blue solid;
   letter-spacing:2px;
@@ -44,7 +46,7 @@ p{
   background:$white;
   min-height:140px;
   width:100%;
-  
+
   .column{
     padding:40px 4.45% 30px 2.27%;
 
@@ -55,17 +57,17 @@ p{
 }
 
 aside{
-float:right;
-height:100%;
-width:31.78%;
-margin:-270px -4.54% 0 0;
-padding-left:4.54%;
+  float:right;
+  height:100%;
+  width:31.78%;
+  margin:-270px -4.54% 0 0;
+  padding-left:4.54%;
 
   .voter-voice{
-  width: 100%;
-  background: $dk-blue;
-  padding: 30px 4.54% 40px 25px;
-  margin-left: -2.27%;
+    width: 100%;
+    background: $dk-blue;
+    padding: 30px 4.54% 40px 25px;
+    margin-left: -2.27%;
 
   h3{
     @include font-style1($lt-orange);
