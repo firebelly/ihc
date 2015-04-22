@@ -11,7 +11,7 @@ $body_content = apply_filters('the_content', $post->post_content);
 
 <section class="main">
 
-  <h2>Our Focus Areas</h2>
+  <h4 class="flag">Our Focus Areas</h4>
   <ul class="focus-list">
   <?php 
   $focus_areas = get_terms('focus_area');

@@ -16,7 +16,11 @@ h4{
   @include font-style1($white);
 }
 
-
+p{
+@include font-style2($dk-blue);
+font-size: $small;
+line-height:20px;
+}
 
 // Hide fonts while loading from Typekit
 .wf-loading {

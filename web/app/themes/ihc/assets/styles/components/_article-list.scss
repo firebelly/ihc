@@ -155,7 +155,7 @@ section.event-cal {
       width:50px;
       height:30px;
       padding:5px 15px;
-      float: right;
+      float:right;
       margin-left: 4px;
     }
     
@@ -183,9 +183,9 @@ section.event-cal {
       }
     }
 
-    .article-excerpt p{
-      @include font-style2($dk-blue);
-      line-height:1.5em;
-    }
+    //.article-excerpt p{
+      //@include font-style2($dk-blue);
+      //line-height:1.5em;
+    //}
   }
 }
