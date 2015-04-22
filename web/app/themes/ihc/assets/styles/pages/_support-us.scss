@@ -1,3 +1,79 @@
 // Support Us page
 .support-us.page {
 }
+
+.share{
+	display:none;
+}
+section.main{
+  float:left;
+  width: 72.64%;
+  padding-right:4.54%;
+  height:auto;
+}
+
+aside{
+  float:right;
+  width:31.78%;
+  padding-left:4.54%;
+  margin-right:-4.54%;
+}
+
+h2{
+  @include font-style1($dk-blue);
+  font-size:$lg;
+  border-bottom:3px $dk-blue solid;
+  letter-spacing:2px;
+  width:86.67%;
+}
+
+p{
+  @include font-style2($dk-blue);
+  margin:0 0 30px;
+  line-height: 20px;
+}
+
+.make-donation{
+  position:relative;
+  min-height:280px;
+	margin-bottom:60px;
+
+  .column{
+    background:$white;
+    float:left;
+    width:50%;
+    padding:30px 2.27% 0;
+  }
+}
+
+.support-purchases{
+  position:relative;
+  background:$white;
+  min-height:140px;
+  width:100%;
+  
+  .column{
+    padding:40px 4.45% 30px 2.27%;
+
+    a{
+      text-decoration: underline;
+    }
+  }
+}
+
+.voter-voice{
+  width:92.86%;
+  margin-top:250px;
+  background:$dk-blue;
+  padding:30px 4.54% 40px 2.27%;
+
+  h3{
+    @include font-style1($lt-orange);
+    padding-left:2.27%;
+  }
+
+  a{
+    color:$white;
+  }
+}
+

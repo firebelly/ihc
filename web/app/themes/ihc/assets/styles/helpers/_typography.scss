@@ -1,37 +1,22 @@
 // Typography
-h1{
-  font-weight:100;
-  text-transform:capitalize;
-  font-family:$sans;
-  font-size:$lg;
-}
-
-h2{
-    @include font-style1($white);
-    background:$color-accent;
-    position:absolute;
-    height:30px;
-    bottom:100%;
-    margin:0;
-    padding:10px 15px;
-    display: inline-block;
-    z-index:100;
-      
-      &::after {
-        top: 100%;
-        right: 0;
-        position: absolute;
-        width: 0;
-        height: 0;
-        content: '';
-        border-top: 20px solid $color-accent;
-        border-right: 25px solid transparent;
-      }
-}
-
 h1, h2, h3, h4, h5{
   margin-top:0;
 }
+
+h1 {
+  font-weight:100;
+  font-family:$sans;
+  font-size:$xl;
+  color:$white;
+  text-transform: none;
+  line-height:30px;
+}
+
+h4{
+  @include font-style1($white);
+}
+
+
 
 // Hide fonts while loading from Typekit
 .wf-loading {

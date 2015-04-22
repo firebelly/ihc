@@ -11,23 +11,27 @@ $body_content = apply_filters('the_content', $post->post_content);
 
 <section class="main">
 <?php if ($content_banner_text): ?>
-  <h4 class="banner"><?= $content_banner_text ?></h4>
+  <h4 class="flag"><?= $content_banner_text ?></h4>
 <?php endif; ?>
   <div class="entry-content user-content">
+   <div class="make-donation">
     <div class="column">
       <?= get_the_block('Support Us Page Block 1') ?>
     </div>
     <div class="column last">
       <?= get_the_block('Support Us Page Block 2') ?>
     </div>
-
+   </div>
+   <div class="support-purchases">
+    <h4 class="flag">Support Through your purchases</h4>
     <div class="column">
       <?= get_the_block('Support Us Page Block 3') ?>
     </div>
   </div>
 </section>
-
 <aside>
   <?php include(locate_template('templates/thought-of-the-day.php')); ?>
+  <div class="voter-voice">
   <?= get_the_block('Support Us Sidebar') ?>
+  </div>
 </aside>

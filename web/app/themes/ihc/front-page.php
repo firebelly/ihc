@@ -9,13 +9,13 @@ $total_news = wp_count_posts('post')->publish;
 
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
 <div class="page-header with-image">
-  <h2>Year-round & State-wide</h2>
+  <h4 class="flag">Year-round & State-wide</h4>
   <h1><span>Be</span>g<span>innin</span>g<span> the conversation</span>.<br> We fuel inquiry through conversation in ways that strengthen society.</h1>
   <p>image caption/link to event to bring it front and center for instant access.</p>
 </div>
 
 <section class="focus-areas">
-  <h2>Our Focus Areas</h2>
+  <h4 class="flag">Our Focus Areas</h4>
   <ul class="focus-list">
     <?php 
     $focus_areas = get_terms('focus_area');
@@ -29,7 +29,7 @@ $total_news = wp_count_posts('post')->publish;
 <div id="map" class="large"></div>
 
 <section class="event-cal">
-  <h2>Attend an Event</h2>
+  <h4 class="flag">Attend an Event</h4>
   <div class="events load-more-container article-list masonry">
     <?php echo \Firebelly\PostTypes\Event\get_events(3); ?>
   </div>
@@ -38,7 +38,7 @@ $total_news = wp_count_posts('post')->publish;
 </section>
 
 <section class="news">
-  <h2>Blog &amp; News</h2>
+  <h4 class="flag">Blog &amp; News</h4>
   <div class="load-more-container article-list masonry">
     <?php 
     // Recent Blog & News posts

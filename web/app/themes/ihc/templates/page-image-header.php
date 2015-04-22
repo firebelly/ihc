@@ -16,9 +16,9 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 ?>
 
-<header class="page-header <?= $header_class ?>"<?= $header_bg ?>>
+<header class="page-header <?= $header_class ?>"<?= $header_bg ?>
   <?php if ($header_banner_text): ?>
-    <h4 class="banner"><?= $header_banner_text ?></h4>
+    <h4 class="flag"><?= $header_banner_text ?></h4>
   <?php endif; ?>
 
   <?php get_template_part('templates/share'); ?>
