@@ -26,6 +26,12 @@ nav .navbar-nav{
     display:inline-block;
     margin-right:25px;
     padding-bottom:30px;
+
+    // active menu item
+    &.active a,
+    &.active a:hover {
+      border-bottom:5px solid $dk-blue;
+    }
     
     a {
       padding:5px;
@@ -33,12 +39,8 @@ nav .navbar-nav{
       font-size:$small;
       line-height: 30px;
 
-      &:hover{
+      &:hover {
         border-bottom:5px solid $lt-orange;
-      }
-
-      &:active {
-        border-bottom:5px solid $dk-blue;
       }
     }
 
