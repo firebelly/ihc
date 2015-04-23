@@ -7,7 +7,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
   <article <?php post_class(); ?>>
     <section class="main">
       <?php if ($category = \Firebelly\Utils\get_first_term($post)): ?>
-        <h3 class="category-name"><a href="<?= get_term_link($category); ?>"><?php echo $category->cat_name; ?></a></h3>
+        <h4 class="flag"><a href="<?= get_term_link($category); ?>"><?php echo $category->cat_name; ?></a></h4>
       <?php endif; ?>
       <time class="article-date" datetime="<?php echo date('c', $post_date_timestamp); ?>"><?php echo date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
       <?php if (has_post_thumbnail()) {
@@ -16,7 +16,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
       } ?>
       <div class="post-inner">
         <header>
-          <h1 class="entry-title"><?php the_title(); ?></h1>
+          <h1 class="entry-title"><span><?php the_title(); ?></span></h1>
         </header>
 
         <?php if ($byline_area = get_post_meta($post->ID, '_cmb2_post_byline', true)): ?>
@@ -27,11 +27,6 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
         <div class="entry-content user-content">
           <?php the_content(); ?>
         </div>
-        <footer>
-          <?= \Firebelly\Utils\get_focus_area_and_tags($post); ?>
-
-          <?php get_template_part('templates/share'); ?>
-        </footer>
         <?php comments_template('/templates/comments.php'); ?>
       </div>
     </section>

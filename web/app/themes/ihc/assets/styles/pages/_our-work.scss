@@ -1,4 +1,43 @@
 // Our Work page
 
 .our-work.page {
+	.main{
+		ul.focus-list{
+		}
+
+		.focus-area{
+			background:$white;
+			border:1px violet solid;
+			height:250px;
+			width:68.1%;
+			
+			.info{
+				width:63.33%;
+				padding:40px 50px 0 25px;
+				float:left;
+
+				h1 a{
+					font-weight:900;
+					color:$dk-blue;
+					border-bottom:3px solid $dk-blue;
+					text-transform: uppercase;
+					letter-spacing:1px;
+				}
+
+				.more a{
+					@include button-style;
+				}
+			}
+
+			.related{
+				background:$bg-beige;
+				width:36.67%;
+				height:100%;
+				padding:40px 50px 0 25px;
+				float:left;
+			}
+			
+		}	
+
+	}
 }

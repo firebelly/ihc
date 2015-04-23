@@ -15,7 +15,7 @@ $body_content = apply_filters('the_content', $post->post_content);
 
   <section class="main">
   <?php if ($content_banner_text): ?>
-    <h4 class="banner"><?= $content_banner_text ?></h4>
+    <h4 class="flag"><?= $content_banner_text ?></h4>
   <?php endif; ?>
     <div class="entry-content user-content">
       <?= $body_content ?>  

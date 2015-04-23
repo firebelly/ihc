@@ -14,11 +14,15 @@ h1 {
 
 h4{
   @include font-style1($white);
+	
+	a{
+		color:white;
+	}
 }
 
 p{
 @include font-style2($dk-blue);
-font-size: $small;
+font-size: $med;
 line-height:20px;
 }
 
