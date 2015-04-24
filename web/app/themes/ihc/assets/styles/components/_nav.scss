@@ -36,7 +36,7 @@ nav .navbar-nav {
 
     a {
       padding:5px;
-      @include font-style1($dk-blue);
+      @include font-style1;
       font-size:$small;
       line-height: 30px;
 
@@ -85,7 +85,7 @@ nav .navbar-nav {
   background: $white;
 
   h1 a {
-    @include font-style2($dk-blue);
+    @include font-style2;
   }
 }
 

@@ -19,7 +19,8 @@
   cite {
     margin: 20px 0 30px;
     display: block;
-    @include font-style2($dk-blue);
+    @include font-style2;
+    color: $dk-blue;
     line-height: 1.6;
     font-size: $small;
     font-style: normal;
@@ -51,7 +52,8 @@
       }
       input[type=text],
       select {
-        @include font-style1($dk-blue);
+        @include font-style1;
+        color: $dk-blue;
         padding: 6px 10px;
         line-height: 30px;
         padding: 0 10px;

@@ -14,24 +14,24 @@
 
 
 
-.filters{
-  background:$white;
-  height:70px;
+.filters {
+  background: $white;
+  height: 70px;
   padding: 20px 25px;
-  margin-bottom:30px;
+  margin-bottom: 30px;
 
   .program-topic,
-  .focus-area-topic{
-    @include font-style1($dk-blue);
-    display:inline-block;
-    margin:10px 25px 0 0;
+  .focus-area-topic {
+    @include font-style1;
+    display: inline-block;
+    margin: 10px 25px 0 0;
   }
 
-  .button{
-    float:right;
+  .button {
+    float: right;
   }
 }
 
 .load-more a{
-  margin:35px 40% 100px;
+  margin: 35px 40% 100px;
 }

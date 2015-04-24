@@ -26,7 +26,7 @@
   }
   
   p {
-    @include font-style1($lt-orange);
+    @include font-style1;
     bottom: 60px;
 
     &:before {

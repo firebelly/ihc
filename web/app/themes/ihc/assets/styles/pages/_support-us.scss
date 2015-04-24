@@ -1,27 +1,26 @@
 // Support Us page
-.support-us.page {
-}
+.support-us.page {}
 
-.share{
+.share {
 	display:none;
 }
 
-.entry-content{
-  float:left;
+.entry-content {
+  float: left;
   width: 72.64%;
-  padding-right:4.54%;
-  height:auto;
+  padding-right: 4.54%;
+  height: auto;
 }
 
-h2{
-  @include font-style1($dk-blue);
-  font-size:$lg;
-  border-bottom:3px $dk-blue solid;
-  letter-spacing:2px;
-  display:inline-block;
+h2 {
+  @include font-style1;
+  font-size: $lg;
+  border-bottom: 3px $dk-blue solid;
+  letter-spacing: 2px;
+  display: inline-block;
 }
 
-.make-donation{
+.make-donation {
   position:relative;
   min-height:280px;
 	margin-bottom:60px;
@@ -35,15 +34,15 @@ h2{
   }
 }
 
-.support-purchases{
-  position:relative;
-  background:$white;
-  min-height:140px;
-  width:100%;
-  margin-bottom:100px;
+.support-purchases {
+  position: relative;
+  background: $white;
+  min-height: 140px;
+  width: 100%;
+  margin-bottom: 100px;
 
   .column{
-    padding:40px 4.45% 30px 2.27%;
+    padding: 40px 4.45% 30px 2.27%;
 
     a{
       text-decoration: underline;
@@ -51,25 +50,26 @@ h2{
   }
 }
 
-aside{
-  float:right;
-  height:100%;
-  width:31.78%;
-  margin:-270px -4.54% 0 0;
-  padding-left:4.54%;
+aside {
+  float: right;
+  height: 100%;
+  width: 31.78%;
+  margin: -270px -4.54% 0 0;
+  padding-left: 4.54%;
 
-  .voter-voice{
+  .voter-voice {
     width: 100%;
     background: $dk-blue;
     padding: 30px 4.54% 40px 25px;
     margin-left: -2.27%;
 
-    h3{
-      @include font-style1($lt-orange);
+    h3 { 
+      @include font-style1;
+      color: $lt-orange;
     }
 
-    a{
-      color:$white;
+    a {
+      color: $white;
       text-decoration: underline;
     }
   }
