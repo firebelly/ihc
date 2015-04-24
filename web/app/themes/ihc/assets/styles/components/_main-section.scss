@@ -61,7 +61,11 @@ section.focus-areas {
   display: inline-block;
   z-index:100;
   color:white;
-    
+
+  &:hover{
+    color:$dk-blue;
+  }
+  
   &::after {
     top: 100%;
     right: 0;

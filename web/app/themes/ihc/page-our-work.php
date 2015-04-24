@@ -25,5 +25,5 @@ $body_content = apply_filters('the_content', $post->post_content);
 
 <aside>
   <?php include(locate_template('templates/thought-of-the-day.php')); ?>
-  <?= get_the_block('Our Work Sidebar') ?>
+  <div class="our-work-sidebar"><?= get_the_block('Our Work Sidebar') ?></div>
 </aside>

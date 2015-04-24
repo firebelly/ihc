@@ -15,126 +15,12 @@ time {
   -webkit-font-smoothing: antialiased;
 } 
 
-
-// Events
-section.event-cal {
-  @include clearfix;
-  top:0;
-  width: 45.5%;
-  margin-left: 49.94%;
-  padding:0 5px;
-  z-index: 20;
-
-  .event {
-    .article-content {
-      min-height: 250px;
-      position: relative;
-      margin: 0 5px 0 0;
-      background: $dk-blue;
-      padding: 20px 50px 30px 25px;
-    }
-    width: 50%;
-    float: left;
-    margin-bottom: 5px;
-
-    h1 a {
-      @include font-style2($color-bg);
-      text-transform:capitalize;
-      border-bottom:1px solid $color-bg;
-      font-size:$lg;
-      line-height:1.5em;
-    }
-
-    h2{
-      width:30%;
-    }
-
-    h3, 
-    p, 
-    .more a, 
-    .register  {
-      @include font-style1($bg-green);
-    }
-    
-    .more a::before {
-      content:'+ ';
-    }
-
-    .register::before {
-      // tmp commenting out so source maps work!
-      // content:'›› ';
-    }
-  }
-  time {
-    position:absolute;
-    width: 50px;
-    height: 60px;
-    margin-left:4px;
-    padding:7px 13px;
-    top:0;
-    right:0;
-
-    .month {
-      @include font-style1($dk-blue);
-    }
-
-    .day {
-      @include font-style2($dk-blue);
-      font-size: $lg;
-    }
-
-    &::after {
-      top: 100%;
-      right: 0;
-      position: absolute;
-      width: 0;
-      height: 0;
-      content: '';
-      border-top: 20px solid $color-bg;
-      border-right: 25px solid transparent;
-    }
-  }
-
-  @include phone {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 0 6.249%;
-    .event {
-      width: 100%;
-      min-height: 205px;
-      margin: 0 4px 4px 0;
-      padding: 20px 20px 25px;
-    }
-  }
-}
-
-.load-more a {
-  @include button-style;
-  margin: 35px 4.54% 0;
-
-  &:before{
-    content: '+ ';
-  }
-  @include phone {
-    margin: 35px 0 10px;
-  }
-}
-.view-all {
-  @include button-style;
-  margin: 30px 4.54% 0;
-
-  @include phone {
-    margin: 0 0 100px;
-  } 
-}
-
 // Blog & News
 .article-list {
   .article {
-
     float:left;
     width: 25%;
+    min-height: 250px;
     margin-bottom: 4px;
 
     @include tablet {
@@ -143,11 +29,10 @@ section.event-cal {
     }
     
     .article-content {
-      min-height: 250px;
-      margin: 0 5px 0 0;
+      position:relative;
       background: $white;
       position: relative;
-    }
+      margin:0 4px 4px 0;
 
     .article-date {
       @include font-style1($white);
@@ -182,9 +67,19 @@ section.event-cal {
       }
     }
 
-    //.article-excerpt p{
-      //@include font-style2($dk-blue);
-      //line-height:1.5em;
-    //}
+    &:hover{
+      background:$dk-blue;
+
+      .article-title a,
+      .article-tag a,
+      p{
+        color:$white;
+      }
+
+      .article-title a{
+        border-bottom:1px $white solid;
+      }
+    }
+  }//end of article-content
   }
 }
