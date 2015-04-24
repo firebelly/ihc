@@ -45,9 +45,29 @@ body {
 .hide {
   display: none;
 }
+.clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  } 
+  &:after {
+    clear: both;
+  }
+}
 
 .button {
   @include button-style;
+
+  a{
+    color:$dk-blue;
+
+    &:hover{
+      color:$white;
+    }
+  }
 }
 
 // visibility classes (borrowing nomenclature from Foundation)
@@ -135,10 +155,6 @@ p {
 
 a {
   text-decoration: none;
-
-  &:hover{
-    color:$dk-blue;
-  }
 }
 
 img {

@@ -34,11 +34,6 @@
   text-align: center;
   background: none;
 
-  &:hover {
-    background: $dk-blue;
-    color: $white;
-  }
-
   @include phone{
     width:100%;
   }
