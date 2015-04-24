@@ -5,6 +5,10 @@
   blockquote {
     margin: 40px 0 10px;
     @extend .smooth;
+
+    p {
+      color:$white;
+    }
   }
 
   h2 {

@@ -54,7 +54,10 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
           border: 3px solid $dk-blue;
         }
       }
-    } 
+      p {
+        color: $bg-color;
+      }
+    }
 
     // time stamps
     .article-list .article-content .article-date,
@@ -118,5 +121,9 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 aside{
   .button a{
         color: $dk-blue;
+  }
+
+  a{
+    @include font-style1;
   }
 }
