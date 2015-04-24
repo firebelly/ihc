@@ -41,15 +41,11 @@ var IHC = (function($) {
       _initSearch();
       _initNav();
       _initMap();
-      // _initAjaxLinks();
       _initMenuToggle();
       _initSliders();
       _initMasonry();
       _initLoadMore();
       _initShareLinks();
-
-      // initial nav update based on URL
-      _updateNav();
 
       // Esc handlers
       $(document).keyup(function(e) {
@@ -87,15 +83,18 @@ var IHC = (function($) {
   }
 
   function _initSearch() {
-    $('.search-toggle, .search-close').on('click', function (e) {
+    $('.search-toggle').on('click', function (e) {
       e.preventDefault();
-        _hideSearch();
+      $('.search-toggle').addClass('search-open');
+      $('.search-form').addClass('active');
+      $('.search-field').focus();
     });
+    $('.search-close').on('click', _hideSearch);
   }
 
   function _hideSearch() {
-    $('.search-toggle').toggleClass('search-open');
-    $('.search-form').toggleClass('active');
+    $('.search-toggle').removeClass('search-open');
+    $('.search-form').removeClass('active');
   }
 
   function _initMap() {
@@ -114,19 +113,6 @@ var IHC = (function($) {
 
       _getMapPoints();
     }
-  }
-
-  // Ajaxify all internal links in content area
-  function _initAjaxLinks() {
-    $content.find('a:internal:not(.no-ajaxy)').each(function() {
-      var href = $(this).attr('href');
-      if (!href.match(/\.(jpg|png|gif|pdf)$/)) {
-        $(this).click(function(e) {
-          e.preventDefault();
-          History.pushState({}, '', href);
-        });
-      }
-    });
   }
 
   function _getMapPoints() {
@@ -179,60 +165,8 @@ var IHC = (function($) {
 
   // handles main nav
   function _initNav() {
-
     // SEO-useless nav toggler
     $('body').prepend('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>');
-
-    $(window).bind('statechange',function(){
-      var State = History.getState(),
-          url = State.url,
-          relative_url = url.replace(rootUrl,''),
-          parent_li;
-
-      if (State.data.ignore_change) { return; }
-
-      if (!page_cache[encodeURIComponent(url)]) {
-        loadingTimer = setTimeout(function() { $content.addClass('loading'); }, 500);
-        $.post(
-          url,
-          function(res) {
-            page_cache[encodeURIComponent(url)] = res;
-            IHC.updateContent();
-          }
-        );
-      } else {
-        _updateContent();
-      }
-    });
-  }
-
-  function _updateContent() {
-    var State = History.getState();
-    var new_content = page_cache[encodeURIComponent(State.url)];
-    // $content.removeClass('fadeInRight').addClass('fadeOutRight');
-    setTimeout(function() {
-      $content.html(new_content);
-      // pull in body class from data attribute
-      $body.attr('class', $content.find('.content:first').data('body-class'));
-      if (loadingTimer) { clearTimeout(loadingTimer); }
-      $content.removeClass('loading');
-
-      _updateTitle();
-      _initAjaxLinks();
-      _initSliders();
-      //_initMasonry();
-      $content.fitVids();
-
-      // scroll to top
-      _scrollBody($body, 250, 0);
-
-      // track page view in Analytics
-      _trackPage();
-
-    }, 150);
-  }
-
-  function _updateNav() {
   }
 
   function _initMenuToggle(){
@@ -245,6 +179,7 @@ var IHC = (function($) {
   function _toggleMobileMenu() {
     $('.menu-toggle').toggleClass('menu-open');
     $('.site-nav').toggleClass('active');
+    _hideSearch();
   }
 
   function _initSliders(){
@@ -328,7 +263,6 @@ var IHC = (function($) {
             more_container.append($data).removeClass('loading');
             more_container.masonry('appended', $data, true);
             $load_more.attr('data-page-at', page+1);
-            // _initAjaxLinks();
             _getMapPoints();
 
             // hide load more if last page
@@ -397,7 +331,6 @@ var IHC = (function($) {
     init: _init,
     resize: _resize,
     delayed_resize: _delayed_resize,
-    updateContent: _updateContent,
     scrollBody: function(section, duration, delay) {
       _scrollBody(section, duration, delay);
     }
