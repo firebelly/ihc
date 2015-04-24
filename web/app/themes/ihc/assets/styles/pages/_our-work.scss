@@ -51,7 +51,6 @@
     }
 
     h3 {
-      @include font-style1;
       margin-bottom:30px;
     }
 
@@ -92,10 +91,6 @@
 
       &::after{
         background: lighten($color-accent, 25%);
-      }
-
-      h3 {
-        color: $white;
       }
 
       .programs a {

@@ -12,6 +12,10 @@ h1 {
   line-height:30px;
 }
 
+h3 {
+  @include font-style1;
+}
+
 h4 {
   @include font-style1;
   color: $white;

@@ -16,6 +16,16 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         }
       }
     }
+    //.button hover
+    .button:hover {
+      background: $dk-blue;
+      color: $bg-color;
+      border: 3px solid $dk-blue;
+
+      a {
+        color: $bg-color;
+      }
+    }
     // events
     .article-list .event {
       color: $bg-color;
@@ -32,6 +42,20 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         }
       }
     }
+
+    //aside
+    aside {
+      h3 {
+      color: $bg-color;
+      }
+        .button:hover {
+          background: $dk-blue;
+          color: $bg-color;
+          border: 3px solid $dk-blue;
+        }
+      }
+    } 
+
     // time stamps
     .article-content time,
     time {
@@ -41,7 +65,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       background: $bg-color;
     }
   }
-}
+
 
 $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 @each $accent-color in $accent-colors {
@@ -77,6 +101,21 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       &:after {
         border-top-color: $accent-color;
       }
-    } 
+    }
+    //aside links
+    aside {
+      a {
+        color: $accent-color;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+aside{
+  .button a{
+        color: $dk-blue;
   }
 }
