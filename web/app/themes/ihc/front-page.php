@@ -11,7 +11,7 @@ $total_news = wp_count_posts('post')->publish;
 <div class="page-header with-image">
   <h4 class="flag">Year-round & State-wide</h4>
   <h1><span>Be</span>g<span>innin</span>g<span> the conversation</span>.<br> We fuel inquiry through conversation in ways that strengthen society.</h1>
-  <p>image caption/link to event to bring it front and center for instant access.</p>
+  <p class="accent">image caption/link to event to bring it front and center for instant access.</p>
 </div>
 
 <section class="focus-areas">

@@ -1,141 +1,141 @@
 // Our Work page
 
 .our-work.page {
-  section.main{
-    float:left;
-    width:68.1%;
+  section.main {
+    float: left;
+    width: 68.1%;
   }
 }
 
-.focus-area{
-		@include clearfix;
-		position:relative;
+.focus-area {
+    @include clearfix;
+    position: relative;
     margin: 0 0 4px 0;
 
-  	 .info{
-  		position: relative;
-  		width: 63.33%;
-  		height: 100%;
-  		background: $white;
-  		padding: 40px 50px 50px 25px;
-  		float:left;
+   .info {
+    position: relative;
+    width: 63.33%;
+    height: 100%;
+    background: $white;
+    padding: 40px 50px 50px 25px;
+    float: left;
 
-  	  h1 a{
-  		font-weight:900;
-  		color:$dk-blue;
-  		border-bottom:3px solid $dk-blue;
-  		text-transform: uppercase;
-  		letter-spacing:1px;
-  	  }
+    h1 a {
+    font-weight: 900;
+    color: $dk-blue;
+    border-bottom: 3px solid $dk-blue;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    }
 
-  	  p {
-  		margin-bottom: 30px;
-  	  }
-	}
+    p {
+      margin-bottom: 30px;
+    }
+  }
 
-	.related{
-		background:$bg-beige;
-		width:36.67%;
-		min-height:230px;
-		padding:40px 50px 0 25px;
-		float:left;
+  .related {
+    background: #f8f4ef;
+    width: 36.67%;
+    padding: 40px 50px 0 25px;
+    float: left;
+
+    &::after {
+      width: 36.67%;
+      content: '';
+      background: #f8f4ef;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -1;
+      bottom: 0;
+    }
+
+    h3 {
+      @include font-style1;
+      margin-bottom:30px;
+    }
+
+    .programs a {
+      @include font-style1;
+      border-bottom: 1px solid $dk-blue;
+      display: inline-block;
+      line-height: 12px;
+    }
+  }
+
+  &:hover {
+    .info {
+      background: $color-accent;
+        
+      h1 a,
+      p,
+      .button {
+        color: $white;
+      }
+
+      .button {
+        border-color: $white;
+
+        &:hover {
+          border-color: $dk-blue;
+          color: $dk-blue;
+        }
+      }
+
+      h1 a {
+        border-bottom: 3px solid $white;
+      }
+    }
+
+    .related {
+      background: lighten($color-accent, 25%);
 
       &::after{
-       width: 36.67%;
-       content: '';
-       background: $bg-beige;
-       position: absolute;
-       top: 0;
-       right: 0;
-       z-index: -1;
-       bottom: 0;
+        background: lighten($color-accent, 25%);
       }
 
-  	  h3{
-  		@include font-style1($dk-blue);
-  		margin-bottom:30px;
-  	  }
+      h3 {
+        color: $white;
+      }
 
-  	  .programs a{
-  		@include font-style1($dk-blue);
-  		border-bottom:1px solid $dk-blue;
-  		display:inline-block;
-  		line-height:12px;
-  	  }
-  }
-
-&:hover{
-  .info{
-      background:$color-accent;
-      
-    h1 a,
-    p,
-    .button,
-    .button a{
-      color:$white;
-    }
-
-    .button{
-      border:3px solid white;
-
-      &:hover{
-        border:3px solid $dk-blue;
+      .programs a {
+        color: $white;
+        border-bottom: 1px solid $white;
+        &:hover {
+          color: $dk-blue;
+          border-color: $dk-blue;
+        }
       }
     }
-
-    .button a:hover{
-      color:$dk-blue;
-    }
-
-    h1 a{
-      border-bottom:3px solid $white;
-    }
   }
-
-  .related{
-      background:lighten($color-accent, 25%);
-
-    &::after{
-    background:lighten($color-accent, 25%);
-    }
-
-    h3,
-    .programs a{
-    color:$white;
-    }
-
-    .programs a{
-    border-bottom:1px solid $white;
-    }
-  }
-}
 }
 
 
 
-.our-work-sidebar{
-  background:$dk-blue;
-  padding:30px 4.54% 30px 25px;
+.our-work-sidebar {
+  background: $dk-blue;
+  padding: 30px 4.54% 30px 25px;
   
   h3,
-  p{
-    color:$color-bg;
+  p {
+    color: $color-bg;
   }
 
-  h3{
-    font-size:$small;
+  h3 {
+    font-size: $small;
   }
 
-  p{
-    margin-bottom:20px;
+  p {
+    margin-bottom: 20px;
 
-    a{
-    @include font-style1($color-accent);
-    margin-bottom:50px;
-      
-      &:hover{
-        color:$white;
+    a {
+      @include font-style1;
+      color: $color-accent;
+      margin-bottom: 50px;
+
+      &:hover {
+        color: $white;
       }
-  }
+    }
   }
 }

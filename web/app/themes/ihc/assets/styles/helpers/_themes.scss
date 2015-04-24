@@ -1,0 +1,66 @@
+// Crazy random themes!
+
+$bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
+@each $bg-color in $bg-colors {
+  $i: index($bg-colors, $bg-color);
+  .background-#{$i} { 
+    // main page bg
+    background: $bg-color;
+    // footer text & links
+    footer.main {
+      color: $bg-color;
+      a {
+        color: $bg-color;
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+    // time stamps
+    .article-content time,
+    time {
+      &:after {
+        border-top-color: $bg-color;
+      }
+      background: $bg-color;
+    }
+  }
+}
+
+$accent-colors: $red $lt-blue $green $aqua $lt-orange;
+@each $accent-color in $accent-colors {
+  $i: index($accent-colors, $accent-color);
+
+  .accent-#{$i} {
+    // random elements with class .accent
+    .accent {
+      color: $accent-color;
+    }
+    // nav elements
+    nav .navbar-nav li a:hover {
+      border-bottom-color: $accent-color;
+    }
+    // focus areas
+    .focus-area {
+      &:hover {
+        .info {
+          background: $accent-color;
+        }
+        .related {
+          background: lighten($accent-color, 25%);
+
+          &::after{
+            background: lighten($accent-color, 25%);
+          }
+        }
+      }
+    }
+    // all page flags
+    .flag {
+      background: $accent-color;
+      &:after {
+        border-top-color: $accent-color;
+      }
+    } 
+  }
+}

@@ -18,7 +18,7 @@ time {
 // Blog & News
 .article-list {
   .article {
-    float:left;
+    float: left;
     width: 25%;
     min-height: 250px;
     margin-bottom: 4px;
@@ -29,57 +29,57 @@ time {
     }
     
     .article-content {
-      position:relative;
+      position: relative;
       background: $white;
       position: relative;
-      margin:0 4px 4px 0;
+      margin: 0 4px 4px 0;
 
-    .article-date {
-      @include font-style1($white);
-      background:$color-bg;
-      height:30px;
-      padding:5px 15px;
-      float:right;
-      margin-left: 4px;
-    }
-    
-    .article-content-wrap {
-      padding: 30px 50px 30px 25px;
-    }
-    
-    .article-tag {
-      margin-bottom: 5px;
-
-      a {
-        @include font-style1($dk-blue);
+      .article-date {
+        @include font-style1;
+        background: $color-bg;
+        height: 30px;
+        padding: 5px 15px;
+        float: right;
+        margin-left: 4px;
       }
-    }
-
-    .article-title{
-      margin-bottom: 10px;
-
-      a{
-      @include font-style2($dk-blue);
-      font-size:$lg;
-      text-transform:capitalize;
-      border-bottom:1px $dk-blue solid;
-      line-height:1.5em;
+      
+      .article-content-wrap {
+        padding: 30px 50px 30px 25px;
       }
-    }
+      
+      .article-tag {
+        margin-bottom: 5px;
 
-    &:hover{
-      background:$dk-blue;
-
-      .article-title a,
-      .article-tag a,
-      p{
-        color:$white;
+        a {
+          @include font-style1;
+        }
       }
 
-      .article-title a{
-        border-bottom:1px $white solid;
+      .article-title {
+        margin-bottom: 10px;
+
+        a {
+          @include font-style2;
+          font-size: $lg;
+          text-transform: capitalize;
+          border-bottom: 1px $dk-blue solid;
+          line-height: 1.5em;
+        }
       }
-    }
-  }//end of article-content
+
+      &:hover {
+        background: $dk-blue;
+
+        .article-title a,
+        .article-tag a,
+        p {
+          color: $white;
+        }
+
+        .article-title a {
+          border-bottom: 1px $white solid;
+        }
+      }
+    } //end of article-content
   }
 }

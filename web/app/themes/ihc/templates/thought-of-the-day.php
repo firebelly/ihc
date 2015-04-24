@@ -6,7 +6,7 @@
 </div>
 
 <div class="submit-thought-wrapper hide">
-	<h4 class="button">Submit Your Thought</h4>
+	<h4 class="flag">Submit Your Thought</h4>
 	<?= \Firebelly\PostTypes\Thought\submit_form(); ?>
 </div>
 </section>

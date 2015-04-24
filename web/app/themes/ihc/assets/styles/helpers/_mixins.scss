@@ -1,22 +1,20 @@
 // Mixins
 
 // Font-styles
-@mixin font-style1($color) {
+@mixin font-style1($color:"") {
   font-family: $sans;
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: $small;
   line-height: 20px;
-  color: $color;
 }
 
-@mixin font-style2($color) {
+@mixin font-style2($color:"") {
   font-family: $sans;
   font-size: $med;
   font-weight: 300;
   letter-spacing: 0.04em;
-  color: $color;
 }
 
 @mixin font-style3 {

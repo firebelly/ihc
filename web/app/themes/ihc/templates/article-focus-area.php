@@ -5,7 +5,7 @@
   <div class="info">
     <h1><a href="<?= get_term_link($focus_area) ?>"><?= $focus_area->name ?></a></h1>
       <p><?= $focus_area->description ?></p>
-      <div class="more button"><a href="<?= get_term_link($focus_area) ?>">Learn More</a></div>
+      <div class="more"><a class="button" href="<?= get_term_link($focus_area) ?>">Learn More</a></div>
   </div>
   <div class="related">
   <?php 
