@@ -32,6 +32,11 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         }
       }
     }
+    .focus-area:hover .button:hover,
+    aside .button:hover,
+    .button:hover {
+      color: $bg-color;
+    }
     // time stamps
     .article-list .article-content .article-date,
     .article-content time,

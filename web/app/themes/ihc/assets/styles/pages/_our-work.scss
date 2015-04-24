@@ -110,8 +110,6 @@
   }
 }
 
-
-
 .our-work-sidebar {
   background: $dk-blue;
   padding: 30px 4.54% 30px 25px;
@@ -127,15 +125,11 @@
 
   p {
     margin-bottom: 20px;
+  }
 
-    a {
-      @include font-style1;
-      color: $color-accent;
-      margin-bottom: 50px;
-
-      &:hover {
-        color: $white;
-      }
-    }
+  a {
+    @include font-style1;
+    color: $color-accent;
+    margin-bottom: 50px;
   }
 }

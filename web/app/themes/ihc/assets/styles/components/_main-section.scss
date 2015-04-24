@@ -16,8 +16,8 @@ section.focus-areas {
   width: 100%;
   padding: 26px 0 40px 25px;
 
-    li a{
-      @include font-style1($dk-blue);
+    li a {
+      @include font-style1;
       border-bottom: 3px $dk-blue solid;
       font-size: $xl;
       line-height: 50px;
@@ -62,10 +62,6 @@ section.focus-areas {
   z-index:100;
   color:white;
 
-  &:hover{
-    color:$dk-blue;
-  }
-  
   &::after {
     top: 100%;
     right: 0;
