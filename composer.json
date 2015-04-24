@@ -55,7 +55,7 @@
     "php": ">=5.4",
     "composer/installers": "v1.0.12",
     "vlucas/phpdotenv": ">=1.0.9",
-    "johnpbloch/wordpress": ">=4.1.1",
+    "johnpbloch/wordpress": ">=4.2",
     "wpackagist-plugin/post-thumbnail-editor" : "*",
     "wpackagist-plugin/limit-login-attempts" : "*",
     "wpackagist-plugin/wordpress-importer" : "*",
