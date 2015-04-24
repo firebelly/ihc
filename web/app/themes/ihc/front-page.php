@@ -33,8 +33,10 @@ $total_news = wp_count_posts('post')->publish;
   <div class="events load-more-container article-list masonry">
     <?php echo \Firebelly\PostTypes\Event\get_events(3); ?>
   </div>
-  <div class="load-more events" data-page-at="1" data-past-events="0" data-per-page="3" data-total-pages="<?= ceil($total_events/3) ?>"><a class="no-ajaxy" href="#">Load More</a></div>
-  <p><a href="/events/" class="view-all">View All Events</a></p>
+  <div class="events-buttons">
+  <div class="load-more" data-page-at="1" data-past-events="0" data-per-page="3" data-total-pages="<?= ceil($total_events/3) ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+  <p><a href="/events/" class="view-all button">View All Events</a></p>
+  </div>
 </section>
 
 <section class="news">
@@ -51,7 +53,7 @@ $total_news = wp_count_posts('post')->publish;
     ?>
   </div>
   <div class="news-buttons">
-    <div class="load-more" data-page-at="1" data-per-page="4" data-total-pages="<?= ceil($total_news/4) ?>"><a class="no-ajaxy" href="#">Load More</a></div>
-    <p class="all-articles"><a href="/news/" class="view-all">All Articles</a></p>
+    <div class="load-more" data-page-at="1" data-per-page="4" data-total-pages="<?= ceil($total_news/4) ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+    <p class="all-articles"><a href="/news/" class="view-all button">All Articles</a></p>
   </div>
 </section>

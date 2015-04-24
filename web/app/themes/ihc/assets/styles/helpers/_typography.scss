@@ -14,10 +14,6 @@ h1 {
 
 h4{
   @include font-style1($white);
-	
-	a{
-		color:white;
-	}
 }
 
 p{

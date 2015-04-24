@@ -63,11 +63,16 @@ body {
 
   a{
     color:$dk-blue;
-
-    &:hover{
-      color:$white;
-    }
   }
+
+  &:hover{
+      color:$white;
+       border: 3px solid $white;
+
+      a{
+        color:$white;
+      }
+    }
 }
 
 // visibility classes (borrowing nomenclature from Foundation)
