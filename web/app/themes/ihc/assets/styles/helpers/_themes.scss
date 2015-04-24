@@ -16,6 +16,22 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         }
       }
     }
+    // events
+    .article-list .event {
+      color: $bg-color;
+      a {
+        color: $bg-color;
+      }
+      time {
+        color: $dk-blue;
+      }
+      &:hover {
+        color: $dk-blue;
+        a {
+          color: $dk-blue;
+        }
+      }
+    }
     // time stamps
     .article-content time,
     time {
