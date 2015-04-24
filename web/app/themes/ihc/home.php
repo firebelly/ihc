@@ -28,7 +28,7 @@ $post = get_page_by_path('/news');
 		endwhile; 
 		?>
 	</div>
-	<div class="load-more" data-page-at="<?= $paged ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">Load More</a></div>
+	<div class="load-more" data-page-at="<?= $paged ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
 	</div>
 <aside>
 		<?php include(locate_template('templates/thought-of-the-day.php')); ?>

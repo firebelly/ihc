@@ -33,6 +33,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       }
     }
     // time stamps
+    .article-list .article-content .article-date,
     .article-content time,
     time {
       &:after {
