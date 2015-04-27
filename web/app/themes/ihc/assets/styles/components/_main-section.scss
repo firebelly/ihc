@@ -78,3 +78,22 @@ section.focus-areas {
     width:auto;
   }
 }
+
+.summary-flag {
+  @extend .flag;
+  top: 100%;
+  bottom: auto;
+  height: auto;
+  margin-left: 22.7%;
+  width: 45.4%;
+  padding: 40px 4.54%;
+
+  &::after {
+    top: -20px;
+    left: 0;
+    border-top: none;
+    border-right: none;
+    border-bottom: 20px solid $color-accent;
+    border-left:25px solid transparent;
+  }
+}
