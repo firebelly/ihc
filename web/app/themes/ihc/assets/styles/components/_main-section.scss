@@ -21,11 +21,6 @@
     border-top: 20px solid $color-accent;
     border-right: 25px solid transparent;
   }
-  // @include phone {
-  //   padding-left: 10px;
-  //   padding-right: 10px;
-  //   width:auto;
-  // }
 }
 .summary-flag {
   @extend .flag;
