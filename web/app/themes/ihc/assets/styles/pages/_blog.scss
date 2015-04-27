@@ -1,5 +1,6 @@
 // Blog (what we're learning) Page
 
+
 @include tablet {
   .page-header {
     h1 {
@@ -30,8 +31,4 @@
   .button {
     float: right;
   }
-}
-
-.load-more a{
-  margin: 35px 40% 100px;
 }

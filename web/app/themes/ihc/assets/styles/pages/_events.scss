@@ -1,5 +1,91 @@
 // Events
 
-.events {
-  
-}
+.event {
+  position: relative;
+  margin: 0;
+  @include tablet {
+    padding: 0 6.249%;
+    padding: 0;
+    width: 49%;
+    float: left;
+  }
+
+  .article-content {
+    min-height: 205px;
+    margin: 0 0 4px 0;
+    @include tablet {
+      margin-right: 4px;
+    }
+    padding: 20px 20px 25px;
+    padding: 20px 50px 30px 25px; 
+    background: $dk-blue;
+  }
+  &:hover .article-content {
+    background:$white;
+    h1 a,
+    h3,
+    p,
+    .more a,
+    .register {
+      color:$dk-blue;
+    }
+
+    h1 a {
+      border-bottom:1px solid $dk-blue;
+    }
+  }
+
+  time {
+    position: absolute;
+    width: 50px;
+    height: 60px;
+    margin-left: 4px;
+    padding: 7px 13px;
+    top: 0;
+    right: 0;
+
+    .month {
+      @include font-style1;
+    }
+
+    .day {
+      @include font-style2;
+      font-size: $lg;
+    }
+
+    &::after {
+      top: 100%;
+      right: 0;
+      position: absolute;
+      width: 0;
+      height: 0;
+      content: '';
+      border-top: 20px solid $color-bg;
+      border-right: 25px solid transparent;
+    }
+  } //end of time section
+
+  h1 a {
+    @include font-style2($color-bg);
+    text-transform:capitalize;
+    border-bottom:1px solid $color-bg;
+    font-size:$lg;
+    line-height:1.5em;
+  }
+
+  h3, 
+  p, 
+  .more a, 
+  .register  {
+    @include font-style1($color-bg);
+  }
+    
+  .more a::before {
+    content:'+ ';
+  }
+
+  .register::before {
+    // tmp commenting out so source maps work!
+    // content:'›› ';
+  }
+} // end .event

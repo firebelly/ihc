@@ -1,6 +1,7 @@
 // Home page
 
 .home.page {
+
   .thought-of-the-day {
     @include tablet {
       position: absolute;
@@ -18,192 +19,128 @@
       }
     }
   }
-}
 
-section.event-cal {
-  @include clearfix;
-  top:0;
-  width: 45.5%;
-  margin-left: 49.94%;
-  padding:0 5px;
-  z-index: 20;
-    
-  .events {
-    width: 100%;
-    min-height: 445px;
-    position: relative;
-  }
-}
-
-.event,
-.events-buttons {
-  width: 49%;
-  min-height: 250px;
-  float: left;
-  margin: 0 4px 4px 0;
-}
-
-.event {
-    position: relative;
-    background: $dk-blue;
-
-.article-content {
-  padding: 20px 50px 30px 25px; 
-  time {
-    position: absolute;
-    width: 50px;
-    height: 60px;
-    margin-left: 4px;
-    padding: 7px 13px;
-    top: 0;
-    right: 0;
-
-    .month {
-      @include font-style1;
-    }
-
-    .day {
-      @include font-style2;
-      font-size: $lg;
-    }
-
-  &::after {
-    top: 100%;
-    right: 0;
-    position: absolute;
-    width: 0;
-    height: 0;
-    content: '';
-    border-top: 20px solid $color-bg;
-    border-right: 25px solid transparent;
-  }
-}//end of time section
-
-  h1 a{
-    @include font-style2($color-bg);
-    text-transform:capitalize;
-    border-bottom:1px solid $color-bg;
-    font-size:$lg;
-    line-height:1.5em;
-    }
-
-    h3, 
-    p, 
-    .more a, 
-    .register  {
-      @include font-style1($color-bg);
-
-    }
-    
-    .more a::before {
-    content:'+ ';
-    }
-
-    .register::before {
-    // tmp commenting out so source maps work!
-    // content:'›› ';
-    }
-  
-}
-  &:hover {
-    background:$white;
-    
-    h1 a,
-    h3,
-    p,
-    .more a,
-    .register {
-    color:$dk-blue;
-    }
-
-    h1 a{
-      border-bottom:1px solid $dk-blue;
-    }
-  }
-  @include phone {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 0 6.249%;
-    .event {
-      width: 100%;
-      min-height: 205px;
-      margin: 0 4px 4px 0;
-      padding: 20px 20px 25px;
-    }
-  }
-}//end of article-content section
-
-  //events buttons
-  .events-buttons{
-    .load-more a {
-        margin: 40px 20% 30px;
-        width:60%;
-
-        &:before{
-          content: '+ ';
-        }
-
-    @include phone {
-      margin: 35px 0 10px;
-    }
-    }//end of .load-more a
-
-    .view-all {
-      margin: 0 20% 30px;
-      width:60%;
-
-    @include phone {
-      margin: 0 0 100px;
-    } 
-    }//end of .view-all
-  }
-
-section.news {
+  // Focus areas
+  section.focus-areas {
+    background: #fff;
     @include clearfix;
-    width:100%;
-    padding:0 4.54%;
-    z-index:20;
-    margin-right:0;
 
-    .news-buttons {
-      @include clearfix;
-      position: relative;
-      margin:30px 31.82% 0; 
+    position: relative;
+    top: -16px;
+    width: 100%;
+    margin: 0 0 40px;
 
-      .load-more, 
-      .all-articles {
-        position:relative;
-        display: inline-block;
-      }
-      .load-more a{
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-      .all-articles{
-        margin: 0 0 0 52px;
-      }
+    .focus-list {
+      padding: 20px 0;
 
-    @include phone {
-      width: 100%;
-      margin: 0;
+      li a {
+        @include font-style1;
+        border-bottom: 3px $dk-blue solid;
+        font-size: $lg;
+        line-height: 40px;
 
-      .load-more {
-        margin: 35px 0 10px;
-        width: 100%;
-      }
-      .all-articles {
-        width: 100%;
-        margin-bottom: 100px;
+        &:hover{
+          color: $color-bg;
+          border-bottom: 3px $color-bg solid;
+        }
       }
     }
-  }
-}
 
-.article-list {
-  .article {
     @include tablet {
-        width: 25%;
+      top: 0;
+      margin: 0 0 0 18.16%;
+      width: 45.4%;
+      z-index:10;
+      .focus-list {
+        height: 260px;
+        padding: 26px 0 40px 25px;
+        li a {
+          font-size: $xl;
+          line-height: 50px;
+        }
+      }
+    }
+
+  }
+
+  section.event-cal {
+    @include clearfix;
+    position: relative;
+    @include tablet {
+      top:0;
+      width: 45.5%;
+      margin-left: 49.94%;
+      padding:0 5px;
+      z-index: 20;
+      .events {
+        width: 100%;
+        min-height: 445px;
+        position: relative;
+      }
     }
   }
+
+  .events-buttons {
+    .load-more {
+      margin: 20px 0 10px;
+    }
+    @include tablet {
+      width: 49%;
+      position: absolute;
+      bottom: 50px;
+      right: 10px;
+      text-align: center;
+      .load-more {
+        margin: 20px 0 30px;
+        a {
+          width: 60%;
+        }
+      }
+      .view-all {
+        a {
+          width: 60%;
+        }
+      }
+    }
+
+  }
+
+
+  section.news {
+    @include clearfix;
+    padding: 0 4.54%;
+    position: relative;
+    .load-more {
+      margin: 20px 0 10px;
+    }
+
+
+    @include tablet {
+      z-index: 20;
+      margin-right: 0;
+
+      .news-buttons {
+        .all-articles,
+        .load-more {
+          display: inline;
+        }
+        a {
+          display: inline-block;
+          margin: 0;
+        }
+        margin: 30px 0 100px; 
+        text-align: center;
+      }
+    }
+
+  } // end .news
+
+  .article-list {
+    .article {
+      @include tablet {
+          width: 25%;
+      }
+    }
+  }
+
 }

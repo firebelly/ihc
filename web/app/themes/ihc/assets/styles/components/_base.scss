@@ -161,13 +161,44 @@ img {
 
 section {
   margin-bottom: 70px;
+  padding: 0 6.249%;
+  // padding: 0 4.54%;
 
   @include desktop {
     position: relative;
     padding: 0;
   }
-  @include phone {
-    padding: 0 6.249%;
+}
+
+.load-more {
+  a:before {
+    content: '+ ';
+  }
+  @include tablet {
+    margin: 35px 0 100px;
+    text-align: center;
   }
 }
 
+.flag {
+  background: $color-accent;
+  display: inline-block;
+  position: absolute;
+  height: 30px;
+  bottom: 100%;
+  margin: 0;
+  padding: 5px 15px;
+  z-index: 100;
+  color: white;
+
+  &::after {
+    top: 100%;
+    right: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    content: '';
+    border-top: 20px solid $color-accent;
+    border-right: 25px solid transparent;
+  }
+}

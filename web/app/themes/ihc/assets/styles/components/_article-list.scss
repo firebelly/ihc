@@ -11,15 +11,23 @@ time {
   top: 0;
   right: 0;
   z-index: 1;
-  background: $bg-green;
   -webkit-font-smoothing: antialiased;
 } 
 
 // Blog & News
+
+.article-date {
+  @include font-style1;
+  height: 30px;
+  padding: 5px 15px;
+  float: right;
+  margin-left: 4px;
+}
+
 .article-list {
+  @include clearfix;
   .article {
-    float: left;
-    width: 25%;
+    position: relative;
     min-height: 250px;
     margin-bottom: 4px;
 
@@ -27,59 +35,53 @@ time {
       float: left;
       width: 33%;
     }
-    
-    .article-content {
-      position: relative;
-      background: $white;
-      position: relative;
-      margin: 0 4px 4px 0;
-
-      .article-date {
-        @include font-style1;
-        background: $color-bg;
-        height: 30px;
-        padding: 5px 15px;
-        float: right;
-        margin-left: 4px;
-      }
-      
-      .article-content-wrap {
-        padding: 30px 50px 30px 25px;
-      }
-      
-      .article-tag {
-        margin-bottom: 5px;
-
-        a {
-          @include font-style1;
-        }
-      }
-
-      .article-title {
-        margin-bottom: 10px;
-
-        a {
-          @include font-style2;
-          font-size: $lg;
-          text-transform: capitalize;
-          border-bottom: 1px $dk-blue solid;
-          line-height: 1.5em;
-        }
-      }
-
-      &:hover {
-        background: $dk-blue;
-
-        .article-title a,
-        .article-tag a,
-        p {
-          color: $white;
-        }
-
-        .article-title a {
-          border-bottom: 1px $white solid;
-        }
-      }
-    } //end of article-content
   }
+
+  .article-content {
+    position: relative;
+    background: $white;
+    position: relative;
+    margin: 0 0 4px 0;
+    @include tablet {
+      margin-right: 4px;
+    }
+    
+    .article-content-wrap {
+      padding: 30px 50px 30px 25px;
+    }
+    
+    .article-tag {
+      margin-bottom: 5px;
+
+      a {
+        @include font-style1;
+      }
+    }
+
+    .article-title {
+      margin-bottom: 10px;
+
+      a {
+        @include font-style2;
+        font-size: $lg;
+        text-transform: capitalize;
+        border-bottom: 1px $dk-blue solid;
+        line-height: 1.5em;
+      }
+    }
+
+    &:hover {
+      background: $dk-blue;
+
+      .article-title a,
+      .article-tag a,
+      p {
+        color: $white;
+      }
+
+      .article-title a {
+        border-bottom: 1px $white solid;
+      }
+    }
+  } //end of article-content
 }
