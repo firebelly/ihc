@@ -26,36 +26,54 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         color: $bg-color;
       }
     }
-    // events
-    .article-list .event {
-      color: $bg-color;
-      a {
-        color: $bg-color;
-      }
-      time {
-        color: $dk-blue;
-      }
-      &:hover {
-        color: $dk-blue;
-        a {
-          color: $dk-blue;
-        }
-      }
-    }
-// article
-.article-date {
-  color: $white;
-  background: $bg-color;
-}
     // focus area
     .focus-area:hover .button:hover,
     aside .button:hover,
     .button:hover {
       color: $bg-color;
     }
+    // events
+   .event .article-content{
+      h1 a,
+      h3,
+      p,
+      .more a{
+      color: $bg-color;
+      }
 
+      h1 a{
+        border-bottom-color: $bg-color;
+      }
+
+      time {
+        color: $dk-blue;
+      }
+      
+      &:hover {
+        h1 a,
+        h3,
+        p,
+        .more a{
+        color: $dk-blue;
+        }
+
+        h1 a{
+        border-bottom-color: $dk-blue;
+        }
+      }
+    }
+    // article tags
+    .article-content-wrap{
+      .article-tag a{
+        color: $bg-color;
+      }
+    }
     // aside
-    aside {
+    aside .support-us-sidebar {
+      p {
+        color: $bg-color;
+      }
+
       h3 {
       color: $bg-color;
       }
@@ -65,11 +83,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
           border: 3px solid $dk-blue;
         }
       }
-      p {
-        color: $bg-color;
-      }
     }
-
     // time stamps
     .article-list .article-content .article-date,
     .article-content time,
@@ -79,8 +93,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       }
       background: $bg-color;
     }
-  }
-
+  }//end of bg-color
 
 $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 @each $accent-color in $accent-colors {
@@ -131,14 +144,4 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       }
     }
   }
-}
-
-aside{
-  .button a{
-        color: $dk-blue;
-  }
-
-  a{
-    @include font-style1;
-  }
-}
+}//end of accent-color

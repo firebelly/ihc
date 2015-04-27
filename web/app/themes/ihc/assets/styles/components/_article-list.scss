@@ -33,9 +33,17 @@ time {
       position: relative;
       margin: 0 4px 4px 0;
 
-      .article-date {
+      .article-date,
+      .article-category,
+      .article-tag{
         @include font-style1;
-        background: $color-bg;
+      }
+      
+      .article-excerpt,
+      .article-title a{
+        @include font-style2;
+      }
+      .article-date {
         height: 30px;
         padding: 5px 15px;
         float: right;
@@ -44,21 +52,21 @@ time {
       
       .article-content-wrap {
         padding: 30px 50px 30px 25px;
+
+        .article-excerpt p {
+          color:$dk-blue;
+        }
       }
       
-      .article-tag {
-        margin-bottom: 5px;
-
-        a {
-          @include font-style1;
-        }
+      .article-category{
+        color:$dk-blue;
+        margin-top:30px;
       }
 
       .article-title {
         margin-bottom: 10px;
 
         a {
-          @include font-style2;
           font-size: $lg;
           text-transform: capitalize;
           border-bottom: 1px $dk-blue solid;
@@ -66,12 +74,17 @@ time {
         }
       }
 
+      .article-tag{
+        text-decoration: underline;
+      }
+
       &:hover {
         background: $dk-blue;
 
         .article-title a,
         .article-tag a,
-        p {
+        .article-excerpt p,
+        .article-category a{
           color: $white;
         }
 

@@ -5,7 +5,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
 <article class="post event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
 
   <section class="main">
-    <h3 class="banner"><?= $banner_text ?></h3>
+    <h4 class="flag"><?= $banner_text ?></h4>
     <h1><?= $post->post_title ?></h1>
     <div class="entry-content user-content"><?= $event->body ?></div>
   </section>  

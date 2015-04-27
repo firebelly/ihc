@@ -146,6 +146,11 @@ ul {
 }
 
 p {
+  font-family:$sans;
+  font-size:$med;
+  font-weight:300;
+  color:$dk-blue;
+  line-height: 20px;
   margin: 0;
   padding: 0;
 }
