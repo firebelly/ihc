@@ -42,14 +42,19 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         }
       }
     }
-
+// article
+.article-date {
+  color: $white;
+  background: $bg-color;
+}
+    // focus area
     .focus-area:hover .button:hover,
     aside .button:hover,
     .button:hover {
       color: $bg-color;
     }
 
-    //aside
+    // aside
     aside {
       h3 {
         color: $bg-color;
@@ -111,6 +116,10 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
         border-top-color: $accent-color;
       }
     }
+    // summary flag for about-us, openICE
+      .summary-flag::after {
+        border-bottom-color: $accent-color;
+      }
     //aside links
     aside {
       a {
