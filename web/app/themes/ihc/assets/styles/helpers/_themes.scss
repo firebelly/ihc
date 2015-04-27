@@ -75,25 +75,25 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       }
 
       h3 {
-      color: $bg-color;
+        color: $bg-color;
       }
-        .button:hover {
-          background: $dk-blue;
-          color: $bg-color;
-          border: 3px solid $dk-blue;
-        }
+      .button:hover {
+        background: $dk-blue;
+        color: $bg-color;
+        border: 3px solid $dk-blue;
       }
     }
     // time stamps
-    .article-list .article-content .article-date,
-    .article-content time,
-    time {
+    .article-list time,
+    .article-date {
+      background: $bg-color;
       &:after {
         border-top-color: $bg-color;
       }
-      background: $bg-color;
     }
   }//end of bg-color
+}
+
 
 $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 @each $accent-color in $accent-colors {

@@ -1,6 +1,7 @@
 // Thought of the Day
 .thought-of-the-day {
   @include clearfix;
+  position: relative;
 
   blockquote {
     margin: 40px 0 10px;

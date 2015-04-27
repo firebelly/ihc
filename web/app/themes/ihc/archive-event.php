@@ -11,7 +11,6 @@ $total_pages = ceil($total_events / $per_page);
 
 $page = get_page_by_path('/events');
 $page_content = apply_filters('the_content', $page->post_content);
-$secondary_content = apply_filters('the_content', get_post_meta($page->ID, '_cmb2_secondary_content', true));
 ?>
 
 <header>

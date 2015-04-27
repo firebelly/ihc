@@ -166,13 +166,21 @@ img {
 
 section {
   margin-bottom: 70px;
+  padding: 0 6.249%;
+  // padding: 0 4.54%;
 
   @include desktop {
     position: relative;
     padding: 0;
   }
-  @include phone {
-    padding: 0 6.249%;
-  }
 }
 
+.load-more {
+  a:before {
+    content: '+ ';
+  }
+  @include tablet {
+    margin: 35px 0 100px;
+    text-align: center;
+  }
+}

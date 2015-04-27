@@ -1,66 +1,15 @@
 // Main Section
-//focus areas
-section.focus-areas {
-  top: 0;
-  margin: 0 0 0 18.16%;
-  width: 45.4%;
-  z-index:10;
-  background: #fff;
-  @include clearfix;
-
-  h2{
-    width:40%;
-  }
-
-  .focus-list{
-  width: 100%;
-  padding: 26px 0 40px 25px;
-
-    li a {
-      @include font-style1;
-      border-bottom: 3px $dk-blue solid;
-      font-size: $xl;
-      line-height: 50px;
-
-      &:hover{
-        color: $color-bg;
-        border-bottom: 3px $color-bg solid;
-      }
-    }
-  }
-
-  @include phone{
-    position: relative;
-    top: -16px;
-    width: 100%;
-    margin: 0 0 40px;
-    height: 260px;
-
-    h2{
-      width: auto;
-    }
-
-    .focus-list{
-      padding: 20px 0;
-
-      li a{
-        font-size: $lg;
-        line-height: 40px; 
-      }
-    }
-  }
-}
 
 .flag {
-  background:$color-accent;
-  position:absolute;
-  height:30px;
-  bottom:100%;
-  margin:0;
-  padding:5px 15px;
+  background: $color-accent;
   display: inline-block;
-  z-index:100;
-  color:white;
+  position: absolute;
+  height: 30px;
+  bottom: 100%;
+  margin: 0;
+  padding: 5px 15px;
+  z-index: 100;
+  color: white;
 
   &::after {
     top: 100%;
@@ -72,13 +21,7 @@ section.focus-areas {
     border-top: 20px solid $color-accent;
     border-right: 25px solid transparent;
   }
-  @include phone {
-    padding-left: 10px;
-    padding-right: 10px;
-    width:auto;
-  }
 }
-
 .summary-flag {
   @extend .flag;
   top: 100%;
@@ -94,6 +37,6 @@ section.focus-areas {
     border-top: none;
     border-right: none;
     border-bottom: 20px solid $color-accent;
-    border-left:25px solid transparent;
+    border-left: 25px solid transparent;
   }
 }

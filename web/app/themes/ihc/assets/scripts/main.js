@@ -45,6 +45,7 @@ var IHC = (function($) {
       _initSliders();
       _initMasonry();
       _initLoadMore();
+      _initBigClicky();
       _initShareLinks();
 
       // Esc handlers
@@ -61,6 +62,16 @@ var IHC = (function($) {
         mobileThought.removeClass('show-for-medium-up').addClass('hide-for-medium-up').appendTo('.content');
       }
 
+  }
+
+  function _initBigClicky() {
+    $(document).on('click', '.article-list article', function(e) {
+      if (!$(e.target).is('a')) {
+        e.preventDefault();
+        var href = $(this).find('a:first').attr('href');
+        if (href) { location.href = href; }
+      }
+    });
   }
 
   function _scrollBody(element, duration, delay) {
