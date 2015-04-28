@@ -54,25 +54,38 @@ time {
 
     .article-category {
       color:$dk-blue;
+      margin-bottom: 5px;
+      margin-top:30px;
+      text-decoration: underline;
+    }
+
+
+    .article-excerpt,
+    .article-title a {
+      @include font-style2;
+    }
+      
+    .article-content-wrap {
+      padding: 30px 50px 30px 25px;
+
+      .article-excerpt p {
+        color:$dk-blue;
+      }
+    }
+      
+    .article-category {
+      color:$dk-blue;
     }
 
     .article-tag { 
       text-decoration: underline;
     }
 
-    .article-excerpt p,
-    .article-title a {
-      @include font-style2;
-    }
-
-    .article-excerpt p {
-      color:$dk-blue;
-    }
-
     .article-title {
       margin-bottom: 10px;
         
-      a {       
+      a {
+        @include font-style2;
         font-size: $lg;
         text-transform: capitalize;
         border-bottom: 1px $dk-blue solid;
@@ -86,12 +99,12 @@ time {
       .article-title a,
       .article-tag a,
       .article-excerpt p,
-      .article-category a{
+      .article-category a {
         color: $white;
       }
 
       .article-title a {
-        border-bottom: 1px $white solid;
+          border-bottom: 1px $white solid;
       }
     }
   }
