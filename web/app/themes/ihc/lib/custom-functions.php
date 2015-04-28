@@ -152,3 +152,15 @@ function get_related_news_post($post_or_focus_area) {
   $output .= '</div>';
   return $output;
 }
+
+/**
+ * Get header bg for post
+ */
+function get_header_bg($post) {
+  $header_bg = false;
+  if (has_post_thumbnail($post->ID)) {
+    $background_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'full', true);
+    $header_bg = ' style="background-image:url('.$background_image.');"';
+  }
+  return $header_bg;
+}
