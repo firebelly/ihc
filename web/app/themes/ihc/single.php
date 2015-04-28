@@ -7,7 +7,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
   <article <?php post_class(); ?>>
     <section class="main">
       <?php if ($category = \Firebelly\Utils\get_first_term($post)): ?>
-        <h4 class="flag"><a href="<?= get_term_link($category); ?>"><?php echo $category->cat_name; ?></a></h4>
+        <h4 class="flag"><a href="<?= get_term_link($category); ?>"><?php echo $category->name; ?></a></h4>
       <?php endif; ?>
       <time class="article-date" datetime="<?php echo date('c', $post_date_timestamp); ?>"><?php echo date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
       <?php if (has_post_thumbnail()) {
