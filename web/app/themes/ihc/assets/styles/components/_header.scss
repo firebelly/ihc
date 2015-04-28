@@ -31,8 +31,7 @@
     bottom: 60px;
 
     &:before {
-      // tmp commenting out so source maps work!
-      // content: "›› ";
+      content: "\bb  ";
     }
   }
   
