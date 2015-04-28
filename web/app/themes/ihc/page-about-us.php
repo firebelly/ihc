@@ -10,11 +10,25 @@ $body_content = apply_filters('the_content', $post->post_content);
 <?php get_template_part('templates/page', 'image-header'); ?>
 
 <section class="main">
+  <div class="entry-content user-content">
   <?php if ($content_banner_text): ?>
     <h4 class="flag"><?= $content_banner_text ?></h4>
   <?php endif; ?>
-  <div class="entry-content user-content">
+  <div class="one-column">
+      <div class="column">
+        <h3 class="about-section">Board</h3>
+        <?= get_the_block('About Us Board') ?>
+      </div>
+      <div class="column">
+        <h3 class="about-section">Staff & Contacts</h3>
+        <?= get_the_block('About Us Staff & Project Contacts') ?>
+      </div>
+      <div class="column">
+         <h3 class="about-section">Supporters</h3>
+        <?= get_the_block('About Us Supporters') ?>
+      </div>
     <?= $body_content ?>  
+    </div>
   </div>
 </section>
 

@@ -1,112 +1,138 @@
 // Single Posts
-section.main {
-  .article-date {
-    position:absolute;
-    @include font-style1;
-    height: 30px;
-    padding: 5px 15px;
-    float: right;
-    margin-left: 4px;
-  }
-}
-
 .single-event,
 .single-post {
-  .post {
-    position: relative;
-    margin-top: 80px;
-    width: 68.1%;
-    background: $white;
-
-      &::after {
-        top: 100%;
-        right: 0;
-        position: absolute;
-        width: 0;
-        height: 0;
-        content: '';
-        border-top: 20px solid $black;
-        border-right: 25px solid transparent;
-      }
-    
-    img{
-      top:0;
-      height:270px;
-      width:100%;
-      overflow: hidden;
-      position: relative;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center top;
-      z-index:10;
-    }
-  }
 }
 
-.post-inner {
-  header {
-    padding:40px 50px 0 25px;
+.post {
+  margin: 80px 0 100px;
+  width:100%;
 
-    h1 {
-      display: inline-block;
+  section.main{
+    position: relative;
+
+      // &::after {
+      //   top: 100%;
+      //   right: 0;
+      //   position: absolute;
+      //   width: 0;
+      //   height: 0;
+      //   content: '';
+      //   border-top: 20px solid $black;
+      //   border-right: 25px solid transparent;
+      // }
+  
+    .article-date {
+      @include font-style1;  
+      position: absolute;
+      top: 0;
+      right: 5.45%;
+      height: 30px;
+      padding: 5px 15px 5px;
+      margin-left: 4px;
     }
+    .post-inner {
+      background:#fff;
 
-    .entry-title span{
-      @include font-style1($dk-blue);
-      font-size: $xl;
-      color: $dk-blue;
-      text-transform: uppercase;
-      line-height: 50px;
-      border-bottom: 3px solid $dk-blue;
+      .share {
+        @include font-style1;
+        color:$dk-blue;
+        float:right;
+
+        .icon-facebook,
+        .icon-twitter{
+          padding-left:10px;
+        }
+      }
+
+      header {
+      padding:40px 50px 0 25px;
+
+        h1 {
+          display: inline-block;
+        }
+
+        .entry-title span{
+          @include font-style1;
+          font-size: $xl;
+          color: $dk-blue;
+          text-transform: uppercase;
+          line-height: 50px;
+          border-bottom: 3px solid $dk-blue;
+        }
+      }
+
+      .byline-area {
+        padding: 0 25px;
+        
+        p {
+          @include font-style1;
+          color: $dk-blue;
+          margin: 0;
+          border-bottom: 1px solid $gray-lite;
+          padding-bottom: 30px;
+        }
+
+        a{
+          border-bottom:1px solid $dk-blue;
+        }
+      }
+
+      .entry-content {
+        width: 100%;
+        padding: 30px 4.54% 40px 25px;
+  
+        em {
+          @include font-style2;
+        }
+
+        strong {
+          @include font-style1;
+        }
+
+        ul { 
+          padding-left:50px;
+
+          li {
+            list-style-type: disc;
+            line-height: 20px;
+            margin-bottom:10px;
+            font-size:14px;
+          }     
+        }
+
+        blockquote {
+          margin: 0;
+          
+          p {
+          @include font-style3;
+          color: $dk-blue;
+          }
+        }
+      } 
     }
   }
 
-  .byline-area {
-    padding: 0 0 0 25px;
-    p {
-      @include font-style1;
-      color: $dk-blue;
+  aside {
+  position: relative;
+  float: right;
+  height: auto;
+  width: 22.7%;
+
+    .event {
+      width: 100%;
       margin: 0;
-      border-bottom: 1px solid $gray-lite;
-      padding-bottom: 30px;
     }
-
-    a{
-      border-bottom:1px solid $dk-blue;
-    }
-  }
-
-  .entry-content {
-    background: $white;
-    width: 100%;
-    padding: 30px 4.54% 30px 25px;
-    margin: 0 0 100px 0;
     
-    em {
+    .event-details {
+      background: $white;
+      margin-bottom: 60px;
+      padding: 30px 25px;
       @include font-style2;
     }
-    
-    strong {
-        @include font-style1;
+
+    .single-blog-post {
+      position: relative;
     }
-
-    ul { 
-      padding-left:50px;
-
-      li {
-      list-style-type: disc;
-      line-height: 20px;
-      margin-bottom:10px;
-      font-size:14px;
-      }     
-    }
-
-    blockquote {
-      margin: 0;
-      p {
-        @include font-style3;
-        color: $dk-blue;
-      }
-    } 
   }
+
 }

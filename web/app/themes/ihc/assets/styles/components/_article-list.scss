@@ -15,15 +15,6 @@ time {
 } 
 
 // Blog & News
-
-.article-date {
-  @include font-style1;
-  height: 30px;
-  padding: 5px 15px;
-  float: right;
-  margin-left: 4px;
-}
-
 .article-list {
   @include clearfix;
   .article {
@@ -38,10 +29,8 @@ time {
   }
 
   .article-content {
-    position: relative;
     background: $white;
     position: relative;
-    margin: 0 0 4px 0;
     @include tablet {
       margin-right: 4px;
     }
@@ -49,69 +38,61 @@ time {
     .article-content-wrap {
       padding: 30px 50px 30px 25px;
     }
-    
+
+    .article-date,
+    .article-category,
     .article-tag {
-      margin-bottom: 5px;
+      @include font-style1;
+    }
 
-      .article-date,
-      .article-category,
-      .article-tag{
-        @include font-style1;
-      }
-      
-      .article-excerpt,
-      .article-title a{
-        @include font-style2;
-      }
-      .article-date {
-        height: 30px;
-        padding: 5px 15px;
-        float: right;
-        margin-left: 4px;
-      }
-      
-      .article-content-wrap {
-        padding: 30px 50px 30px 25px;
+    .article-date {
+      height: 30px;
+      padding: 5px 15px;
+      float: right;
+      margin-left: 4px;
+    }
 
-        .article-excerpt p {
-          color:$dk-blue;
-        }
-      }
-      
-      .article-category{
-        color:$dk-blue;
-        margin-top:30px;
-      }
+    .article-category {
+      color:$dk-blue;
+    }
+
+    .article-tag { 
+      text-decoration: underline;
+    }
+
+    .article-excerpt p,
+    .article-title a {
+      @include font-style2;
+    }
+
+    .article-excerpt p {
+      color:$dk-blue;
+    }
 
     .article-title {
       margin-bottom: 10px;
-
-
-      a {
-        @include font-style2;
+        
+      a {       
         font-size: $lg;
         text-transform: capitalize;
         border-bottom: 1px $dk-blue solid;
         line-height: 1.5em;
       }
     }
-      .article-tag{
-        text-decoration: underline;
+
+    &:hover {
+      background: $dk-blue;
+
+      .article-title a,
+      .article-tag a,
+      .article-excerpt p,
+      .article-category a{
+        color: $white;
       }
-
-      &:hover {
-        background: $dk-blue;
-
-        .article-title a,
-        .article-tag a,
-        .article-excerpt p,
-        .article-category a{
-          color: $white;
-        }
 
       .article-title a {
         border-bottom: 1px $white solid;
       }
     }
-  } //end of article-content
+  }
 }
