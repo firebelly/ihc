@@ -3,6 +3,10 @@
   @include clearfix;
   position: relative;
 
+  .thought {
+    width: 83.33%;
+  }
+
   blockquote {
     margin: 40px 0 10px;
     @extend .smooth;

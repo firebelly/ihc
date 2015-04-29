@@ -1,7 +1,5 @@
 // Main Section
-
 .flag {
-  background: $color-accent;
   display: inline-block;
   position: absolute;
   height: 30px;
@@ -18,7 +16,6 @@
     width: 0;
     height: 0;
     content: '';
-    border-top: 20px solid $color-accent;
     border-right: 25px solid transparent;
   }
 }
@@ -36,7 +33,48 @@
     left: 0;
     border-top: none;
     border-right: none;
-    border-bottom: 20px solid $color-accent;
     border-left: 25px solid transparent;
   }
+}
+
+aside.page-with-img {
+    margin:-270px -4.54% 0 0;
+    height:auto;
+
+    .about-us-sidebar,
+    .our-work-sidebar,
+    .support-us-sidebar {
+      background:$dk-blue;
+      padding:30px 4.54% 30px 25px;
+      margin-left: -2.27%;
+
+      h3 {
+        margin:0 0 20px;
+      }
+
+      ul li{
+        @include font-style1;
+        font-size:$lg;
+        padding-bottom: 3px;
+        margin-bottom: 20px;
+      }
+
+      p{
+        margin: 10px 0 30px;
+      }
+
+      a{
+        @include font-style1;
+      }
+    }
+  
+    .support-us-sidebar {
+      a {
+        color: $white;
+        text-decoration: underline;
+      }
+      p {
+        margin: 10px 0 0;
+      }
+    }
 }

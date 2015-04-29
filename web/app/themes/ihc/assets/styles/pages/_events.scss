@@ -51,7 +51,7 @@
     margin-right: 4px;
     }
 
-    &:hover .article-content {
+    &:hover{
     background:$white;
       
       h1 a,
@@ -63,7 +63,7 @@
       }
 
       h1 a {
-      border-bottom:1px solid $dk-blue;
+      border-bottom-color:$dk-blue;
       }
 
     .article-date {
@@ -83,17 +83,6 @@
         @include font-style2;
         font-size: $lg;
       }
-
-      &::after {
-        top: 100%;
-        right: 0;
-        position: absolute;
-        width: 0;
-        height: 0;
-        content: '';
-        border-top: 20px solid $color-bg;
-        border-right: 25px solid transparent;
-      }
     }
 
     // h1 a {
@@ -104,14 +93,33 @@
     //   line-height:1.5em;
     // }
 
-    // .more a::before {
-    // content:'+ ';
-    // }
+    .more a::before {
+      content:'+ ';
+    }
 
-    // .register::before {
-    // // tmp commenting out so source maps work!
-    // // content:'›› ';
-    // }
+    .register::before {
+    // tmp commenting out so source maps work!
+      content:'›› ';
+    }
   }
  }
+}
+
+//main-events-page
+.past-tab {
+  background: $dk-blue;
+  display: inline-block;
+  position: absolute;
+  height: 30px;
+  bottom: 100%;
+  margin: 0;
+  padding: 5px 15px;
+  z-index: 100;
+  
+  h4 {
+    color:$white;
+    border-bottom:1px solid $white;
+    line-height: 16px;
+    padding-top: 2px;
+  }
 }

@@ -17,19 +17,21 @@ $page_content = apply_filters('the_content', $page->post_content);
 	<div class="user-content">
 		<?php echo $page_content; ?>
 	</div>
-
-	<aside>
-		<?php include(locate_template('templates/thought-of-the-day.php')); ?>
-	</aside>
 </header>
 
-<div id="map" class="large"></div>
+<?php get_template_part('templates/page', 'image-header'); ?>
+<div id="map" class="large hide"></div>
 
 <section class="main">
 	<ul>
-		<li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/">Upcoming Events</a></li>	
-		<li><a class="<?= $past_events ? 'active' : '' ?>" href="/events/?past_events=1">Past Events</a></li>	
+		<li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/"><h4 class="flag">Upcoming Events</h4></a></li>	
+		<li><a class="<?= $past_events ? 'active' : '' ?> past-tab" href="/events/?past_events=1"><h4>Past Events</h4></a></li>	
 	</ul>
+	<div class="filters">
+		<div class="program-topic">Program:</div>
+		<div class="focus-area-topic">Focus Area:</div>
+		<button class="button">Filter</button>
+	</div>
 
 	<div class="events load-more-container article-list masonry">
 		<?php echo \Firebelly\PostTypes\Event\get_events(); ?>
@@ -38,3 +40,6 @@ $page_content = apply_filters('the_content', $page->post_content);
 	<div class="load-more events" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">+ Load More</a></div>
 
 </section>
+<aside class="page-with-img">
+		<?php include(locate_template('templates/thought-of-the-day.php')); ?>
+</aside>

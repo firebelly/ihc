@@ -15,6 +15,9 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
           color: $white;
         }
       }
+      p.medium-up{
+        color: $bg-color;
+      }
     }
     //.button hover
     .button:hover {
@@ -67,17 +70,19 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
 
         }
       }
+
     // events
-   .event .article-content{
+   .event .article-content {
       h1 a,
       h3,
       p,
-      .more a{
+      .more a { 
       color: $bg-color;
       }
 
-      h1 a{
-        border-bottom-color: $bg-color;
+      h1 a {
+        line-height: 37px;
+        border-bottom: 1px solid $bg-color;
       }
 
       time {
@@ -88,18 +93,18 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         h1 a,
         h3,
         p,
-        .more a{
+        .more a {
         color: $dk-blue;
         }
 
-        h1 a{
+        h1 a {
         border-bottom-color: $dk-blue;
         }
       }
     }
     // article tags
-    .article-content-wrap{
-      .article-tag a{
+    .article-content-wrap {
+      .article-tag a {
         color: $bg-color;
       }
     }
@@ -154,5 +159,25 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       .summary-flag::after {
         border-bottom-color: $accent-color;
       }
+
+    //aside
+      .about-us-sidebar,
+      .support-us-sidebar {
+        h3 {
+        color:$accent-color;
+        margin-bottom:20px;
+        }
+      }
+
+      .our-work-sidebar{
+        p a {
+          color: $accent-color;
+
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+
   }
 }//end of accent-color

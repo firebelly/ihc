@@ -112,29 +112,4 @@
     }
   }
 }
-aside {
-    margin:-270px -4.54% 0 0;
-    height:auto;
 
-  .our-work-sidebar {
-    background:$dk-blue;
-    padding:30px 4.54% 30px 25px;
-    margin-left: -2.27%;
-
-    ul li{
-      @include font-style1;
-      font-size:$lg;
-      padding-bottom: 3px;
-      margin-bottom: 20px;
-    }
-
-    p{
-      margin: 10px 0 30px;
-      
-      a{
-        @include font-style1;
-        color: $color-accent;
-      }
-    }
-  }
-}

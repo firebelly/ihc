@@ -30,7 +30,7 @@ $body_content = apply_filters('the_content', $post->post_content);
     </div>
   </div>
 </section>
-<aside>
+<aside class="page-with-img">
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
   <div class="support-us-sidebar">
   <?= get_the_block('Support Us Sidebar') ?>

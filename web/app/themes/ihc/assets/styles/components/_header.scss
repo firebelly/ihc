@@ -9,6 +9,18 @@
   background-size: cover;
   z-index: 1;
   
+    .share {
+      float: right;
+      margin-top: -64px;
+      margin-right: 4.54%;
+      color: $white;
+      @include font-style1;
+
+      span {
+        padding-right:5px;
+      }
+    }
+
   h1 {
     font-size: $xxl;
     line-height: 60px;
