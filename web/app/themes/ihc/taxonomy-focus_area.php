@@ -14,7 +14,13 @@ if ($header_image) {
 $header_text = $focus_area->description;
 ?>
 
-  <?php get_template_part('templates/page', 'image-header'); ?>
+  <header class="page-header <?= $header_class ?>"<?= $header_bg ?>>
+    <h4 class="flag"><?= $post->post_title ?></h4>
+
+    <h1 class="header-text">
+      <?= $header_text ?>
+    </h1>
+  </header>
 
 <section class="main">
   <?php 
@@ -32,13 +38,13 @@ $header_text = $focus_area->description;
   <?php endif; ?>
 </section>
 
-<aside class="page-with-img">
+<aside>
   <div class="article-list">
     <?= \Firebelly\Utils\get_related_event_post($focus_area->slug) ?>
     <?= \Firebelly\Utils\get_related_news_post($focus_area->slug) ?>
-  </div>
-  <div class="contacts user-content">
-    <h3>Focus Area Contacts</h3>
-    <?= $focus_area_contacts ?>
+    <div class="contacts user-content">
+      <h3>Focus Area Contacts</h3>
+      <?= $focus_area_contacts ?>
+    </div>
   </div>
 </aside>

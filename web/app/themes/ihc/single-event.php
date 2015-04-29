@@ -20,16 +20,16 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
     <div id="map" ></div>
     <div class="event-details">
     <h3>When:</h3>
-    <?= date('l, F j, Y', $event->event_start) ?>
+    <p><?= date('l, F j, Y', $event->event_start) ?>
     <br><?= $event->time_txt ?></p>
     <h3>Where:</h3>
-    <?= $event->venue ?> 
+    <p><?= $event->venue ?>
     <br><?= $event->address['address-1'] ?> 
     <?php if (!empty($event->address['address-2'])): ?>
       <br><?= $event->address['address-2'] ?>
     <?php endif; ?>
     <br><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?>
-    <?php if (!($event->archived)): ?>
+    <?php if (!($event->archived)): ?></p>
       <h3>Cost:</h3>
       <p class="cost">
       <?php if (!$event->cost): ?>
@@ -46,7 +46,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
       </ul>
     <?php endif; ?>
     </div>
-    <div class="single-blog-post">
+    <div class="article-list">
     <h4 class="flag">Blog & News</h4>
       <?php 
       while (have_posts()) : the_post();
@@ -54,7 +54,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
         include(locate_template('templates/article-news.php'));
       endwhile; 
       ?>
-      <div class="load-more" data-page-at="1" data-per-page="4" data-total-pages="<?= ceil($total_news/4) ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+      <p class="view-all"><a href="/news/" class="button">View All Articles</a></p>
     </div>
   </aside>
 </article>

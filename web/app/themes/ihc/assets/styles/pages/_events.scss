@@ -1,6 +1,5 @@
 // Events
-.events {}
-
+.events {
 .event {
   position: relative;
   margin: 0;
@@ -44,7 +43,6 @@
   .article-content {
     min-height: 205px;
     margin: 0 0 4px 0;
-    padding: 20px 50px 30px 25px; 
     background: $dk-blue;
 
     @include tablet {
@@ -104,9 +102,9 @@
   }
  }
 }
-
+}
 //main-events-page
-.past-tab {
+.tab {
   background: $dk-blue;
   display: inline-block;
   position: absolute;

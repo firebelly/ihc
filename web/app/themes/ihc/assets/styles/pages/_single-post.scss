@@ -111,28 +111,4 @@
       } 
     }
   }
-
-  aside {
-  position: relative;
-  float: right;
-  height: auto;
-  width: 22.7%;
-
-    .event {
-      width: 100%;
-      margin: 0;
-    }
-    
-    .event-details {
-      background: $white;
-      margin-bottom: 60px;
-      padding: 30px 25px;
-      @include font-style2;
-    }
-
-    .single-blog-post {
-      position: relative;
-    }
-  }
-
 }

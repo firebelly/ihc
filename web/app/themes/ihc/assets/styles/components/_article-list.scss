@@ -71,10 +71,6 @@ time {
         color:$dk-blue;
       }
     }
-      
-    .article-category {
-      color:$dk-blue;
-    }
 
     .article-tag { 
       text-decoration: underline;
@@ -104,6 +100,34 @@ time {
 
       .article-title a {
           border-bottom: 1px $white solid;
+      }
+    }
+  }
+}
+
+.articles-list {
+  .program {
+    float:left;
+    background:$white;
+    width: 49.7%;
+    padding: 30px 25px;
+    margin-bottom:4px;
+
+    h2 {
+      text-transform: uppercase;
+      display:inline-block;
+      line-height: 40px;
+
+      span {
+        border-bottom:3px solid $dk-blue;
+      }
+    }
+
+    .more {
+      margin-top:20px;
+
+      &:hover {
+        color: $white;
       }
     }
   }

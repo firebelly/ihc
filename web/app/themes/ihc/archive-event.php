@@ -25,7 +25,7 @@ $page_content = apply_filters('the_content', $page->post_content);
 <section class="main">
 	<ul>
 		<li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/"><h4 class="flag">Upcoming Events</h4></a></li>	
-		<li><a class="<?= $past_events ? 'active' : '' ?> past-tab" href="/events/?past_events=1"><h4>Past Events</h4></a></li>	
+		<li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1"><h4>Past Events</h4></a></li>	
 	</ul>
 	<div class="filters">
 		<div class="program-topic">Program:</div>
@@ -37,7 +37,7 @@ $page_content = apply_filters('the_content', $page->post_content);
 		<?php echo \Firebelly\PostTypes\Event\get_events(); ?>
 	</div>
 	
-	<div class="load-more events" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">+ Load More</a></div>
+	<div class="load-more events" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">Load More</a></div>
 
 </section>
 <aside class="page-with-img">
