@@ -17,6 +17,7 @@
     height: 0;
     content: '';
     border-right: 25px solid transparent;
+    border-top: 20px solid $color-accent;
   }
 }
 .summary-flag {
@@ -34,6 +35,7 @@
     border-top: none;
     border-right: none;
     border-left: 25px solid transparent;
+    border-top: 20px solid $color-accent;
   }
 }
 
