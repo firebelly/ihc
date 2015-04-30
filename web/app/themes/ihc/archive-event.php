@@ -11,35 +11,61 @@ $total_pages = ceil($total_events / $per_page);
 
 $page = get_page_by_path('/events');
 $page_content = apply_filters('the_content', $page->post_content);
+$pr = filter_input(INPUT_GET, 'pr');
+$fa = filter_input(INPUT_GET, 'fa');
 ?>
 
 <header>
-	<div class="user-content">
-		<?php echo $page_content; ?>
-	</div>
+  <div class="user-content">
+    <?php echo $page_content; ?>
+  </div>
 </header>
 
 <?php get_template_part('templates/page', 'image-header'); ?>
 <div id="map" class="large hide"></div>
 
 <section class="main">
-	<ul>
-		<li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/"><h4 class="flag">Upcoming Events</h4></a></li>	
-		<li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1"><h4>Past Events</h4></a></li>	
-	</ul>
-	<div class="filters">
-		<div class="program-topic">Program:</div>
-		<div class="focus-area-topic">Focus Area:</div>
-		<button class="button">Filter</button>
-	</div>
+  <ul>
+    <li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/"><h4 class="flag">Upcoming Events</h4></a></li> 
+    <li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1"><h4>Past Events</h4></a></li>  
+  </ul>
+  <form class="filters" action="/events" method="get">
+    <div class="program-topic">Program: 
+      <select name="pr">
+      <option value="">ALL</option>
+        <?php 
+        $programs_related_to_events = $wpdb->get_results(
+          "SELECT p.ID,p.post_title FROM {$wpdb->postmeta} pm 
+          INNER JOIN {$wpdb->posts} p ON (p.ID=pm.meta_value) 
+          INNER JOIN {$wpdb->posts} p2 ON (p2.ID=pm.post_id) 
+          WHERE meta_key='_cmb2_related_program' AND p2.post_type='event' 
+          GROUP BY pm.meta_value ORDER BY p.post_title"
+        );
+        foreach ($programs_related_to_events as $program):
+        ?>
+        <option <?= $pr==$program->ID ? 'selected' : '' ?> value="<?= $program->ID ?>"><?= $program->post_title ?></option>
+      <?php endforeach; ?>
+      </select>
+    </div>
+    <div class="focus-area-topic">Focus Area:
+      <select name="fa">
+      <option value="">ALL</option>
+        <?php $focus_areas = get_terms('focus_area');
+        foreach ($focus_areas as $focus_area): ?>
+        <option <?= $fa==$focus_area->term_id ? 'selected' : '' ?> value="<?= $focus_area->term_id ?>"><?= $focus_area->name ?></option>
+      <?php endforeach; ?>
+      </select>
+    </div>
+    <button class="button" type="submit">Filter</button>
+  </form>
 
-	<div class="events load-more-container article-list masonry">
-		<?php echo \Firebelly\PostTypes\Event\get_events(); ?>
-	</div>
-	
-	<div class="load-more events" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">Load More</a></div>
+  <div class="events load-more-container article-list masonry">
+    <?php echo \Firebelly\PostTypes\Event\get_events('', $fa, $pr); ?>
+  </div>
+  
+  <div class="load-more events" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">Load More</a></div>
 
 </section>
 <aside class="page-with-img">
-		<?php include(locate_template('templates/thought-of-the-day.php')); ?>
+    <?php include(locate_template('templates/thought-of-the-day.php')); ?>
 </aside>
