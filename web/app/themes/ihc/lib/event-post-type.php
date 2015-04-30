@@ -178,24 +178,6 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
-  $meta_boxes['event_program'] = array(
-    'id'            => 'event_program',
-    'title'         => __( 'Event Program', 'cmb2' ),
-    'object_types'  => array( 'event', ),
-    'context'       => 'normal',
-    'priority'      => 'high',
-    'show_names'    => true,
-    'fields'        => array(
-      array(
-          'name'    => 'Related Program',
-          'desc'    => 'If set, shows in sidebar, otherwise uses Focus Area',
-          'id'      => $prefix . 'event_program',
-          'type'    => 'pw_select',
-          'options' => \Firebelly\CMB2\get_post_options(['post_type' => 'program', 'numberposts' => -1]),
-      ),
-    ),
-  );
-
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
