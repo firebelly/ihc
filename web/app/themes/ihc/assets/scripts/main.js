@@ -11,9 +11,7 @@ var IHC = (function($) {
       page_cache = [],
       $content,
       $backnav,
-      $body,
       $document,
-      $nav,
       map,
       mapFeatureLayer,
       mapGeoJSON = [],
@@ -25,13 +23,8 @@ var IHC = (function($) {
       // set screen size vars
       _resize();
 
-      // init state
-      State = History.getState();
-
       $document = $(document);
-      $body = $('body');
       $content = $('section.main');
-      $nav = $('.site-nav');
 
       // fit them vids!
       $content.fitVids();
@@ -41,14 +34,13 @@ var IHC = (function($) {
       _initSearch();
       _initNav();
       _initMap();
-      _initMenuToggle();
       _initSliders();
       _initMasonry();
       _initLoadMore();
       _initBigClicky();
       _initShareLinks();
 
-      // Esc handlers
+      // esc handlers
       $(document).keyup(function(e) {
         if (e.keyCode === 27) {
           _hideSearch();
@@ -68,7 +60,7 @@ var IHC = (function($) {
     $(document).on('click', '.article-list article', function(e) {
       if (!$(e.target).is('a')) {
         e.preventDefault();
-        var href = $(this).find('a:first').attr('href');
+        var href = $(this).find('h1:first a').attr('href');
         if (href) { location.href = href; }
       }
     });
@@ -160,31 +152,15 @@ var IHC = (function($) {
     }
   }
 
-  function _updateTitle() {
-    var title = $content.find('.content:first').data('post-title');
-    if (title === '' || title === 'Main') {
-      title = 'IHC';
-    } else {
-      title = title + ' | IHC';
-    }
-    // this bit also borrowed from Ajaxify
-    document.title = title;
-    try {
-      document.getElementsByTagName('title')[0].innerHTML = document.title.replace('<','&lt;').replace('>','&gt;').replace(' & ',' &amp; ');
-    } catch (Exception) {}
-  }
-
   // handles main nav
   function _initNav() {
     // SEO-useless nav toggler
-    $('body').prepend('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>');
-  }
-
-  function _initMenuToggle(){
-    $('.menu-toggle').on('click', function (e) {
-      e.preventDefault();
-      _toggleMobileMenu();
-    });
+    $('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>')
+      .prependTo('body')
+      .on('click', function(e) {
+        e.preventDefault();
+        _toggleMobileMenu();
+      });
   }
 
   function _toggleMobileMenu() {
