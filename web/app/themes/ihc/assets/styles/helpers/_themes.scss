@@ -186,6 +186,10 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       a.add-to-calendar{
         color: $accent-color;
       }
+
+      .page-with-img .our-work-sidebar p a {
+        color: $accent-color;
+      }
     }
   }
 }//end of accent-color
