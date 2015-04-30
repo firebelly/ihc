@@ -23,7 +23,7 @@ function metaboxes( array $meta_boxes ) {
         'name' => 'Header Banner Text',
         'desc' => 'Shows in banner above Header Text for Pages',
         'id'   => $prefix . 'header_banner_text',
-        'type' => 'text',
+        'type' => 'textarea_small',
       ),
       array(
         'name' => 'Header Text',

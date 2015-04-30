@@ -8,7 +8,7 @@ if ($header_bg = \Firebelly\Utils\get_header_bg($post)) {
 if ($post->post_type == 'program')
   $header_banner_text = $post->post_title;
 else
-  $header_banner_text = get_post_meta($post->ID, '_cmb2_header_banner_text', true);
+  $header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));
 // Custom fields for header text
 $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
