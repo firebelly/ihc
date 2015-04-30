@@ -1,5 +1,6 @@
         <div class="share">
-          <span class="st_facebook_custom">facebook</span>
-          <span class="st_twitter_custom">twitter</span>
-          <span class="st_email_custom" >email</span>
+          <span>share:</span>
+          <span class="icon-facebook"></span>
+          <span class="icon-twitter"></span>
+          <span class="st_email_custom hide" >email</span>
         </div>

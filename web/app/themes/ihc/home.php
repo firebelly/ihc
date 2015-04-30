@@ -19,7 +19,6 @@ $post = get_page_by_path('/news');
 		<div class="focus-area-topic">Focus Area:</div>
 		<button class="button">Filter</button>
 	</div>
-
 	<div class="load-more-container masonry article-list">
 		<?php 
 		while (have_posts()) : the_post();
@@ -30,7 +29,7 @@ $post = get_page_by_path('/news');
 	</div>
 	<div class="load-more" data-page-at="<?= $paged ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
 	</div>
-<aside>
+</section>
+<aside class="page-with-img">
 		<?php include(locate_template('templates/thought-of-the-day.php')); ?>
 	</aside>
-</section>

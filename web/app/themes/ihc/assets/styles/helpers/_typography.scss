@@ -12,6 +12,10 @@ h1 {
   line-height:30px;
 }
 
+h2 {
+  font-size:$lg;
+}
+
 h3 {
   @include font-style1;
 }

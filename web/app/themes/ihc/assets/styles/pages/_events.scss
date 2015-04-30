@@ -1,8 +1,5 @@
 // Events
-
 .events {
-}
-
 .event {
   position: relative;
   margin: 0;
@@ -13,81 +10,113 @@
     float: left;
   }
 
+    .article-date {
+      position: absolute;
+      width: 50px;
+      min-height: 60px;
+      margin-left: 4px;
+      padding: 7px 13px;
+      top: 0;
+      right: 0;
+
+      &::after {
+        top: 100%;
+        right: 0;
+        position: absolute;
+        width: 0;
+        height: 0;
+        content: '';
+        border-top: 20px solid $color-bg;
+        border-right: 25px solid transparent;
+      }
+
+      .month {
+        @include font-style1;
+      }
+
+      .day {
+        @include font-style2;
+        font-size: $lg;
+      }    
+    }
+
   .article-content {
     min-height: 205px;
     margin: 0 0 4px 0;
-    @include tablet {
-      margin-right: 4px;
-    }
-    padding: 20px 20px 25px;
-    padding: 20px 50px 30px 25px; 
     background: $dk-blue;
-  }
-  &:hover .article-content {
+
+    @include tablet {
+    margin-right: 4px;
+    }
+
+    &:hover{
     background:$white;
-    h1 a,
-    h3,
-    p,
-    .more a,
-    .register {
+      
+      h1 a,
+      h3,
+      p,
+      .more a,
+      .register {
       color:$dk-blue;
-    }
+      }
 
-    h1 a {
-      border-bottom:1px solid $dk-blue;
-    }
-  }
+      h1 a {
+      border-bottom-color:$dk-blue;
+      }
 
-  .article-date {
-    position: absolute;
-    width: 50px;
-    height: 60px;
-    margin-left: 4px;
-    padding: 7px 13px;
-    top: 0;
-    right: 0;
-
-    .month {
-      @include font-style1;
-    }
-
-    .day {
-      @include font-style2;
-      font-size: $lg;
-    }
-
-    &::after {
-      top: 100%;
-      right: 0;
+    .article-date {
       position: absolute;
-      width: 0;
-      height: 0;
-      content: '';
-      border-top: 20px solid $color-bg;
-      border-right: 25px solid transparent;
+      width: 50px;
+      height: 60px;
+      margin-left: 4px;
+      padding: 7px 13px;
+      top: 0;
+      right: 0;
+
+      .month {
+        @include font-style1;
+      }
+
+      .day {
+        @include font-style2;
+        font-size: $lg;
+      }
     }
-  } //end of time section
 
-  h1 a {
-    @include font-style2($color-bg);
-    text-transform:capitalize;
-    border-bottom:1px solid $color-bg;
-    font-size:$lg;
-    line-height:1.5em;
-  }
+    // h1 a {
+    //   @include font-style2($color-bg);
+    //   text-transform:capitalize;
+    //   border-bottom:1px solid $color-bg;
+    //   font-size:$lg;
+    //   line-height:1.5em;
+    // }
 
-  h3, 
-  p, 
-  .more a, 
-  .register  {
-    @include font-style1($color-bg);
-  }
-    
-  .more a::before {
-    content:'+ ';
-  }
+    .more a::before {
+      content:'+ ';
+    }
 
-  .register::before {
-    content: "\bb  ";
+    .register::before {
+      content: "\bb  ";
+    }
   }
-} // end .event
+ }
+}
+}
+//main-events-page
+.tab {
+  background: $dk-blue;
+  display: inline-block;
+  position: absolute;
+  height: 30px;
+  bottom: 100%;
+  margin: 0;
+  padding: 5px 15px;
+  z-index: 100;
+  
+  h4 {
+    color:$white;
+    border-bottom:1px solid $white;
+    line-height: 16px;
+    padding-top: 2px;
+  }
+}

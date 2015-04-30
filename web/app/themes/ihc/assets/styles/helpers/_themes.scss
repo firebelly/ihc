@@ -15,6 +15,9 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
           color: $white;
         }
       }
+      p.medium-up{
+        color: $bg-color;
+      }
     }
     //.button hover
     .button:hover {
@@ -32,16 +35,54 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     .button:hover {
       color: $bg-color;
     }
+    //aside
+      .about-us-sidebar,
+      .our-work-sidebar,
+      .support-us-sidebar {
+        h3 {
+        color:$bg-color;
+        margin-bottom:20px;
+        }
+
+        p{
+          color:$bg-color;
+        }
+        ul li {
+          color:$bg-color;
+           span {
+            border-bottom:2px solid $bg-color;
+          }
+        .button {
+          color:$dk-blue;
+          
+          &:hover {
+            background: $dk-blue;
+            color: $bg-color;
+            border: 3px solid $dk-blue;
+          }
+        }
+        &:hover {
+          color:$white;
+          span {
+            border-bottom-color:$white;
+          }
+        }
+
+        }
+      }
+
     // events
-   .event .article-content{
-      h1 a,
+   .event {
+    .article-content {
+      .article-title a,
       h3,
       p,
-      .more a{
+      .more a { 
       color: $bg-color;
       }
 
-      h1 a{
+      .article-title a{
+        line-height: 37px;
         border-bottom-color: $bg-color;
       }
 
@@ -53,41 +94,27 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         h1 a,
         h3,
         p,
-        .more a{
+        .more a {
         color: $dk-blue;
         }
 
-        h1 a{
+        h1 a {
         border-bottom-color: $dk-blue;
         }
       }
     }
+  }
     // article tags
-    .article-content-wrap{
-      .article-tag a{
+    .article-content-wrap {
+      .article-tag a {
         color: $bg-color;
-      }
-    }
-    // aside
-    aside .support-us-sidebar {
-      p {
-        color: $bg-color;
-      }
-
-      h3 {
-        color: $bg-color;
-      }
-      .button:hover {
-        background: $dk-blue;
-        color: $bg-color;
-        border: 3px solid $dk-blue;
       }
     }
     // time stamps
-    .article-list time,
-    .article-date {
+    .article .article-date,
+    .event .article-date {
       background: $bg-color;
-      &:after {
+      &::after {
         border-top-color: $bg-color;
       }
     }
@@ -134,13 +161,30 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       .summary-flag::after {
         border-bottom-color: $accent-color;
       }
-    //aside links
-    aside {
-      a {
-        color: $accent-color;
-        &:hover {
-          color: $white;
+
+    //aside
+      .about-us-sidebar,
+      .support-us-sidebar {
+        h3 {
+        color:$accent-color;
+        margin-bottom:20px;
         }
+      }
+
+      .our-work-sidebar{
+        p a {
+          color: $accent-color;
+
+          &:hover {
+            color: $white;
+          }
+        }
+      }
+
+    aside {
+      a.register,
+      a.add-to-calendar{
+        color: $accent-color;
       }
     }
   }

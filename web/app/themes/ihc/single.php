@@ -26,9 +26,16 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
         <?php endif; ?>
         <div class="entry-content user-content">
           <?php the_content(); ?>
+        <?php get_template_part('templates/share'); ?>
         </div>
-        <?php comments_template('/templates/comments.php'); ?>
       </div>
+      <?php comments_template('/templates/comments.php'); ?>
     </section>
+    <aside>
+      <h4 class="flag">Related Event</h4>
+      <div class="events load-more-container article-list masonry">
+        <?php echo \Firebelly\PostTypes\Event\get_events(1); ?>
+  </div>
+    </aside>
   </article>
 <?php endwhile; ?>

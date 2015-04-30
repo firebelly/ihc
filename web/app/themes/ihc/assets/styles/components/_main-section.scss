@@ -1,7 +1,5 @@
 // Main Section
-
 .flag {
-  background: $color-accent;
   display: inline-block;
   position: absolute;
   height: 30px;
@@ -18,8 +16,8 @@
     width: 0;
     height: 0;
     content: '';
-    border-top: 20px solid $color-accent;
     border-right: 25px solid transparent;
+    border-top: 20px solid $color-accent;
   }
 }
 .summary-flag {
@@ -36,7 +34,7 @@
     left: 0;
     border-top: none;
     border-right: none;
-    border-bottom: 20px solid $color-accent;
     border-left: 25px solid transparent;
+    border-top: 20px solid $color-accent;
   }
 }

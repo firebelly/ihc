@@ -23,7 +23,7 @@ $body_content = apply_filters('the_content', $post->post_content);
 
 </section>
 
-<aside>
+<aside class="page-with-img">
   <?php include(locate_template('templates/thought-of-the-day.php')); ?>
   <div class="our-work-sidebar"><?= get_the_block('Our Work Sidebar') ?></div>
 </aside>

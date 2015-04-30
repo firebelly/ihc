@@ -1,7 +1,22 @@
 // About Us page
 
 .about-us.page {
-  section.main{
-    margin-top:180px;
+  .entry-content {
+    position: relative;
+  }
+  .one-column {
+    margin-top: 180px;
+    padding:30px 25px;
+
+    h3.about-section {
+      color:$dk-blue;
+    }
+
+    h4 {
+      text-transform: capitalize;
+      color:$dk-blue;
+      font-size:$med;
+      margin-bottom:10px;
+    }
   }
 }

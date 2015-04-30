@@ -14,16 +14,20 @@ if ($header_image) {
 $header_text = $focus_area->description;
 ?>
 
-<header class="<?= $header_class ?>"<?= $header_bg ?>>
-  <h1 class="header-text"><?= $header_text ?></h1>
-</header>
+  <header class="page-header <?= $header_class ?>"<?= $header_bg ?>>
+    <h4 class="flag"><?= $post->post_title ?></h4>
+
+    <h1 class="header-text">
+      <?= $header_text ?>
+    </h1>
+  </header>
 
 <section class="main">
   <?php 
   $related_programs = \Firebelly\PostTypes\Program\get_programs($focus_area->slug);
   if ($related_programs):
   ?>
-    <h2 class="banner"><?= $focus_area->name ?> Programs:</h2>
+    <h4 class="flag"><?= $focus_area->name ?> Programs:</h4>
     <div class="masonry articles-list">
       <?php 
       foreach ($related_programs as $program_post):
@@ -38,9 +42,9 @@ $header_text = $focus_area->description;
   <div class="article-list">
     <?= \Firebelly\Utils\get_related_event_post($focus_area->slug) ?>
     <?= \Firebelly\Utils\get_related_news_post($focus_area->slug) ?>
-  </div>
-  <div class="contacts user-content">
-    <h3>Focus Area Contacts</h3>
-    <?= $focus_area_contacts ?>
+    <div class="contacts user-content">
+      <h3>Focus Area Contacts</h3>
+      <?= $focus_area_contacts ?>
+    </div>
   </div>
 </aside>

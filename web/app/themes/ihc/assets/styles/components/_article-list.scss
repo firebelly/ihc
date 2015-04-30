@@ -15,15 +15,6 @@ time {
 } 
 
 // Blog & News
-
-.article-date {
-  @include font-style1;
-  height: 30px;
-  padding: 5px 15px;
-  float: right;
-  margin-left: 4px;
-}
-
 .article-list {
   @include clearfix;
   .article {
@@ -38,10 +29,8 @@ time {
   }
 
   .article-content {
-    position: relative;
     background: $white;
     position: relative;
-    margin: 0 0 4px 0;
     @include tablet {
       margin-right: 4px;
     }
@@ -49,17 +38,26 @@ time {
     .article-content-wrap {
       padding: 30px 50px 30px 25px;
     }
-    
-    .article-tag {
-      margin-bottom: 5px;
-      text-decoration: underline;
-    }
 
     .article-date,
     .article-category,
     .article-tag {
       @include font-style1;
     }
+
+    .article-date {
+      height: 30px;
+      padding: 5px 15px;
+      float: right;
+      margin-left: 4px;
+    }
+
+    .article-category {
+      color:$dk-blue;
+      margin-bottom: 5px;
+      text-decoration: underline;
+    }
+
 
     .article-excerpt,
     .article-title a {
@@ -73,15 +71,14 @@ time {
         color:$dk-blue;
       }
     }
-      
-    .article-category {
-      color:$dk-blue;
-      margin-top:30px;
+
+    .article-tag { 
+      text-decoration: underline;
     }
 
     .article-title {
       margin-bottom: 10px;
-
+        
       a {
         @include font-style2;
         font-size: $lg;
@@ -106,4 +103,32 @@ time {
       }
     }
   }
-} // end of article-content
+}
+
+.articles-list {
+  .program {
+    float:left;
+    background:$white;
+    width: 49.7%;
+    padding: 30px 25px;
+    margin-bottom:4px;
+
+    h2 {
+      text-transform: uppercase;
+      display:inline-block;
+      line-height: 40px;
+
+      span {
+        border-bottom:3px solid $dk-blue;
+      }
+    }
+
+    .more {
+      margin-top:20px;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+}

@@ -14,7 +14,8 @@ $body_content = apply_filters('the_content', $post->post_content);
   <h4 class="flag"><?= $content_banner_text ?></h4>
 <?php endif; ?>
   <div class="entry-content user-content">
-   <div class="make-donation">
+   <div class="two-column">
+   
     <div class="column">
       <?= get_the_block('Support Us Page Block 1') ?>
     </div>
@@ -22,14 +23,14 @@ $body_content = apply_filters('the_content', $post->post_content);
       <?= get_the_block('Support Us Page Block 2') ?>
     </div>
    </div>
-   <div class="support-purchases">
+   <div class="one-column">
     <h4 class="flag">Support Through your purchases</h4>
     <div class="column">
       <?= get_the_block('Support Us Page Block 3') ?>
     </div>
   </div>
 </section>
-<aside>
+<aside class="page-with-img">
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
   <div class="support-us-sidebar">
   <?= get_the_block('Support Us Sidebar') ?>
