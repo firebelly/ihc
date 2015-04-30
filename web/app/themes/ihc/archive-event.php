@@ -6,13 +6,13 @@
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $per_page = get_option('posts_per_page');
 $past_events = get_query_var('past_events', 0);
+$pr = get_query_var('pr', '');
+$fa = get_query_var('fa', '');
 $total_events = \Firebelly\PostTypes\Event\get_num_events($past_events);
 $total_pages = ceil($total_events / $per_page);
 
 $page = get_page_by_path('/events');
 $page_content = apply_filters('the_content', $page->post_content);
-$pr = filter_input(INPUT_GET, 'pr');
-$fa = filter_input(INPUT_GET, 'fa');
 ?>
 
 <header>
@@ -31,6 +31,7 @@ $fa = filter_input(INPUT_GET, 'fa');
   </ul>
   <form class="filters" action="/events" method="get">
     <div class="program-topic">Program: 
+      <input type="hidden" name="past_events" value="<?= $past_events ?>">
       <select name="pr">
       <option value="">ALL</option>
         <?php 
@@ -52,7 +53,7 @@ $fa = filter_input(INPUT_GET, 'fa');
       <option value="">ALL</option>
         <?php $focus_areas = get_terms('focus_area');
         foreach ($focus_areas as $focus_area): ?>
-        <option <?= $fa==$focus_area->term_id ? 'selected' : '' ?> value="<?= $focus_area->term_id ?>"><?= $focus_area->name ?></option>
+        <option <?= $fa==$focus_area->slug ? 'selected' : '' ?> value="<?= $focus_area->slug ?>"><?= $focus_area->name ?></option>
       <?php endforeach; ?>
       </select>
     </div>
