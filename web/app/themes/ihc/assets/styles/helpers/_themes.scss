@@ -164,6 +164,7 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       }
     }
     // all page flags
+    .flag-tabs a.active,
     .flag {
       background: $accent-color;
       &:after {
