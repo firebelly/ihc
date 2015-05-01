@@ -1,5 +1,4 @@
-// Sitewide elements
-
+// Main Section
 .flag {
   display: inline-block;
   position: absolute;
@@ -66,7 +65,7 @@ aside {
 }
 
 //pages with header img & thought of day section
-aside.page-with-img {
+.page-with-img {
   margin-top: -270px;
 
   .about-us-sidebar,
@@ -81,9 +80,9 @@ aside.page-with-img {
       margin-bottom: 20px;
     
     a {
-      @include font-style1;
-      border: none;
-      margin-bottom: 50px;
+    @include font-style1;
+    border: none;
+    margin-bottom: 50px;
     }
   }
 
@@ -107,8 +106,8 @@ aside.page-with-img {
     }
   }
 
-  .single-program-sidebar,
-  .contacts {
+  .contacts,
+  .single-program-sidebar {
     padding: 30px 25px 30px 0;
   }
 
@@ -118,7 +117,6 @@ aside.page-with-img {
       color: $dk-blue;
       font-size: 14px;
       margin-bottom: 0;
-      font-weight: 700;
     }
   }
 }
