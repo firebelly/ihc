@@ -1,7 +1,4 @@
 // Single Posts
-.single-event,
-.single-post {
-}
 
 .post {
   margin: 80px 0 100px;
@@ -10,17 +7,16 @@
   section.main{
     position: relative;
 
-      // &::after {
-      //   top: 100%;
-      //   right: 0;
-      //   position: absolute;
-      //   width: 0;
-      //   height: 0;
-      //   content: '';
-      //   border-top: 20px solid $black;
-      //   border-right: 25px solid transparent;
-      // }
-  
+// &::after {
+//   top: 100%;
+//   right: 0;
+//   position: absolute;
+//   width: 0;
+//   height: 0;
+//   content: '';
+//   border-top: 20px solid $black;
+//   border-right: 25px solid transparent;
+// }
     .article-date {
       @include font-style1;  
       position: absolute;
@@ -30,6 +26,36 @@
       padding: 5px 15px 5px;
       margin-left: 4px;
     }
+
+    .event {
+      .article-date {
+        width: 50px;
+        min-height: 60px;
+        padding-top: 7px;
+        padding-left: 13px;
+
+        &::after {
+          top: 100%;
+          right: 0;
+          position: absolute;
+          width: 0;
+          height: 0;
+          content: '';
+          border-top: 20px solid $color-bg;
+          border-right: 25px solid transparent;
+        }
+
+          .month {
+          @include font-style1;
+          }
+
+          .day {
+          @include font-style2;
+          font-size: $lg;
+          }    
+      }
+    }
+    
     .post-inner {
       background:#fff;
 
@@ -45,7 +71,7 @@
       }
 
       header {
-      padding:40px 50px 0 25px;
+        padding:40px 50px 0 25px;
 
         h1 {
           display: inline-block;
@@ -112,3 +138,7 @@
     }
   }
 }
+
+
+
+  

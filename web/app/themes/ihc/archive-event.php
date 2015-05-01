@@ -37,7 +37,7 @@ $page_content = apply_filters('the_content', $page->post_content);
 		<?php echo \Firebelly\PostTypes\Event\get_events(); ?>
 	</div>
 	
-	<div class="load-more events" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">Load More</a></div>
+	<div class="load-more events button" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy" href="#">Load More</a></div>
 
 </section>
 <aside class="page-with-img">

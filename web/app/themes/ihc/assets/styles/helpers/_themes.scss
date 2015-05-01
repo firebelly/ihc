@@ -11,13 +11,11 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       color: $bg-color;
       a {
         color: $bg-color;
-        &:hover {
-          color: $white;
-        }
+        border-bottom-color:$bg-color;
       }
       p.medium-up{
         color: $bg-color;
-      }
+      } 
     }
     //.button hover
     .button:hover {
@@ -72,12 +70,14 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       }
 
     // events
-   .event {
+  section.main {
+  .event {
     .article-content {
       .article-title a,
       h3,
       p,
-      .more a { 
+      .more a,
+      .register { 
       color: $bg-color;
       }
 
@@ -85,42 +85,32 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         line-height: 37px;
         border-bottom-color: $bg-color;
       }
-
-      time {
-        color: $dk-blue;
-      }
-      
-      &:hover {
-        h1 a,
-        h3,
-        p,
-        .more a {
-        color: $dk-blue;
-        }
-
-        h1 a {
-        border-bottom-color: $dk-blue;
-        }
-      }
     }
   }
+  }
     // article tags
-    .article-content-wrap {
+  .article-content-wrap {
       .article-tag a {
         color: $bg-color;
       }
     }
     // time stamps
     .article .article-date,
-    .event .article-date {
+    .event .article-date, 
+    .post .article-date {
       background: $bg-color;
       &::after {
         border-top-color: $bg-color;
       }
     }
-  }//end of bg-color
-}
-
+  }
+    //about-us-page
+      .columns {
+        h3{
+          color: $bg-color;
+        }
+      }
+ }//end of bg-color
 
 $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 @each $accent-color in $accent-colors {
@@ -189,6 +179,12 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 
       .page-with-img .our-work-sidebar p a {
         color: $accent-color;
+      }
+
+      .contacts {
+        h3 {
+          color: $accent-color;
+        }
       }
     }
   }

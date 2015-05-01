@@ -4,9 +4,28 @@
   .entry-content {
     position: relative;
   }
+
   .one-column {
     margin-top: 180px;
     padding:30px 25px;
+
+    .columns {
+      column-count: 3;
+      -webkit-column-count: 3;
+      -moz-column-columns: 3;
+
+      column-width: 33.33%;
+      column-width: 33.33%;
+      column-width: 33.33%;
+
+      column-gap: 25px;      
+      -webkit-column-gap: 25px;
+      -moz-column-gap: 25px;
+    }
+
+    .expanded {
+      padding:0;
+    }
 
     h3.about-section {
       color:$dk-blue;

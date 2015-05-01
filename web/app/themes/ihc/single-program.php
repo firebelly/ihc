@@ -15,10 +15,10 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
 
   <section class="main">
   <?php if ($content_banner_text): ?>
-    <h4 class="banner"><?= $content_banner_text ?></h4>
+    <h4 class="flag"><?= $content_banner_text ?></h4>
   <?php endif; ?>
     <div class="entry-content user-content">
-      <h2 class="banner"><?= $header_banner_text ?></h2>
+      <h4 class="flag"><?= $header_banner_text ?></h4>
       <?= $body_content ?>
     </div>
     
@@ -33,7 +33,7 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
         $block_body = apply_filters('the_content', $page_block['body']);
       ?>
       <div class="entry-content user-content">
-        <h2 class="banner"><?= $block_title ?></h2>
+        <h4 class="flag"><?= $block_title ?></h4>
         <?= $block_body ?>
       </div>
     <?php endforeach; ?>

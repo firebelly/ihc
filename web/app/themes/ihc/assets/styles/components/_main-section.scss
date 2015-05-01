@@ -35,6 +35,63 @@
     border-top: none;
     border-right: none;
     border-left: 25px solid transparent;
-    border-top: 20px solid $color-accent;
+    border-bottom: 20px solid $color-accent;
   }
 }
+
+aside {
+  position: relative;
+  float: right;
+  height: 100%;
+  width: 27.24%;
+  padding-left: 4.54%;
+  margin-bottom: 100px;
+}
+//pages with header img & thought of day section
+aside.page-with-img {
+  margin-top: -270px;
+
+  .about-us-sidebar,
+  .our-work-sidebar,
+  .support-us-sidebar {
+    background: $dk-blue;
+    padding: 30px 50px 30px 25px;
+    margin-right: -20%;
+  }
+
+  .our-work-sidebar p {
+      margin-bottom: 20px;
+    
+    a {
+    @include font-style1;
+    border: none;
+    margin-bottom: 50px;
+    }
+  }
+
+  .support-us-sidebar p a {
+      color: $white;
+      border-bottom: 1px solid $white;
+      font-weight: 700;
+  }
+
+  .about-us-sidebar {
+    p {
+      margin-bottom:40px;
+    }
+    ul li {
+      margin-bottom:20px;
+
+      span {
+        @include font-style1;
+        font-size:$lg;
+      }
+    }
+  }
+
+  .contacts {
+    padding: 30px 25px 30px 0;
+  }
+}
+
+

@@ -186,135 +186,36 @@ section {
   }
 }
 
-aside {
-  position: relative;
-  float: right;
-  height: 100%;
-  width: 27.24%;
-  padding-left: 4.54%;
-  margin-bottom: 100px;
-
-  //single event page
-  .event-details {
-    position: relative;
-    background: $white;
-    padding: 25px 30px;
-    margin-bottom: 60px;
-
-    h3 {
-      margin-bottom:10px;
-    }
-
-    p { 
-      font-size:$med;
-      line-height:20px;
-      margin-bottom:30px;
-    }
-    
-    .register,
-    .add-to-calendar {
-      @include font-style1;
-    }
-
-    // .register::before {
-    //   content: '>>';
-    // }
-
-    .add-to-calendar::before {
-      content: '+ ';
-    }
-  }
-
-  // related blog & news
-  .article-list {
-    position: relative;
-
-    .article,
-    .event {
-      float: none;
-      width: 100%;
-      margin: 0;
-
-      .article-content {
-        margin: 0;
-        padding: 0;
-        background: $white;
-        color: $dk-blue;
-      }
-      .article-title a{
-        color: $dk-blue;
-        border-bottom:1px solid $dk-blue;
-      }
-
-      h3,
-      p,
-      .more a {
-        color: $dk-blue;
-        font-weight: 900;
-      }
-
-      .article-date {
-        height: 30px;
-        padding: 5px 15px;
-        float: right;
-        margin-left: 4px;
-      }
-
-      .view-all {
-        padding: 0 0 30px 25px;
-        background: #fff;
-
-      .button {
-        width: 70%;
-        &:hover {
-        color: $white;
-        }
-      }
-    }
-  }
-}
-}
-//pages with header img & thought of day section
-aside.page-with-img {
-  margin-top: -270px;
-
-  .about-us-sidebar,
-  .our-work-sidebar,
-  .support-us-sidebar {
+.event {
+  .article-content {
     background: $dk-blue;
-    padding: 30px 50px 30px 25px;
-    margin-right: -20%;
-  }
 
-  .our-work-sidebar p {
-      margin-bottom: 20px;
-    
-    a {
-    @include font-style1;
-    border: none;
-    margin-bottom: 50px;
-    }
-  }
-
-  .support-us-sidebar p a {
+    h1 a,
+    h3,
+    p,
+    .more a,
+    .register {
       color: $white;
-      border-bottom: 1px solid $white;
-      font-weight: 700;
-  }
-
-  .about-us-sidebar {
-    p {
-      margin-bottom:40px;
     }
-    ul li {
-      margin-bottom:20px;
 
-      span {
-        @include font-style1;
-        font-size:$lg;
-      }
+    h1 a {
+      border-bottom-color:$white;
+    }
+
+  &:hover {
+    background: $white;
+
+    h1 a,
+    h3,
+    p,
+      .more a,
+      .register {
+      color: $dk-blue;
+    }
+
+    h1 a {
+      border-bottom-color:$dk-blue;
     }
   }
+ }
 }
-
-

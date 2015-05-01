@@ -62,7 +62,7 @@
 
   }
 
-  section.event-cal {
+section.event-cal {
     @include clearfix;
     position: relative;
     @include tablet {
@@ -77,62 +77,116 @@
         position: relative;
       }
     }
+
+  .event {
+    .article-content {
+      background: $dk-blue;
+
+      h1 a,
+      h3,
+      p,
+      .more a,
+      .register {
+        color: $white;
+      }
+
+      h1 a {
+        border-bottom-color:$white;
+      }
+
+    &:hover {
+      background: $white;
+
+      h1 a,
+      h3,
+      p,
+        .more a,
+        .register {
+        color: $dk-blue;
+      }
+
+      h1 a {
+        border-bottom-color:$dk-blue;
+      }
+    }
+    }
   }
 
   .events-buttons {
     .load-more {
       margin: 20px 0 10px;
     }
+
     @include tablet {
       width: 49%;
       position: absolute;
       bottom: 50px;
       right: 10px;
       text-align: center;
+      
       .load-more {
         margin: 20px 0 30px;
         a {
           width: 60%;
         }
       }
+      
       .view-all {
         a {
           width: 60%;
         }
       }
     }
-
   }
+}
 
 
-  section.news {
-    @include clearfix;
+section.news {
+  @include clearfix;
     padding: 0 4.54%;
     position: relative;
-    .load-more {
-      margin: 20px 0 10px;
-    }
-
 
     @include tablet {
       z-index: 20;
       margin-right: 0;
-
-      .news-buttons {
-        .view-all,
-        .load-more {
-          display: inline;
-        }
-        a {
-          display: inline-block;
-          margin: 0;
-        }
-        margin: 30px 0 100px; 
-        text-align: center;
-      }
     }
 
-  } // end .news
+  .article {
+    .article-content-wrap:hover {
+      background: $dk-blue;
+
+      .article-category a,
+      .article-title a,
+      .article-excerpt p {
+        color: $white;
+      }
+
+      .article-title a {
+        border-bottom-color: $white;
+      }
+    }
+  }
+
+  .news-buttons {
+    margin: 30px 0 100px; 
+    text-align: center;
+    
+    .view-all,
+    .load-more {
+      display: inline;
+    }
+    
+    a {
+      display: inline-block;
+      margin: 0;
+    }
+  }
+
+  .load-more {
+    margin: 20px 0 10px;
+  }
+
+}
 
   .article-list {
     .article {
@@ -141,5 +195,4 @@
       }
     }
   }
-
 }

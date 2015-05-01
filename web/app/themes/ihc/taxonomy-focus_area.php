@@ -15,7 +15,7 @@ $header_text = $focus_area->description;
 ?>
 
   <header class="page-header <?= $header_class ?>"<?= $header_bg ?>>
-    <h4 class="flag"><?= $post->post_title ?></h4>
+    <h4 class="flag"><?= $focus_area->name ?></h4>
 
     <h1 class="header-text">
       <?= $header_text ?>
@@ -38,7 +38,7 @@ $header_text = $focus_area->description;
   <?php endif; ?>
 </section>
 
-<aside>
+<aside class="page-with-img">
   <div class="article-list">
     <?= \Firebelly\Utils\get_related_event_post($focus_area->slug) ?>
     <?= \Firebelly\Utils\get_related_news_post($focus_area->slug) ?>
