@@ -23,6 +23,7 @@ time {
     margin-bottom: 4px;
 
     @include tablet {
+      cursor: pointer;
       float: left;
       width: 33%;
     }
