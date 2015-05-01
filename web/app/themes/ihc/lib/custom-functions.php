@@ -108,7 +108,11 @@ function get_resources($post) {
   $output = '<ul class="resources">';
   foreach ((array)$files as $attachment_id => $attachment_url) {
     $post = get_post($attachment_id);
-    $output .= '<li><a target="_blank" href="' . $attachment_url . '">' . $post->post_title . '</a></li>';
+    if ($post) {
+      $output .= '<li><a target="_blank" href="' . $attachment_url . '">' . $post->post_title . '</a></li>';
+    } else {
+      $output .= '<li>Attachment not found.</li>';
+    }
   }
   $output .= '</ul>';
   return $output;
@@ -125,7 +129,7 @@ function get_related_event_post($post_or_focus_area) {
     $focus_area = $post_or_focus_area;
   }
   $output = '<div class="related related-events">';
-  $output = '<h4 class="flag">Attend an Event</h4>';
+  $output .= '<h4 class="flag">Attend an Event</h4>';
   $output .= \Firebelly\PostTypes\Event\get_events(1, $focus_area);
   $output .= '<p class="more button"><a href="/events/">View All Events</a></p>';
   $output .= '</div>';
@@ -143,7 +147,7 @@ function get_related_news_post($post_or_focus_area) {
   }
   $posts = get_posts('numberposts=1&focus_area='.$focus_area);
   $output = '<div class="related related-news">';
-  $output = '<h4 class="flag">Blog &amp; News</h4>';
+  $output .= '<h4 class="flag">Blog &amp; News</h4>';
   ob_start();
   foreach ($posts as $news_post)
     include(locate_template('templates/article-news.php'));
