@@ -228,10 +228,12 @@ var IHC = (function($) {
     $document.on('click', '.load-more a', function(e) {
       e.preventDefault();
       var $load_more = $(this).closest('.load-more');
-      var post_type = $load_more.hasClass('events') ? 'event' : 'news';
+      var post_type = $load_more.attr('data-post-type') ? $load_more.attr('data-post-type') : 'news';
       var page = parseInt($load_more.attr('data-page-at'));
       var per_page = parseInt($load_more.attr('data-per-page'));
       var past_events = (post_type==='events') ? parseInt($load_more.attr('data-past-events')) : 0;
+      var focus_area = (post_type==='events') ? $load_more.attr('data-focus-area') : '';
+      var program = (post_type==='events') ? $load_more.attr('data-program') : '';
       var more_container = $load_more.parents('section').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
       $.ajax({
@@ -242,7 +244,9 @@ var IHC = (function($) {
               post_type: post_type,
               page: page + 1,
               per_page: per_page,
-              past_events: past_events
+              past_events: past_events,
+              focus_area: focus_area,
+              program: program
           },
           success: function(data) {
             var $data = $(data);
@@ -250,7 +254,12 @@ var IHC = (function($) {
             more_container.append($data).removeClass('loading');
             more_container.masonry('appended', $data, true);
             $load_more.attr('data-page-at', page+1);
-            _getMapPoints();
+            if (post_type==='event') {
+              _getMapPoints();
+              if ($('.home.page').length) {
+                $('.event-cal').addClass('loaded-more').find('.events-buttons').removeClass('initial');
+              }
+            }
 
             // hide load more if last page
             if ($load_more.attr('data-total-pages') <= page + 1) {
