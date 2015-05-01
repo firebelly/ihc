@@ -1,4 +1,6 @@
 <?php 
+if (!$post) return; // if we somehow get to this partial w/out a post
+
 $header_class = '';
 if ($header_bg = \Firebelly\Utils\get_header_bg($post)) {
   $header_class = 'with-image';

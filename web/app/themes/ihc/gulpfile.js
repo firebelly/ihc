@@ -219,6 +219,7 @@ gulp.task('watch', function() {
   browserSync({
     files: [path.dist, '{lib,templates}/**/*.php', '*.php'],
     proxy: config.devUrl,
+    notify: false,
     snippetOptions: {
       whitelist: ['/wp-admin/admin-ajax.php'],
       blacklist: ['/wp-admin/**']

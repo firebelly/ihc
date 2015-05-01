@@ -185,7 +185,7 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get Num Events, past or future
  */
-function get_num_events($past='') {
+function get_num_events($past='', $focus_area='', $program='') {
   global $wpdb;
   $count = $wpdb->get_var($wpdb->prepare(
     "
@@ -230,12 +230,10 @@ function get_events($num_posts='', $focus_area='', $program='') {
     );
   }
   if (!empty($program)) {
-    $args['meta_query'] = array(
-      array(
-        'key' => '_cmb2_related_program',
-        'value' => array( (int)$program ),
-        'compare' => 'IN',
-      )
+    $args['meta_query'][] = array(
+      'key' => '_cmb2_related_program',
+      'value' => array( (int)$program ),
+      'compare' => 'IN',
     );
   }
  
@@ -373,12 +371,12 @@ function get_ical_date($time, $incl_time=true){
 // }
 
 /**
- * Add query var "past_events"
+ * Add query vars for events
  */
 function add_query_vars_filter($vars){
   $vars[] = "past_events";
-  $vars[] = "pr";
-  $vars[] = "fa";
+  $vars[] = "filter_program";
+  $vars[] = "filter_focus_area";
   return $vars;
 }
 add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
@@ -421,54 +419,35 @@ function get_event_details($post) {
  * Alter WP query for Event archive pages
  * if "past_events" is set, only shows archived events
  */
-function event_query($query){
-  global $wp_the_query;
-  if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
-    $meta_query = array(
-      array(
-        'key' => '_cmb2_event_start',
-        'value' => time(),
-        'compare' => (get_query_var('past_events') ? '<=' : '>')
-      )
-    );
-    $query->set('meta_query', $meta_query);
-    $query->set('orderby', 'meta_value_num');
-    $query->set('meta_key', '_cmb2_event_start');
-    // show events oldest->newest
-    $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
-  }
-}
-add_action('pre_get_posts', __NAMESPACE__ . '\\event_query');
+// currently site is just using get_events() in event-post-type.php
+// 
+// function event_query($query){
+//   global $wp_the_query;
+//   if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
+//     $meta_query = array(
+//       array(
+//         'key' => '_cmb2_event_start',
+//         'value' => time(),
+//         'compare' => (get_query_var('past_events') ? '<=' : '>')
+//       )
+//     );
+//     $query->set('meta_query', $meta_query);
+//     $query->set('orderby', 'meta_value_num');
+//     $query->set('meta_key', '_cmb2_event_start');
+//     // show events oldest->newest
+//     $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
 
-
-// function add_rewrite_rules($aRules) {
-//   $aNewRules = array('msds-pif/([^/]+)/?$' => 'index.php?pagename=msds-pif&msds_pif_cat=$matches[1]');
-//   $aRules = $aNewRules + $aRules;
-//   return $aRules;
+//     // focus area?
+//     if (get_query_var('event_focus_area')) {
+//       $tax_query = array(
+//         array(
+//           'taxonomy' => 'focus_area',
+//           'field' => 'id',
+//           'terms' => get_query_var('event_focus_area')
+//         )
+//       );
+//       $query->set('tax_query', $tax_query);
+//     }
+//   }
 // }
-// add_filter('rewrite_rules_array', __NAMESPACE__ . '\\add_rewrite_rules');
-
-add_action( 'pre_get_posts', __NAMESPACE__ . '\\event_filters' );
-function event_filters($query) {
-  if( $query->is_main_query() && !is_admin() && is_post_type_archive('event') ) {
-    if (!empty($_GET['pr'])) {
-      $query->set('meta_query', array(
-        array(
-          'key' => '_cmb2_related_program',
-          'value' => array( (int)$_GET['pr'] ),
-          'compare' => 'IN',
-        )
-      ));
-    }
-    if (!empty($_GET['fa'])) {
-      $query->set('tax_query', array(
-        array(
-          'taxonomy' => 'focus_area',
-          'field' => 'id',
-          'terms' => (int)$_GET['fa']
-        )
-      ));
-    }
-    return $query;
-  }
-}
+// add_action('pre_get_posts', __NAMESPACE__ . '\\event_query');

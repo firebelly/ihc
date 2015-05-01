@@ -1,4 +1,5 @@
-// Main Section
+// Sitewide elements
+
 .flag {
   display: inline-block;
   position: absolute;
@@ -80,9 +81,9 @@ aside.page-with-img {
       margin-bottom: 20px;
     
     a {
-    @include font-style1;
-    border: none;
-    margin-bottom: 50px;
+      @include font-style1;
+      border: none;
+      margin-bottom: 50px;
     }
   }
 

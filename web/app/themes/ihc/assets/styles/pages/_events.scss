@@ -87,30 +87,13 @@
  }
 }
 
-//main-events-page
+// Main events page
 .archive {
-  .tab {
-    background: $dk-blue;
-    display: inline-block;
-    position: absolute;
-    height: 30px;
-    bottom: 100%;
-    margin: 0;
-    padding: 5px 15px;
-    z-index: 100;
-  
-    h4 {
-      color:$white;
-      border-bottom:1px solid $white;
-      line-height: 16px;
-      padding-top: 2px;
-    }
-  }
-
   .event {
     width: 33.33%;
     margin-bottom: 4px;
     .article-content {
+      transition: background $transition-speed;
       background: $dk-blue;
 
       h1 a,
@@ -125,26 +108,61 @@
         border-bottom-color:$white;
       }
 
-    &:hover {
-      background: $white;
+      &:hover {
+        background: $white;
 
-      h1 a,
-      h3,
-      p,
-        .more a,
-        .register {
-        color: $dk-blue;
-      }
+        h1 a,
+        h3,
+        p,
+          .more a,
+          .register {
+          color: $dk-blue;
+        }
 
-      h1 a {
-        border-bottom-color:$dk-blue;
+        h1 a {
+          border-bottom-color:$dk-blue;
+        }
       }
-    }
     }
   }
 
 
   .load-more {
     margin: 40px 40% 0;
+  }
+}
+
+// Tab navigation w/ current item matching .flag styling -- currently only used in Events
+.flag-tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    display: inline;
+  }
+  a {
+    display: inline-block;
+    position: relative;
+    background: $dk-blue;
+    height: 30px;
+    margin: -30px -5px 0 0;
+    padding: 5px 15px;
+    color:$white;
+    text-decoration: underline;
+    @include font-style1;
+    &.active {
+      text-decoration: none;
+      background: $color-accent;
+      &::after {
+        top: 100%;
+        right: 0;
+        position: absolute;
+        width: 0;
+        height: 0;
+        content: '';
+        border-right: 25px solid transparent;
+        border-top: 20px solid $color-accent;
+      }
+    }
   }
 }
