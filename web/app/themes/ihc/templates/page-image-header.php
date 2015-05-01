@@ -24,7 +24,7 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
   <?php get_template_part('templates/share'); ?>
 
   <div class="header-text">
-    <?= $header_text ?>
+    <h1><?= $header_text ?></h1>
     <?php if ($secondary_header_text): ?>
       <div class="secondary-header-text summary-flag"><?= $secondary_header_text ?></div>
     <?php endif; ?>

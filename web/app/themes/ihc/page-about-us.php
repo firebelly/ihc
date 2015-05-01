@@ -15,19 +15,22 @@ $body_content = apply_filters('the_content', $post->post_content);
     <h4 class="flag"><?= $content_banner_text ?></h4>
   <?php endif; ?>
   <div class="one-column">
-    <article>
+    <article class="row">
+     <div class="plus"></div><div class="minus hide"></div>
         <h3 class="about-section">Board</h3>
         <div class="columns">
         <?= get_the_block('About Us Board') ?>
       </div>
       </article>
-      <article class="expanded">
+      <article class="row expanded">
+      <div class="plus hide"></div><div class="minus"></div>
       <h3 class="about-section">Staff & Contacts</h3>
       <div class="columns">
         <?= get_the_block('About Us Staff & Project Contacts') ?>
       </div>
       </article>
-      <article>
+      <article class="row">
+      <div class="plus"></div><div class="minus hide"></div>
       <h3 class="about-section">Supporters</h3>
       <div class="columns">
         <?= get_the_block('About Us Supporters') ?>

@@ -185,37 +185,3 @@ section {
     text-align: center;
   }
 }
-
-.event {
-  .article-content {
-    background: $dk-blue;
-
-    h1 a,
-    h3,
-    p,
-    .more a,
-    .register {
-      color: $white;
-    }
-
-    h1 a {
-      border-bottom-color:$white;
-    }
-
-  &:hover {
-    background: $white;
-
-    h1 a,
-    h3,
-    p,
-      .more a,
-      .register {
-      color: $dk-blue;
-    }
-
-    h1 a {
-      border-bottom-color:$dk-blue;
-    }
-  }
- }
-}

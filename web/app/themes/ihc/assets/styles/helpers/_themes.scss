@@ -6,6 +6,29 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
   .background-#{$i} { 
     // main page bg
     background: $bg-color;
+
+    .focus-list {
+      li a{
+        &:hover {
+          color: $bg-color;
+          border-bottom-color: $bg-color;
+        }
+      }
+    }
+
+    .user-content {
+      .columns h3 {
+        color: $bg-color;
+      }
+
+      .plus,
+      .minus {
+        &::before,
+        &::after {
+          background: $bg-color;
+        }
+      }
+    }
     // footer text & links
     footer.main {
       color: $bg-color;
@@ -104,13 +127,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       }
     }
   }
-    //about-us-page
-      .columns {
-        h3{
-          color: $bg-color;
-        }
-      }
- }//end of bg-color
+}//end of bg-color
 
 $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 @each $accent-color in $accent-colors {
@@ -140,6 +157,12 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
         }
       }
     }
+    //user-content
+    .user-content {
+      .block-content h4 {
+        color: $accent-color;
+      }
+    }
     // all page flags
     .flag {
       background: $accent-color;
@@ -151,8 +174,13 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       .summary-flag::after {
         border-bottom-color: $accent-color;
       }
-
+.thought {
+  blockquote p:hover {
+    color: $accent-color;
+  }
+}
     //aside
+      .single-program-sidebar,
       .about-us-sidebar,
       .support-us-sidebar {
         h3 {

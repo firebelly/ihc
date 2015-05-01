@@ -131,7 +131,7 @@ function get_related_event_post($post_or_focus_area) {
   $output = '<div class="related related-events">';
   $output .= '<h4 class="flag">Attend an Event</h4>';
   $output .= \Firebelly\PostTypes\Event\get_events(1, $focus_area);
-  $output .= '<p class="more button"><a href="/events/">View All Events</a></p>';
+  $output .= '<p class="more"><a class="button" href="/events/">View All Events</a></p>';
   $output .= '</div>';
 }
 
@@ -152,7 +152,7 @@ function get_related_news_post($post_or_focus_area) {
   foreach ($posts as $news_post)
     include(locate_template('templates/article-news.php'));
   $output .= ob_get_clean();
-  $output .= '<p class="more button"><a href="/news/">View All Articles</a></p>';
+  $output .= '<p class="view-all"><a class="button" href="/news/">View All Articles</a></p>';
   $output .= '</div>';
   return $output;
 }
