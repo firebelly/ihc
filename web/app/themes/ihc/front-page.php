@@ -5,14 +5,16 @@
 
 $total_events = \Firebelly\PostTypes\Event\get_num_events();
 $total_news = wp_count_posts('post')->publish;
+$header_bg = \Firebelly\Utils\get_header_bg($post);
 ?>
 
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
-<div class="page-header with-image">
+
+<header class="page-header with-image"<?= $header_bg ?>>
   <h4 class="flag">Year-round & State-wide</h4>
   <h1><span>Be</span>g<span>innin</span>g<span> the conversation</span>.<br> We fuel inquiry through conversation in ways that strengthen society.</h1>
   <p class="accent">image caption/link to event to bring it front and center for instant access.</p>
-</div>
+</header>
 
 <section class="focus-areas">
   <h4 class="flag">Our Focus Areas</h4>

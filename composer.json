@@ -60,7 +60,7 @@
     "wpackagist-plugin/limit-login-attempts" : "*",
     "wpackagist-plugin/wordpress-importer" : "*",
     "wpackagist-plugin/intuitive-custom-post-order": "*",
-    "wpackagist-plugin/cmb2": ">=2.0.2",
+    "wpackagist-plugin/cmb2": ">=2.0.5",
     "wpackagist-plugin/accordion-shortcodes": "2.1.1",
     "wpackagist-plugin/multiple-content-blocks": ">=3.2",
     "mustardBees/cmb-field-select2": ">=2.0.4"

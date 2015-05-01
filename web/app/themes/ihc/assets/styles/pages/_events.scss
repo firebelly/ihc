@@ -81,8 +81,7 @@
     }
 
     .register::before {
-    // tmp commenting out so source maps work!
-      content:'›› ';
+      content: "\bb  ";
     }
   }
  }

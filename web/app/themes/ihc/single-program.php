@@ -5,7 +5,7 @@
 use Firebelly\Utils;
 $content_banner_text = get_post_meta($post->ID, '_cmb2_content_banner_text', true);
 $body_content = apply_filters('the_content', $post->post_content);
-$header_banner_text = get_post_meta($post->ID, '_cmb2_header_banner_text', true);
+$header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));
 $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
 ?>
 
@@ -22,7 +22,7 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
       <?= $body_content ?>
     </div>
     
-    <?php 
+    <?php
     $page_blocks = get_post_meta($post->ID, '_cmb2_page_blocks', true);
 
     foreach ($page_blocks as $page_block):
@@ -38,6 +38,20 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
       </div>
     <?php endforeach; ?>
 
+    if ($page_blocks):
+      foreach ($page_blocks as $page_block):
+        $block_title = $block_body = '';
+        if (!empty($page_block['title']))
+          $block_title = $page_block['title'];
+        if (!empty($page_block['body']))
+          $block_body = apply_filters('the_content', $page_block['body']);
+        ?>
+        <div class="entry-content user-content">
+          <h4 class="flag"><?= $block_title ?></h2>
+          <?= $block_body ?>
+        </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
   </section>
 
   <aside>

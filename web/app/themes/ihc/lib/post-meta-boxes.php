@@ -41,6 +41,39 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
+  $meta_boxes['related_program'] = array(
+    'id'            => 'related_program',
+    'title'         => __( 'Related Program(s)', 'cmb2' ),
+    'object_types'  => array( 'event', 'post', ),
+    'context'       => 'side',
+    'priority'      => 'low',
+    'show_names'    => true,
+    'fields'        => array(
+      array(
+          // 'name'     => 'If set, will trump finding a related program by Focus Area',
+          'desc'     => 'Select Program(s)...',
+          'id'       => $prefix . 'related_program',
+          'type'     => 'multicheck',
+          // 'type'     => 'pw_multiselect', // currently multiple=true is causing issues with pw_multiselect -nate 4/30/15 
+          'multiple' => true, 
+          'options'  => \Firebelly\CMB2\get_post_options(['post_type' => 'program', 'numberposts' => -1]),
+      ),
+    ),
+  );
+
+
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
+
+/**
+ * Remove tags
+ */
+add_action('admin_menu', __NAMESPACE__ . '\remove_sub_menus');
+function remove_sub_menus() {
+    remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post_tag');
+}
+function remove_post_metaboxes() {
+  remove_meta_box( 'tagsdiv-post_tag','post','normal' ); // Tags Metabox
+}
+add_action('admin_menu', __NAMESPACE__ . '\remove_post_metaboxes');

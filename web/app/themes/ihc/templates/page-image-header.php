@@ -1,16 +1,14 @@
 <?php 
-$header_class = $header_bg = '';
-if (has_post_thumbnail($post->ID)) {
-  $background_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'full', true);
+$header_class = '';
+if ($header_bg = \Firebelly\Utils\get_header_bg($post)) {
   $header_class = 'with-image';
-  $header_bg = ' style="background-image:url('.$background_image.');"';
 }
 
 // Programs use title for banner text
 if ($post->post_type == 'program')
   $header_banner_text = $post->post_title;
 else
-  $header_banner_text = get_post_meta($post->ID, '_cmb2_header_banner_text', true);
+  $header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));
 // Custom fields for header text
 $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);

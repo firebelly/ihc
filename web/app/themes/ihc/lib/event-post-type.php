@@ -178,24 +178,6 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
-  $meta_boxes['event_program'] = array(
-    'id'            => 'event_program',
-    'title'         => __( 'Event Program', 'cmb2' ),
-    'object_types'  => array( 'event', ),
-    'context'       => 'normal',
-    'priority'      => 'high',
-    'show_names'    => true,
-    'fields'        => array(
-      array(
-          'name'    => 'Related Program',
-          'desc'    => 'If set, shows in sidebar, otherwise uses Focus Area',
-          'id'      => $prefix . 'event_program',
-          'type'    => 'pw_select',
-          'options' => \Firebelly\CMB2\get_post_options(['post_type' => 'program', 'numberposts' => -1]),
-      ),
-    ),
-  );
-
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
@@ -221,7 +203,7 @@ function get_num_events($past='') {
 /**
  * Get Events
  */
-function get_events($num_posts='', $focus_area='') {
+function get_events($num_posts='', $focus_area='', $program='') {
   if (!$num_posts) $num_posts = get_option('posts_per_page');
   $args = [
     'numberposts' => $num_posts,
@@ -247,7 +229,16 @@ function get_events($num_posts='', $focus_area='') {
         )
     );
   }
-
+  if (!empty($program)) {
+    $args['meta_query'] = array(
+      array(
+        'key' => '_cmb2_related_program',
+        'value' => array( (int)$program ),
+        'compare' => 'IN',
+      )
+    );
+  }
+ 
   $event_posts = get_posts($args);
   if (!$event_posts) return false;
   $output = '';
@@ -386,6 +377,8 @@ function get_ical_date($time, $incl_time=true){
  */
 function add_query_vars_filter($vars){
   $vars[] = "past_events";
+  $vars[] = "pr";
+  $vars[] = "fa";
   return $vars;
 }
 add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
@@ -446,3 +439,36 @@ function event_query($query){
   }
 }
 add_action('pre_get_posts', __NAMESPACE__ . '\\event_query');
+
+
+// function add_rewrite_rules($aRules) {
+//   $aNewRules = array('msds-pif/([^/]+)/?$' => 'index.php?pagename=msds-pif&msds_pif_cat=$matches[1]');
+//   $aRules = $aNewRules + $aRules;
+//   return $aRules;
+// }
+// add_filter('rewrite_rules_array', __NAMESPACE__ . '\\add_rewrite_rules');
+
+add_action( 'pre_get_posts', __NAMESPACE__ . '\\event_filters' );
+function event_filters($query) {
+  if( $query->is_main_query() && !is_admin() && is_post_type_archive('event') ) {
+    if (!empty($_GET['pr'])) {
+      $query->set('meta_query', array(
+        array(
+          'key' => '_cmb2_related_program',
+          'value' => array( (int)$_GET['pr'] ),
+          'compare' => 'IN',
+        )
+      ));
+    }
+    if (!empty($_GET['fa'])) {
+      $query->set('tax_query', array(
+        array(
+          'taxonomy' => 'focus_area',
+          'field' => 'id',
+          'terms' => (int)$_GET['fa']
+        )
+      ));
+    }
+    return $query;
+  }
+}
