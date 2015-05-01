@@ -105,30 +105,35 @@ section.main {
     }
   }
 }
+//focus area single page
+.tax-focus_area {
+  .articles-list {
+    width: 100%;
 
-.articles-list {
-  .program {
-    float:left;
-    background:$white;
-    width: 49.7%;
-    padding: 30px 25px;
-    margin-bottom:4px;
+    .program {
+      float:left;
+      background:$white;
+      width: 49%;
+      padding: 30px 25px;
+      margin-bottom:4px;
+      margin-right:4px;
 
-    h2 {
-      text-transform: uppercase;
-      display:inline-block;
-      line-height: 40px;
+      h2 {
+        text-transform: uppercase;
+        display:inline-block;
+        line-height: 40px;
 
-      span {
-        border-bottom:3px solid $dk-blue;
+        span {
+          border-bottom:3px solid $dk-blue;
+        }
       }
-    }
 
-    .more {
-      margin-top:20px;
+      .more {
+        margin-top:20px;
 
-      &:hover {
-        color: $white;
+        &:hover {
+          color: $white;
+        }
       }
     }
   }

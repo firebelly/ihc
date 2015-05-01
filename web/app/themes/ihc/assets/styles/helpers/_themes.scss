@@ -149,6 +149,12 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
         }
       }
     }
+    //user-content
+    .user-content {
+      .block-content h4 {
+        color: $accent-color;
+      }
+    }
     // all page flags
     .flag {
       background: $accent-color;
@@ -162,6 +168,7 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       }
 
     //aside
+      .single-program-sidebar,
       .about-us-sidebar,
       .support-us-sidebar {
         h3 {

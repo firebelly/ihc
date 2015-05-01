@@ -63,6 +63,7 @@ aside {
   padding-left: 4.54%;
   margin-bottom: 100px;
 }
+
 //pages with header img & thought of day section
 aside.page-with-img {
   margin-top: -270px;
@@ -110,4 +111,17 @@ aside.page-with-img {
   }
 }
 
+//single program page
+.single-program {
+  position:relative;
+  .page-block {
+    position: relative;
 
+    .block-content {
+      position: relative;
+      background: $white;
+      padding: 30px 25px 10px;
+      margin-bottom: 60px;
+    }
+  }
+}

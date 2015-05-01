@@ -14,13 +14,6 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
   <?php get_template_part('templates/page', 'image-header'); ?>
 
   <section class="main">
-  <?php if ($content_banner_text): ?>
-    <h4 class="flag"><?= $content_banner_text ?></h4>
-  <?php endif; ?>
-    <div class="entry-content user-content">
-      <h4 class="flag"><?= $header_banner_text ?></h4>
-      <?= $body_content ?>
-    </div>
     
     <?php
     $page_blocks = get_post_meta($post->ID, '_cmb2_page_blocks', true);
@@ -33,9 +26,9 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
         if (!empty($page_block['body']))
           $block_body = apply_filters('the_content', $page_block['body']);
         ?>
-        <div class="entry-content user-content">
+        <div class="entry-content user-content page-block">
           <h4 class="flag"><?= $block_title ?></h4>
-          <?= $block_body ?>
+          <div class="block-content"><?= $block_body ?></div>
         </div>
       <?php endforeach; ?>
     <?php endif; ?>
@@ -46,7 +39,7 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
       <?= Utils\get_related_event_post($post) ?>
       <?= Utils\get_related_news_post($post) ?>
     </div>
-
+    <div class="single-program-sidebar">
     <?php if ($resources = Utils\get_resources($post)): ?>
       <h3>Resources</h3>
       <?= $resources ?>
@@ -55,5 +48,6 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
     <?php if ($addl_info): ?>
       <?= apply_filters('the_content', $addl_info); ?>
     <?php endif; ?>
+    </div>
   </aside>
 </article>

@@ -2,15 +2,45 @@
 
 .user-content {
   h1,h2,h3,h4,h5,h6 {
+
   }
+  h1 {
+    @include font-style2;
+    font-size: $xl;
+
+    a {
+      border-bottom: 3px solid $dk-blue;
+    }
+  }
+
+  h2 {
+    @include font-style1;
+    font-size: $lg;
+    display:inline-block;
+    line-height: 40px;
+    span {
+          border-bottom:3px solid $dk-blue;
+        }
+  }
+  h3 {
+    margin-bottom: 20px;
+    @include font-style1;
+    color: $dk-blue;
+  }
+
   p {
     margin-top: 0;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
+
   ol,
   ul {
-    padding: 0;
+    padding: 0 0 0 50px;
+    margin-bottom: 20px; 
     li {
+      font-size: $med;
+      line-height: 20px;
+      color: $dk-blue;
       ol,
       ul {
         font-size: 1em;
@@ -34,10 +64,43 @@
   }
   a {
     color: $dk-blue;
+    text-decoration: underline;
+  }
+
+.block-content {
+    h5 {
+      @include font-style1;
+      color: $dk-blue;
+      margin:0;
+      padding:0;
+      display:inline;
+    }
+
+    h6 {
+      @include font-style2;
+      font-size: $small;
+      margin-left: 0;
+      margin-bottom: 0;
+      padding:0;
+      display:inline;
+      text-transform: uppercase;
+    }
+
+    blockquote p{
+      @include font-style3;
+      color: $dk-blue;
+    }
+  }
+
+aside {
+  .single-program-sidebar {
+
+    h4 {
+      text-transform: capitalize;
+      color: $dk-blue;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
   }
 }
-
-.page-header {
-  h1 {
-  }
 }
