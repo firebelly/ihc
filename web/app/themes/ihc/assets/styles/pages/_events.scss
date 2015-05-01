@@ -4,6 +4,7 @@
   position: relative;
   margin: 0;
   @include tablet {
+    cursor: pointer;
     padding: 0 6.249%;
     padding: 0;
     width: 49%;
