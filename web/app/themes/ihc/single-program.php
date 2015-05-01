@@ -25,19 +25,6 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
     <?php
     $page_blocks = get_post_meta($post->ID, '_cmb2_page_blocks', true);
 
-    foreach ($page_blocks as $page_block):
-      $block_title = $block_body = '';
-      if (!empty($page_block['title']))
-        $block_title = $page_block['title'];
-      if (!empty($page_block['body']))
-        $block_body = apply_filters('the_content', $page_block['body']);
-      ?>
-      <div class="entry-content user-content">
-        <h4 class="flag"><?= $block_title ?></h4>
-        <?= $block_body ?>
-      </div>
-    <?php endforeach; ?>
-
     if ($page_blocks):
       foreach ($page_blocks as $page_block):
         $block_title = $block_body = '';
@@ -47,7 +34,7 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
           $block_body = apply_filters('the_content', $page_block['body']);
         ?>
         <div class="entry-content user-content">
-          <h4 class="flag"><?= $block_title ?></h2>
+          <h4 class="flag"><?= $block_title ?></h4>
           <?= $block_body ?>
         </div>
       <?php endforeach; ?>
