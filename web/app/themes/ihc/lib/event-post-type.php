@@ -185,7 +185,7 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get Num Events, past or future
  */
-function get_num_events($past='') {
+function get_num_events($past='', $focus_area='', $program='') {
   global $wpdb;
   $count = $wpdb->get_var($wpdb->prepare(
     "
@@ -230,12 +230,10 @@ function get_events($num_posts='', $focus_area='', $program='') {
     );
   }
   if (!empty($program)) {
-    $args['meta_query'] = array(
-      array(
-        'key' => '_cmb2_related_program',
-        'value' => array( (int)$program ),
-        'compare' => 'IN',
-      )
+    $args['meta_query'][] = array(
+      'key' => '_cmb2_related_program',
+      'value' => array( (int)$program ),
+      'compare' => 'IN',
     );
   }
  
@@ -377,8 +375,8 @@ function get_ical_date($time, $incl_time=true){
  */
 function add_query_vars_filter($vars){
   $vars[] = "past_events";
-  $vars[] = "event_program";
-  $vars[] = "event_focus_area";
+  $vars[] = "filter_program";
+  $vars[] = "filter_focus_area";
   return $vars;
 }
 add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );
