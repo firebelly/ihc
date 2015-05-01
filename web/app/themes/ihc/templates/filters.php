@@ -8,7 +8,7 @@ $filter_focus_area = get_query_var('filter_focus_area', '');
 $past_events = get_query_var('past_events', 0);
 $post_type = is_post_type_archive('event') ? 'event' : 'post';
 ?>
-  <form class="filters" action="/<?= $post_type ?>s/" method="get">
+  <form class="filters" action="/<?= $post_type == 'event' ? 'events' : 'news' ?>/" method="get">
     <div class="program-topic">Program: 
       <input type="hidden" name="past_events" value="<?= $past_events ?>">
       <select name="filter_program">
