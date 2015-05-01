@@ -2,8 +2,7 @@
 .flag {
   display: inline-block;
   position: absolute;
-  text-align: center;
-  min-height: 30px;
+  height: 30px;
   bottom: 100%;
   margin: 0;
   padding: 5px 15px;
@@ -19,9 +18,6 @@
     content: '';
     border-right: 25px solid transparent;
     border-top: 20px solid $color-accent;
-  }
-  a {
-    color: #fff;
   }
 }
 .summary-flag {
@@ -42,6 +38,22 @@
     border-bottom: 20px solid $color-accent;
   }
 }
+
+.focus-list {
+      padding: 20px 0;
+
+      li a {
+        @include font-style1;
+        border-bottom: 3px $dk-blue solid;
+        font-size: $lg;
+        line-height: 40px;
+
+        &:hover{
+          color: $color-bg;
+          border-bottom: 3px $color-bg solid;
+        }
+      }
+    }
 
 aside {
   position: relative;

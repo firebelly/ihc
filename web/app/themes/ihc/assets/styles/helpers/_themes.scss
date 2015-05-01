@@ -6,6 +6,15 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
   .background-#{$i} { 
     // main page bg
     background: $bg-color;
+
+    .focus-list {
+      li a{
+        &:hover {
+          color: $bg-color;
+          border-bottom-color: $bg-color;
+        }
+      }
+    }
     // footer text & links
     footer.main {
       color: $bg-color;
