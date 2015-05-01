@@ -14,11 +14,9 @@ $post = get_page_by_path('/news');
 <section class="main">
 <div class="entry-content">
 	<h4 class="flag">Filter Posts</h4>
-	<div class="filters">
-		<div class="program-topic">Program:</div>
-		<div class="focus-area-topic">Focus Area:</div>
-		<button class="button">Filter</button>
-	</div>
+
+	<?php include(locate_template('templates/filters.php')); ?>
+
 	<div class="load-more-container masonry article-list">
 		<?php 
 		while (have_posts()) : the_post();
