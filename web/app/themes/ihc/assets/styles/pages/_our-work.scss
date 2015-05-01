@@ -8,15 +8,16 @@
 }
 
 .focus-area {
-    @include clearfix;
-    position: relative;
-    margin: 0 0 4px 0;
+  @include clearfix;
+  position: relative;
+  margin: 0 0 4px 0;
 
-    a{
-      color:$dk-blue;
-    }
+  a {
+    color:$dk-blue;
+  }
 
-   .info {
+  .info {
+    transition: background $transition-speed, color $transition-speed;
     position: relative;
     width: 63.33%;
     height: 100%;
@@ -25,11 +26,11 @@
     float: left;
 
     h1 a {
-    font-weight: 900;
-    color: $dk-blue;
-    border-bottom: 3px solid $dk-blue;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+      font-weight: 900;
+      color: $dk-blue;
+      border-bottom: 3px solid $dk-blue;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     p {
@@ -38,12 +39,14 @@
   }
 
   .related {
+    transition: background $transition-speed, color $transition-speed;
     background: #f8f4ef;
     width: 36.67%;
     padding: 40px 50px 0 25px;
     float: left;
 
     &::after {
+      transition: background $transition-speed, color $transition-speed;
       width: 36.67%;
       content: '';
       background: #f8f4ef;

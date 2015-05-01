@@ -28,13 +28,14 @@ time {
     }
   }
 
-.article-content {
-  background: $white;
-  position: $white;
-  @include tablet {
-    margin-right: 4px;
-  }
-  .article-content-wrap {
+  .article-content {
+    transition: background $transition-speed, color $transition-speed;
+    background: $white;
+    position: $white;
+    @include tablet {
+      margin-right: 4px;
+    }
+    .article-content-wrap {
       padding: 30px 50px 30px 25px;
     }
 
@@ -90,7 +91,7 @@ time {
 
 section.main {
   .article {
-    .article-content-wrap:hover {
+    .article-content:hover {
       background: $dk-blue;
 
       .article-category a,

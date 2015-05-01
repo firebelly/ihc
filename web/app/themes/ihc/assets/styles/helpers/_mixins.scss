@@ -26,6 +26,7 @@
 // Button style
 @mixin button-style {
   @include font-style1($dk-blue);
+  transition: background $transition-speed, color $transition-speed;
   border: 3px solid $dk-blue;
   padding: 3px 5px 2px;
   text-align: center;

@@ -22,11 +22,12 @@ $bg-green: #b7ddba; //pastel green
 $bg-pink: #edbaba; 
 $bg-beige: #e5d3be;
 $bg-grey: #c6c9cc;
-$bg-peach:#eac6af;
+$bg-peach: #eac6af;
 
-//color transitions
-$color-accent:$lt-orange;
-$color-bg:$bg-green;
+// Color transitions
+$color-accent: $lt-orange;
+$color-bg: $bg-green;
+$transition-speed: .2s;
 
 // Breakpoints
 $breakpoint-small: 480px;
@@ -36,7 +37,7 @@ $breakpoint-huge: 3000px;
 
 $column: 4.54;
 
-//font-sizes
+// Font sizes
 $small: 12px; //12px
 $med: 14px; //14px
 $lg: 21px; //21px

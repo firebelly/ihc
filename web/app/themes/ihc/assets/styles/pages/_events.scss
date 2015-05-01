@@ -111,6 +111,7 @@
     width: 33.33%;
     margin-bottom: 4px;
     .article-content {
+      transition: background $transition-speed;
       background: $dk-blue;
 
       h1 a,
@@ -125,21 +126,21 @@
         border-bottom-color:$white;
       }
 
-    &:hover {
-      background: $white;
+      &:hover {
+        background: $white;
 
-      h1 a,
-      h3,
-      p,
-        .more a,
-        .register {
-        color: $dk-blue;
-      }
+        h1 a,
+        h3,
+        p,
+          .more a,
+          .register {
+          color: $dk-blue;
+        }
 
-      h1 a {
-        border-bottom-color:$dk-blue;
+        h1 a {
+          border-bottom-color:$dk-blue;
+        }
       }
-    }
     }
   }
 
