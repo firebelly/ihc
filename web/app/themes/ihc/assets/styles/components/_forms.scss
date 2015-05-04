@@ -22,7 +22,6 @@ form {
     border: none;
     padding-right: 28px;
     background: none;
-    max-width: 200px;
     -webkit-appearance: none;
     &:focus {
       outline: none;
@@ -48,6 +47,7 @@ form {
   border-bottom: 1px solid $dk-blue;
   select {
     @include font-style1;
+    max-width: 200px;
     font-weight: bold;
     text-transform: uppercase;
   }
