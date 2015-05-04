@@ -1,25 +1,5 @@
 // Forms
 
-// Custom select styles
-
-.select-wrapper {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    &:after {
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 30px;
-      width: 30px;
-      content: '';
-      border-left: 1px solid $white;
-      pointer-events: none;
-      background: url("../images/icon-arrow-down.svg") no-repeat center center;
-      background-size: 13px 8px;
-    }
-}
-
 // General form hooha
 form {
   .actions {
@@ -30,17 +10,51 @@ form {
   }
 }
 
-
-.select-wrapper select {
-    border: none;
+// Custom select styles
+.select-wrapper {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  select {
+    color: $dk-blue;
     box-shadow: none;
     border-radius: 0;
-    padding-right: 18px;
-    background-color: transparent;
-    background-image: none;
+    border: none;
+    padding-right: 28px;
+    background: none;
+    max-width: 200px;
     -webkit-appearance: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    content: '';
+    pointer-events: none;
+    border-left: 1px solid $white;
+    background: url("../images/icon-arrow-down.svg") no-repeat center center;
+    background-size: 13px 8px;
+  }
 }
 
-.select-wrapper select:focus {
-    outline: none;
+// Events/News filters have slightly different style
+.filters .select-wrapper {
+  display: inline-block;
+  border-bottom: 1px solid $dk-blue;
+  select {
+    @include font-style1;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  &::after {
+    height: 26px;
+    width: 24px;
+    border: none;
+    background-color: $white;
+  }
 }
