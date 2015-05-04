@@ -116,3 +116,26 @@
   }
 }
 
+.tax-focus_area {
+  .articles-list {
+    .program:hover {
+      h2 span a,
+      p {
+        color: $white;
+      }
+      
+      h2 span{
+        border-bottom-color: $white;
+      }
+
+      .more {
+        border-color: $white;
+        
+        a {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
