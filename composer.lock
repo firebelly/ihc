@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ed01014b299bf6af9db65619dd962c10",
+    "hash": "56a7699c8118451d8f42a75f97c308d3",
     "packages": [
         {
             "name": "composer/installers",
@@ -236,15 +236,15 @@
         },
         {
             "name": "wpackagist-plugin/accordion-shortcodes",
-            "version": "2.1.1",
+            "version": "2.2",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/accordion-shortcodes/",
-                "reference": "tags/2.1.1"
+                "reference": "tags/2.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.1.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -256,7 +256,7 @@
         },
         {
             "name": "wpackagist-plugin/cmb2",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/cmb2/",
