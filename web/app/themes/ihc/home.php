@@ -5,8 +5,8 @@
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $per_page = get_option('posts_per_page');
-$total_news = wp_count_posts('post')->publish;
-$total_pages = ceil($total_news / $per_page);
+$total_posts = $GLOBALS['wp_query']->found_posts;
+$total_pages = ceil($total_posts / $per_page);
 $post = get_page_by_path('/news');
 ?>
 
@@ -26,7 +26,9 @@ $post = get_page_by_path('/news');
         endwhile; 
         ?>
       </div>
-      <div class="load-more" data-page-at="<?= $paged ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+      <?php if ($total_pages>1): ?>
+        <div class="load-more" data-page-at="<?= $paged ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+      <?php endif ?>
     <?php else: ?>    
       <div class="notice">
         <p>No posts found.</p>
