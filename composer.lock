@@ -256,7 +256,7 @@
         },
         {
             "name": "wpackagist-plugin/cmb2",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/cmb2/",

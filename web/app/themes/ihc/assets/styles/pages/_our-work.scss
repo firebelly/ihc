@@ -65,11 +65,16 @@
       margin-bottom:30px;
     }
 
-    .programs a {
-      @include font-style1;
-      border-bottom: 1px solid $dk-blue;
-      display: inline-block;
-      line-height: 12px;
+    .programs {
+      li {
+        margin-bottom: 10px;
+      }
+
+      a {
+        @include font-style1;
+        border-bottom: 1px solid $dk-blue;
+        line-height: 12px;
+      }
     }
   }
 
@@ -78,18 +83,13 @@
       background: $color-accent;
         
       h1 a,
-      p,
-      .button {
+      p {
         color: $white;
       }
 
-      .button {
+      .more .button {
+        color: $white;
         border-color: $white;
-
-        &:hover {
-          border-color: $dk-blue;
-          color: $dk-blue;
-        }
       }
 
       h1 a {
@@ -111,10 +111,6 @@
       .programs a {
         color: $white;
         border-bottom: 1px solid $white;
-        &:hover {
-          color: $dk-blue;
-          border-color: $dk-blue;
-        }
       }
     }
   }
