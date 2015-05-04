@@ -1,6 +1,6 @@
 <?php
 /**
- * Extra fields for Posts
+ * Extra fields, admin changes, and filters for Posts
  */
 
 namespace Firebelly\PostTypes\Posts;
@@ -77,3 +77,37 @@ function remove_post_metaboxes() {
   remove_meta_box( 'tagsdiv-post_tag','post','normal' ); // Tags Metabox
 }
 add_action('admin_menu', __NAMESPACE__ . '\remove_post_metaboxes');
+
+/**
+ * Add filter for Focus Area and Related Program(s)
+ */
+function news_filters($query){
+  global $wp_the_query;
+  if ($wp_the_query === $query && !is_admin() && (is_home() || is_archive())) {
+
+    // Filter by focus area?
+    if (get_query_var('filter_focus_area')) {
+      $tax_query = array(
+        array(
+          'taxonomy' => 'focus_area',
+          'field' => 'slug',
+          'terms' => get_query_var('filter_focus_area')
+        )
+      );
+      $query->set('tax_query', $tax_query);
+    }
+
+    // Filter by program?
+    if (get_query_var('filter_program')) {
+      $meta_query = array(
+        array(
+          'key' => '_cmb2_related_program',
+          'value' => [get_query_var('filter_program')],
+          'compare' => 'IN',
+        )
+      );
+      $query->set('meta_query', $meta_query);
+    }
+  }
+}
+add_action('pre_get_posts', __NAMESPACE__ . '\\news_filters');
