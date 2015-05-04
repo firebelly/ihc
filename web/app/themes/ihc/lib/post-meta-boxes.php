@@ -83,7 +83,7 @@ add_action('admin_menu', __NAMESPACE__ . '\remove_post_metaboxes');
  */
 function news_filters($query){
   global $wp_the_query;
-  if ($wp_the_query === $query && !is_admin() && (is_home() || is_archive())) {
+  if ($wp_the_query === $query && !is_admin() && !is_post_type_archive('event') && (is_home() || is_archive())) {
 
     // Filter by focus area?
     if (get_query_var('filter_focus_area')) {
