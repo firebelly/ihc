@@ -12,7 +12,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
       <time class="article-date" datetime="<?php echo date('c', $post_date_timestamp); ?>"><?php echo date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
       <?php if (has_post_thumbnail()) {
         $thumb = wp_get_attachment_url(get_post_thumbnail_id());
-        echo '<div class="article-thumb" style="background-image:url('.$thumb.');"><img class="hide" src="'.$thumb.'"></div>';
+        echo '<div class="article-thumb" style="background-image:url('.$thumb.');"></div>';
       } ?>
       <div class="post-inner">
         <header>

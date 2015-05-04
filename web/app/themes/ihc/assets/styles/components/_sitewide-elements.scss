@@ -52,12 +52,12 @@
         font-size: $lg;
         line-height: 40px;
 
-        &:hover{
-          color: $color-bg;
-          border-bottom: 3px $color-bg solid;
-        }
+          &:hover{
+            color: $color-bg;
+            border-bottom: 3px $color-bg solid;
+          }
       }
-    }
+}
 
 aside {
   position: relative;
