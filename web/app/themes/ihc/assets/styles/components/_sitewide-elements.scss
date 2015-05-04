@@ -8,7 +8,10 @@
   margin: 0;
   padding: 5px 15px;
   z-index: 100;
-  color: white;
+  color: $white;
+  a {
+    color: $white;
+  }
 
   &::after {
     top: 100%;
