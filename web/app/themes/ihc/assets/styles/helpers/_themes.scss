@@ -141,7 +141,7 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
     nav .navbar-nav li a:hover {
       border-bottom-color: $accent-color;
     }
-    // focus areas
+    // our work page
     .focus-area {
       &:hover {
         .info {
@@ -157,6 +157,12 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
             background: lighten($accent-color, 25%);
           }
         }
+      }
+    }
+    //single focus area
+    .articles-list {
+      .program:hover {
+        background: $accent-color;
       }
     }
     //user-content
