@@ -47,6 +47,9 @@
       background:#fff;
 
       .share {
+        a {
+          text-decoration: none;
+        }
         @include font-style1;
         color:$dk-blue;
         float:right;

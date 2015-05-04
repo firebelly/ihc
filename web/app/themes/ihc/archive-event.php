@@ -11,8 +11,8 @@ $filter_focus_area = get_query_var('filter_focus_area', '');
 $total_events = \Firebelly\PostTypes\Event\get_num_events($past_events, $filter_program, $filter_focus_area);
 $total_pages = ceil($total_events / $per_page);
 
-$page = get_page_by_path('/events');
-$page_content = apply_filters('the_content', $page->post_content);
+$post = get_page_by_path('/events');
+$page_content = apply_filters('the_content', $post->post_content);
 ?>
 
 <header>
