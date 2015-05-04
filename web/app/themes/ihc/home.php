@@ -18,14 +18,20 @@ $post = get_page_by_path('/news');
     <?php include(locate_template('templates/filters.php')); ?>
 
     <div class="load-more-container masonry article-list">
-      <?php 
-      while (have_posts()) : the_post();
-        $news_post = $post;
-        include(locate_template('templates/article-news.php'));
-      endwhile; 
-      ?>
-    </div>
-    <div class="load-more" data-page-at="<?= $paged ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+      <?php if (have_posts()): ?>
+        <?php 
+        while (have_posts()) : the_post();
+          $news_post = $post;
+          include(locate_template('templates/article-news.php'));
+        endwhile; 
+        ?>
+      </div>
+      <div class="load-more" data-page-at="<?= $paged ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+    <?php else: ?>    
+      <div class="notice">
+        <p>No posts found.</p>
+      </div>
+    <?php endif; ?>
   </div>
 </section>
 <aside class="page-with-img">
