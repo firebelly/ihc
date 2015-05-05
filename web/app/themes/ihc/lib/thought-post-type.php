@@ -180,7 +180,7 @@ function submit_form() {
     <!-- die bots --><div style="position: absolute; left: -5000px;"><input type="text" name="die_bots_5000" tabindex="-1" value=""></div>
     <input type="hidden" name="action" value="thought_submission">
     <div class="actions">
-      <button type="submit" class="button"><div class="submit-thought">Submit Thought</div></button>
+      <button type="submit" class="button">Submit Thought</button>
     </div>
   </form>
 <?php

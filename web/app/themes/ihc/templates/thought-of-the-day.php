@@ -2,7 +2,7 @@
 <div class="thought-wrapper">
 	<h4 class="flag">Thought of the Day</h4>
 	<?= \Firebelly\PostTypes\Thought\get_thought_of_the_day(!empty($focus_area) ? $focus_area : ''); ?>
-	<div class="button"><a class="submit-thought" href="#">Submit A Thought</a></div>
+	<div class="submit-thought"><a class="button" href="#">Submit A Thought</a></div>
 </div>
 
 <div class="submit-thought-wrapper hide">

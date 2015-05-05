@@ -265,7 +265,7 @@ var IHC = (function($) {
   }
 
   function _initThoughtSubmit() {
-    $document.on('click', 'a.submit-thought', function(e) {
+    $document.on('click', '.submit-thought a', function(e) {
       e.preventDefault();
       $('.thought-of-the-day').addClass('submitting-thought');
     });
