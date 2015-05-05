@@ -6,14 +6,17 @@
 $total_events = \Firebelly\PostTypes\Event\get_num_events();
 $total_news = wp_count_posts('post')->publish;
 $header_bg = \Firebelly\Utils\get_header_bg($post);
+$header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));
+$header_text = apply_filters('the_content', get_post_meta($post->ID, '_cmb2_header_text', true));
+$secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 ?>
 
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
 
 <header class="page-header with-image"<?= $header_bg ?>>
-  <h4 class="flag">Year-round & State-wide</h4>
-  <h1><span>Be</span>g<span>innin</span>g<span> the conversation</span>.<br> We fuel inquiry through conversation in ways that strengthen society.</h1>
-  <p class="accent">image caption/link to event to bring it front and center for instant access.</p>
+  <h4 class="flag"><?= $header_banner_text ?></h4>
+  <?= $header_text ?>
+  <p class="accent"><?= $secondary_header_text ?></p>
 </header>
 
 <section class="focus-areas">
