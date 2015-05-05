@@ -2,6 +2,7 @@
 
 <footer class="main" role="contentinfo">
   <div class="container">
+    <h2 class="logo"><a href="/">IL Humanities</a></h2>
     <div class="footer-meta">
      <nav role="navigation">
        <?php

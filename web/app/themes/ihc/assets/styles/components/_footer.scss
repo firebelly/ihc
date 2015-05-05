@@ -5,6 +5,15 @@ footer.main {
   height: 460px;
   width: 100%;
   padding: 50px 4.54% 30px;
+  position: relative;
+
+  .logo {
+    top: -58px;
+    width: 49px;
+    overflow: hidden;
+    margin-right: 0;
+    right: #{$column*1}%;
+  }
 
   a {
     color: $color-bg;
