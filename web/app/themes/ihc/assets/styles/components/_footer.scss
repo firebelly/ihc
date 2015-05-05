@@ -4,7 +4,7 @@ footer.main {
   color: $color-bg;
   height: 460px;
   width: 100%;
-  padding: 50px 4.54% 30px;
+  padding: 50px #{$column * 1}% 30px;
   position: relative;
 
   .logo {
@@ -12,7 +12,7 @@ footer.main {
     width: 49px;
     overflow: hidden;
     margin-right: 0;
-    right: #{$column*1}%;
+    right: #{$column * 1}%;
   }
 
   a {
@@ -48,8 +48,8 @@ footer.main {
 
 .footer-meta {
   float: right;
-  width: 40.86%;
-  margin-right: 4.54%;
+  width: #{$column * 9}%;
+  margin-right: #{$column * 1}%;
 
   .small-only,
   #menu-footer-links a,

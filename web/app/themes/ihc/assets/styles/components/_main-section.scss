@@ -25,9 +25,9 @@
   top: 100%;
   bottom: auto;
   height: auto;
-  margin-left: 22.7%;
-  width: 45.4%;
-  padding: 40px 4.54%;
+  margin-left: #{$column * 5}%;
+  width: #{$column * 10}%;
+  padding: 40px #{$column * 1}%;
 
   &::after {
     top: -20px;
@@ -59,8 +59,8 @@ aside {
   position: relative;
   float: right;
   height: 100%;
-  width: 27.24%;
-  padding-left: 4.54%;
+  width: #{$column * 6}%;
+  padding-left: #{$column * 1}%;
   margin-bottom: 100px;
 }
 

@@ -6,15 +6,15 @@
     @include tablet {
       position: absolute;
       top: 330px;
-      width: #{$column*5}%;
+      width: #{$column * 5}%;
       right: 0;
       z-index: 400;
-      margin-right: #{$column}%;
+      margin-right: #{$column * 1}%;
     }
 
     &.submitting-thought {
       @include tablet {
-        width: #{$column*7}%;
+        width: #{$column * 7}%;
         margin-right: 0;
       }
     }
@@ -32,8 +32,8 @@
 
     @include tablet {
       top: 0;
-      margin: 0 0 0 18.16%;
-      width: 45.4%;
+      margin: 0 0 0 #{$column * 4}%;
+      width: #{$column * 10}%;
       z-index:10;
       .focus-list {
         padding: 26px 0 40px 25px;
@@ -51,7 +51,7 @@
       @include tablet {
         top:0;
         width: 45.5%;
-        margin-left: 49.94%;
+        margin-left: #{$column * 11}%;
         padding:0 5px;
         z-index: 20;
         .events {
@@ -128,7 +128,7 @@
 
   section.news {
     @include clearfix;
-      padding: 0 4.54%;
+      padding: 0 #{$column * 1}%;
       position: relative;
 
       @include tablet {

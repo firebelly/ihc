@@ -29,7 +29,7 @@
   @include tablet {
     top: 51px;
     margin-right: -200px;
-    right: #{$column*6}%;
+    right: #{$column * 6}%;
   }
 }
 .no-svg .logo {
