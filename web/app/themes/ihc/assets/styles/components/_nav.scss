@@ -31,6 +31,9 @@
     margin-right: -200px;
     right: #{$column * 6}%;
   }
+  @include phone {
+    z-index: 10;
+  }
 }
 .no-svg .logo {
   background-image: url(../images/ihc-logo.png);

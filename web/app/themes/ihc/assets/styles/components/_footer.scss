@@ -28,7 +28,7 @@ footer.main {
 
     li {
       display: inline-block;
-      margin-right: 37px;
+      margin-right: 25px;
     }
 
     .menu-donate-now,
@@ -82,11 +82,10 @@ footer.main {
       margin-right: 37px;
     }
   }
-
   @include phone {
     float: none;
     width: 100%;
-    margin: 0;
+    margin-bottom: 50px;
 
     .disclaimer {
       .medium-up {
@@ -100,6 +99,20 @@ footer.main {
         text-transform: uppercase;
         text-decoration: underline;
         font-size: 11px;
+        line-height:23px;
+      }
+    } 
+    
+    & #menu-footer-links {
+      margin-top: 0;
+
+      li {
+        margin-right: 15px;
+        display: inline;
+
+        a {
+          line-height: 23px;
+        }
       }
     }
   }

@@ -18,6 +18,9 @@
         margin-right: 0;
       }
     }
+    @include phone {
+      display: none;
+    }
   }
 
   // Focus areas
@@ -170,6 +173,18 @@
     a {
       display: inline-block;
       margin: 0;
+    }
+
+    @include phone {
+      margin-bottom: 0;
+
+      a {
+        display: block;
+      }
+
+      .load-more a {
+        margin-bottom: 20px;
+      }
     }
   }
 

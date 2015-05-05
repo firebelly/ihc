@@ -12,10 +12,10 @@
        ?>
      </nav>
      <div class="disclaimer">
-      <a class="small-only" href="#">disclaimer</a>
       <p class="medium-up">Illinois Humanities respects the privacy of its audiences and will at no time sell or distribute personal information to any party not directly affiliated with Illinois Humanities and its programs.</p>
       <p class="medium-up">Illinois Humanities is supported in part by the National Endowment for the Humanities (NEH) and the Illinois General Assembly [through the Illinois Arts Council, a state agency], as well as by contributions from individuals, foundations and corporations.</p>
       <p class="medium-up">Any views, findings, conclusions, or recommendations expressed by speakers, program participants, or audiences do not necessarily reflect those of the NEH, the Illinois Humanities, our partnering organizations or our funders.</p>
+     <a class="small-only" href="#">disclaimer</a>
      </div>
      <?php
      if (has_nav_menu('footer_links')) :
