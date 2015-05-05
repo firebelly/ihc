@@ -4,7 +4,7 @@
 display:none;
  position:relative;
  top:0;
- left:-4.54%;
+ left:-#{$column * 1}%;
  float:left;
  width:74.64%;
  z-index:1;

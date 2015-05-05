@@ -44,6 +44,25 @@ function load_more_posts() {
       ]
     ];
   }
+  // Filter by Focus Area?
+  if (!empty($_REQUEST['focus_area'])) {
+    $args['tax_query'] = array(
+        array(
+            'taxonomy' => 'focus_area',
+            'field' => 'slug',
+            'terms' => $_REQUEST['focus_area'],
+        )
+    );
+  }
+  // Filter by Program?
+  if (!empty($_REQUEST['program'])) {
+    $args['meta_query'][] = array(
+      'key' => '_cmb2_related_program',
+      'value' => array( (int)$_REQUEST['program'] ),
+      'compare' => 'IN',
+    );
+  }
+
   $posts = get_posts($args);
 
   if ($posts): 

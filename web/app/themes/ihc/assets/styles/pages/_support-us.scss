@@ -2,7 +2,7 @@
 section.main {
   width: 72.65%;
   float: left;
-  padding-right: 4.54%;
+  padding-right: #{$column * 1}%;
   height: auto;
   
   & .one-column {

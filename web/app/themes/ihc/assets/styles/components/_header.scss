@@ -3,8 +3,8 @@
   @include clearfix;
   width: 86.26%;
   min-height: 560px;
-  margin-left: -4.54%;
-  padding: 120px 0 0 4.54%;
+  margin-left: -#{$column * 1}%;
+  padding: 120px 0 0 #{$column * 1}%;
   background: 50% 50% no-repeat scroll;
   background-size: cover;
   z-index: 1;
@@ -12,7 +12,7 @@
     .share {
       float: right;
       margin-top: -64px;
-      margin-right: 4.54%;
+      margin-right: #{$column * 1}%;
       color: $white;
       @include font-style1;
 
@@ -25,7 +25,7 @@
   h1 {
     font-size: $xxl;
     line-height: 60px;
-    padding-right: 9.08%;
+    padding-right: #{$column * 2}%;
     padding-bottom: 50px;
   }
 

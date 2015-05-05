@@ -23,6 +23,8 @@
 
   p {
     @include font-style3;
+    letter-spacing: 0;
+    font-variant-ligatures: common-ligatures;
   }
 
   cite {

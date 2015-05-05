@@ -168,7 +168,7 @@ img {
 section {
   margin-bottom: 70px;
   padding: 0 6.249%;
-  // padding: 0 4.54%;
+  // padding: 0 #{$column * 1}%;
 
   @include desktop {
     position: relative;
