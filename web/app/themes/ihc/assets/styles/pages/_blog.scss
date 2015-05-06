@@ -1,5 +1,9 @@
 // Blog (what we're learning) Page
-
+.blog {
+  .share {
+    display:none;
+  }
+}
 #comments {
   display: none
 }

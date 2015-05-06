@@ -1,12 +1,14 @@
 // About Us page
 
 .about-us.page {
+  .share {
+    display:none;
+  }
   .entry-content {
     position: relative;
   }
 
   .one-column {
-    margin-top: 180px;
     padding:30px 25px;
 
     .columns {

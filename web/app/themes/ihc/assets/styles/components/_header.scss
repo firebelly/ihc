@@ -1,40 +1,49 @@
 // Header
 .page-header {
   @include clearfix;
-  width: 86.26%;
-  min-height: 560px;
-  margin-left: -#{$column * 1}%;
-  padding: 120px 0 0 #{$column * 1}%;
-  background: 50% 50% no-repeat scroll;
-  background-size: cover;
-  z-index: 1;
-  
-    .share {
-      float: right;
-      margin-top: -64px;
-      margin-right: #{$column * 1}%;
-      color: $white;
-      @include font-style1;
+  position: relative;
 
-      span {
-        padding-right:5px;
-        color: $white;
-      }
+  .container {
+    position:relative;
+    z-index:2;
+    background: 50% 50% no-repeat scroll;
+    background-size: cover;
+    margin-left: -#{$column * 1}%;
+    width: #{$column * 19}%;
+    padding: 50px 0 140px #{$column * 1}%;
+  }
+  
+  .share {
+    float: right;
+    margin-top: -64px;
+    margin-right: #{$column * 1}%;
+    color: $white;
+    @include font-style1;
+
+    span {
+      padding-right:5px;
+      color: $white;
+    }
+  }
+
+    h4.flag {
+      position: relative;
+      padding: 5px 30px;
+      bottom: auto;
+      height: auto;
+      margin-bottom: 40px;
     }
 
-  h1 {
-    font-size: $xxl;
-    line-height: 60px;
-    padding-right: #{$column * 2}%;
-    padding-bottom: 50px;
-  }
-
-  h4.flag {
-    top: 50px;
-    bottom: auto;
-    padding: 5px 30px;
-    height:auto;
-  }
+  .header-text {
+      padding-right: #{$column * 2}%;
+      z-index:4;
+   
+    h1 {
+      font-size: $xxl;
+      line-height: 60px;
+    }
+   }
+  
   
   p {
     @include font-style1;
@@ -45,44 +54,20 @@
     }
   }
   
+  .secondary-header-text {
+    @include font-style2;
+  }
+
   @include phone {
-    width: 100%;
-    min-height: 400px;
-    padding: 110px 6.249% 30px;
-    margin: 0;
-    z-index: 1;
-
+    .container {
+      width: 100%;
+      margin-left: 0;
+      padding: 50px 4.54% 60px;
+    }
+    
     h1 {
-      font-size: $xl;
-      line-height: 30px;
-      padding: 0;
-    }
-
-    h2 {
-      top: 50px;
-      width: 77.18%;
-    }
-
-    p {
-      margin: 50px 0 30px;
+        font-size: $xl;
+        line-height: 30px;
     }
   }
-}
-
-.navbar-header .navbar-brand {
-  width: 200px;
-  height: 80px;
-  float: right;
-  margin-right: 8.332%;
-  background: $white;
-  z-index: 5;
-}
-
-.header-text {
-  position:relative;
-}
-
-.secondary-header-text {
-  @include font-style2;
-  line-height: 20px;
 }

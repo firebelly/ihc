@@ -14,12 +14,14 @@ if ($header_image) {
 $header_text = $focus_area->description;
 ?>
 
-  <header class="page-header <?= $header_class ?>"<?= $header_bg ?>>
+  <header class="page-header <?= $header_class ?>">
+    <div class="container" <?= $header_bg ?>>
     <h4 class="flag"><?= $focus_area->name ?></h4>
 
-    <h1 class="header-text">
-      <?= $header_text ?>
-    </h1>
+      <div class="header-text">
+        <h1><?= $header_text ?></h1>
+      </div>
+    </div>
   </header>
 
 <section class="main">
