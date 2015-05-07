@@ -33,17 +33,12 @@
       height: auto;
       margin-bottom: 40px;
     }
-
-  .header-text {
-      padding-right: #{$column * 2}%;
-      z-index:4;
    
     h1 {
       font-size: $xxl;
       line-height: 60px;
+      padding-right: #{$column * 4}%;
     }
-   }
-  
   
   p {
     @include font-style1;
@@ -63,11 +58,13 @@
       width: 100%;
       margin-left: 0;
       padding: 50px 4.54% 60px;
-    }
+      margin-bottom: 80px;
     
-    h1 {
+      h1 {
         font-size: $xl;
         line-height: 30px;
+        padding-right: #{$column * 1.5}%;
+      }    
     }
   }
 }

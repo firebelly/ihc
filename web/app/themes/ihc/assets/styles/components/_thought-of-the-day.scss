@@ -46,6 +46,11 @@
     .submit-thought-wrapper {
       display: block;
       padding: 30px 50px 50px;
+
+      .submit-thought {
+        color: $dk-blue;
+      }
+      
       textarea {
         @include font-style3;
         width: 100%;
