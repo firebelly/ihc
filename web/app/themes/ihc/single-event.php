@@ -19,35 +19,35 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
     <h4 class="flag">Event Details</h4>
     <div id="map" ></div>
     <div class="event-details">
-    <h3>When:</h3>
-    <p><?= date('l, F j, Y', $event->event_start) ?>
-    <br><?= $event->time_txt ?></p>
-    <h3>Where:</h3>
-    <p><?= $event->venue ?>
-    <br><?= $event->address['address-1'] ?> 
-    <?php if (!empty($event->address['address-2'])): ?>
-      <br><?= $event->address['address-2'] ?>
-    <?php endif; ?>
-    <br><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?>
-    <?php if (!($event->archived)): ?></p>
-      <h3>Cost:</h3>
-      <p class="cost">
-      <?php if (!$event->cost): ?>
-        Free, open to the public.
-      <?php else: ?>
-        <?= $event->cost ?>
+      <h3>When:</h3>
+      <p><?= date('l, F j, Y', $event->event_start) ?>
+      <br><?= $event->time_txt ?></p>
+      <h3>Where:</h3>
+      <p><?= $event->venue ?>
+      <br><?= $event->address['address-1'] ?> 
+      <?php if (!empty($event->address['address-2'])): ?>
+        <br><?= $event->address['address-2'] ?>
       <?php endif; ?>
-      </p>
-      <ul>
+      <br><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?>
+      <?php if (!($event->archived)): ?></p>
+        <h3>Cost:</h3>
+        <p class="cost">
+          <?php if (!$event->cost): ?>
+            Free, open to the public.
+          <?php else: ?>
+            <?= $event->cost ?>
+          <?php endif; ?>
+        </p>
+        <ul>
           <?php if (!empty($event->registration_url)): ?>
             <li><a class="register" target="_blank" href="<?= $event->registration_url ?>">Register For Event</a></li>
           <?php endif; ?>
           <li><a class="add-to-calendar" href="<?= $event->add_to_calendar_url ?>">Add To My Calendar</a></li>
-      </ul>
-    <?php endif; ?>
+        </ul>
+      <?php endif; ?>
     </div>
-    <div class="article-list">
-    <h4 class="flag">Blog & News</h4>
+    <div class="related">
+      <h4 class="flag">Blog & News</h4>
       <?php 
       while (have_posts()) : the_post();
         $news_post = $post;

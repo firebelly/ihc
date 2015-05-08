@@ -6,7 +6,7 @@
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $per_page = get_option('posts_per_page');
 $total_posts = $GLOBALS['wp_query']->found_posts;
-$total_pages = ceil($total_posts / $per_page);
+$total_pages = ($total_posts > 0) ? ceil($total_posts / $per_page) : 1;
 $post = get_page_by_path('/news');
 ?>
 

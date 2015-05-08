@@ -49,52 +49,23 @@
   }
 
   section.event-cal {
-      @include clearfix;
-      position: relative;
-      @include tablet {
-        top:0;
-        width: 45.5%;
-        margin-left: #{$column * 11}%;
-        padding:0 5px;
-        z-index: 20;
-        .events {
-          width: 100%;
-          min-height: 445px;
-          position: relative;
-        }
+    @include clearfix;
+    position: relative;
+    @include tablet {
+      top:0;
+      width: 45.5%;
+      margin-left: #{$column * 11}%;
+      padding:0 5px;
+      z-index: 20;
+      .events {
+        width: 100%;
+        min-height: 445px;
+        position: relative;
       }
-
-    .event {
-      .article-content {
-        background: $dk-blue;
-
-        h1 a,
-        h3,
-        p,
-        .more a,
-        .register {
-          color: $white;
+      .article-list {
+        .event {
+          width: 50%;
         }
-
-        h1 a {
-          border-bottom-color:$white;
-        }
-
-      &:hover {
-        background: $white;
-
-        h1 a,
-        h3,
-        p,
-          .more a,
-          .register {
-          color: $dk-blue;
-        }
-
-        h1 a {
-          border-bottom-color:$dk-blue;
-        }
-      }
       }
     }
 
@@ -138,22 +109,6 @@
         z-index: 20;
         margin-right: 0;
       }
-
-    .article {
-      .article-content:hover {
-        background: $dk-blue;
-
-        .article-category a,
-        .article-title a,
-        .article-excerpt p {
-          color: $white;
-        }
-
-        .article-title a {
-          border-bottom-color: $white;
-        }
-      }
-    }
 
     .load-more {
       margin: 20px 0 10px;

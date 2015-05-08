@@ -24,6 +24,18 @@
     border-top: 20px solid $color-accent;
   }
 }
+
+// Share blocks
+.share {
+  @include font-style1;
+  color:$dk-blue;
+  a {
+    text-decoration: none;
+    padding-left: 10px;
+    color:$dk-blue;
+  }
+}
+
 .summary-flag {
   @extend .flag;
   top: 100%;
@@ -43,42 +55,63 @@
   }
 }
 
-.focus-list {
-      padding: 20px 0;
-
-      li a {
-        @include font-style1;
-        border-bottom: 3px $dk-blue solid;
-        font-size: $lg;
-        line-height: 40px;
-
-          &:hover{
-            color: $color-bg;
-            border-bottom: 3px $color-bg solid;
-          }
-      }
-}
-
 aside {
   position: relative;
   float: right;
-  height: 100%;
   width: #{$column * 6}%;
   padding-left: #{$column * 1}%;
   margin-bottom: 100px;
+}
+.related {
+  position: relative;
+  background: $white;
+}
+
+// Sidebars
+.sidebar-content {
+  h3 {
+    color: $color-bg;
+    margin-top: 30px;
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+  p {
+    margin: 10px 0;
+  }
+  a {
+    text-decoration: underline;
+  }
+
+  // Dark bg sidebars
+  &.dark {
+    background: $dk-blue;
+    color: $color-bg;
+    padding: 30px 50px 30px 25px;
+    margin-right: -20%;
+    p {
+      color: $color-bg;
+    }
+
+  }
+
+  .focus-list {
+    li {
+      @include font-style1;
+      font-size:$lg;
+      letter-spacing: .2em;
+      padding: 15px 0;
+      a {
+        color: $color-bg;
+        border: none;
+      }
+    }
+  }
 }
 
 //pages with header img & thought of day section
 aside.page-with-img {
   margin-top: -270px;
-
-  .about-us-sidebar,
-  .our-work-sidebar,
-  .support-us-sidebar {
-    background: $dk-blue;
-    padding: 30px 50px 30px 25px;
-    margin-right: -20%;
-  }
 
   .our-work-sidebar p {
       margin-bottom: 20px;
@@ -96,20 +129,6 @@ aside.page-with-img {
       font-weight: 700;
   }
 
-  .about-us-sidebar {
-    p {
-      margin-bottom:40px;
-    }
-    ul li {
-      margin-bottom:20px;
-
-      span {
-        @include font-style1;
-        font-size:$lg;
-      }
-    }
-  }
-
   .single-program-sidebar,
   .contacts {
     padding: 30px 25px 30px 0;
@@ -122,21 +141,6 @@ aside.page-with-img {
       font-size: 14px;
       margin-bottom: 0;
       font-weight: 700;
-    }
-  }
-}
-
-//single program page
-.single-program {
-  position:relative;
-  .page-block {
-    position: relative;
-
-    .block-content {
-      position: relative;
-      background: $white;
-      padding: 30px 25px 10px;
-      margin-bottom: 60px;
     }
   }
 }
@@ -161,16 +165,10 @@ aside.page-with-img {
   }
   
   &::before {
-   -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
   transform: rotate(0deg);
   }
   
   &::after {
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
   transform: rotate(90deg);
   }
 }
@@ -195,9 +193,6 @@ aside.page-with-img {
   }
   
   &::before {
-   -webkit-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 }

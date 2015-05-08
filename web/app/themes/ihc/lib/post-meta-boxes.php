@@ -53,14 +53,13 @@ function metaboxes( array $meta_boxes ) {
           // 'name'     => 'If set, will trump finding a related program by Focus Area',
           'desc'     => 'Select Program(s)...',
           'id'       => $prefix . 'related_program',
-          'type'     => 'multicheck',
+          'type'     => 'select',
           // 'type'     => 'pw_multiselect', // currently multiple=true is causing issues with pw_multiselect -nate 4/30/15 
           'multiple' => true, 
           'options'  => \Firebelly\CMB2\get_post_options(['post_type' => 'program', 'numberposts' => -1]),
       ),
     ),
   );
-
 
   return $meta_boxes;
 }

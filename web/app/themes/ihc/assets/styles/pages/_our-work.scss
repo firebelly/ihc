@@ -11,6 +11,22 @@
   }
 }
 
+// Single program page
+.single-program {
+  position:relative;
+  .page-block {
+    position: relative;
+
+    .block-content {
+      position: relative;
+      background: $white;
+      padding: 30px 25px 10px;
+      margin-bottom: 60px;
+    }
+  }
+}
+
+
 .focus-area {
   @include clearfix;
   position: relative;
@@ -44,6 +60,7 @@
 
   .related {
     transition: background $transition-speed, color $transition-speed;
+    position: relative;
     background: #f8f4ef;
     width: 36.67%;
     padding: 40px 50px 0 25px;

@@ -1,18 +1,65 @@
 // Article lists
 
-// Share buttons
-.share span {
-  cursor: pointer;
+// Article dates
+.article-date {
+  position: absolute;
+  width: 50px;
+  padding: 7px 13px;
+  top: 0;
+  right: 4px;
+  color: $dk-blue;
+  @include font-style1;
+  -webkit-font-smoothing: antialiased;
 }
 
-// Time tags
-time {
-  position:relative;
-  top: 0;
-  right: 0;
-  z-index: 20;
-  -webkit-font-smoothing: antialiased;
-} 
+// Event dates
+.event .article-date {
+  &::after {
+    top: 100%;
+    right: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    content: '';
+    border-top: 20px solid $color-bg;
+    border-right: 25px solid transparent;
+  }
+
+  .month {
+    @include font-style1;
+  }
+
+  .day {
+    @include font-style2;
+    font-size: $lg;
+  }    
+}
+
+.article-list {
+  .event {
+    .article-content {
+      background: $dk-blue;
+    }
+    margin-bottom: 4px;
+
+    @include tablet {
+      cursor: pointer;
+      width: 33.3%;
+      float: left;
+      .article-content:hover {
+        background: $white;
+        color: $dk-blue;
+        p,
+        a {
+          color: $dk-blue;
+        }
+        .article-title a {
+          border-bottom-color: $dk-blue;
+        }
+      }
+    }
+  }
+}
 
 // Blog & News
 .article-list {
@@ -25,7 +72,21 @@ time {
     @include tablet {
       cursor: pointer;
       float: left;
-      width: 33%;
+      width: 33.3%;
+
+      .article-content:hover {
+        background: $dk-blue;
+
+        .article-category a,
+        .article-title a,
+        .article-excerpt p {
+          color: $white;
+        }
+
+        .article-title a {
+          border-bottom-color: $white;
+        }
+      }
     }
   }
 
@@ -40,24 +101,15 @@ time {
       padding: 30px 50px 30px 25px;
     }
 
-    .article-date,
     .article-category,
     .article-tag {
       @include font-style1;
-    }
-
-    .article-date {
-      height: 30px;
-      padding: 5px 15px;
-      float: right;
-      margin-left: 4px;
     }
 
     .article-category {
       color:$dk-blue;
       margin-bottom: 5px;
     }
-
 
     .article-excerpt,
     .article-title a {
@@ -90,23 +142,6 @@ time {
   }
 }
 
-section.main {
-  .article {
-    .article-content:hover {
-      background: $dk-blue;
-
-      .article-category a,
-      .article-title a,
-      .article-excerpt p {
-        color: $white;
-      }
-
-      .article-title a {
-        border-bottom-color: $white;
-      }
-    }
-  }
-}
 //focus area single page
 .tax-focus_area {
   .articles-list {
@@ -201,20 +236,6 @@ aside {
           color: $dk-blue;
         }
       }
-
-      .article {
-        .article-date {
-          min-height: 30px;
-          padding: 5px 15px;
-          float: right;
-          margin-left: 4px;
-
-          &::after {
-            content: '';
-            border:none;
-          }
-        }
-      }
       
       p.view-all {
         padding: 0 0 30px 25px;
@@ -229,8 +250,3 @@ aside {
     }
   }
 }
-
-
-
-
-  
