@@ -67,11 +67,11 @@
   @include clearfix;
   .article {
     position: relative;
-    min-height: 250px;
     width: 100%;
     margin-bottom: 4px;
 
     @include tablet {
+      min-height: 250px;
       cursor: pointer;
       float: left;
       width: 33.3%;

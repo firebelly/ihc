@@ -40,7 +40,7 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
   <div class="events load-more-container article-list masonry">
     <?php echo \Firebelly\PostTypes\Event\get_events(3); ?>
   </div>
-  <div class="events-buttons initial">
+  <div class="events-buttons">
     <div class="load-more" data-post-type="event" data-page-at="1" data-past-events="0" data-per-page="3" data-total-pages="<?= ceil($total_events/3) ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
     <p class="view-all"><a href="/events/" class="button">View All Events</a></p>
   </div>

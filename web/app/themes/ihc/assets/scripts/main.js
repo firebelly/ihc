@@ -29,6 +29,18 @@ var IHC = (function($) {
       // fit them vids!
       $content.fitVids();
 
+      // homepage
+      if ($('.home.page').length) {
+        // duplicate thought of the day for mobile
+        var mobileThought = $('.thought-of-the-day').addClass('show-for-medium-up').clone();
+        mobileThought.removeClass('show-for-medium-up').addClass('hide-for-medium-up').appendTo('.content');
+
+        // homepage has a funky load-more in events that is part of masonry until clicked
+        if (breakpoint_medium) {
+          $('.event-cal .events-buttons').clone().addClass('masonry-me').appendTo('.event-cal .events');
+        }
+      }
+
       // init behavior for various sections
       _initThoughtSubmit();
       _initSearch();
@@ -45,13 +57,6 @@ var IHC = (function($) {
           _hideSearch();
         }
       });
-
-      // homepage
-      if ($('.home.page').length) {
-        // duplicate thought of the day for mobile
-        var mobileThought = $('.thought-of-the-day').addClass('show-for-medium-up').clone();
-        mobileThought.removeClass('show-for-medium-up').addClass('hide-for-medium-up').appendTo('.content');
-      }
 
   }
 
@@ -211,7 +216,7 @@ var IHC = (function($) {
   function _initMasonry(){
     if (breakpoint_medium) {
       $('.masonry').masonry({
-        itemSelector: 'article',
+        itemSelector: 'article,.masonry-me',
         transitionDuration: '.3s'
       });
     }
@@ -230,6 +235,14 @@ var IHC = (function($) {
       var more_container = $load_more.parents('section').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
 
+      // homepage has a funky load-more in events that is part of masonry until clicked
+      if (breakpoint_medium && $('.home.page').length && $('.events .events-buttons').length) {
+        var lm = $('.event-cal').addClass('loaded-more').find('.events .events-buttons');
+        // remove load-more from masonry and relayout
+        $('.events').masonry('remove', lm);
+        $('.events').masonry();
+      }
+
       $.ajax({
           url: wp_ajax_url,
           method: 'post',
@@ -246,13 +259,12 @@ var IHC = (function($) {
             var $data = $(data);
             if (loadingTimer) { clearTimeout(loadingTimer); }
             more_container.append($data).removeClass('loading');
-            more_container.masonry('appended', $data, true);
+            if (breakpoint_medium) {
+              more_container.masonry('appended', $data, true);
+            }
             $load_more.attr('data-page-at', page+1);
             if (post_type==='event') {
               _getMapPoints();
-              if ($('.home.page').length) {
-                $('.event-cal').addClass('loaded-more').find('.events-buttons').removeClass('initial');
-              }
             }
 
             // hide load more if last page
@@ -344,19 +356,14 @@ jQuery(window).resize(function($){
 
 
 (function($){
-  // Internal Helper (from Ajaxify)
+  // internal helper (from Ajaxify)
   $.expr[':'].internal = function(obj, index, meta, stack){
-    // Prepare
     var
       $this = $(obj),
       url = $this.attr('href')||'',
       isInternalLink,
       rootUrl = History.getRootUrl();
-
-    // Check link
     isInternalLink = url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
-    
-    // Ignore or Keep
     return isInternalLink;
   };
 })(jQuery);

@@ -72,19 +72,18 @@
       }
     }
 
-    .events-buttons.initial {
-      .load-more {
-        margin: 20px 0 10px;
-      }
+    .load-more {
+      margin: 20px 0 10px;
+    }
 
-      @include tablet {
-        margin: 0;
+    @include tablet {
+      .events-buttons {
+        display: none;
+      }
+      .events .events-buttons {
+        display: block;
         width: 49%;
-        position: absolute;
-        bottom: 50px;
-        right: 10px;
-        text-align: center;
-        
+        float: left;
         .load-more {
           display: block;
           margin: 20px 0 30px;
@@ -100,6 +99,9 @@
           }
         }
       }
+    }
+    &.loaded-more .events-buttons {
+      display: block;
     }
   }
 
