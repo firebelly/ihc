@@ -1,7 +1,6 @@
 // Home page
 
 .home.page {
-
   .thought-of-the-day {
     @include tablet {
       position: absolute;
@@ -45,6 +44,9 @@
           line-height: 50px;
         }
       }
+    }
+    @include phone {
+      top: 0;
     }
   }
 

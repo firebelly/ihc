@@ -16,7 +16,8 @@ $header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 ?>
 
-<header class="page-header <?= $header_class ?>"<?= $header_bg ?>>
+<header class="page-header <?= $header_class ?>">
+  <div class="container" <?= $header_bg ?>>
   <?php if ($header_banner_text): ?>
   <h4 class="flag"><?= $header_banner_text ?></h4>
   <?php endif; ?>
@@ -29,5 +30,4 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
       <div class="secondary-header-text summary-flag"><?= $secondary_header_text ?></div>
     <?php endif; ?>
   </div>
-
 </header>

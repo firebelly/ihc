@@ -1,12 +1,14 @@
 // About Us page
-
 .about-us.page {
+
+  .share {
+    display:none;
+  }
   .entry-content {
     position: relative;
   }
 
   .one-column {
-    margin-top: 180px;
     padding:30px 25px;
 
     .columns {
@@ -36,6 +38,41 @@
       color:$dk-blue;
       font-size:$med;
       margin-bottom:10px;
+    }
+  }
+  @include phone {
+    section.main {
+      width: 100%;
+      float: none;
+      padding:0 4.54%;
+    }
+
+    .one-column {
+      padding: 30px #{$column * 1.5}%;
+
+      .columns {
+        column-count: 1;
+        -webkit-column-count: 1;
+        -moz-column-columns: 1;
+      }
+    }
+
+    aside {
+      float: none;
+      width: 100%;
+      padding-left: 0;
+
+      &.page-with-img {
+        margin-top: 0;
+
+        .about-us-sidebar {
+        margin-right: 0;
+        }
+      }
+
+      .thought-of-the-day {
+        display: block;
+      }
     }
   }
 }
