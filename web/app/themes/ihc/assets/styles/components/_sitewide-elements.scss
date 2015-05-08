@@ -1,6 +1,5 @@
 // Sitewide elements
 section.main {
-  z-index: 20;
   @include phone {
     width: 100%;
     float: none;
@@ -14,8 +13,9 @@ section.main {
   bottom: 100%;
   margin: 0;
   padding: 10px 20px;
-  z-index: 100;
   color: $white;
+  letter-spacing: .1em;
+  z-index: 1;
   a {
     color: $white;
   }
@@ -38,11 +38,25 @@ aside {
   width: #{$column * 6}%;
   padding-left: #{$column * 1}%;
   margin-bottom: 100px;
-  z-index: 200;
   .related {
     position: relative;
     background: $white;
   }
+}
+
+.load-more {
+  a:before {
+    content: '+ ';
+  }
+  @include tablet {
+    margin: 35px 0 100px;
+    text-align: center;
+  }
+}
+
+.alert {
+  padding: 50px;
+  background: $white;
 }
 
 // Sidebars

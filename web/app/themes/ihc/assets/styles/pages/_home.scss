@@ -2,12 +2,13 @@
 
 .home.page {
   .thought-of-the-day {
+    display: none;
     @include tablet {
+      display: block;
       position: absolute;
       top: 330px;
       width: #{$column * 5}%;
       right: 0;
-      z-index: 400;
       margin-right: #{$column * 1}%;
     }
 
@@ -17,48 +18,48 @@
         margin-right: 0;
       }
     }
-    @include phone {
-      display: none;
-    }
   }
 
   // Focus areas
-  section.focus-areas {
+  .focus-areas {
     background: #fff;
     @include clearfix;
-
     position: relative;
-    top: -16px;
-    width: 100%;
-    margin: 0 0 40px;
+    margin: -80px #{$column * 1}% 80px;
+
+    .focus-list {
+      padding: 26px 0 40px 25px;
+      @include font-style1;
+      font-size:$lg;
+      line-height: 40px;
+      li a {
+        border-bottom: 3px solid $dk-blue;
+      }
+      
+    }
+
 
     @include tablet {
       top: 0;
       margin: 0 0 0 #{$column * 4}%;
       width: #{$column * 10}%;
-      z-index:10;
       .focus-list {
         padding: 26px 0 40px 25px;
-        li a {
-          font-size: $xl;
-          line-height: 50px;
-        }
+        font-size: $xl;
+        line-height: 50px;
       }
-    }
-    @include phone {
-      top: 0;
     }
   }
 
-  section.event-cal {
+  .event-cal {
     @include clearfix;
     position: relative;
+    margin: 0 #{$column * 1}% 80px;
     @include tablet {
       top:0;
       width: 45.5%;
       margin-left: #{$column * 11}%;
       padding:0 5px;
-      z-index: 20;
       .events {
         width: 100%;
         min-height: 445px;
@@ -102,15 +103,14 @@
     }
   }
 
-  section.news {
+  .news {
     @include clearfix;
-      padding: 0 #{$column * 1}%;
-      position: relative;
+    margin: 0 #{$column * 1}% 80px;
+    position: relative;
 
-      @include tablet {
-        z-index: 20;
-        margin-right: 0;
-      }
+    @include tablet {
+      margin: 0 0 0 #{$column * 1}%;
+    }
 
     .load-more {
       margin: 20px 0 10px;
@@ -119,33 +119,23 @@
   
   .events-buttons,
   .news-buttons {
-    margin: 30px 0 100px; 
-    text-align: center;
-    
-    .view-all,
-    .load-more {
-      display: inline;
-    }
-    
-    a {
-      display: inline-block;
-      margin: 0;
-    }
-
-    @include phone {
-      margin-bottom: 0;
-
-      a {
-        display: block;
+    @include tablet {
+      margin: 30px 0 100px; 
+      text-align: center;
+      
+      .view-all,
+      .load-more {
+        display: inline;
       }
-
-      .load-more a {
-        margin-bottom: 20px;
+      
+      a {
+        display: inline-block;
+        margin: 0;
       }
     }
   }
 
-
+  // Blog & News gets 4 per row on homepage
   .article-list {
     .article {
       @include tablet {

@@ -3,7 +3,7 @@
 // Font-styles
 @mixin font-style1 {
   font: 900 #{$small}/1.2 $sans;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -31,11 +31,10 @@
   @include tablet {
     min-width: 150px;
     display: inline-block;
-  }
-
-  &:hover {
-    color: $color-bg;
-    background: $dk-blue;
+    &:hover {
+      color: $color-bg;
+      background: $dk-blue;
+    }
   }
 }
 

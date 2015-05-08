@@ -6,7 +6,7 @@
   width: 50px;
   padding: 7px 13px;
   top: 0;
-  right: 4px;
+  right: 0;
   color: $dk-blue;
   @include font-style1;
   -webkit-font-smoothing: antialiased;
@@ -37,6 +37,7 @@
 
 .article-list {
   .event {
+    width: 100%;
     .article-content {
       background: $dk-blue;
     }
@@ -67,6 +68,7 @@
   .article {
     position: relative;
     min-height: 250px;
+    width: 100%;
     margin-bottom: 4px;
 
     @include tablet {
@@ -177,72 +179,71 @@
 }
 
 aside {
-    .event-details {
-      position: relative;
-      background: $white;
-      padding: 25px 30px;
-      margin-bottom: 60px;
+  .event-details {
+    position: relative;
+    background: $white;
+    padding: 25px 30px;
+    margin-bottom: 60px;
 
-      h3 {
-        margin-bottom:10px;
-      }
-
-      p { 
-        font-size:$med;
-        line-height:20px;
-        margin-bottom:30px;
-      }
-      
-      .register,
-      .add-to-calendar {
-        @include font-style1;
-      }
-
-      // .register::before {
-      //   content: '>>';
-      // }
-
-      .add-to-calendar::before {
-        content: '+ ';
-      }
+    h3 {
+      margin-bottom:10px;
     }
 
+    p { 
+      font-size:$med;
+      line-height:20px;
+      margin-bottom:30px;
+    }
+    
+    .register,
+    .add-to-calendar {
+      @include font-style1;
+    }
 
-    .article-list {
-      position: relative;
+    // .register::before {
+    //   content: '>>';
+    // }
 
-      .article,
-      .event {
-        float: none;
-        width: 100%;
+    .add-to-calendar::before {
+      content: '+ ';
+    }
+  }
+
+  .article-list {
+    position: relative;
+
+    .article,
+    .event {
+      float: none;
+      width: 100%;
+      margin: 0;
+      min-height: 0;
+
+      .article-content {
         margin: 0;
-        min-height: 0;
-
-        .article-content {
-          margin: 0;
-          padding: 0;
-          background: $white;
-          color: $dk-blue;
-        }
-
-        .article-title a{
-          color: $dk-blue;
-          border-bottom:1px solid $dk-blue;
-        }
-
-        h3,
-        p,
-        .more a {
-          color: $dk-blue;
-        }
+        padding: 0;
+        background: $white;
+        color: $dk-blue;
       }
-      
-      p.view-all {
-        padding: 0 0 30px 25px;
-        background: #fff;
 
-        .button {
-          width: 70%;
+      .article-title a{
+        color: $dk-blue;
+        border-bottom:1px solid $dk-blue;
+      }
+
+      h3,
+      p,
+      .more a {
+        color: $dk-blue;
+      }
+    }
+    
+    p.view-all {
+      padding: 0 0 30px 25px;
+      background: #fff;
+
+      .button {
+        width: 70%;
         &:hover {
         color: $white;
         }

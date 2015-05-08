@@ -11,8 +11,7 @@ html {
 body {
   background-color:$color-bg;
   color: $dk-blue; 
-  font-size: 12px;
-  font-size:100%; 
+  font-size: 100%;
   min-height: 100%;
   overflow-x: hidden;
   font-family: $sans;
@@ -20,20 +19,14 @@ body {
 
 
 // Browser alert
-.alert-warning {
+.old-browser {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 200;
-  color: $black;
+  color: $white;
   padding: 50px;
   text-align: center;
   background: $red;
-}
-
-// Disable scrolling when modals are active
-.no-scroll {
-  overflow: hidden;
 }
 
 .smooth {
@@ -45,6 +38,20 @@ body {
 .hide {
   display: none;
 }
+.loading {
+  opacity: .5;
+}
+
+// Visually hide, accessibility-friendly
+.viz-hide {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  display: inline-block;
+}
+
 .clearfix {
   *zoom: 1;
   &:before, &:after {
@@ -62,7 +69,7 @@ body {
   @include button-style;
 }
 
-// visibility classes (borrowing nomenclature from Foundation)
+// Visibility classes (borrowing nomenclature from Foundation)
 .show-for-medium-up {
   display: none;
   @include tablet {
@@ -75,23 +82,6 @@ body {
   }
 }
 
-//visually hide, accessibility-friendly
-.viz-hide {
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  text-indent: 100%;
-  white-space: nowrap;
-  display: inline-block;
-}
-
-.loading {
-  opacity: .5;
-}
-
-.at {
-}
-
 .wrap {
   width: 100%;
   margin: 0 auto;
@@ -101,7 +91,6 @@ body {
 }
 
 .content {
-  z-index: 1;
   width: 100%;
   height: auto;
 
@@ -110,77 +99,19 @@ body {
   }
 }
 
-.alert {
-  padding: 50px;
-  background: $white;
-}
-
-.posts-navigation {
-//  text-align: center;
-//  h2 {
-//  display: none;
-//}
-//.nav-links {
-//  a {
-//  }
-//}
-}
-
-// default link color
+// Default link styles
 a {
   color: $dk-blue;
+  text-decoration: none;
 }
 
-h1 {
-  font-weight:100;
-  font-family:$sans;
-  color:$white;
-  text-transform: none;
-  line-height:30px;
-}
-  
 ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-p {
-  font-family:$sans;
-  font-size:$med;
-  font-weight:300;
-  color:$dk-blue;
-  line-height: 20px;
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
 img {
   max-width: 100%;
   height: auto;
-}
-
-section {
-  margin-bottom: 70px;
-  padding: 0 6.249%;
-  // padding: 0 #{$column * 1}%;
-
-  @include desktop {
-    position: relative;
-    padding: 0;
-  }
-}
-
-.load-more {
-  a:before {
-    content: '+ ';
-  }
-  @include tablet {
-    margin: 35px 0 100px;
-    text-align: center;
-  }
 }

@@ -20,12 +20,13 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     }
 
     // Button hovers
-    .button:hover {
-      color: $bg-color;
+    @include tablet {
+      .button:hover {
+        color: $bg-color;
+      }
     }
 
-    // Asides
-    
+    // Sidebars
     .sidebar-content {
       &.dark {
         h3 {
@@ -39,8 +40,10 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         // }
         .focus-list a {
           color: $bg-color;
-          &:hover {
-            color: $white;
+          @include tablet {
+            &:hover {
+              color: $white;
+            }
           }
         }
       }
@@ -91,31 +94,37 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       color: $accent-color;
       a {
         color: $accent-color;
-        &:hover {
-          color: $white;
+        @include tablet {
+          &:hover {
+            color: $white;
+          }
         }
       }
     }
 
     // Nav elements
-    nav .navbar-nav li a:hover {
-      border-bottom-color: $accent-color;
+    @include tablet {
+      nav .navbar-nav li a:hover {
+        border-bottom-color: $accent-color;
+      }
     }
 
     // Our Work page
     .focus-area {
-      &:hover {
-        .info {
-          background: $accent-color;
-        }
-        .button:hover {
-          border-color: $dk-blue;
-        }
-        .related {
-          background: lighten($accent-color, 25%);
-
-          &::after{
+      @include tablet {
+        &:hover {
+          .info {
+            background: $accent-color;
+          }
+          .button:hover {
+            border-color: $dk-blue;
+          }
+          .related {
             background: lighten($accent-color, 25%);
+
+            &::after{
+              background: lighten($accent-color, 25%);
+            }
           }
         }
       }
@@ -123,11 +132,13 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 
     // Single Focus area
     .articles-list {
-      .program:hover {
-        background: $accent-color;
-
-        .more:hover {
+      @include tablet {
+        .program:hover {
           background: $accent-color;
+
+          .more:hover {
+            background: $accent-color;
+          }
         }
       }
     }
@@ -157,9 +168,11 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
     }
 
     // Thought of Day hovers
-    .thought-of-the-day:hover {
-      blockquote p {
-        color: $accent-color;
+    @include tablet {
+      .thought-of-the-day:hover {
+        blockquote p {
+          color: $accent-color;
+        }
       }
     }
 
@@ -177,8 +190,10 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       p a {
         color: $accent-color;
 
-        &:hover {
-          color: $white;
+        @include tablet {
+          &:hover {
+            color: $white;
+          }
         }
       }
     }

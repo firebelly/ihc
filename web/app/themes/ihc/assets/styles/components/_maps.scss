@@ -1,22 +1,19 @@
 // Maps
 
 #map {
- position:relative;
- top:0;
- left:-#{$column * 1}%;
- float:left;
- width:74.64%;
- z-index:1;
- margin: 2em 0;
+  display: none;
+  position: relative;
+  top: 0;
+  left: -#{$column * 1}%;
+  float: left;
+  width: 74.64%;
+  z-index: -1;
+  margin: 2em 0;
 
- &.large {
-   width: 700px;
-   height: 1000px;
- }
-
-@include phone {
-		display:none;
-	}
+  &.large {
+    width: 700px;
+    height: 1000px;
+  }
 }
 
 // tmp mapbox fix
@@ -28,13 +25,13 @@
 .leaflet-container.dark .map-tooltip .close,
 .map-tooltip .close,
 .mapbox-icon {
-  background-image:url(../images/icons-000000@2x.png);
-  }
+  background-image: url(../images/icons-000000@2x.png);
+}
 .leaflet-container.dark .leaflet-control-attribution:after,
 .mapbox-button-icon:before,
 .leaflet-container.dark .leaflet-control-zoom-in,
 .leaflet-container.dark .leaflet-control-zoom-out,
 .leaflet-container.dark .leaflet-control-layers-toggle,
 .leaflet-container.dark .mapbox-icon {
-  background-image:url(../images/icons-ffffff@2x.png);
+  background-image: url(../images/icons-ffffff@2x.png);
 }
