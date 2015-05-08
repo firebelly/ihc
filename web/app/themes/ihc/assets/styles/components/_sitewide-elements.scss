@@ -78,10 +78,10 @@ aside {
   padding-left: #{$column * 1}%;
   margin-bottom: 100px;
   z-index: 200;
-}
-.related {
-  position: relative;
-  background: $white;
+  .related {
+    position: relative;
+    background: $white;
+  }
 }
 
 // Sidebars

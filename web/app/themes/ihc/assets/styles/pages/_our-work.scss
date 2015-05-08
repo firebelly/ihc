@@ -27,107 +27,107 @@
 }
 
 
-.focus-area {
-  @include clearfix;
-  position: relative;
-  margin: 0 0 4px 0;
-
-  a {
-    color:$dk-blue;
-  }
-
-  .info {
-    transition: background $transition-speed, color $transition-speed;
+.focus-list-large {
+  .focus-area {
+    @include clearfix;
     position: relative;
-    width: 63.33%;
-    height: 100%;
-    background: $white;
-    padding: 40px 50px 50px 25px;
-    float: left;
+    margin: 0 0 4px 0;
 
-    h1 a {
-      font-weight: 900;
-      color: $dk-blue;
-      border-bottom: 3px solid $dk-blue;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    a {
+      color:$dk-blue;
     }
 
-    p {
-      margin-bottom: 30px;
-    }
-  }
-
-  .related {
-    transition: background $transition-speed, color $transition-speed;
-    position: relative;
-    background: #f8f4ef;
-    width: 36.67%;
-    padding: 40px 50px 0 25px;
-    float: left;
-
-    &::after {
-      transition: background $transition-speed, color $transition-speed;
-      width: 36.67%;
-      content: '';
-      background: #f8f4ef;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: -1;
-      bottom: 0;
-    }
-
-    h3 {
-      margin-bottom:30px;
-    }
-
-    .programs {
-      li {
-        margin-bottom: 10px;
-      }
-
-      a {
-        @include font-style1;
-        border-bottom: 1px solid $dk-blue;
-        line-height: 12px;
-      }
-    }
-  }
-
-  &:hover {
     .info {
-      background: $color-accent;
-        
-      h1 a,
-      p {
-        color: $white;
-      }
-
-      .more .button {
-        color: $white;
-        border-color: $white;
-      }
+      transition: background $transition-speed, color $transition-speed;
+      position: relative;
+      width: 63.33%;
+      background: $white;
+      padding: 40px 50px 50px 25px;
+      float: left;
 
       h1 a {
-        border-bottom: 3px solid $white;
+        font-weight: 900;
+        color: $dk-blue;
+        border-bottom: 3px solid $dk-blue;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      p {
+        margin-bottom: 30px;
       }
     }
 
     .related {
-      background: lighten($color-accent, 25%);
+      transition: background $transition-speed, color $transition-speed;
+      background: #f8f4ef;
+      width: 36.67%;
+      padding: 40px 50px 25px 25px;
+      float: left;
 
-      &::after{
-        background: lighten($color-accent, 25%);
+      &::after {
+        transition: background $transition-speed, color $transition-speed;
+        width: 36.67%;
+        content: '';
+        background: #f8f4ef;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        bottom: 0;
       }
 
       h3 {
-        color: $white;
+        margin-bottom:30px;
       }
 
-      .programs a {
-        color: $white;
-        border-bottom: 1px solid $white;
+      .programs {
+        li {
+          margin-bottom: 10px;
+        }
+
+        a {
+          @include font-style1;
+          border-bottom: 1px solid $dk-blue;
+          line-height: 12px;
+        }
+      }
+    }
+
+    &:hover {
+      .info {
+        background: $color-accent;
+          
+        h1 a,
+        p {
+          color: $white;
+        }
+
+        .more .button {
+          color: $white;
+          border-color: $white;
+        }
+
+        h1 a {
+          border-bottom: 3px solid $white;
+        }
+      }
+
+      .related {
+        background: lighten($color-accent, 25%);
+
+        &::after{
+          background: lighten($color-accent, 25%);
+        }
+
+        h3 {
+          color: $white;
+        }
+
+        .programs a {
+          color: $white;
+          border-bottom: 1px solid $white;
+        }
       }
     }
   }

@@ -12,7 +12,7 @@ $body_content = apply_filters('the_content', $post->post_content);
 <section class="main">
 
   <h4 class="flag">Our Focus Areas</h4>
-  <ul class="focus-list">
+  <ul class="focus-list-large">
   <?php 
   $focus_areas = get_terms('focus_area');
   foreach ($focus_areas as $focus_area) {
