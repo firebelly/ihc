@@ -13,10 +13,12 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
 
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
 
-<header class="page-header with-image"<?= $header_bg ?>>
-  <h4 class="flag"><?= $header_banner_text ?></h4>
-  <?= $header_text ?>
-  <p class="accent"><?= $secondary_header_text ?></p>
+<header class="page-header with-image">
+  <div class="container"<?= $header_bg ?>>
+    <h4 class="flag"><?= $header_banner_text ?></h4>
+    <?= $header_text ?>
+    <p class="accent"><?= $secondary_header_text ?></p>
+  </div>
 </header>
 
 <section class="focus-areas">
