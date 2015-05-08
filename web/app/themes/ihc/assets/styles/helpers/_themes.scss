@@ -13,10 +13,19 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       a {
         color: $bg-color;
         border-bottom-color: $bg-color;
+        @include tablet {
+          &:hover {
+            color: $white;
+            border-bottom-color: $white !important;
+          }
+        }
       }
-      p.medium-up{
+      p {
         color: $bg-color;
       } 
+    }
+    #menu-footer-links a {
+      border-bottom: 1px solid $bg-color;
     }
 
     // Button hovers

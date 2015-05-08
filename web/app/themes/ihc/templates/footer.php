@@ -11,11 +11,10 @@
        endif;
        ?>
      </nav>
-     <div class="disclaimer">
-      <p class="medium-up">Illinois Humanities respects the privacy of its audiences and will at no time sell or distribute personal information to any party not directly affiliated with Illinois Humanities and its programs.</p>
-      <p class="medium-up">Illinois Humanities is supported in part by the National Endowment for the Humanities (NEH) and the Illinois General Assembly [through the Illinois Arts Council, a state agency], as well as by contributions from individuals, foundations and corporations.</p>
-      <p class="medium-up">Any views, findings, conclusions, or recommendations expressed by speakers, program participants, or audiences do not necessarily reflect those of the NEH, the Illinois Humanities, our partnering organizations or our funders.</p>
-     <a class="small-only" href="#">disclaimer</a>
+     <div class="disclaimer show-for-medium-up">
+      <p>Illinois Humanities respects the privacy of its audiences and will at no time sell or distribute personal information to any party not directly affiliated with Illinois Humanities and its programs.</p>
+      <p>Illinois Humanities is supported in part by the National Endowment for the Humanities (NEH) and the Illinois General Assembly [through the Illinois Arts Council, a state agency], as well as by contributions from individuals, foundations and corporations.</p>
+      <p>Any views, findings, conclusions, or recommendations expressed by speakers, program participants, or audiences do not necessarily reflect those of the NEH, the Illinois Humanities, our partnering organizations or our funders.</p>
      </div>
      <?php
      if (has_nav_menu('footer_links')) :
@@ -27,7 +26,7 @@
       <li class="address">
         <address class="vcard"> 
           <span class="org">Illinois Humanities</span><br>
-          <a href="https://goo.gl/maps/60el5"><span class="street-address">Suite 1400, 17 North State St.</span><br>
+          <a class="underline" href="https://goo.gl/maps/60el5"><span class="street-address">Suite 1400, 17 North State St.</span><br>
             <span class="locality">Chicago, IL</span>
             <span class="postal-code">60602-3296</span>
           </a>
@@ -36,7 +35,7 @@
 
       <li class="contact">
         <span class="tel">312.422.5580</span> | <span class="tel">312.422.5580</span> FAX<br>
-        <a class="email" href="mailto:info@illinoishumanities.org">info@illinoishumanities.org</a>
+        <a class="email underline" href="mailto:info@illinoishumanities.org">info@illinoishumanities.org</a>
       </li>
 
       <li class="social">

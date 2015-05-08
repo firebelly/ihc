@@ -41,6 +41,11 @@ var IHC = (function($) {
         }
       }
 
+      $('<li class="hide-for-medium-up"><a href="#">Disclaimer</a></li>').prependTo('#menu-footer-links').on('click', function(e) {
+        e.preventDefault();
+        $('.disclaimer').slideDown();
+      });
+
       // init behavior for various sections
       _initThoughtSubmit();
       _initSearch();

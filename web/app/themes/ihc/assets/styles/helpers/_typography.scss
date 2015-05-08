@@ -30,7 +30,7 @@ p {
 }
 
 p {
-  font: 300 $med/1.43 $sans;
+  font: 300 #{$med}/1.43 $sans;
   color: $dk-blue;
   margin: 0;
   padding: 0;
