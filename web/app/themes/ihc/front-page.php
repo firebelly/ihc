@@ -11,8 +11,6 @@ $header_text = apply_filters('the_content', get_post_meta($post->ID, '_cmb2_head
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 ?>
 
-<?php include(locate_template('templates/thought-of-the-day.php')); ?>
-
 <header class="page-header with-image">
   <div class="container"<?= $header_bg ?>>
     <h4 class="flag"><?= $header_banner_text ?></h4>
@@ -20,6 +18,8 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
     <p class="accent"><?= $secondary_header_text ?></p>
   </div>
 </header>
+
+<?php include(locate_template('templates/thought-of-the-day.php')); ?>
 
 <section class="focus-areas">
   <h4 class="flag">Our Focus Areas</h4>

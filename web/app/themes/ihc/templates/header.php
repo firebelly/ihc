@@ -1,9 +1,9 @@
 <?php use Roots\Sage\Nav\NavWalker; ?>
 
 <header class="banner navbar navbar-default navbar-static-top" role="banner">
-<?php get_search_form(); ?>
+  <?php get_search_form(); ?>
   <div class="container">
-  	<h1 class="logo"><a href="/">IL Humanities</a></h1>
+    <h1 class="logo"><a href="/">IL Humanities</a></h1>
     <nav class="site-nav" role="navigation">
       <?php
       if (has_nav_menu('primary_navigation')) :

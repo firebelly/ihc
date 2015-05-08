@@ -34,7 +34,7 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
     <?php endif; ?>
   </section>
 
-  <aside class="page-with-img">
+  <aside class="main">
     <div class="article-list">
       <?= Utils\get_related_event_post($post) ?>
       <?= Utils\get_related_news_post($post) ?>

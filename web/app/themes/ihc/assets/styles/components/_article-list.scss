@@ -1,9 +1,9 @@
-// Article lists
+// Articles
 
 // Article dates
 .article-date {
   position: absolute;
-  width: 50px;
+  min-width: 50px;
   padding: 7px 13px;
   top: 0;
   right: 0;
@@ -14,6 +14,7 @@
 
 // Event dates
 .event .article-date {
+  width: 50px;
   &::after {
     top: 100%;
     right: 0;
@@ -93,9 +94,9 @@
   }
 
   .article-content {
+    position: relative;
     transition: background $transition-speed, color $transition-speed;
     background: $white;
-    position: $white;
     @include tablet {
       margin-right: 4px;
     }

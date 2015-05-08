@@ -35,12 +35,9 @@
       li a {
         border-bottom: 3px solid $dk-blue;
       }
-      
     }
 
-
     @include tablet {
-      top: 0;
       margin: 0 0 0 #{$column * 4}%;
       width: #{$column * 10}%;
       .focus-list {
@@ -57,9 +54,12 @@
     margin: 0 #{$column * 1}% 80px;
     @include tablet {
       top:0;
-      width: 45.5%;
+      width: #{$column * 10}%;
       margin-left: #{$column * 11}%;
       padding:0 5px;
+      h4.flag {
+        width: #{$column * 3}%;
+      }
       .events {
         width: 100%;
         min-height: 445px;

@@ -1,12 +1,4 @@
 // Sitewide elements
-section.main {
-  @include phone {
-    width: 100%;
-    float: none;
-    padding:0 4.54%;
-  }
-}
-
 .flag {
   display: inline-block;
   position: absolute;
@@ -29,18 +21,6 @@ section.main {
     content: '';
     border-right: 25px solid transparent;
     border-top: 20px solid $color-accent;
-  }
-}
-
-aside {
-  position: relative;
-  float: right;
-  width: #{$column * 6}%;
-  padding-left: #{$column * 1}%;
-  margin-bottom: 100px;
-  .related {
-    position: relative;
-    background: $white;
   }
 }
 

@@ -31,7 +31,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
       </div>
       <?php comments_template('/templates/comments.php'); ?>
     </section>
-    <aside>
+    <aside class="main">
       <h4 class="flag">Related Event</h4>
       <div class="related">
         <?php echo \Firebelly\PostTypes\Event\get_events(1); ?>

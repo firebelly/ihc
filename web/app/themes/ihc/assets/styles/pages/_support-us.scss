@@ -1,35 +1,6 @@
 // Support Us page
-section.main {
-  width: 72.65%;
-  float: left;
-  padding-right: #{$column * 1}%;
-  height: auto;
-  
-  & .one-column {
-    position: relative;
-    background: $white;
-    min-height: 140px;
-    width: 100%;
-    margin-bottom: 100px;
-  }
-
-  & .two-column {
-    position: relative;
-    min-height: 280px;
-    margin-bottom: 60px;
-
-    & .column {
-      background:$white;
-      float:left;
-    }
-  }
-}  
 
 .support-us.page {
-  .share {
-    display:none;
-  }
-  
   .column {
     .button:hover {
         color: $white;

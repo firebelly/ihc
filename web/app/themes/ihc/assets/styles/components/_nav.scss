@@ -27,8 +27,8 @@
   }
   @include tablet {
     top: 51px;
-    margin-right: -200px;
-    right: #{$column * 6}%;
+    right: auto;
+    left: #{$column * 16}%;
   }
   @include phone {
   }
@@ -39,11 +39,11 @@
 
 .banner {
   height: 58px;
-  padding: 10px 6.249%;
+  padding: 10px #{$column * 1}%;
 
   @include tablet {
     height: 110px;
-    padding: 30px 4.166%;
+    padding: 30px #{$column * 1}%;
   }
 }
 
@@ -125,7 +125,7 @@ nav .navbar-nav {
 .menu-toggle {
   position: absolute;
   top: 37px;
-  margin: 0 6.249%;
+  margin: 0 #{$column * 1}%;
   padding: 6px 0;
 
   &:before, &:after {
@@ -189,7 +189,7 @@ nav .navbar-nav {
       right: 0;
       width: 100%;
       height: 640px;
-      padding: 40px 6.249%;
+      padding: 40px #{$column * 1}%;
       background: $color-bg;
     }
   }

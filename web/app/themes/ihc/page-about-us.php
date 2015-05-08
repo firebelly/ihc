@@ -21,7 +21,7 @@ $body_content = apply_filters('the_content', $post->post_content);
   </div>
 </section>
 
-<aside class="page-with-img">
+<aside class="main">
 <?php include(locate_template('templates/thought-of-the-day.php')); ?>
   <div class="sidebar-content dark">
     <?= get_the_block('About Us Sidebar') ?>

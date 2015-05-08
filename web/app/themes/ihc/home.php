@@ -36,6 +36,6 @@ $post = get_page_by_path('/news');
     <?php endif; ?>
   </div>
 </section>
-<aside class="page-with-img">
+<aside class="main">
     <?php include(locate_template('templates/thought-of-the-day.php')); ?>
   </aside>

@@ -2,6 +2,7 @@
 .thought-of-the-day {
   @include clearfix;
   position: relative;
+  margin-bottom: 60px;
 
   .thought {
     width: 83.33%;

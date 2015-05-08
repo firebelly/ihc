@@ -1,6 +1,11 @@
 // Single Posts
 .single .post {
-  margin: 80px 0 100px;
+  margin: 80px 0;
+  @include tablet {
+    aside.main {
+      margin: 0 0 100px;
+    }
+  }
 
   .article-thumb {
     min-height:270px;
@@ -8,17 +13,17 @@
     background: no-repeat;
     background-size: cover;
 
+    // Cutout triangle on thumb
     &::before,
     &::after {
       position: absolute;
       top:250px;
-      margin-right: 6.25%;
       content: '';
     }
 
     &::before {
       left: 0;
-      width: 91%;
+      right: 25px;
       height: 20px;
       background: $white;
     }

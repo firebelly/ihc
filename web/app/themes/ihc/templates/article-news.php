@@ -7,10 +7,12 @@ $publication_date = get_post_meta($news_post->ID, '_cmb2_publication_date', true
 $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($news_post->post_date);
 ?>
 <article class="article">
-<?php if (!empty($show_images) && has_post_thumbnail($news_post->ID)) {
-  $thumb = wp_get_attachment_url(get_post_thumbnail_id($news_post->ID));
-  echo '<a href="'.get_the_permalink($news_post).'" class="article-thumb" style="background-image:url('.$thumb.');"><span class="clip"></span></a>';
-} ?>
+  <?php 
+  if (!empty($show_images) && has_post_thumbnail($news_post->ID)) {
+    $thumb = wp_get_attachment_url(get_post_thumbnail_id($news_post->ID));
+    echo '<a href="'.get_the_permalink($news_post).'" class="article-thumb" style="background-image:url('.$thumb.');"><span class="clip"></span></a>';
+  } 
+  ?>
   <div class="article-content">
     <time class="article-date" datetime="<?= date('c', $post_date_timestamp); ?>"><?= date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
     <div class="article-content-wrap">

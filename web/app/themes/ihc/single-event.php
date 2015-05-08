@@ -15,7 +15,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
           </div>
       </div>
    </section>
-  <aside>
+  <aside class="main">
     <h4 class="flag">Event Details</h4>
     <div id="map" ></div>
     <div class="event-details">

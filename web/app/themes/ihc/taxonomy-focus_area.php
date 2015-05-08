@@ -14,15 +14,15 @@ if ($header_image) {
 $header_text = $focus_area->description;
 ?>
 
-  <header class="page-header <?= $header_class ?>">
-    <div class="container" <?= $header_bg ?>>
+<header class="page-header <?= $header_class ?>">
+  <div class="container" <?= $header_bg ?>>
     <h4 class="flag"><?= $focus_area->name ?></h4>
 
-      <div class="header-text">
-        <h1><?= $header_text ?></h1>
-      </div>
+    <div class="header-text">
+      <h1><?= $header_text ?></h1>
     </div>
-  </header>
+  </div>
+</header>
 
 <section class="main">
   <?php 
@@ -40,13 +40,16 @@ $header_text = $focus_area->description;
   <?php endif; ?>
 </section>
 
-<aside class="page-with-img">
-  <div class="article-list">
+<aside class="main">
+  <div class="related article-list">
     <?= \Firebelly\Utils\get_related_event_post($focus_area->slug) ?>
     <?= \Firebelly\Utils\get_related_news_post($focus_area->slug) ?>
+  </div>
+
+  <?php if ($focus_area_contacts): ?>
     <div class="contacts user-content">
       <h3>Focus Area Contacts</h3>
       <?= $focus_area_contacts ?>
     </div>
-  </div>
+  <?php endif ?>
 </aside>

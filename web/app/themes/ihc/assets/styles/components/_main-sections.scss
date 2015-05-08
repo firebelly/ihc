@@ -1,0 +1,56 @@
+// Main sections
+
+.wrap {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  @include clearfix();
+}
+
+.content {
+  width: 100%;
+  height: auto;
+
+  @include tablet {
+    padding: 0 #{$column * 1}%;
+  }
+}
+
+section.main {
+	position: relative;
+	margin: 0 #{$column * 1}% 80px;
+
+	@include tablet {
+		width: #{$column * 15}%;
+		float: left;
+		margin: 0 0 80px;
+	}
+  
+  .one-column {
+    background: $white;
+    min-height: 140px;
+  }
+
+  .two-column {
+    min-height: 280px;
+    .column {
+      background: $white;
+      float: left;
+    }
+  }
+}  
+
+aside.main {
+  position: relative;
+  margin: 0 #{$column * 1}% 100px;
+	.related {
+	  position: relative;
+	  background: $white;
+	}
+	@include tablet {
+		float: right;
+		width: #{$column * 5}%;
+		margin: -270px 0 100px;
+	}
+}
