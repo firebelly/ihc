@@ -1,31 +1,26 @@
 // Mixins
 
 // Font-styles
-@mixin font-style1($color:"") {
-  font-family: $sans;
-  font-weight: 900;
+@mixin font-style1 {
+  font: 900 #{$small}/1.2 $sans;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-size: $small;
-  line-height: 20px;
 }
 
-@mixin font-style2($color:"") {
-  font-family: $sans;
-  font-size: $med;
+@mixin font-style2 {
+  font: 300 #{$med}/1.43 $sans;
   font-weight: 300;
   letter-spacing: 0.04em;
-  line-height: 20px;
 }
 
 @mixin font-style3 {
-  font: italic 700 27px/30px $serif;
+  font: italic 700 27px/1.1 $serif;
   color: $white;
 }
 
 // Button style
 @mixin button-style {
-  @include font-style1($dk-blue);
+  @include font-style1;
   transition: background $transition-speed, color $transition-speed;
   border: 3px solid $dk-blue;
   padding: 3px 5px 2px;

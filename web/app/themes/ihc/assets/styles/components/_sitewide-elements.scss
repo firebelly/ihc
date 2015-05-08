@@ -11,10 +11,9 @@ section.main {
 .flag {
   display: inline-block;
   position: absolute;
-  height: 30px;
   bottom: 100%;
   margin: 0;
-  padding: 5px 20px;
+  padding: 10px 20px;
   z-index: 100;
   color: $white;
   a {
@@ -30,44 +29,6 @@ section.main {
     content: '';
     border-right: 25px solid transparent;
     border-top: 20px solid $color-accent;
-  }
-}
-
-// Share blocks
-.share {
-  @include font-style1;
-  color:$dk-blue;
-  a {
-    text-decoration: none;
-    padding-left: 10px;
-    color:$dk-blue;
-  }
-}
-
-.summary-flag {
-  @extend .flag;
-  position: relative;
-  top: -110px;
-  bottom: auto;
-  height: auto;
-  margin-left: #{$column * 5}%;
-  width: #{$column * 10}%;
-  padding: 40px #{$column * 1}%;
-  z-index:2;
-
-  &::after {
-    top: -20px;
-    left: 0;
-    border-top: none;
-    border-right: none;
-    border-left: 25px solid transparent;
-    border-bottom: 20px solid $color-accent;
-  }
-  @include phone {
-    margin-top: 30px;
-    margin-left: 0;
-    width: 100%;
-    padding: 20px 10%;
   }
 }
 
@@ -89,7 +50,7 @@ aside {
   h3 {
     color: $color-bg;
     margin-top: 30px;
-    &:first-of-type {
+    &:first-child {
       margin-top: 0;
     }
   }

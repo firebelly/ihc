@@ -18,16 +18,17 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
 
 <header class="page-header <?= $header_class ?>">
   <div class="container" <?= $header_bg ?>>
-  <?php if ($header_banner_text): ?>
-  <h4 class="flag"><?= $header_banner_text ?></h4>
-  <?php endif; ?>
-
-  <?php get_template_part('templates/share'); ?>
-
-  <div class="header-text">
-    <?= $header_text ?>
-    <?php if ($secondary_header_text): ?>
-      <div class="secondary-header-text summary-flag"><?= $secondary_header_text ?></div>
+    <?php if ($header_banner_text): ?>
+    <h4 class="flag"><?= $header_banner_text ?></h4>
     <?php endif; ?>
+
+    <?php get_template_part('templates/share'); ?>
+
+    <div class="header-text">
+      <?= $header_text ?>
+    </div>
   </div>
+  <?php if ($secondary_header_text): ?>
+    <div class="secondary-header-text"><?= $secondary_header_text ?></div>
+  <?php endif; ?>
 </header>

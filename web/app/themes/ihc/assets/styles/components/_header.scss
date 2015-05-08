@@ -1,20 +1,13 @@
 // Header
 .page-header {
   @include clearfix;
-  width: 86.26%;
-  min-height: 560px;
-  margin-left: -#{$column * 1}%;
-  padding: 120px 0 0 #{$column * 1}%;
-  background: 50% 50% no-repeat scroll;
-  background-size: cover;
-  z-index: 1;
   color: $white;
   a {
     color: $white;
   }
   .container {
     position:relative;
-    z-index:2;
+    min-height: 560px;
     background: 50% 50% no-repeat scroll;
     background-size: cover;
     margin-left: -#{$column * 1}%;
@@ -52,9 +45,7 @@
 
   h4.flag {
     position: relative;
-    padding: 5px 30px;
     bottom: auto;
-    height: auto;
     margin-bottom: 40px;
   }
  
@@ -73,10 +64,6 @@
     }
   }
   
-  .secondary-header-text {
-    @include font-style2;
-  }
-
   @include phone {
     .container {
       width: 100%;
@@ -92,3 +79,41 @@
     }
   }
 }
+
+// Share blocks
+.share {
+  @include font-style1;
+  color:$dk-blue;
+  a {
+    text-decoration: none;
+    padding-left: 10px;
+    color:$dk-blue;
+  }
+}
+
+.secondary-header-text {
+  @include font-style2;
+  position: relative;
+  margin: -100px 0 60px #{$column * 5}%;
+  width: #{$column * 10}%;
+  padding: 40px #{$column * 1}%;
+  background: $color-accent;
+
+  &::after {
+    bottom: 100%;
+    left: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    content: '';
+    border-left: 25px solid transparent;
+    border-bottom: 20px solid $color-accent;
+  }
+  // @include phone {
+  //   margin-top: 30px;
+  //   margin-left: 0;
+  //   width: 100%;
+  //   padding: 20px 10%;
+  // }
+}
+
