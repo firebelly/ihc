@@ -41,6 +41,9 @@
   // Submitting thought, show form
   &.submitting-thought {
     background: $white;
+    @include tablet {
+      margin-right: -22%;
+    }
     .thought-wrapper {
       display: none;
     }
