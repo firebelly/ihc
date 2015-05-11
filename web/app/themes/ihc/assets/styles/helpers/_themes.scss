@@ -125,13 +125,13 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
           .info {
             background: $accent-color;
           }
-          .button:hover {
-            border-color: $dk-blue;
-          }
           .related {
             &::after{
               background: lighten($accent-color, 25%);
             }
+          }
+          .button:hover {
+            border-color: $dk-blue;
           }
         }
       }
@@ -139,9 +139,12 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 
     // Single Focus area
     @include tablet {
-      .article-list {
+      .program-list {
         .flex-item:hover {
           background: $accent-color;
+        }
+        .button:hover {
+          border-color: $dk-blue;
         }
       }
     }

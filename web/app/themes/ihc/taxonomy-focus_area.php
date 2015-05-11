@@ -30,7 +30,7 @@ $header_text = $focus_area->description;
   if ($related_programs):
   ?>
     <h4 class="flag"><?= $focus_area->name ?> Programs:</h4>
-    <div class="article-list grid">
+    <div class="program-list article-list grid">
       <?php foreach ($related_programs as $program_post): ?>
         <div class="flex-item one-half">
           <?php include(locate_template('templates/article-program.php')); ?>

@@ -39,7 +39,7 @@
 
 .button {
   @include font-style1;
-  transition: background $transition-speed, color $transition-speed;
+  transition: all $transition-speed;
   border: 3px solid $dk-blue;
   padding: 6px 20px 5px;
   text-align: center;

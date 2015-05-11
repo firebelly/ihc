@@ -67,6 +67,7 @@
 .article-list {
   @include clearfix;
   .article {
+    margin-bottom: 4px;
     @include tablet {
       min-height: 250px;
       cursor: pointer;

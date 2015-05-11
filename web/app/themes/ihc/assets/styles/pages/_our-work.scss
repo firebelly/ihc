@@ -103,7 +103,7 @@
           p {
             color: $white;
           }
-          .more .button {
+          .button {
             color: $white;
             border-color: $white;
           }
@@ -127,8 +127,8 @@
 }
 
 // Focus Area programs
-.article-list {
-  .program {
+.program-list {
+  .flex-item {
     transition: all $transition-speed;
     h2 {
       font: 900 $lg/40px $sans;
@@ -143,8 +143,8 @@
     &:hover {
       p,
       a {
-        color: $white;
         border-color: $white;
+        color: $white;
       }
       h2 {
         border-bottom-color: $white;
