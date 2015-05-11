@@ -12,16 +12,17 @@
   width: 100%;
 
   @include tablet {
-    padding: 0 #{$column * 1}%;
+    padding: 0 #{$column-width * 1};
   }
 }
 
 section.main {
 	position: relative;
-	margin: 0 #{$column * 1}% 80px;
+  @include clearfix;
+	margin: 0 #{$column-width * 1} 80px #{$column-width * 1};
 
 	@include tablet {
-		width: #{$column * 15}%;
+		width: #{$column-width * 15};
 		float: left;
 		margin: 0 0 80px;
 	}
@@ -53,14 +54,14 @@ section.main {
 // Sidebars
 aside.main {
   position: relative;
-  margin: 0 #{$column * 1}% 100px;
+  margin: 0 #{$column-width * 1} 100px;
   .related {
     position: relative;
     background: $white;
   }
   @include tablet {
     float: right;
-    width: #{$column * 5}%;
+    width: #{$column-width * 5};
     margin: -270px 0 100px;
   }
 }

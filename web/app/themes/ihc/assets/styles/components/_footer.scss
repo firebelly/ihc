@@ -5,7 +5,7 @@ footer.main {
   position: relative;
   background: $dk-blue;
   color: $color-bg;
-  padding: 50px #{$column * 1}% 30px;
+  padding: 50px #{$column-width * 1} 30px;
 
   // link/hover colors in _themes.scss
 
@@ -20,7 +20,7 @@ footer.main {
     width: 49px;
     overflow: hidden;
     margin-right: 0;
-    right: #{$column * 1}%;
+    right: #{$column-width * 1};
   }
 
   p {
@@ -92,8 +92,8 @@ footer.main {
   @include tablet {
     .footer-meta {
       float: right;
-      width: #{$column * 9}%;
-      margin-right: #{$column * 1}%;
+      width: #{$column-width * 9};
+      margin-right: #{$column-width * 1};
     }
   }
 }

@@ -36,9 +36,9 @@
   }    
 }
 
+// Events
 .article-list {
   .event {
-    width: 100%;
     .article-content {
       background: $dk-blue;
     }
@@ -67,16 +67,12 @@
 .article-list {
   @include clearfix;
   .article {
-    position: relative;
-    width: 100%;
-    margin-bottom: 4px;
-
     @include tablet {
       min-height: 250px;
       cursor: pointer;
       float: left;
       width: 33.3%;
-
+      
       .article-content:hover {
         background: $dk-blue;
 
@@ -145,40 +141,6 @@
   }
 }
 
-//focus area single page
-.tax-focus_area {
-  .articles-list {
-    width: 100%;
-
-    .program {
-      float:left;
-      background:$white;
-      width: 49%;
-      padding: 30px 25px;
-      margin-bottom:4px;
-      margin-right:4px;
-
-      h2 {
-        text-transform: uppercase;
-        display:inline-block;
-        line-height: 40px;
-
-        span {
-          border-bottom:3px solid $dk-blue;
-        }
-      }
-
-      .more {
-        margin-top:20px;
-
-        &:hover {
-          color: $white;
-        }
-      }
-    }
-  }
-}
-
 aside {
   .event-details {
     position: relative;
@@ -240,15 +202,7 @@ aside {
     }
     
     p.view-all {
-      padding: 0 0 30px 25px;
-      background: #fff;
-
-      .button {
-        width: 70%;
-        &:hover {
-        color: $white;
-        }
-      }
+      margin: 0 20px 30px;
     }
   }
 }

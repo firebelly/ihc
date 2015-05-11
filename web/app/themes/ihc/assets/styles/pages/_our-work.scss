@@ -126,26 +126,31 @@
   }
 }
 
-.tax-focus_area {
-  .articles-list {
-    .program:hover {
-      h2 span a,
-      p {
+// Focus Area programs
+.article-list {
+  .program {
+    transition: all $transition-speed;
+    h2 {
+      font: 900 $lg/40px $sans;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: inline-block;
+      border-bottom: 3px solid $dk-blue;
+    }
+    p {
+      margin-bottom: 30px;
+    }
+    &:hover {
+      p,
+      a {
         color: $white;
+        border-color: $white;
       }
-      
-      h2 span{
+      h2 {
         border-bottom-color: $white;
       }
-
-      .more {
-        border-color: $white;
-        
-        a {
-          color: $white;
-        }
-      }
+    }
+    @include tablet {
     }
   }
 }
-

@@ -9,15 +9,15 @@
     display: inline;
   }
   a {
+    @include font-style1;
+    line-height: 20px;
     display: inline-block;
     position: relative;
     background: $dk-blue;
-    height: 30px;
     margin: 0 -5px 0 0;
     padding: 5px 15px;
-    color:$white;
+    color: $white;
     text-decoration: underline;
-    @include font-style1;
     &.active {
       text-decoration: none;
       background: $color-accent;

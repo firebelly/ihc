@@ -7,14 +7,14 @@
       display: block;
       position: absolute;
       top: 330px;
-      width: #{$column * 5}%;
+      width: #{$column-width * 5};
       right: 0;
-      margin-right: #{$column * 1}%;
+      margin-right: #{$column-width * 1};
     }
 
     &.submitting-thought {
       @include tablet {
-        width: #{$column * 7}%;
+        width: #{$column-width * 7};
         margin-right: 0;
       }
     }
@@ -25,7 +25,7 @@
     background: #fff;
     @include clearfix;
     position: relative;
-    margin: -80px #{$column * 1}% 80px;
+    margin: -80px #{$column-width * 1} 80px;
 
     .focus-list {
       padding: 26px 0 40px 25px;
@@ -39,8 +39,8 @@
     }
 
     @include tablet {
-      margin: 0 0 0 #{$column * 4}%;
-      width: #{$column * 10}%;
+      margin: 0 0 0 #{$column-width * 4};
+      width: #{$column-width * 10};
       .focus-list {
         padding: 26px 0 40px 25px;
         font-size: $xl;
@@ -52,11 +52,11 @@
   .event-cal {
     @include clearfix;
     position: relative;
-    margin: 0 #{$column * 1}% 80px;
+    margin: 0 #{$column-width * 1} 80px;
     @include tablet {
       top:0;
-      width: #{$column * 10}%;
-      margin-left: #{$column * 11}%;
+      width: #{$column-width * 10};
+      margin-left: #{$column-width * 11};
       padding:0 5px;
       .events {
         width: 100%;
@@ -105,11 +105,11 @@
 
   .news {
     @include clearfix;
-    margin: 0 #{$column * 1}% 80px;
+    margin: 0 #{$column-width * 1} 80px;
     position: relative;
 
     @include tablet {
-      margin: 0 0 0 #{$column * 1}%;
+      margin: 0 0 0 #{$column-width * 1};
     }
 
     .load-more {

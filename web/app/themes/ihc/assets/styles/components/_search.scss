@@ -12,13 +12,17 @@
 .search-toggle {
   top: 0;
   @include tablet {
-    top: 35px;
+    top: 50px;
   }
 }
 
 .search-toggle {
+  padding: 5px;
   position: absolute;
+  top: 10px;
+  left: -4px;
   margin: 0;
+  cursor: pointer;
 }
 .icon-search {
   font-size: 18px;
@@ -35,7 +39,7 @@
 
   @include phone {
     &.active {
-      padding: 0 #{$column * 1}% 0 10%;
+      padding: 0 #{$column-width * 1} 0 10%;
     }
 
     .search-close:before,
@@ -44,24 +48,13 @@
     }
 
     .search-field {
+      padding: 0;
       width: 80%;
       margin-left: 30px;
     }
 
     .active {
-      padding: 0 #{$column * 1}% 0 12%;
-    }
-  }
-
-  &.active {
-    top: 30px;
-    right: 0;
-    left: 0;
-    margin-left: 4.166%;
-    .search-field,
-    .search-submit,
-    .search-close {
-      display: inline-block;
+      padding: 0 #{$column-width * 1} 0 12%;
     }
   }
 
@@ -70,11 +63,12 @@
     position: absolute;
     width: 30px;
     height: 30px;
+    top: 0;
     left: 0;
     @include tablet {
-      left: -2.27%;
+      top: 4px;
+      left: -34px;
     }
-    top: 0;
     &:before, 
     &:after {
       content:'';
@@ -98,13 +92,18 @@
     display: none;
     @include font-style3;
     @include tablet {
-      width: 390px;
+      width: 400px;
     }
+    padding: 0;
     color: $dk-blue;
     background: none;
-    margin-left: 6px;
     border: none;
     outline: none;
+
+    &::placeholder {
+      color: rgba($dk-blue,.5);
+      padding-top: 5px; // wtf
+    }
 
     .search-field.form-control {
       border: none;
@@ -117,9 +116,18 @@
     background: none;
     border: none;
     padding: 0;
-    &:before {
-      top: 5px;
-      position: absolute;
+    width: 30px;
+    height: 30px;
+  }
+
+  &.active {
+    top: 0;
+    right: 0;
+    left: 0;
+    .search-field,
+    .search-submit,
+    .search-close {
+      display: inline-block;
     }
   }
 }

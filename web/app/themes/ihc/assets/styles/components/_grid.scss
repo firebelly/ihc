@@ -1,11 +1,11 @@
 // Grid
 
-$margin: 1em;
-$padding: 1em;
+$column-width: 4.54%;
 
 .grid {
   width: 100%;
   display: block;
+  margin: -2px -2px 0 -2px;
   @include tablet {
     display: flex;
   }
@@ -14,29 +14,17 @@ $padding: 1em;
   }
 }
 
-.one-half-right, .two-thirds-right, .one-third-right, .one-third-middle, .one-fourth-right  {margin-top: $margin;}
-
-
-.grid.-persist {
-  .flex-item {
-    flex-basis: auto;
-  }
-  .one-fourth {
-    max-width: 25%;
-    flex-basis: 25%;
-  }
-  .one-third {
-    flex-basis: 33.3333333%;
-    max-width: 33.3333333%;
-  }
-  .one-half {
-    flex-basis: 50%;
-    max-width: 50%;
-  }
-  .two-thirds {
-    flex-basis: 66.6666667%;
-    max-width: 66.6666667%;
-  }
+.one-half-right,
+.two-thirds-right,
+.one-third-right,
+.one-third-middle,
+.one-fourth-right {
+  margin-top: 1em;
+}
+.flex-item {
+  margin: 2px 2px 4px;
+  padding: 20px;
+  background: $white;
 }
 
 @include tablet {
