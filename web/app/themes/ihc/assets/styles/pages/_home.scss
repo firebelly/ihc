@@ -30,10 +30,11 @@
     .focus-list {
       padding: 26px 0 40px 25px;
       @include font-style1;
-      font-size:$lg;
+      font-size: $lg;
       line-height: 40px;
+      @extend .smooth;
       li a {
-        border-bottom: 3px solid $dk-blue;
+        border-bottom: 4px solid $dk-blue;
       }
     }
 
@@ -57,9 +58,6 @@
       width: #{$column * 10}%;
       margin-left: #{$column * 11}%;
       padding:0 5px;
-      h4.flag {
-        width: #{$column * 3}%;
-      }
       .events {
         width: 100%;
         min-height: 445px;

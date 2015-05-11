@@ -15,7 +15,7 @@ $body_content = apply_filters('the_content', $post->post_content);
   <?php endif; ?>
 
   <div class="one-column">
-    <div class="entry-content user-content">
+    <div class="user-content">
       <?= $body_content ?>
     </div>
   </div>

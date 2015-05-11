@@ -26,7 +26,7 @@ $addl_info = get_post_meta($post->ID, '_cmb2_addl_info', true);
         if (!empty($page_block['body']))
           $block_body = apply_filters('the_content', $page_block['body']);
         ?>
-        <div class="entry-content user-content page-block">
+        <div class="user-content page-block">
           <h4 class="flag"><?= $block_title ?></h4>
           <div class="block-content"><?= $block_body ?></div>
         </div>

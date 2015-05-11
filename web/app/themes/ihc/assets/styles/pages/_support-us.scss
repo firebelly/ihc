@@ -1,18 +1,14 @@
 // Support Us page
 
 .support-us.page {
-  .column {
-    .button:hover {
-        color: $white;
-    }
-  }
-
-  .two-column {
-    .column {
-      width: 49%;
-      padding: 30px 25px 0;
+  .grid {
+    position: relative;
+    margin: -2px -2px 60px;
+    .flex-item {
+      padding: 20px;
+      margin: 2px 2px 4px;
       min-height: 280px;
-      margin-right: 4px;
+      background: $white;
 
       h2 {
         @include font-style1;
@@ -22,20 +18,6 @@
         line-height: 35px;
         display: inline;
       }
-
-      p {
-        margin-top: 20px;
-      }
-
-      .last {
-        margin: 0px;
-      }
-    }
-  }
-
-  .one-column {
-    .column {
-      padding: 30px 25px 0px;
     }
   }
 }

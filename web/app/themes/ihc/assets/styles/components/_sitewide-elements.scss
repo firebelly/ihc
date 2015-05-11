@@ -7,7 +7,10 @@
   padding: 10px 20px;
   color: $white;
   letter-spacing: .1em;
+  line-height: 20px;
   z-index: 1;
+  @extend .smooth;
+  text-align: center;
   a {
     color: $white;
   }
@@ -34,87 +37,30 @@
   }
 }
 
+.button {
+  @include font-style1;
+  transition: background $transition-speed, color $transition-speed;
+  border: 3px solid $dk-blue;
+  padding: 6px 20px 5px;
+  text-align: center;
+  background: none;
+  display: block;
+  white-space: nowrap;
+
+  @include tablet {
+    min-width: 150px;
+    display: inline-block;
+    &:hover {
+      color: $color-bg;
+      background: $dk-blue;
+    }
+  }
+}
+
+
 .alert {
   padding: 50px;
   background: $white;
-}
-
-// Sidebars
-.sidebar-content {
-  h3 {
-    color: $color-bg;
-    margin-top: 30px;
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-  p {
-    margin: 10px 0;
-  }
-  a {
-    text-decoration: underline;
-  }
-
-  // Dark bg sidebars
-  &.dark {
-    background: $dk-blue;
-    color: $color-bg;
-    padding: 30px 50px 30px 25px;
-    margin-right: -20%;
-    p {
-      color: $color-bg;
-    }
-
-  }
-
-  .focus-list {
-    li {
-      @include font-style1;
-      font-size:$lg;
-      letter-spacing: .2em;
-      padding: 15px 0;
-      a {
-        color: $color-bg;
-        border: none;
-      }
-    }
-  }
-}
-
-//pages with header img & thought of day section
-aside.page-with-img {
-  margin-top: -270px;
-
-  .our-work-sidebar p {
-      margin-bottom: 20px;
-    
-    a {
-      @include font-style1;
-      border: none;
-      margin-bottom: 50px;
-    }
-  }
-
-  .support-us-sidebar p a {
-      color: $white;
-      border-bottom: 1px solid $white;
-      font-weight: 700;
-  }
-
-  .single-program-sidebar,
-  .contacts {
-    padding: 30px 25px 30px 0;
-  }
-
-  .single-program-sidebar {
-    h4 {
-      text-transform: capitalize;
-      color: $dk-blue;
-      font-size: 14px;
-      margin-bottom: 0;
-      font-weight: 700;
-    }
-  }
 }
 
 .plus {

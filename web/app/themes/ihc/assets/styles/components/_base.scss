@@ -65,10 +65,6 @@ body {
   }
 }
 
-.button {
-  @include button-style;
-}
-
 // Visibility classes (borrowing nomenclature from Foundation)
 .show-for-medium-up {
   display: none;

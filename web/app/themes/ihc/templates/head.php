@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="alternate" type="application/rss+xml" title="<?= get_bloginfo('name'); ?> Feed" href="<?= esc_url(get_feed_link()); ?>">
     <link rel="icon" type="image/png" href="<?= Roots\Sage\Assets\asset_path('images/favicon-32x32.png') ?>" />
-    <script src="//use.typekit.net/wqq6fxh.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="//use.typekit.net/ekm2caz.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
     <?php wp_head(); ?>
   </head>

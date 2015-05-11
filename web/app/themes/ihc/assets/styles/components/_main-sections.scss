@@ -10,7 +10,6 @@
 
 .content {
   width: 100%;
-  height: auto;
 
   @include tablet {
     padding: 0 #{$column * 1}%;
@@ -26,10 +25,20 @@ section.main {
 		float: left;
 		margin: 0 0 80px;
 	}
-  
+
+  .columns {
+    display: flex;
+    .column {
+      
+    }
+  }
   .one-column {
+    position: relative;
     background: $white;
     min-height: 140px;
+    .user-content {
+      padding: 20px;
+    }
   }
 
   .two-column {
@@ -41,16 +50,98 @@ section.main {
   }
 }  
 
+// Sidebars
 aside.main {
   position: relative;
   margin: 0 #{$column * 1}% 100px;
-	.related {
-	  position: relative;
-	  background: $white;
-	}
-	@include tablet {
-		float: right;
-		width: #{$column * 5}%;
-		margin: -270px 0 100px;
-	}
+  .related {
+    position: relative;
+    background: $white;
+  }
+  @include tablet {
+    float: right;
+    width: #{$column * 5}%;
+    margin: -270px 0 100px;
+  }
+}
+
+.sidebar-content {
+  h3 {
+    color: $color-bg;
+    margin-top: 30px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  p {
+    margin: 10px 0;
+  }
+  a {
+    text-decoration: underline;
+  }
+
+  // Dark bg sidebars
+  &.dark {
+    background: $dk-blue;
+    color: $color-bg;
+    padding: 30px 50px 30px 25px;
+    margin: -20px 0 100px;
+    @include tablet {
+      margin: 0 -20% 0 0;
+    }
+    p {
+      color: $color-bg;
+    }
+  }
+
+  // sidebar focus lists (currently only used on /about-us)
+  .focus-list {
+    li {
+      @include font-style1;
+      font-size:$lg;
+      letter-spacing: .2em;
+      @extend .smooth;
+      padding: 15px 0;
+      a {
+        color: $color-bg;
+        border: none;
+      }
+    }
+  }
+}
+
+//pages with header img & thought of day section
+aside.page-with-img {
+  margin-top: -270px;
+
+  .our-work-sidebar p {
+      margin-bottom: 20px;
+    
+    a {
+      @include font-style1;
+      border: none;
+      margin-bottom: 50px;
+    }
+  }
+
+  .support-us-sidebar p a {
+      color: $white;
+      border-bottom: 1px solid $white;
+      font-weight: 700;
+  }
+
+  .single-program-sidebar,
+  .contacts {
+    padding: 30px 25px 30px 0;
+  }
+
+  .single-program-sidebar {
+    h4 {
+      text-transform: capitalize;
+      color: $dk-blue;
+      font-size: 14px;
+      margin-bottom: 0;
+      font-weight: 700;
+    }
+  }
 }

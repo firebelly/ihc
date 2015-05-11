@@ -12,7 +12,7 @@ if ($post->post_type == 'program')
 else
   $header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));
 // Custom fields for header text
-$header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
+$header_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_text', true));
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 ?>
 

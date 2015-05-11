@@ -68,38 +68,5 @@
         padding-bottom: 30px;
       }
     }
-
-    .entry-content {
-      width: 100%;
-      padding: 30px #{$column * 1}% 40px 25px;
-
-      em {
-        @include font-style2;
-      }
-
-      strong {
-        @include font-style1;
-      }
-
-      ul { 
-        padding-left:50px;
-
-        li {
-          list-style-type: disc;
-          line-height: 20px;
-          margin-bottom:10px;
-          font-size:14px;
-        }     
-      }
-
-      blockquote {
-        margin: 0;
-        
-        p {
-        @include font-style3;
-        color: $dk-blue;
-        }
-      }
-    } 
   }
 }

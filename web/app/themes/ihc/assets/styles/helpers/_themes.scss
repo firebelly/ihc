@@ -25,7 +25,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       } 
     }
     #menu-footer-links a {
-      border-bottom: 1px solid $bg-color;
+      border-bottom-color: $bg-color;
     }
 
     // Button hovers
@@ -129,8 +129,6 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
             border-color: $dk-blue;
           }
           .related {
-            background: lighten($accent-color, 25%);
-
             &::after{
               background: lighten($accent-color, 25%);
             }

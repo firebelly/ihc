@@ -1,14 +1,14 @@
 // Our Work page
 
 .our-work.page {
-  section.main {
-    float: left;
-    width: 68.1%;
-  }
+  // section.main {
+  //   float: left;
+  //   width: 68.1%;
+  // }
 
-  .focus-list {
-    padding:0 0 20px;
-  }
+  // .focus-list {
+  //   padding:0 0 20px;
+  // }
 }
 
 // Single program page
@@ -37,44 +37,47 @@
       color:$dk-blue;
     }
 
+    h1 a {
+      font: 900 #{$xl}/1.2 $sans;
+      @extend .smooth;
+      border-bottom: 4px solid $dk-blue;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+    }
+
     .info {
       transition: background $transition-speed, color $transition-speed;
       position: relative;
-      width: 63.33%;
       background: $white;
       padding: 40px 50px 50px 25px;
-      float: left;
-
-      h1 a {
-        font-weight: 900;
-        color: $dk-blue;
-        border-bottom: 3px solid $dk-blue;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
 
       p {
         margin-bottom: 30px;
+      }
+
+      @include tablet {
+        float: left;
+        width: 63.33%;
       }
     }
 
     .related {
       transition: background $transition-speed, color $transition-speed;
-      background: #f8f4ef;
-      width: 36.67%;
       padding: 40px 50px 25px 25px;
-      float: left;
-
       &::after {
         transition: background $transition-speed, color $transition-speed;
-        width: 36.67%;
         content: '';
-        background: #f8f4ef;
+        background: rgba($white, .8);
         position: absolute;
         top: 0;
         right: 0;
+        left: 0;
         z-index: -1;
         bottom: 0;
+      }
+      @include tablet {
+        width: 36.67%;
+        float: left;
       }
 
       h3 {
@@ -93,40 +96,30 @@
         }
       }
     }
-
-    &:hover {
-      .info {
-        background: $color-accent;
-          
-        h1 a,
-        p {
-          color: $white;
+    @include tablet {
+      &:hover {
+        .info {
+          h1 a,
+          p {
+            color: $white;
+          }
+          .more .button {
+            color: $white;
+            border-color: $white;
+          }
+          h1 a {
+            border-bottom: 3px solid $white;
+          }
         }
 
-        .more .button {
-          color: $white;
-          border-color: $white;
-        }
-
-        h1 a {
-          border-bottom: 3px solid $white;
-        }
-      }
-
-      .related {
-        background: lighten($color-accent, 25%);
-
-        &::after{
-          background: lighten($color-accent, 25%);
-        }
-
-        h3 {
-          color: $white;
-        }
-
-        .programs a {
-          color: $white;
-          border-bottom: 1px solid $white;
+        .related {
+          h3 {
+            color: $white;
+          }
+          .programs a {
+            color: $white;
+            border-bottom: 1px solid $white;
+          }
         }
       }
     }

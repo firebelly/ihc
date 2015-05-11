@@ -1,17 +1,17 @@
 // Typography
-h1, h2, h3, h4, h5{
-  margin-top:0;
+h1, h2, h3, h4, h5 {
+  margin-top: 0;
 }
 
 h1 {
-  font-weight:100;
-  font-family:$sans;
-  color:$white;
-  line-height:30px;
+  font-weight: 100;
+  font-family: $sans;
+  color: $white;
+  line-height: 30px;
 }
 
 h2 {
-  font-size:$lg;
+  font-size: $lg;
 }
 
 h3 {
@@ -24,9 +24,9 @@ h4 {
 }
 
 p {
-	@include font-style2;
-	font-size: $med;
-	line-height:20px;
+  @include font-style2;
+  font-size: $med;
+  line-height: 20px;
 }
 
 p {

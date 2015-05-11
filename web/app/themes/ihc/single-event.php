@@ -6,22 +6,22 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
   <section class="main">
     <h4 class="flag"><?= $banner_text ?></h4>
     <time class="article-date" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
-      <div class="post-inner">
-        <header>
-          <h1 class="entry-title"><span><?= $post->post_title ?></span></h1>
-        </header>
-          <div class="entry-content user-content"><?= $event->body ?>
-          <?php get_template_part('templates/share'); ?>
-          </div>
+    <div class="post-inner">
+      <div class="entry-content user-content">
+        <h1 class="entry-title"><span><?= $post->post_title ?></span></h1>
+        <?= $event->body ?>
+        <?php get_template_part('templates/share'); ?>
       </div>
-   </section>
+    </div>
+  </section>
   <aside class="main">
     <h4 class="flag">Event Details</h4>
-    <div id="map" ></div>
+    <div id="map"></div>
     <div class="event-details">
       <h3>When:</h3>
       <p><?= date('l, F j, Y', $event->event_start) ?>
       <br><?= $event->time_txt ?></p>
+
       <h3>Where:</h3>
       <p><?= $event->venue ?>
       <br><?= $event->address['address-1'] ?> 
@@ -29,6 +29,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
         <br><?= $event->address['address-2'] ?>
       <?php endif; ?>
       <br><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?>
+
       <?php if (!($event->archived)): ?></p>
         <h3>Cost:</h3>
         <p class="cost">
@@ -46,6 +47,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
         </ul>
       <?php endif; ?>
     </div>
+    
     <div class="related">
       <h4 class="flag">Blog & News</h4>
       <?php 
