@@ -6,6 +6,9 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
   .background-#{$i} {
     // Main page bg
     background: $bg-color;
+    .site-nav.active {
+      background: $bg-color;
+    }
 
     // Footer text & links
     footer.main {

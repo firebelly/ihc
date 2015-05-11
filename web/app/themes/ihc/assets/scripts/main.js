@@ -159,7 +159,7 @@ var IHC = (function($) {
   function _initNav() {
     // SEO-useless nav toggler
     $('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>')
-      .prependTo('body')
+      .insertAfter('.search-toggle')
       .on('click', function(e) {
         e.preventDefault();
         _toggleMobileMenu();

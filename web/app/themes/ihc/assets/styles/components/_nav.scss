@@ -1,13 +1,17 @@
 // Nav
 
-// wp admin bar push
+// WP admin bar push
 .admin-bar {
   .logo {
     top: 46px;
     @include tablet {
       top: 83px;
     }
-  }  
+  }
+  .search-form,
+  .search-toggle {
+    top: 52px;
+  }
 }
 
 .logo {
@@ -41,8 +45,6 @@
 // Main banner area
 .banner {
   height: 58px;
-  padding: 0;
-  margin: 0 0 0 #{$column-width * 1};
   position: relative;
   @include clearfix;
 
@@ -52,34 +54,66 @@
   }
 }
 
+.search-toggle {
+  padding: 5px;
+  position: absolute;
+  top: 2px;
+  left: $column-width;
+  margin: 0 0 0 -4px;
+  cursor: pointer;
+}
+.icon-search {
+  font-size: 18px;
+}
+.search-close {
+  @include close-x;
+  display: none;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  left: -34px;
+  @include tablet {
+    top: 4px;
+  }
+}
+
+.search-open .icon-search {
+  display: none;
+}
+
 // Main site nav
 .site-nav {
-  ul {
-    margin-top: 44px;
+  display: none;
+  padding:0;
+
+  &.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+    padding: 40px $column-width;
   }
+
   li {
-    display: inline-block;
-    margin-right: 20px;
-    @include tablet {
-      padding-bottom: 30px;
-      &.menu-support-us {
-        margin-right: 80px;
-      }
+    display: block;
+    margin-bottom: 10px;
+    // Active menu item
+    &.active a {
+      border-bottom: 3px solid $dk-blue !important;
     }
 
-    // Active menu item
-    &.active a,
-    &.active a:hover {
-      border-bottom: 3px solid $dk-blue;
+    &.menu-support-us {
+      margin-bottom: 50px;
     }
 
     a {
       display: inline-block;
       @include font-style1;
       padding: 5px 0 4px;
-      &:hover {
-        border-bottom: 3px solid $lt-orange;
-      }
     }
 
     &.menu-get-il-humanities-news-events a,
@@ -94,16 +128,20 @@
       }
     }
   }
-
-  @include phone {
-    padding:0;
-
+  @include tablet {
+    display: block;
+    ul {
+      margin-top: 44px;
+    }
     li {
-      display:block;
-      margin-right: 25px;
-
+      display: inline-block;
+      margin-right: 20px;
+      padding-bottom: 30px;
       &.menu-support-us {
-        margin-bottom: 50px;
+        margin-bottom: 0;
+      }
+      a:hover {
+        border-bottom: 3px solid $lt-orange;
       }
     }
   }
@@ -134,11 +172,13 @@
 // mobile menu toggle
 .menu-toggle {
   position: absolute;
+  left: $column-width;
   top: 37px;
-  margin: 0 #{$column-width * 1};
   padding: 6px 0;
+  z-index: 10;
 
-  &:before, &:after {
+  &::before, &::after {
+    transition: all .1s .25s;
     position: absolute;
     left: 0;
     content:'';
@@ -147,11 +187,11 @@
     background: $dk-blue;
   } 
 
-  &:before {
+  &::before {
     top: 0;
     transform-origin: top left;
   }
-  &:after {
+  &::after {
     bottom: 0;
     transform-origin: bottom left;
   }
@@ -165,21 +205,62 @@
   @include tablet {
     display:none;
   }
+
+  &.menu-open {
+    top: 40px;
+    left: $column-width * 20;
+
+    .menu-bar {
+      display: none;
+    }
+
+    &::before {
+      top: -3px;
+      transform: rotate(45deg);
+    }
+    &::after{
+      transform: rotate(-45deg);
+    }
+  }
+
 }
 
-.menu-open {
-  top: 40px;
-  left: 83%;
+.search-form {
+  position: absolute;
 
-  .menu-bar {
+  .search-field {
     display: none;
+    @include font-style3;
+    @include tablet {
+      width: 400px;
+      float: left;
+    }
+    color: $dk-blue;
+    background: none;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      color: rgba($dk-blue,.5);
+      padding-top: 5px; // wtf?
+    }
   }
 
-  &:before {
-    top: -3px;
-    transform: rotate(45deg);
+  .search-submit {
+    display: none;
+    color: $dk-blue;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 30px;
   }
-  &:after{
-    transform: rotate(-45deg);
+
+  &.active {
+    .search-field,
+    .search-submit,
+    .search-close {
+      display: block;
+    }
   }
 }
