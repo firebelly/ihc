@@ -47,6 +47,7 @@
   height: 58px;
   position: relative;
   @include clearfix;
+  margin: 0 0 0 #{$column-width * 1};
 
   @include tablet {
     height: 90px;
@@ -58,12 +59,9 @@
   padding: 5px;
   position: absolute;
   top: 2px;
-  left: $column-width;
+  left: 0;
   margin: 0 0 0 -4px;
   cursor: pointer;
-  @include tablet {
-    left: 0;
-  }
 }
 .icon-search {
   font-size: 18px;
@@ -90,15 +88,17 @@
   display: none;
   padding:0;
 
-  &.active {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 5;
-    padding: 40px $column-width;
+  @media only screen and (max-width: 768px) {
+    &.active {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 5;
+      padding: 40px $column-width;
+    }
   }
 
   li {
@@ -150,32 +150,11 @@
   }
 }
 
-// .site-nav {
-//   position: absolute;
-
-//   @include phone {
-//     right: 100%;
-//     padding: 0;
-//   }
-//   &.active {
-//     right:100%;
-
-//     @include phone { 
-//       top: 0;
-//       right: 0;
-//       width: 100%;
-//       height: 640px;
-//       padding: 40px #{$column-width * 1};
-//       background: $color-bg;
-//     }
-//   }
-// }
-
-
 // mobile menu toggle
 .menu-toggle {
   position: absolute;
-  left: $column-width;
+  left: 0;
+  width: 20px;
   top: 37px;
   padding: 6px 0;
   z-index: 10;
@@ -263,7 +242,7 @@
     .search-field,
     .search-submit,
     .search-close {
-      display: block;
+      display: inline-block;
     }
   }
 }
