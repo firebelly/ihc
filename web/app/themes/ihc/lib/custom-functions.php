@@ -158,13 +158,31 @@ function get_related_news_post($post_or_focus_area) {
 }
 
 /**
- * Get header bg for post
+ * Get header bg for post, duotone treated with the random IHC_BACKGROUND + Dark Blue 
  */
 function get_header_bg($post) {
   $header_bg = false;
   if (has_post_thumbnail($post->ID)) {
-    $background_image = wp_get_attachment_url(get_post_thumbnail_id($post->ID), 'full', true);
-    $header_bg = ' style="background-image:url('.$background_image.');"';
+    $thumb_id = get_post_thumbnail_id($post->ID);
+    $background_image = get_attached_file($thumb_id, 'full', true);
+    $upload_dir = wp_upload_dir();
+    $base_dir = $upload_dir['basedir'] . '/backgrounds/';
+
+    // Build treated filename with thumb_id in case there are filename conflicts
+    $treated_filename = preg_replace("/.+\/(.+)\.(\w{2,5})$/", $thumb_id."-$1-".IHC_BACKGROUND.".$2", $background_image);
+    $treated_image = $base_dir . $treated_filename;
+  
+    // If treated file doesn't exist, create it
+    if (!file_exists($treated_image)) {
+
+      // If the background directory doesn't exist, create it first
+      if(!file_exists($base_dir)) {
+        mkdir($base_dir);
+      }
+
+      exec('/usr/local/bin/convert '.$background_image.' -colorspace gray -level +10% +level-colors "#44607f","#'.IHC_BACKGROUND.'" '.$treated_image);
+    }    
+    $header_bg = ' style="background-image:url(' . $upload_dir['baseurl'] . '/backgrounds/' . $treated_filename . ');"';
   }
   return $header_bg;
 }

@@ -29,3 +29,24 @@ function custom_nav_highlights($classes, $item) {
   return $classes;
 }
 if (!is_admin()) { add_filter('nav_menu_css_class', __NAMESPACE__ . '\custom_nav_highlights', 20, 2); }
+
+/**
+ * Custom theme classes added to body
+ */
+function body_class( $classes ) {
+  // Array of background hex values
+  $background_array = ['c1d6d8', 'b7ddba', 'edbaba', 'e5d3be', 'c6c9cc', 'eac6af'];
+
+  // Select random bg & accents for page
+  $background = rand(1,6);
+  $accent = rand(1,5);
+  
+  // Set global var to use when creating treated backgrounds
+  define('IHC_BACKGROUND', $background_array[$background-1]);
+  
+  // Add to body_class()
+  $classes[] = 'background-' . $background;
+  $classes[] = 'accent-' . $accent;
+  return $classes;
+}
+add_filter('body_class', __NAMESPACE__ . '\body_class');

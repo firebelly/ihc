@@ -3,14 +3,9 @@
 // WP admin bar push
 .admin-bar {
   .logo {
-    top: 46px;
     @include tablet {
-      top: 83px;
+      top: 32px;
     }
-  }
-  .search-form,
-  .search-toggle {
-    top: 52px;
   }
 }
 
