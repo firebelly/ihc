@@ -134,26 +134,29 @@
   .flex-item {
     transition: all $transition-speed;
     h2 {
-      font: 900 $lg/40px $sans;
+      @extend .smooth;
+      margin-top: -5px;
+      font: 900 #{$lg}/40px $sans;
       letter-spacing: .1em;
       text-transform: uppercase;
-      display: inline-block;
-      border-bottom: 3px solid $dk-blue;
+      a {
+        border-bottom: 3px solid $dk-blue;
+      }
     }
     p {
-      margin-bottom: 30px;
-    }
-    &:hover {
-      p,
-      a {
-        border-color: $white;
-        color: $white;
-      }
-      h2 {
-        border-bottom-color: $white;
-      }
+      margin: 20px 0 30px;
     }
     @include tablet {
+      &:hover {
+        p,
+        a {
+          border-color: $white;
+          color: $white;
+        }
+        h2 {
+          border-bottom-color: $white;
+        }
+      }
     }
   }
 }
