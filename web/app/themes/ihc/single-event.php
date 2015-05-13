@@ -3,7 +3,7 @@ $event = \Firebelly\PostTypes\Event\get_event_details($post);
 $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
 ?>
 <article class="post event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
-  <section class="main">
+  <main>
     <h4 class="flag"><?= $banner_text ?></h4>
     <time class="article-date flagged" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
     <header>
@@ -15,7 +15,8 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
         <?php get_template_part('templates/share'); ?>
       </div>
     </div>
-  </section>
+  </main>
+
   <aside class="main">
     <h4 class="flag">Event Details</h4>
     <div id="map"></div>

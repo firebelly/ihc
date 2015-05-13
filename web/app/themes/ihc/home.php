@@ -8,13 +8,12 @@ $per_page = get_option('posts_per_page');
 $total_posts = $GLOBALS['wp_query']->found_posts;
 $total_pages = ($total_posts > 0) ? ceil($total_posts / $per_page) : 1;
 $post = get_page_by_path('/news');
+$with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 ?>
-
-<?php get_template_part('templates/page', 'image-header'); ?>
-<section class="main">
-  <div class="entry-content">
+<div class="content-wrap <?= $with_image_class ?>">
+  <?php get_template_part('templates/page', 'image-header'); ?>
+  <main>
     <h4 class="flag">Filter Posts</h4>
-
     <?php include(locate_template('templates/filters.php')); ?>
 
     <div class="load-more-container masonry article-list">
@@ -34,8 +33,9 @@ $post = get_page_by_path('/news');
         <p>No posts found.</p>
       </div>
     <?php endif; ?>
-  </div>
-</section>
-<aside class="main">
+  </main>
+
+  <aside class="main">
     <?php include(locate_template('templates/thought-of-the-day.php')); ?>
   </aside>
+</div>

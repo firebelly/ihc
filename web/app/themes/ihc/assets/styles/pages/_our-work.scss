@@ -37,12 +37,15 @@
       color:$dk-blue;
     }
 
-    h1 a {
+    h1 {
       font: 900 #{$xl}/1.2 $sans;
+      margin-bottom: 30px;
       @extend .smooth;
-      border-bottom: 4px solid $dk-blue;
       text-transform: uppercase;
       letter-spacing: .15em;
+      a {
+        border-bottom: 4px solid $dk-blue;
+      }
     }
 
     .info {

@@ -10,6 +10,10 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       background: $bg-color;
     }
 
+    #map.large::after {
+      box-shadow: inset 0 0 300px 200px $bg-color;
+    }
+
     // Footer text & links
     footer.main {
       color: $bg-color;
@@ -178,6 +182,14 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
         blockquote p {
           color: $accent-color;
         }
+      }
+    }
+
+    // Events
+    .event-details {
+      a,
+      h3 {
+        color: $accent-color;
       }
     }
 

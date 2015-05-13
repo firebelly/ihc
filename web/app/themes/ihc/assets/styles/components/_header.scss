@@ -4,18 +4,20 @@
   a {
     color: $white;
   }
-  .container {
-    @include clearfix;
-    position:relative;
+  &.with-image .container {
     padding: 50px 4.54% 60px;
     margin-bottom: 80px;
     background: 50% 50% no-repeat scroll;
     background-size: cover;
-  
+  }
+  .container {
+    @include clearfix;
+    position:relative;
+
     h1 {
       font-size: $xl;
       line-height: 30px;
-      padding-right: #{$column-width * 2};
+      margin: 0 #{$column-width * 2} 20px 0;
       @extend .smooth;
       br {
         display: none;
@@ -25,16 +27,23 @@
         background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAABCAIAAACUgoPjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTg1ODE3NTJFQjk1MTFFNDg1NEJDMkNDMDZFNzRGNDYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTg1ODE3NTNFQjk1MTFFNDg1NEJDMkNDMDZFNzRGNDYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1ODU4MTc1MEVCOTUxMUU0ODU0QkMyQ0MwNkU3NEY0NiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1ODU4MTc1MUVCOTUxMUU0ODU0QkMyQ0MwNkU3NEY0NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PmZ7gRQAAAARSURBVHjaYvz//z8DGAAEGAAX/AL/A/IscQAAAABJRU5ErkJggg==') 0 29px repeat-x;
       }
     }    
-    @include tablet {
+  }
+  @include tablet {
+    &.with-image .container {
       min-height: 560px;
       margin: 0 0 0 -6.125%;
       padding: 50px 0 0 6.125%;
       width: #{$column-width * 19};
+      float: none;
+    }
+    .container {
+      float: left;
+      margin-top: 50px;
+      width: #{$column-width * 15};
       h1 {
         font-size: $xxl;
         line-height: 60px;
-        padding-right: #{$column-width * 2};
-        padding-bottom: 50px;
+        margin: 0 #{$column-width * 2} 50px 0;
         br {
           display: block;
         }
@@ -42,8 +51,10 @@
           background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAIAAAASFvFNAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTg1ODE3NEVFQjk1MTFFNDg1NEJDMkNDMDZFNzRGNDYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTg1ODE3NEZFQjk1MTFFNDg1NEJDMkNDMDZFNzRGNDYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGQkU0NjIwOUVBOTYxMUU0ODU0QkMyQ0MwNkU3NEY0NiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGQkU0NjIwQUVBOTYxMUU0ODU0QkMyQ0MwNkU3NEY0NiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pk2bIIQAAAAVSURBVHjaYvz//z8DGDAxwABAgAEANgYDAcj9JjsAAAAASUVORK5CYII=') 0 61px repeat-x;
         }
       }
+
     }
   }
+
 
   h4.flag {
     position: relative;
@@ -54,12 +65,12 @@
   h1 {
     font-size: $xxl;
     line-height: 60px;
-    padding-right: #{$column-width * 4};
+    // padding-right: #{$column-width * 4};
   }
   
   p {
     @include font-style1;
-    bottom: 60px;
+    margin-bottom: 20px;
 
     &::before {
       content: "\bb  ";

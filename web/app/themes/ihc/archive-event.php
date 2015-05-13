@@ -12,39 +12,34 @@ $total_events = \Firebelly\PostTypes\Event\get_num_events($past_events, $filter_
 $total_pages = ceil($total_events / $per_page);
 
 $post = get_page_by_path('/events');
+$with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 $page_content = apply_filters('the_content', $post->post_content);
 ?>
+<div class="content-wrap <?= $with_image_class ?>">
+  <?php get_template_part('templates/page', 'image-header'); ?>
+  <div id="map" class="large hide"></div>
 
-<header>
-  <div class="user-content">
-    <?php echo $page_content; ?>
-  </div>
-</header>
+  <main>
+    <ul class="flag-tabs">
+      <li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/">Upcoming Events</a></li> 
+      <li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1">Past Events</a></li>  
+    </ul>
 
-<?php get_template_part('templates/page', 'image-header'); ?>
-<div id="map" class="large hide"></div>
+    <?php include(locate_template('templates/filters.php')); ?>
 
-<section class="main">
-  <ul class="flag-tabs">
-    <li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/">Upcoming Events</a></li> 
-    <li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1">Past Events</a></li>  
-  </ul>
-
-  <?php include(locate_template('templates/filters.php')); ?>
-
-  <div class="events load-more-container article-list masonry">
-    <?php if ($event_posts = \Firebelly\PostTypes\Event\get_events('', $filter_focus_area, $filter_program)): ?>
-      <?= $event_posts ?>
-    <?php else: ?>
-      <div class="notice">
-        <p>No posts found.</p>
-      </div>
-    <?php endif; ?>
-  </div>
-  
-  <div class="load-more" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
-
-</section>
-<aside class="main">
-    <?php include(locate_template('templates/thought-of-the-day.php')); ?>
-</aside>
+    <div class="events load-more-container article-list masonry">
+      <?php if ($event_posts = \Firebelly\PostTypes\Event\get_events('', $filter_focus_area, $filter_program)): ?>
+        <?= $event_posts ?>
+      <?php else: ?>
+        <div class="notice">
+          <p>No posts found.</p>
+        </div>
+      <?php endif; ?>
+    </div>
+    
+    <div class="load-more" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+  </main>
+  <aside class="main">
+      <?php include(locate_template('templates/thought-of-the-day.php')); ?>
+  </aside>
+</div>

@@ -5,7 +5,7 @@ $publication_date = get_post_meta($post->ID, '_cmb2_publication_date', true);
 $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($post->post_date);
 ?>
   <article <?php post_class(); ?>>
-    <section class="main">
+    <main>
       <?php if ($category = \Firebelly\Utils\get_first_term($post)): ?>
         <h4 class="flag"><a href="<?= get_term_link($category); ?>"><?php echo $category->name; ?></a></h4>
       <?php endif; ?>
@@ -30,7 +30,8 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
         </div>
       </div>
       <?php comments_template('/templates/comments.php'); ?>
-    </section>
+    </main>
+    
     <aside class="main">
       <h4 class="flag">Related Event</h4>
       <div class="related article-list">

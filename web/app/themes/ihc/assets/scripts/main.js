@@ -24,7 +24,7 @@ var IHC = (function($) {
       _resize();
 
       $document = $(document);
-      $content = $('section.main');
+      $content = $('main');
 
       // fit them vids!
       $content.fitVids();
@@ -113,7 +113,7 @@ var IHC = (function($) {
   function _initMap() {
     if ($('#map').length) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
-      map = L.mapbox.map('map', 'firebellydesign.lkh3a3i1', { zoomControl: false, attributionControl: false }).setView([41.843, -88.075], 11);
+      map = L.mapbox.map('map', 'firebellydesign.0238ce0b', { zoomControl: false, attributionControl: false }).setView([41.843, -88.075], 11);
       
       mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 

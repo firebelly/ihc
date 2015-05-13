@@ -1,17 +1,29 @@
 // Maps
 
 #map {
-  &.large {
-    position: relative;
-    top: 0;
-    left: -#{$column-width * 1};
-    float: left;
-    width: 74.64%;
-    z-index: -1;
-    margin: 2em 0;
-
-    width: 700px;
-    height: 1000px;
+  display: none;
+  background: #eee;
+  @include tablet {
+    display: block;
+    &.large {
+      background: none;
+      position: absolute;
+      top: 700px;
+      left: -240px;
+      width: 1200px;
+      z-index: -1;
+      height: 1000px;
+      &::after {
+       content: '';
+       position: absolute;
+       box-shadow: inset 0 0 300px 300px $color-bg;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       z-index: 200;
+      }
+    }
   }
 }
 
