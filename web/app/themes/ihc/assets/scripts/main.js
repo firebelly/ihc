@@ -247,7 +247,7 @@ var IHC = (function($) {
       var past_events = (post_type==='events') ? parseInt($load_more.attr('data-past-events')) : 0;
       var focus_area = $load_more.attr('data-focus-area');
       var program = $load_more.attr('data-program');
-      var more_container = $load_more.parents('section').find('.load-more-container');
+      var more_container = $load_more.parents('section,main').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
 
       // homepage has a funky load-more in events that is part of masonry until clicked
