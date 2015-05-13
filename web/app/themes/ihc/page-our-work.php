@@ -9,7 +9,7 @@ $body_content = apply_filters('the_content', $post->post_content);
 
 <?php get_template_part('templates/page', 'image-header'); ?>
 
-<section class="main">
+<main>
   <h4 class="flag">Our Focus Areas</h4>
   <ul class="focus-list-large">
     <?php 
@@ -19,7 +19,7 @@ $body_content = apply_filters('the_content', $post->post_content);
     }
     ?>
   </ul>
-</section>
+</main>
 
 <aside class="main">
   <?php include(locate_template('templates/thought-of-the-day.php')); ?>

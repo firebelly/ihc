@@ -24,7 +24,7 @@ $header_text = $focus_area->description;
   </div>
 </header>
 
-<section class="main">
+<main>
   <?php 
   $related_programs = \Firebelly\PostTypes\Program\get_programs($focus_area->slug);
   if ($related_programs):
@@ -38,7 +38,7 @@ $header_text = $focus_area->description;
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
-</section>
+</main>
 
 <aside class="main">
   <div class="related article-list">

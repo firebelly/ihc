@@ -7,20 +7,21 @@
 
 $content_banner_text = get_post_meta($post->ID, '_cmb2_content_banner_text', true);
 $body_content = apply_filters('the_content', $post->post_content);
+$with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 ?>
 
-<article <?php post_class(); ?>>
+<article <?php post_class($with_image_class); ?>>
 
   <?php get_template_part('templates/page', 'image-header'); ?>
 
-  <section class="main">
+  <main>
     <?php if ($content_banner_text): ?>
       <h4 class="flag"><?= $content_banner_text ?></h4>
     <?php endif; ?>
     <div class="entry-content user-content">
       <?= $body_content ?>  
     </div>
-  </section>
+  </main>
 
   <aside>
     <div class="article-list">
