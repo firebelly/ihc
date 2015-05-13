@@ -101,6 +101,7 @@
   li {
     display: block;
     margin-bottom: 10px;
+
     // Active menu item
     &.active a {
       border-bottom: 3px solid $dk-blue !important;
@@ -113,6 +114,7 @@
     a {
       display: inline-block;
       @include font-style1;
+      border-bottom: 3px transparent;
       padding: 5px 0 4px;
     }
 

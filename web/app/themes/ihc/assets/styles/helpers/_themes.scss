@@ -1,4 +1,4 @@
-// Crazy random themes!
+// Each page load can have a random background and random accent
 
 $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
 @each $bg-color in $bg-colors {
@@ -77,16 +77,13 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     }
 
     // Article tags
-    .article-content-wrap {
-      .article-tag a {
-        color: $bg-color;
-      }
+    .article-tag a {
+      color: $bg-color;
     }
 
     // Time stamps
     .article-date {
       background: $bg-color;
-
       &::after {
         border-top-color: $bg-color;
       }
@@ -100,7 +97,7 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
   $i: index($accent-colors, $accent-color);
 
   .accent-#{$i} {
-    // Random elements with class .accent
+    // Random elements with class "accent"
     .accent {
       color: $accent-color;
       a {
@@ -167,9 +164,9 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       }
     }
 
-    // Summary flag for about-us, openICE
+    // Secondary header blocks
     .secondary-header-text {
-      background: $accent-color;      
+      background: $accent-color;
       &::after {
         border-bottom-color: $accent-color;
       }

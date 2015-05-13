@@ -13,7 +13,8 @@
     @extend .smooth;
 
     p {
-      color:$white;
+      transition: color $transition-speed;
+      color: $white;
     }
   }
 

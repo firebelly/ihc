@@ -13,7 +13,7 @@
 }
 
 // Event dates
-.event .article-date {
+.article-date.flagged {
   width: 50px;
   &::after {
     top: 100%;

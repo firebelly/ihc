@@ -5,7 +5,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
 <article class="post event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
   <section class="main">
     <h4 class="flag"><?= $banner_text ?></h4>
-    <time class="article-date" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
+    <time class="article-date flagged" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
     <header>
       <h1 class="entry-title"><span><?= $post->post_title ?></span></h1>
     </header>
