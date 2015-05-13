@@ -37,17 +37,24 @@
     }
   }
 
-  .post-inner {
+  section.main {
     background: $white;
+    header,
+    .entry-content {
+      padding: 30px 50px 0 25px;
+    }
+    h1 {
+      color: $dk-blue;
+      margin: 0;
+    }
+    .user-content {
+      p {
+        margin: 0 0 30px;
+      }
+    }
 
     header {
-      padding:40px 50px 0 25px;
-
-      h1 {
-        display: inline-block;
-      }
-
-      .entry-title span{
+      .entry-title span {
         @include font-style1;
         font-size: $xl;
         color: $dk-blue;
@@ -58,14 +65,12 @@
     }
 
     .byline-area {
-      padding: 0 25px;
-      
+      border-bottom: 1px solid $gray-lite;
+
       p {
         @include font-style1;
         color: $dk-blue;
-        margin: 0;
-        border-bottom: 1px solid $gray-lite;
-        padding-bottom: 30px;
+        margin: 20px 0;
       }
     }
   }

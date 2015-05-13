@@ -43,24 +43,28 @@
       background: $dk-blue;
     }
     margin-bottom: 4px;
-
-    @include tablet {
+  }
+  @include tablet {
+    &.masonry .event {
       cursor: pointer;
       width: 33.3%;
       float: left;
       .article-content:hover {
         background: $white;
-        color: $dk-blue;
-        p,
-        a {
+        .article-content-wrap {
           color: $dk-blue;
-        }
-        .article-title a {
-          border-bottom-color: $dk-blue;
+          p,
+          a {
+            color: $dk-blue;
+          }
+          .article-title a {
+            border-bottom-color: $dk-blue;
+          }
         }
       }
     }
   }
+
 }
 
 // Blog & News
@@ -68,7 +72,9 @@
   @include clearfix;
   .article {
     margin-bottom: 4px;
-    @include tablet {
+  }
+  @include tablet {
+    &.masonry .article {
       min-height: 250px;
       cursor: pointer;
       float: left;

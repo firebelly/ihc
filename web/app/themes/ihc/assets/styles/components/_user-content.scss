@@ -1,7 +1,6 @@
 // Styling of content that is editable in wysiwyg
 
 .user-content {
-  h1,h2,h3,h4,h5,h6 {}
   h1 {
     @include font-style2;
     font-size: $xl;
@@ -10,7 +9,6 @@
       border-bottom: 3px solid $dk-blue;
     }
   }
-
   h2 {
     @include font-style1;
     font-size: $lg;
@@ -28,9 +26,8 @@
 
   // these were in _single-post in .entry-content
   p {
-    margin: 1em 0;
+    margin: 10px 0;
   }
-
   // em {
   //   @include font-style2;
   // }
@@ -61,18 +58,25 @@
 
   ol,
   ul {
-    padding: 0 0 0 50px;
-    margin-bottom: 20px; 
+    padding: 0 0 0 40px;
+    margin-bottom: 30px; 
     li {
       font-size: $med;
       line-height: 20px;
       color: $dk-blue;
+      padding-left: 10px;
       ol,
       ul {
         font-size: 1em;
         padding-left: 1em;
       }
     }
+  }
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style-type: decimal;
   }
   hr {
     height: 0;

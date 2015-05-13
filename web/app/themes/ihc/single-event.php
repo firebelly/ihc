@@ -6,9 +6,11 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
   <section class="main">
     <h4 class="flag"><?= $banner_text ?></h4>
     <time class="article-date" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
+    <header>
+      <h1 class="entry-title"><span><?= $post->post_title ?></span></h1>
+    </header>
     <div class="post-inner">
       <div class="entry-content user-content">
-        <h1 class="entry-title"><span><?= $post->post_title ?></span></h1>
         <?= $event->body ?>
         <?php get_template_part('templates/share'); ?>
       </div>
@@ -48,7 +50,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
       <?php endif; ?>
     </div>
     
-    <div class="related">
+    <div class="related article-list">
       <h4 class="flag">Blog & News</h4>
       <?php 
       while (have_posts()) : the_post();

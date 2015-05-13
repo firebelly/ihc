@@ -2,9 +2,12 @@
 
 // WP admin bar push
 .admin-bar {
-  .logo {
-    @include tablet {
-      top: 32px;
+  .site-nav.active {
+    top: 46px;
+  }
+  @include tablet {
+    .logo {
+        top: 32px;
     }
   }
 }
@@ -27,8 +30,7 @@
   }
   @include tablet {
     top: 32px;
-    right: auto;
-    left: #{$column-width * 16};
+    width: 26.4%;
   }
   @include phone {
   }

@@ -62,7 +62,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     }
 
     // Events
-    .event {
+    .article-list.masonry .event {
       .article-content {
         color: $bg-color;
         p,
@@ -70,8 +70,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
           color: $bg-color;
         }
 
-        .article-title a{
-          line-height: 37px;
+        .article-title a {
           border-bottom-color: $bg-color;
         }
       }
@@ -190,38 +189,11 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       h3 {
         color: $accent-color;
       }
+    }
+    aside.main.dark .sidebar-content {
       a {
         color: $accent-color;
       }
     }
-
-    .our-work-sidebar{
-      p a {
-        color: $accent-color;
-
-        @include tablet {
-          &:hover {
-            color: $white;
-          }
-        }
-      }
-    }
-
-    aside {
-      a.register,
-      a.add-to-calendar{
-        color: $accent-color;
-      }
-
-      .page-with-img .our-work-sidebar p a {
-        color: $accent-color;
-      }
-
-      .contacts {
-        h3 {
-          color: $accent-color;
-        }
-      }
-    }
   }
-}//end of accent-color
+}

@@ -17,13 +17,13 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
       <div class="post-inner">
         <header>
           <h1 class="entry-title"><span><?php the_title(); ?></span></h1>
+          <?php if ($byline_area = get_post_meta($post->ID, '_cmb2_post_byline', true)): ?>
+            <div class="byline-area user-content">
+              <?php echo apply_filters('the_content', $byline_area); ?>
+            </div>
+          <?php endif; ?>
         </header>
 
-        <?php if ($byline_area = get_post_meta($post->ID, '_cmb2_post_byline', true)): ?>
-          <div class="byline-area user-content">
-            <?php echo apply_filters('the_content', $byline_area); ?>
-          </div>
-        <?php endif; ?>
         <div class="entry-content user-content">
           <?php the_content(); ?>
         <?php get_template_part('templates/share'); ?>
@@ -33,7 +33,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
     </section>
     <aside class="main">
       <h4 class="flag">Related Event</h4>
-      <div class="related">
+      <div class="related article-list">
         <?php echo \Firebelly\PostTypes\Event\get_events(1); ?>
       </div>
     </aside>
