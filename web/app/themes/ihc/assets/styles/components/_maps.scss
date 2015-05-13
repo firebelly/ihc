@@ -1,16 +1,15 @@
 // Maps
 
 #map {
-  display: none;
-  position: relative;
-  top: 0;
-  left: -#{$column-width * 1};
-  float: left;
-  width: 74.64%;
-  z-index: -1;
-  margin: 2em 0;
-
   &.large {
+    position: relative;
+    top: 0;
+    left: -#{$column-width * 1};
+    float: left;
+    width: 74.64%;
+    z-index: -1;
+    margin: 2em 0;
+
     width: 700px;
     height: 1000px;
   }
@@ -34,4 +33,7 @@
 .leaflet-container.dark .leaflet-control-layers-toggle,
 .leaflet-container.dark .mapbox-icon {
   background-image: url(../images/icons-ffffff@2x.png);
+}
+.mapbox-logo-true {
+  display: none;
 }

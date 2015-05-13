@@ -60,6 +60,7 @@ var IHC = (function($) {
       $(document).keyup(function(e) {
         if (e.keyCode === 27) {
           _hideSearch();
+          _cancelThoughtSubmit();
         }
       });
 
@@ -70,7 +71,13 @@ var IHC = (function($) {
       if (!$(e.target).is('a')) {
         e.preventDefault();
         var href = $(this).find('h1:first a').attr('href');
-        if (href) { location.href = href; }
+        if (href) { 
+          if (e.metaKey) {
+            window.open(href);
+          } else {
+            location.href = href; 
+          }
+        }
       }
     });
   }
@@ -106,7 +113,7 @@ var IHC = (function($) {
   function _initMap() {
     if ($('#map').length) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
-      map = L.mapbox.map('map', 'firebellydesign.lkh3a3i1').setView([41.843, -88.075], 11);
+      map = L.mapbox.map('map', 'firebellydesign.lkh3a3i1', { zoomControl: false, attributionControl: false }).setView([41.843, -88.075], 11);
       
       mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 
@@ -152,6 +159,9 @@ var IHC = (function($) {
       mapFeatureLayer.setGeoJSON(mapGeoJSON);
       // set bounds to markers
       map.fitBounds(mapFeatureLayer.getBounds());
+      if ($mapPoints.length===1) {
+        map.setZoom(6);
+      }
     }
   }
 
@@ -305,6 +315,10 @@ var IHC = (function($) {
           }
       });
     });
+  }
+
+  function _cancelThoughtSubmit() {
+    $('.thought-of-the-day').removeClass('submitting-thought');
   }
 
   // track ajax pages in Analytics
