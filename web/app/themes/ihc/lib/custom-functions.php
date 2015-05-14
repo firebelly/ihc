@@ -169,7 +169,7 @@ function get_related_news_post($post_or_focus_area) {
  * @param  [string|object] $post_or_image [WP post object or background image]
  */
 function get_header_bg($post_or_image, $thumb_id='') {
-  $header_bg = false;
+  $header_bg = $background_image = false;
   // If WP post object, get the featured image
   if (is_object($post_or_image)) {
     if (has_post_thumbnail($post_or_image->ID)) {
