@@ -1,6 +1,9 @@
 // Home page
 
 .home.page {
+  .button {
+    min-width: 170px;
+  }
   .thought-of-the-day {
     display: none;
     @include tablet {
@@ -85,16 +88,10 @@
         .load-more {
           display: block;
           margin: 20px 0 30px;
-          a {
-            width: 60%;
-          }
         }
         
         .view-all {
           display: block;
-          a {
-            width: 60%;
-          }
         }
       }
     }

@@ -46,6 +46,7 @@
   text-align: center;
   background: none;
   display: block;
+  white-space: nowrap;
 
   @include tablet {
     display: inline-block;
