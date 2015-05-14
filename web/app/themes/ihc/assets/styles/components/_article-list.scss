@@ -49,16 +49,19 @@
       cursor: pointer;
       width: 33.3%;
       float: left;
-      .article-content:hover {
-        background: $white;
-        .article-content-wrap {
-          color: $dk-blue;
-          p,
-          a {
+      .article-content {
+        margin-right: 4px;
+        &:hover {
+          background: $white;
+          .article-content-wrap {
             color: $dk-blue;
-          }
-          .article-title a {
-            border-bottom-color: $dk-blue;
+            p,
+            a {
+              color: $dk-blue;
+            }
+            .article-title a {
+              border-bottom-color: $dk-blue;
+            }
           }
         }
       }
@@ -70,6 +73,9 @@
 // Blog & News
 .article-list {
   @include clearfix;
+  article {
+    width: 100%;
+  }
   .article {
     margin-bottom: 4px;
   }
@@ -79,6 +85,9 @@
       cursor: pointer;
       float: left;
       width: 33.3%;
+      .article-content {
+        margin-right: 4px;
+      }
       
       .article-content:hover {
         background: $dk-blue;
@@ -100,9 +109,6 @@
     position: relative;
     transition: background $transition-speed, color $transition-speed;
     background: $white;
-    @include tablet {
-      margin-right: 4px;
-    }
     .article-content-wrap {
       padding: 30px 50px 30px 25px;
     }

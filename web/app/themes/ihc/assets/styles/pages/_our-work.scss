@@ -38,8 +38,8 @@
     }
 
     h1 {
-      font: 900 #{$xl}/1.2 $sans;
-      margin-bottom: 30px;
+      font: 900 #{$xl}/50px $sans;
+      margin: -12px 0 30px;
       @extend .smooth;
       text-transform: uppercase;
       letter-spacing: .15em;
@@ -131,32 +131,42 @@
 
 // Focus Area programs
 .program-list {
-  .flex-item {
-    transition: all $transition-speed;
-    h2 {
-      @extend .smooth;
-      margin-top: -5px;
-      font: 900 #{$lg}/40px $sans;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      a {
-        border-bottom: 3px solid $dk-blue;
-      }
-    }
-    p {
-      margin: 20px 0 30px;
-    }
+  .program {
     @include tablet {
-      &:hover {
-        p,
+      width: 33%;
+      float: left;
+    }
+    .article-content {
+      padding: 30px 25px;
+      margin-bottom: 4px;
+      transition: all $transition-speed;
+      h2 {
+        @extend .smooth;
+        margin-top: -5px;
+        font: 900 #{$lg}/40px $sans;
+        letter-spacing: .1em;
+        text-transform: uppercase;
         a {
-          border-color: $white;
-          color: $white;
-        }
-        h2 {
-          border-bottom-color: $white;
+          border-bottom: 3px solid $dk-blue;
         }
       }
+      p {
+        margin: 20px 0 30px;
+      }
+      @include tablet {
+        margin-right: 4px;
+        &:hover {
+          p,
+          a {
+            border-color: $white;
+            color: $white;
+          }
+          h2 {
+            border-bottom-color: $white;
+          }
+        }
+      }
+      
     }
   }
 }

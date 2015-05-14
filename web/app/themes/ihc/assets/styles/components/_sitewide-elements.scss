@@ -46,14 +46,13 @@
   text-align: center;
   background: none;
   display: block;
-  white-space: nowrap;
 
   @include tablet {
-    min-width: 150px;
     display: inline-block;
     &:hover {
       color: $color-bg;
       background: $dk-blue;
+      border: 3px solid $dk-blue !important;
     }
   }
 }
