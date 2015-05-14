@@ -49,7 +49,7 @@ aside.main {
   margin: 0 #{$column-width * 1} 100px;
   .related {
     @include clearfix;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     position: relative;
     background: $white;
   }
