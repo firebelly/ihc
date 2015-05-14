@@ -3,6 +3,13 @@
 namespace Firebelly\Init;
 
 /**
+ * Don't run wpautop before shortcodes are run! wtf Wordpress. from http://stackoverflow.com/a/14685465/1001675
+ */
+remove_filter( 'the_content', 'wpautop' );
+add_filter( 'the_content', 'wpautop' , 99);
+add_filter( 'the_content', 'shortcode_unautop',100 );
+
+/**
  * FB theme inits
  */
 
@@ -51,6 +58,7 @@ function body_class( $classes ) {
 }
 add_filter('body_class', __NAMESPACE__ . '\body_class');
 
+
 function mce_buttons_2($buttons) {
   array_unshift( $buttons, 'styleselect' );
   return $buttons;
@@ -68,7 +76,7 @@ function simplify_tinymce($settings) {
     $settings['formats'] = "{ underline: { inline: 'u', exact: true} }";
   
   // What goes into the toolbars. Add 'wp_adv' to get the Toolbar toggle button back
-  $settings['toolbar1'] = 'bold,italic,underline,strikethrough,formatselect,bullist,numlist,blockquote,link,unlink,hr,wp_more,fullscreen';
+  $settings['toolbar1'] = 'styleselect,bold,italic,underline,strikethrough,formatselect,bullist,numlist,blockquote,link,unlink,hr,wp_more,outdent,indent,AccordionShortcode,AccordionItemShortcode,fullscreen';
   $settings['toolbar2'] = '';
   $settings['toolbar3'] = '';
   $settings['toolbar4'] = '';
@@ -77,7 +85,22 @@ function simplify_tinymce($settings) {
   $settings['paste_as_text'] = 'true';
   // print_r($settings); exit;
 
+  $style_formats = array(  
+    // array(  
+    //   'title' => 'Two Column',
+    //   'block' => 'div',
+    //   'classes' => 'two-column',
+    //   'wrapper' => true,
+    // ),  
+    array(  
+      'title' => 'Three Column',
+      'block' => 'div',
+      'classes' => 'three-column',
+      'wrapper' => true,
+    ),
+  );  
+  $settings['style_formats'] = json_encode( $style_formats );
+
   return $settings;
 }
-
 add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');

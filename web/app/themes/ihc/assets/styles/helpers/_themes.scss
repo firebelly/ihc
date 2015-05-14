@@ -187,6 +187,12 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
       }
     }
 
+    // Accordions
+    .open-status::before,
+    .open-status::after {
+      background: $accent-color;
+    }
+
     // Asides
     .sidebar-content {
       h3 {

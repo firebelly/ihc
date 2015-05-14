@@ -64,6 +64,9 @@ var IHC = (function($) {
         }
       });
 
+      // add span to accordion titles to style +/- icons
+      $('.accordion-title').prepend('<span class="open-status"></span>');
+
   }
 
   function _initBigClicky() {
