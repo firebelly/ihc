@@ -50,3 +50,34 @@ function body_class( $classes ) {
   return $classes;
 }
 add_filter('body_class', __NAMESPACE__ . '\body_class');
+
+function mce_buttons_2($buttons) {
+  array_unshift( $buttons, 'styleselect' );
+  return $buttons;
+}
+add_filter('mce_buttons_2', __NAMESPACE__ . '\mce_buttons_2');
+
+function simplify_tinymce($settings) {
+  // What goes into the 'formatselect' list
+  $settings['block_formats'] = 'Header 1=h1;Header 2=h2;Header 3=h3;Header 4=h4;Paragraph=p';
+
+  $settings['inline_styles'] = 'false';
+  if (!empty($settings['formats']))
+    $settings['formats'] = substr($settings['formats'],0,-1).",underline: { inline: 'u', exact: true} }";
+  else
+    $settings['formats'] = "{ underline: { inline: 'u', exact: true} }";
+  
+  // What goes into the toolbars. Add 'wp_adv' to get the Toolbar toggle button back
+  $settings['toolbar1'] = 'bold,italic,underline,strikethrough,formatselect,bullist,numlist,blockquote,link,unlink,hr,wp_more,fullscreen';
+  $settings['toolbar2'] = '';
+  $settings['toolbar3'] = '';
+  $settings['toolbar4'] = '';
+
+  // Clear most formatting when pasting text directly in the editor
+  $settings['paste_as_text'] = 'true';
+  // print_r($settings); exit;
+
+  return $settings;
+}
+
+add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');
