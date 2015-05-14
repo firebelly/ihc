@@ -123,16 +123,20 @@ function get_resources($post) {
  * @param  [Object or String] $post_or_focus_area [$post object or $focus_area slug]
  */
 function get_related_event_post($post_or_focus_area) {
+  $output = false;
   if (is_object($post_or_focus_area)) {
     $focus_area = get_focus_area($post_or_focus_area);
   } else {
     $focus_area = $post_or_focus_area;
   }
-  $output = '<div class="related related-events">';
-  $output .= '<h4 class="flag">Attend an Event</h4>';
-  $output .= \Firebelly\PostTypes\Event\get_events(1, $focus_area);
-  $output .= '<p class="more"><a class="button" href="/events/">View All Events</a></p>';
-  $output .= '</div>';
+  if ($event = \Firebelly\PostTypes\Event\get_events(1, $focus_area)) {
+    $output = '<div class="related related-events">';
+    $output .= '<h4 class="flag">Attend an Event</h4>';
+    $output .= $event;
+    $output .= '<p class="view-all"><a class="button" href="/events/">View All Events</a></p>';
+    $output .= '</div>';
+  }
+  return $output;
 }
 
 /**
@@ -140,31 +144,43 @@ function get_related_event_post($post_or_focus_area) {
  */
 function get_related_news_post($post_or_focus_area) {
   global $news_post;
+  $output = false;
   if (is_object($post_or_focus_area)) {
     $focus_area = get_focus_area($post_or_focus_area);
   } else {
     $focus_area = $post_or_focus_area;
   }
   $posts = get_posts('numberposts=1&focus_area='.$focus_area);
-  $output = '<div class="related related-news">';
-  $output .= '<h4 class="flag">Blog &amp; News</h4>';
-  ob_start();
-  foreach ($posts as $news_post)
-    include(locate_template('templates/article-news.php'));
-  $output .= ob_get_clean();
-  $output .= '<p class="view-all"><a class="button" href="/news/">View All Articles</a></p>';
-  $output .= '</div>';
+  if ($posts) {
+    $output = '<div class="related related-news">';
+    $output .= '<h4 class="flag">Blog &amp; News</h4>';
+    ob_start();
+    foreach ($posts as $news_post)
+      include(locate_template('templates/article-news.php'));
+    $output .= ob_get_clean();
+    $output .= '<p class="view-all"><a class="button" href="/news/">View All Articles</a></p>';
+    $output .= '</div>';
+  }
   return $output;
 }
 
 /**
- * Get header bg for post, duotone treated with the random IHC_BACKGROUND + Dark Blue 
+ * Get header bg for post, duotone treated with the random IHC_BACKGROUND + Dark Blue  
+ * @param  [string|object] $post_or_image [WP post object or background image]
  */
-function get_header_bg($post) {
+function get_header_bg($post_or_image, $thumb_id='') {
   $header_bg = false;
-  if (has_post_thumbnail($post->ID)) {
-    $thumb_id = get_post_thumbnail_id($post->ID);
-    $background_image = get_attached_file($thumb_id, 'full', true);
+  // If WP post object, get the featured image
+  if (is_object($post_or_image)) {
+    if (has_post_thumbnail($post_or_image->ID)) {
+      $thumb_id = get_post_thumbnail_id($post_or_image->ID);
+      $background_image = get_attached_file($thumb_id, 'full', true);
+    }
+  } else {
+    // These are sent from a taxonomy page
+    $background_image = $post_or_image;
+  }
+  if ($background_image) {
     $upload_dir = wp_upload_dir();
     $base_dir = $upload_dir['basedir'] . '/backgrounds/';
 
