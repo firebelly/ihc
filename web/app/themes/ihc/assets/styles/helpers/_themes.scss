@@ -51,14 +51,13 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         p {
           color: $bg-color;
         }
-        // a {
-        //   color: $bg-color; 
-        // }
         .focus-list a {
           color: $bg-color;
+          border-bottom-color: $bg-color;
           @include tablet {
             &:hover {
               color: $white;
+              border-bottom-color: $white;
             }
           }
         }
@@ -200,10 +199,18 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
       h3 {
         color: $accent-color;
       }
-    }
-    aside.main.dark .sidebar-content {
-      a {
-        color: $accent-color;
+      &.dark {
+        .focus-list h3 {
+          color: $accent-color;
+        }
+        a {
+          color: $accent-color;
+          border-bottom-color: $accent-color;
+          &:hover {
+            color: $white;
+            border-bottom-color: $white;
+          }
+        }
       }
     }
   }

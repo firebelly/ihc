@@ -6,39 +6,14 @@
 namespace Firebelly\Utils\ShortCodes;
 use Firebelly\Utils;
 
-// Shortcode [related_news]
-add_shortcode('related_news', __NAMESPACE__ . '\related_news_shortcode');
-function related_news_shortcode($atts) {
-  extract(shortcode_atts(array(
-       'tag' => '',
-    ), $atts));
-  $args = array(
-    'numberposts' => 3,
-    'tags' => $tag,
-    'category_name' => 'happenings',
-  );
-  if ($tag != '') {
-    $args['tax_query'] = array(
-      array(
-        'taxonomy' => 'post_tag',
-        'field' => 'slug',
-        'terms' => $tag
-      )
-    );
-  }
-
-?>
-  <div class="grid wrap-extend">
-    <div class="article-list flex-item grid">
-      <?php
-        // Happenings posts
-        if ($happenings_posts = get_posts($args)):
-          foreach ($happenings_posts as $happenings_post) {
-            include(locate_template('templates/happenings-list.php'));
-          }
-        endif;
-      ?>
-    </div>
-   </div>
-<?php
+// Shortcode [our_focus_areas]
+add_shortcode('focus_areas', __NAMESPACE__ . '\focus_areas_shortcode');
+function focus_areas_shortcode($atts) {
+  $output = '<h3>Our Focus Areas</h3>';
+  $output .= '<ul class="focus-list">';
+  $focus_areas = get_terms('focus_area');
+  foreach ($focus_areas as $focus_area) 
+    $output .= '<li><a href="' . get_term_link($focus_area) . '">' . $focus_area->name . '</a></li>';
+  $output .= '</ul>';
+  return $output;
 }

@@ -68,7 +68,7 @@
     // padding-right: #{$column-width * 4};
   }
   
-  p {
+  p.accent {
     @include font-style1;
     margin-bottom: 20px;
 

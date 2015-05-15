@@ -1,13 +1,12 @@
 <?php 
 /**
- * Template Name: About Us
+ * Template Name: Archived Programs
  */
 
 $content_banner_text = get_post_meta($post->ID, '_cmb2_content_banner_text', true);
 $body_content = apply_filters('the_content', $post->post_content);
 $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 ?>
-
 <div class="content-wrap <?= $with_image_class ?>">
 
   <?php get_template_part('templates/page', 'image-header'); ?>
@@ -25,9 +24,8 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
   </main>
 
   <aside class="main">
-  <?php include(locate_template('templates/thought-of-the-day.php')); ?>
     <div class="sidebar-content dark">
-      <?= get_the_block('About Us Sidebar') ?>
+      <?= get_the_block('Archived Programs Sidebar') ?>
     </div>
   </aside>
 

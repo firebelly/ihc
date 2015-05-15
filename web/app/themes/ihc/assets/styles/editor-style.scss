@@ -30,3 +30,8 @@ body {
     text-decoration: none;    
   }
 }
+.arrow-link {
+  &::before {
+    content: "\bb  ";
+  }
+}

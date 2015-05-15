@@ -10,6 +10,7 @@ $total_pages = ($total_posts > 0) ? ceil($total_posts / $per_page) : 1;
 $post = get_page_by_path('/news');
 $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 ?>
+
 <div class="content-wrap <?= $with_image_class ?>">
   <?php get_template_part('templates/page', 'image-header'); ?>
   <main>

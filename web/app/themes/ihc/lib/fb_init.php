@@ -103,6 +103,11 @@ function simplify_tinymce($settings) {
       'block' => 'span',
       'classes' => 'button',
     ),
+    array(  
+      'title' => '» Arrow Link',
+      'block' => 'span',
+      'classes' => 'arrow-link',
+    ),
   );  
   $settings['style_formats'] = json_encode( $style_formats );
 

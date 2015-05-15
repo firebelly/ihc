@@ -80,7 +80,7 @@ aside.main {
     margin: 10px 0;
   }
   a {
-    text-decoration: underline;
+    border-bottom: 1px solid $color-bg;
   }
 
   // Dark bg sidebars
@@ -97,17 +97,21 @@ aside.main {
     }
   }
 
-  // sidebar focus lists (currently only used on /about-us)
+  // sidebar large focus lists
   .focus-list {
+    margin-top: 20px;
     li {
-      @include font-style1;
-      font-size:$lg;
+      font: 900 #{$lg}/30px $sans;
+      text-transform: uppercase;
       letter-spacing: .2em;
       @extend .smooth;
-      padding: 15px 0;
+      margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 0;
+      }
       a {
         color: $color-bg;
-        border: none;
+        border-bottom: 2px solid $color-bg;
       }
     }
   }

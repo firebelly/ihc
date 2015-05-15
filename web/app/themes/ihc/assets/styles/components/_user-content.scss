@@ -104,6 +104,16 @@
     }
   }
 
+  .arrow-link {
+    a {
+      @include font-style1;
+      border: none !important;
+      &::before {
+        content: "\bb  ";
+      }
+    }
+  }
+
   .accordion-title {
     position: relative;
     padding: 20px 0;
