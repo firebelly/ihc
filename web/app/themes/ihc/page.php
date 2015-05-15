@@ -26,6 +26,7 @@ $sidebar_content = get_the_block('Sidebar Content', true);
 
   <?php if ($sidebar_content): ?>
     <aside class="main">
+      <?php if ($post->post_title==='About Us') include(locate_template('templates/thought-of-the-day.php')); ?>
       <div class="sidebar-content dark">
         <?= $sidebar_content ?>
       </div>
