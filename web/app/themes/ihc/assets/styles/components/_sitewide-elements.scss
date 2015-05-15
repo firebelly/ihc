@@ -47,6 +47,7 @@
   background: none;
   display: block;
   white-space: nowrap;
+  text-decoration: none !important;
 
   @include tablet {
     display: inline-block;

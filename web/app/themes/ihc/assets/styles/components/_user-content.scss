@@ -19,33 +19,25 @@
     }
   }
   h3 {
-    margin-bottom: 20px;
+    margin: 20px 0;
     @include font-style1;
     color: $dk-blue;
   }
-
-  // these were in _single-post in .entry-content
-  p {
-    margin: 10px 0;
+  h4 {
+    color: $dk-blue;
+    font: 700 #{$med}/1.4 $sans;
+    letter-spacing: 0;
+    text-transform: none;
+    margin: 0;
   }
-  // em {
-  //   @include font-style2;
-  // }
-
-  // strong {
-  //   @include font-style1;
-  // }
-
-  // ul { 
-  //   padding-left:50px;
-
-  //   li {
-  //     list-style-type: disc;
-  //     line-height: 20px;
-  //     margin-bottom:10px;
-  //     font-size:14px;
-  //   }     
-  // }
+  // div,
+  p {
+    font: 300 #{$med}/20px $sans;
+    margin: 10px 0 20px;
+    a {
+      text-decoration: underline;
+    }
+  }
 
   blockquote {
     margin: 0;
@@ -90,41 +82,27 @@
     font-style: italic;
   }
   strong {
-    font-weight: 900;
+    font-weight: 700;
+    @extend .smooth;
   }
-  // p a {
-  //   color: $dk-blue;
-  //   text-decoration: underline;
-  // }
-}
-
-.block-content {
-  h5 {
-    @include font-style1;
-    color: $dk-blue;
-    margin:0;
-    padding:0;
-    display:inline;
-  }
-
-  h6 {
-    @include font-style2;
-    font-size: $small;
-    margin-left: 0;
-    margin-bottom: 0;
-    padding:0;
-    display:inline;
-    text-transform: uppercase;
-  }
-}
-
-.three-column {
-  column-count: 3;
-  column-width: 33.33%;
-  column-gap: 25px;
 }
 
 .user-content {
+  .two-column {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  .three-column {
+    column-count: 3;
+    column-gap: 20px;
+  }
+  .two-column,
+  .three-column {
+    p {
+      break-inside: avoid;
+    }
+  }
+
   .accordion-title {
     position: relative;
     padding: 20px 0;
@@ -168,8 +146,15 @@
     }
   }
   .accordion-content {
-    &:first-of-type {
-      margin-top: -0px;
+    // First p,h3,h4,etc no margin on top
+    :first-of-type {
+      margin-top: 0px;
     }
+    padding-bottom: 30px;
+    // Last accordion no padding on bottom
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+
   }
-}
+} // END .user-content

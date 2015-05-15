@@ -25,12 +25,6 @@ h4 {
 }
 
 p {
-  @include font-style2;
-  font-size: $med;
-  line-height: 20px;
-}
-
-p {
   font: 300 #{$med}/1.43 $sans;
   color: $dk-blue;
   margin: 0;

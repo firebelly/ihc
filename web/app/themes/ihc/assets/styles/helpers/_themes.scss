@@ -96,7 +96,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
 } // End of bg-color
 
 
-$accent-colors: $red $lt-blue $green $aqua $lt-orange;
+$accent-colors: $red $lt-blue $green $aqua $orange;
 @each $accent-color in $accent-colors {
   $i: index($accent-colors, $accent-color);
 
@@ -116,7 +116,7 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 
     // Nav elements
     @include tablet {
-      nav .navbar-nav li a:hover {
+      .site-nav li a:hover {
         border-bottom-color: $accent-color;
       }
     }
@@ -172,15 +172,13 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
 
     // Thought of Day hovers
     @include tablet {
-      .thought-of-the-day:hover {
-        blockquote p {
-          color: $accent-color;
-        }
+      .thought-of-the-day blockquote p:hover {
+        color: $accent-color;
       }
     }
 
     // Events
-    .event-details {
+    .single-event .event-details {
       a,
       h3 {
         color: $accent-color;
@@ -191,6 +189,11 @@ $accent-colors: $red $lt-blue $green $aqua $lt-orange;
     .open-status::before,
     .open-status::after {
       background: $accent-color;
+    }
+    .accordion-content {
+      h3 {
+        color: $accent-color;
+      }
     }
 
     // Asides

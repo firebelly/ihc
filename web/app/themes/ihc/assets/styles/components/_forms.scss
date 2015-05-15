@@ -42,13 +42,19 @@ form {
 }
 
 // Events/News filters have slightly different style
+.filters {
+  .program-topic,
+  .focus-area-topic {
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
 .filters .select-wrapper {
   display: inline-block;
   border-bottom: 1px solid $dk-blue;
   select {
     @include font-style1;
     max-width: 200px;
-    font-weight: bold;
     text-transform: uppercase;
   }
   &::after {

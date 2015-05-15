@@ -1,31 +1,29 @@
 // Variables
 
 // Colors
-$lt-blue: #009bdb; //cerulean
-$green: #4ca847; //grass	
-$lt-orange: #fc992b; //tangerine
-$red: #d64f54; //brick
-$aqua: #66bc99; //sea
-$dk-orange: #e56638; //blood orange
 $dk-blue: #44607f;
 
 $black: #202020;
-$black-lite: #444648;
-$white: #fff;
+$white: #FFFFFF;
 $gray-lite: #DCDCDC;
-$gray: #969696;
-$gray-dark: #555;
+
+// Accents
+$aqua: #66BDC9;
+$lt-blue: #009CDB;
+$green: #4DA84F;
+$orange: #FC992B;
+$red: #D64F54;
 
 // Background Swatches
-$bg-blue: #c1d6d8; //pastel blue
-$bg-green: #b7ddba; //pastel green
-$bg-pink: #edbaba; 
-$bg-beige: #e5d3be;
-$bg-grey: #c6c9cc;
-$bg-peach: #eac6af;
+$bg-blue: #C2D6D9;
+$bg-green: #B8DEBA;
+$bg-pink: #EDBABA; 
+$bg-beige: #E5D4BE;
+$bg-grey: #C7C9CC;
+$bg-peach: #EBC7B0;
 
 // Color transitions
-$color-accent: $lt-orange;
+$color-accent: $orange;
 $color-bg: $bg-green;
 $transition-speed: .2s;
 

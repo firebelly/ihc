@@ -161,9 +161,12 @@ var IHC = (function($) {
       // add the array of point objects
       mapFeatureLayer.setGeoJSON(mapGeoJSON);
       // set bounds to markers
-      map.fitBounds(mapFeatureLayer.getBounds());
       if ($mapPoints.length===1) {
+        map.fitBounds(mapFeatureLayer.getBounds());
         map.setZoom(6);
+      } else {
+        // center map on IL
+        map.setView([41.7068, -88.3658], 9);
       }
     }
   }

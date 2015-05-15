@@ -22,14 +22,19 @@ $column-width: 4.54%;
   margin-top: 1em;
 }
 .flex-item {
-  margin: 2px 2px 4px;
-  padding: 30px 25px;
-  background: $white;
 }
 
 @include tablet {
   .flex-item {
     flex-basis: auto;
+  }
+  .flex-20 {
+    max-width: 20%;
+    flex-basis: 20%;
+  }
+  .flex-40 {
+    max-width: 40%;
+    flex-basis: 40%;
   }
   .one-fourth {
     max-width: 25%;

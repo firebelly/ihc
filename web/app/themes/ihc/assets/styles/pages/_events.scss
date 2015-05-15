@@ -27,19 +27,6 @@
     p { 
       margin-bottom:30px;
     }
-    
-    .register,
-    .add-to-calendar {
-      @include font-style1;
-    }
-
-    // .register::before {
-    //   content: '>>';
-    // }
-
-    .add-to-calendar::before {
-      content: '+ ';
-    }
   }
 }
 

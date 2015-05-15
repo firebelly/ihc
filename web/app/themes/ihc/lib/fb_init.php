@@ -42,7 +42,7 @@ if (!is_admin()) { add_filter('nav_menu_css_class', __NAMESPACE__ . '\custom_nav
  */
 function body_class( $classes ) {
   // Array of background hex values
-  $background_array = ['c1d6d8', 'b7ddba', 'edbaba', 'e5d3be', 'c6c9cc', 'eac6af'];
+  $background_array = ['C2D6D9', 'B8DEBA', 'EDBABA', 'E5D4BE', 'C7C9CC', 'EBC7B0'];
 
   // Select random bg & accents for page
   $background = rand(1,6);
