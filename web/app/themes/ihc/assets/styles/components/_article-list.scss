@@ -93,25 +93,17 @@
     transition: background $transition-speed, color $transition-speed;
     background: $white;
 
-    .article-category,
     .article-tags {
       @include font-style1;
-    }
-
-    .article-category {
-      color: $dk-blue;
-    }
-
-    .article-tags {
       margin-top: 20px;
       line-height: 20px;
     }
 
-    .article-excerpt,
-    .article-title a {
-      @include font-style2;
+    .article-category {
+      @include font-style1;
+      color: $dk-blue;
     }
-      
+
     .article-content-wrap {
       padding: 30px 25px 30px 25px;
 
@@ -122,13 +114,12 @@
 
     .article-title {
       margin-bottom: 10px;
+      font: 300 #{$lg}/30px $sans;
+      text-transform: capitalize;
+      letter-spacing: .04em;
         
       a {
-        @include font-style2;
-        font-size: $lg;
-        text-transform: capitalize;
         border-bottom: 1px $dk-blue solid;
-        line-height: 1.5em;
       }
     }
   }

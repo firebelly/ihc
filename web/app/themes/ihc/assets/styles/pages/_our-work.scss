@@ -134,17 +134,18 @@
     @include tablet {
       width: 50%;
       float: left;
+      cursor: pointer;
     }
     .article-content {
       padding: 30px 25px;
       margin-bottom: 4px;
       transition: all $transition-speed;
-      h2 {
-        @extend .smooth;
-        margin-top: -5px;
+      h1 {
         font: 900 #{$lg}/40px $sans;
-        letter-spacing: .1em;
         text-transform: uppercase;
+        margin-top: -5px;
+        letter-spacing: .1em;
+        @extend .smooth;
         a {
           border-bottom: 3px solid $dk-blue;
         }
