@@ -211,7 +211,7 @@ function get_header_bg($post_or_image, $thumb_id='') {
         mkdir($base_dir);
       }
       $convert_command = (WP_ENV==='development') ? '/usr/local/bin/convert' : '/usr/bin/convert';
-      exec($convert_command.' '.$background_image.' -resize 1400 -colorspace gray -level +10% +level-colors "#44607f","#'.IHC_BACKGROUND.'" '.$treated_image);
+      exec($convert_command.' '.$background_image.' -resize 1400x -quality 65 -colorspace gray -level +10% +level-colors "#44607f","#'.IHC_BACKGROUND.'" '.$treated_image);
     }    
     $header_bg = ' style="background-image:url(' . $upload_dir['baseurl'] . '/backgrounds/' . $treated_filename . ');"';
   }
