@@ -140,13 +140,15 @@
 
 // Events
 .article-list {
+  .event {
+    // Give space for date block
+    h1 {
+      padding-right: 25px;
+    }
+  }
   &.masonry .event {
     .article-content {
       background: $dk-blue;
-      // Give space for date block
-      h1 {
-        padding-right: 20px;
-      }
     }
     margin-bottom: 4px;
   }
