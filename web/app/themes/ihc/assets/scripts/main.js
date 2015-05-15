@@ -161,12 +161,13 @@ var IHC = (function($) {
       // add the array of point objects
       mapFeatureLayer.setGeoJSON(mapGeoJSON);
       // set bounds to markers
-      if ($mapPoints.length===1) {
+      if ($('#map').hasClass('large')) {
+        // larger map centers on IL
+        map.setView([41.7068, -88.3658], 9);
+      } else {
+        // smaller map zooms in on single point
         map.fitBounds(mapFeatureLayer.getBounds());
         map.setZoom(6);
-      } else {
-        // center map on IL
-        map.setView([41.7068, -88.3658], 9);
       }
     }
   }

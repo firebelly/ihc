@@ -200,7 +200,7 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
         color: $accent-color;
       }
       &.dark {
-        .focus-list h3 {
+        h3.accent {
           color: $accent-color;
         }
         a {
