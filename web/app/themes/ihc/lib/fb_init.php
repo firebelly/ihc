@@ -98,6 +98,11 @@ function simplify_tinymce($settings) {
       'classes' => 'three-column',
       'wrapper' => true,
     ),
+    array(  
+      'title' => 'Button',
+      'block' => 'span',
+      'classes' => 'button',
+    ),
   );  
   $settings['style_formats'] = json_encode( $style_formats );
 

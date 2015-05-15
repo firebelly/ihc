@@ -66,18 +66,33 @@ function get_page_content($slug) {
  * Get focus area for post
  */
 function get_focus_area($post) {
-  if ($focus_area = get_post_meta($post->ID, '_cmb2_focus_area', true)) {
-    return get_term($focus_area[0], 'focus_area');
+  if ($focus_areas = get_the_terms($post->ID, 'focus_area')) {
+    return $focus_areas[0]->name;
   } else return false;
 }
 
-function get_focus_area_and_tags($post) {
-  $return = false;
-  if ($focus_area = get_focus_area($post)) {
-    $return = '<a href="'.get_term_link($focus_area).'">'.$focus_area->name.'</a>';
+/**
+ * Get related Program
+ */
+function get_program($post) {
+  if ($program = get_post_meta($post->ID, '_cmb2_related_program', true)) {
+    return get_post($program);
+  } else return false;
+}
+
+/**
+ * Get Focus Area(s) and Program(s) "article-tag" list for post
+ */
+function get_article_tags($post) {
+  $links = [];
+  if ($focus_areas = get_the_terms($post->ID, 'focus_area')) {
+    foreach($focus_areas as $focus_area)
+      $links[] = '<a href="'.get_term_link($focus_area).'">'.$focus_area->name.'</a>';
   }
-  // todo: pull tags also and prepend focus area to list
-  return $return;
+  if ($program = get_program($post)) {
+    $links[] = '<a href="'.get_the_permalink($program).'">'.$program->post_title.'</a>';
+  }
+  return count($links) ? implode(', ', $links) : false;
 }
 
 /**

@@ -79,14 +79,9 @@
       
       .article-content:hover {
         background: $dk-blue;
-
-        .article-category a,
-        .article-title a,
-        .article-excerpt p {
-          color: $white;
-        }
-
-        .article-title a {
+        p,
+        a {
+          color: $white !important;
           border-bottom-color: $white;
         }
       }
@@ -99,12 +94,17 @@
     background: $white;
 
     .article-category,
-    .article-tag {
+    .article-tags {
       @include font-style1;
     }
 
     .article-category {
       color: $dk-blue;
+    }
+
+    .article-tags {
+      margin-top: 20px;
+      line-height: 20px;
     }
 
     .article-excerpt,
@@ -118,10 +118,6 @@
       .article-excerpt p {
         color:$dk-blue;
       }
-    }
-
-    .article-tag { 
-      text-decoration: underline;
     }
 
     .article-title {

@@ -12,6 +12,8 @@ function get_post_options( $query_args ) {
 
     $args = wp_parse_args( $query_args, array(
         'post_type'   => 'post',
+        'orderby' => 'title',
+        'order' => 'ASC',
         'numberposts' => 10,
         'post_parent' => 0,
     ) );

@@ -1,6 +1,6 @@
 <?php 
 use Firebelly\Utils;
-$focus_area = Utils\get_focus_area($post);
+$article_tags = Utils\get_article_tags($post);
 $permalink = get_the_permalink($post);
 ?>
 <article class="article">
@@ -12,7 +12,7 @@ $permalink = get_the_permalink($post);
     <div class="article-content-wrap">
       <header class="article-header">
         <h1 class="article-title"><a class="no-ajaxy" href="<?php echo $permalink; ?>"><?php echo $post->post_title; ?></a></h1>
-        <?php if ($focus_area): ?><div class="article-tag"><?php echo $focus_area->name; ?></div><?php endif; ?>
+        <?php if ($article_tags): ?><div class="article-tags"><?= $article_tags ?></div><?php endif; ?>
       </header>
       <div class="article-excerpt">
         <p><?php echo Utils\get_excerpt($post); ?></p>

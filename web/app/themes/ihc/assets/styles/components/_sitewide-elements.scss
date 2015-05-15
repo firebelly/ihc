@@ -48,6 +48,9 @@
   display: block;
   white-space: nowrap;
   text-decoration: none !important;
+  a {
+    text-decoration: none !important;
+  }
 
   @include tablet {
     display: inline-block;
@@ -55,6 +58,9 @@
       color: $color-bg;
       background: $dk-blue;
       border: 3px solid $dk-blue !important;
+      a {
+        color: #fff;
+      }
     }
   }
 }

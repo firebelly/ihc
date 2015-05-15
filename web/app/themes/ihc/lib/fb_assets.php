@@ -26,3 +26,23 @@ function scripts() {
   wp_enqueue_script('addthis', 'http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5522ee3d7ab8ddd8', [], null, true);
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__.'\\scripts', 100);
+
+
+function admin_scripts() {
+    wp_register_style('select2css', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css', false, '1.0', 'all');
+    wp_register_script('select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js', ['jquery'], null, true);
+    wp_enqueue_style('select2css');
+    wp_enqueue_script('select2');
+    }
+add_action('admin_enqueue_scripts', __NAMESPACE__ . '\admin_scripts');
+
+function admin_scripts_inline() {
+  ?>
+  <script type='text/javascript'>
+  jQuery(document).ready(function($) {
+     $('#_cmb2_related_program').select2();
+  });
+  </script>
+  <?php
+}
+add_action( 'admin_head', __NAMESPACE__ . '\admin_scripts_inline' );

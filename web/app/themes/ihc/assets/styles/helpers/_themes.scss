@@ -81,8 +81,9 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     }
 
     // Article tags
-    .article-tag a {
+    .article-tags a {
       color: $bg-color;
+      border-bottom: 1px solid $bg-color;
     }
 
     // Time stamps

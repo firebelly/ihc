@@ -1,7 +1,7 @@
 <?php 
 use Firebelly\Utils;
 $category = Utils\get_category($news_post);
-$focus_area = Utils\get_focus_area($news_post);
+$article_tags = Utils\get_article_tags($news_post);
 // support legacy publication_dates via custom field
 $publication_date = get_post_meta($news_post->ID, '_cmb2_publication_date', true);
 $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($news_post->post_date);
@@ -23,7 +23,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
       <div class="article-excerpt">
         <p><?= Utils\get_excerpt($news_post); ?></p>
       </div>
-      <?php if ($focus_area): ?><div class="article-tag"><a href="<?= get_term_link($focus_area); ?>"><?= $focus_area->name; ?></a></div><?php endif; ?>
+      <?php if ($article_tags): ?><div class="article-tags"><?= $article_tags ?></div><?php endif; ?>
     </div>
   </div>
 </article>

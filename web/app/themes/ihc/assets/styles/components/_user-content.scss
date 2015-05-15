@@ -35,7 +35,7 @@
     font: 300 #{$med}/20px $sans;
     margin: 10px 0 20px;
     a {
-      text-decoration: underline;
+      border-bottom: 1px solid $dk-blue;
     }
   }
 
@@ -88,16 +88,17 @@
 }
 
 .user-content {
-  .two-column {
-    column-count: 2;
-    column-gap: 20px;
+  @include phablet {
+    .three-column {
+      column-count: 2;
+      column-gap: 20px;
+    }
   }
-  .three-column {
-    column-count: 3;
-    column-gap: 20px;
-  }
-  .two-column,
-  .three-column {
+  @include tablet {
+    .three-column {
+      column-count: 3;
+      column-gap: 20px;
+    }
     p {
       break-inside: avoid;
     }
