@@ -42,7 +42,7 @@ $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
             <?= $event->cost ?>
           <?php endif; ?>
         </p>
-        <ul>
+        <ul class="actions">
           <?php if (!empty($event->registration_url)): ?>
             <li><a class="register" target="_blank" href="<?= $event->registration_url ?>">Register For Event</a></li>
           <?php endif; ?>

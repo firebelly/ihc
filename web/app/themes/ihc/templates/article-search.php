@@ -11,7 +11,7 @@ $permalink = get_the_permalink($post);
   <div class="article-content">
     <div class="article-content-wrap">
       <header class="article-header">
-        <h4 class="article-title"><a class="no-ajaxy" href="<?php echo $permalink; ?>"><?php echo $post->post_title; ?></a></h4>
+        <h1 class="article-title"><a class="no-ajaxy" href="<?php echo $permalink; ?>"><?php echo $post->post_title; ?></a></h1>
         <?php if ($focus_area): ?><div class="article-tag"><?php echo $focus_area->name; ?></div><?php endif; ?>
       </header>
       <div class="article-excerpt">

@@ -147,10 +147,8 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
     }
 
     // User content
-    .user-content {
-      .block-content h4 {
-        color: $accent-color;
-      }
+    .user-content h4 {
+      color: $accent-color;
     }
 
     // All page flags

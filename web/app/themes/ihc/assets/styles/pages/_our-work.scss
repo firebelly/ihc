@@ -13,11 +13,10 @@
 
 // Single program page
 .single-program {
-  position:relative;
   .page-block {
     position: relative;
 
-    .block-content {
+    .user-content {
       position: relative;
       background: $white;
       padding: 30px 25px 10px;
@@ -133,7 +132,7 @@
 .program-list {
   .program {
     @include tablet {
-      width: 33%;
+      width: 50%;
       float: left;
     }
     .article-content {
@@ -151,7 +150,7 @@
         }
       }
       p {
-        margin: 20px 0 30px;
+        margin: 10px 0 25px;
       }
       @include tablet {
         margin-right: 4px;

@@ -142,16 +142,16 @@ function metaboxes( array $meta_boxes ) {
           'id'      => $prefix . 'sponsor',
           'type'    => 'text',
       ),
-      array(
-          'name'    => 'Lat',
-          'id'      => $prefix . 'lat',
-          'type'    => 'text_small',
-      ),
-      array(
-          'name'    => 'Lng',
-          'id'      => $prefix . 'lng',
-          'type'    => 'text_small',
-      ),
+      // array(
+      //     'name'    => 'Lat',
+      //     'id'      => $prefix . 'lat',
+      //     'type'    => 'text_small',
+      // ),
+      // array(
+      //     'name'    => 'Lng',
+      //     'id'      => $prefix . 'lng',
+      //     'type'    => 'text_small',
+      // ),
     ),
   );
 
@@ -267,7 +267,7 @@ function geocode_address($post_id, $post) {
 
     $xml = simplexml_load_file($request_url);
     $status = $xml->status;
-    if(strcmp($status, 'OK') == 0):
+    if(strcmp($status, 'OK')===0):
         $lat = $xml->result->geometry->location->lat;
         $lng = $xml->result->geometry->location->lng;
         update_post_meta($post_id, '_cmb2_lat', (string)$lat);

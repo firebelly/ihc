@@ -6,14 +6,18 @@ $event = \Firebelly\PostTypes\Event\get_event_details($event_post);
     <time class="article-date flagged" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
     <div class="article-content-wrap"> 
       <h1 class="article-title"><a href="<?= get_permalink($event->ID); ?>"><?= $event->title ?></a></h1>
-      <h3><?= $event->time_txt ?></h3>
-      <?php if (!empty($event->address['city'])): ?>
-        <p><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?></p>
-      <?php endif; ?>
-      <?php if (!empty($event->registration_url)): ?>
-        <a class="register" href="<?= $event->registration_url ?>">Register</a>
-      <?php endif; ?>
-      <p class="more"><a href="<?= get_permalink($event->ID); ?>">More Details</a></p>
+      <div class="event-details">
+        <p class="time"><?= $event->time_txt ?></p>
+        <?php if (!empty($event->address['city'])): ?>
+          <p class="address"><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?></p>
+        <?php endif; ?>
+      </div>
+      <ul class="actions">
+        <?php if (!empty($event->registration_url)): ?>
+          <a target="_blank" class="register" href="<?= $event->registration_url ?>">Register</a>
+        <?php endif; ?>
+        <li><a class="more" href="<?= get_permalink($event->ID); ?>">More Details</a></p></li>
+      </ul>
     </div>
   </div>
 </article>

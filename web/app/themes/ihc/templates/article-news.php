@@ -18,7 +18,7 @@ $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtot
     <div class="article-content-wrap">
       <header class="article-header">
         <?php if ($category): ?><div class="article-category"><a href="<?= get_term_link($category); ?>"><?= $category->name; ?></a></div><?php endif; ?>
-        <h1 class="article-title"><a href="<?= get_the_permalink($news_post); ?>"><?= $news_post->post_title; ?></a></h1>
+        <h1 class="article-title"><a href="<?= get_the_permalink($news_post); ?>"><?= wp_trim_words($news_post->post_title, 10); ?></a></h1>
       </header>
       <div class="article-excerpt">
         <p><?= Utils\get_excerpt($news_post); ?></p>

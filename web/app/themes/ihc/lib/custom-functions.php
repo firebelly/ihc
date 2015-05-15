@@ -24,7 +24,7 @@ function get_excerpt( $post, $length=15, $force_content=false ) {
     $excerpt = apply_filters( 'the_content', $excerpt );
     $excerpt = str_replace( ']]>', ']]&gt;', $excerpt );
     $excerpt_length = apply_filters( 'excerpt_length', $length );
-    $excerpt = wp_trim_words( $excerpt, $excerpt_length, '...' );
+    $excerpt = wp_trim_words( $excerpt, $excerpt_length );
   }
   return $excerpt;
 }

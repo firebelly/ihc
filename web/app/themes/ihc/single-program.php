@@ -26,11 +26,11 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
         if (!empty($page_block['body']))
           $block_body = apply_filters('the_content', $page_block['body']);
         ?>
-        <div class="user-content page-block">
+        <div class="page-block">
           <?php if ($block_title): ?>
             <h4 class="flag"><?= $block_title ?></h4>
           <?php endif ?>
-          <div class="block-content"><?= $block_body ?></div>
+          <div class="user-content"><?= $block_body ?></div>
         </div>
       <?php endforeach; ?>
     <?php endif; ?>
