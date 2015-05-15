@@ -52,6 +52,9 @@ aside.main {
     margin-bottom: 60px;
     position: relative;
     background: $white;
+    &.related-events {
+      background: $dk-blue;
+    }
   }
   @include tablet {
     float: right;

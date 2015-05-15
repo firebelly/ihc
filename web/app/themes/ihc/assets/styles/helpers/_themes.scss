@@ -65,6 +65,16 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     }
 
     // Events
+    .related-events .button {
+      border-color: $bg-color;
+      color: $bg-color;
+      &:hover {
+        border-color: $white !important;
+        background: $white;
+        color: $dk-blue;
+      }
+    }
+    .related-events .event,
     .article-list.masonry .event {
       .article-content {
         color: $bg-color;
