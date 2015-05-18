@@ -46,7 +46,7 @@
       </li>
 
       <li class="source-org copyright">
-        &copy; Copyright <?php echo date('Y'); ?> Illinois Humanities Council
+        &copy; Copyright <?php echo date('Y'); ?> Illinois Humanities
       </li>
     </ul>
   </div>
