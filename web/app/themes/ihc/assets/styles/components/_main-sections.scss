@@ -55,6 +55,7 @@ aside.main {
     &.related-events {
       background: $dk-blue;
     }
+    padding-bottom: 30px;
   }
   @include tablet {
     float: right;
@@ -62,7 +63,7 @@ aside.main {
     margin: 0 0 100px;
   }
   p.view-all {
-    margin: 0 25px 30px;
+    margin: 0 25px;
   }
 }
 .with-image aside.main {

@@ -41,9 +41,9 @@
 
 // Main banner area
 .banner {
+  @include clearfix;
   height: 58px;
   position: relative;
-  @include clearfix;
   margin: 0 0 0 #{$column-width * 1};
 
   @include tablet {
@@ -132,13 +132,9 @@
   }
   @include tablet {
     display: block;
-    ul {
-      margin-top: 44px;
-    }
     li {
       display: inline-block;
       margin-right: 20px;
-      padding-bottom: 30px;
       &.menu-support-us {
         margin-bottom: 0;
       }
@@ -207,7 +203,7 @@
 }
 
 .search-form {
-  position: absolute;
+  height: 44px;
 
   .search-field {
     display: none;

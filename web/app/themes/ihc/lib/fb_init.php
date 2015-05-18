@@ -10,6 +10,24 @@ add_filter( 'the_content', 'wpautop' , 99);
 add_filter( 'the_content', 'shortcode_unautop',100 );
 
 /**
+ * Add Edit Page link for Events archive page
+ */
+function events_admin_edit_link() {
+  global $wp_admin_bar;
+
+  if ( is_post_type_archive( 'event' ) ) {
+    $page = get_page_by_title( 'Events' );
+    $wp_admin_bar->add_menu(array(
+      'id' => 'edit',
+      'class' => 'ab-item',
+      'title' => __('Edit Page'),
+      'href' => get_edit_post_link($page)
+    ));
+  }
+}
+add_action('wp_before_admin_bar_render', __NAMESPACE__ . '\events_admin_edit_link');
+
+/**
  * FB theme inits
  */
 

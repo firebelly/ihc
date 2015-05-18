@@ -12,6 +12,12 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.article-tags {
+  @include font-style1;
+  margin-top: 20px;
+  line-height: 20px;
+}
+
 // Event dates
 .article-date.flagged {
   width: 50px;
@@ -93,12 +99,6 @@
     transition: background $transition-speed, color $transition-speed;
     background: $white;
 
-    .article-tags {
-      @include font-style1;
-      margin-top: 20px;
-      line-height: 20px;
-    }
-
     .article-category {
       @include font-style1;
       color: $dk-blue;
@@ -128,6 +128,15 @@
 // Events
 .article-list {
   .event {
+    .article-tags {
+      margin-top: 0;
+    }
+    .actions {
+      margin-top: 20px;
+    }
+    .article-content .article-title {
+      margin-bottom: 20px;
+    }
     // Give space for date block
     h1 {
       padding-right: 25px;

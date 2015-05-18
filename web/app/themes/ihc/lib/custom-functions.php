@@ -140,6 +140,7 @@ function get_resources($post) {
 function get_related_event_post($post_or_focus_area) {
   $output = false;
   if (is_object($post_or_focus_area)) {
+    // todo: if post_type=='program' see if there's a directly related event
     $focus_area = get_focus_area($post_or_focus_area);
   } else {
     $focus_area = $post_or_focus_area;

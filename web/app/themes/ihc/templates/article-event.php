@@ -1,5 +1,6 @@
 <?php 
 $event = \Firebelly\PostTypes\Event\get_event_details($event_post);
+$article_tags = \Firebelly\Utils\get_article_tags($event_post);
 ?>
 <article class="event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
   <div class="article-content">
@@ -11,6 +12,7 @@ $event = \Firebelly\PostTypes\Event\get_event_details($event_post);
         <?php if (!empty($event->address['city'])): ?>
           <p class="address"><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?></p>
         <?php endif; ?>
+        <?php if ($article_tags): ?><div class="article-tags"><?= $article_tags ?></div><?php endif; ?>
       </div>
       <ul class="actions">
         <?php if (!empty($event->registration_url)): ?>
