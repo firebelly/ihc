@@ -63,6 +63,7 @@
     "wpackagist-plugin/cmb2": ">=2.0.5",
     "wpackagist-plugin/accordion-shortcodes": ">=2.2.0",
     "wpackagist-plugin/multiple-content-blocks": ">=3.2",
+    "wpackagist-plugin/user-roles-and-capabilities": "1.1",
     "mustardBees/cmb-field-select2": ">=2.0.4"
   },
   "extra": {
