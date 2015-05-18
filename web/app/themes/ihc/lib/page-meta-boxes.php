@@ -11,25 +11,30 @@ function metaboxes( array $meta_boxes ) {
 
   $meta_boxes['page_header_metabox'] = array(
     'id'            => 'page_header_metabox',
-    'title'         => __( 'Header Banner Text', 'cmb2' ),
+    'title'         => __( 'Page Banners', 'cmb2' ),
     'object_types'  => array( 'page' ),
     'context'       => 'normal',
     'priority'      => 'high',
-    'show_names'    => false,
+    'show_names'    => true,
     'fields'        => array(
       array(
-        // 'name' => 'Header Banner Text',
+        'name' => 'Header Banner Text',
         'desc' => 'Shows in banner above Header Text',
         'id'   => $prefix . 'header_banner_text',
         'type' => 'textarea_small',
       ),
+      array(
+        'name' => 'Content Banner Text',
+        'desc' => 'Shows in banner above main content',
+        'id'   => $prefix . 'content_banner_text',
+        'type' => 'text',
+      ),
     ),
   );
 
-
   $meta_boxes['page_metabox'] = array(
     'id'            => 'page_metabox',
-    'title'         => __( 'Header Fields', 'cmb2' ),
+    'title'         => __( 'Header Text', 'cmb2' ),
     'object_types'  => array( 'page', 'program' ),
     'context'       => 'normal',
     'priority'      => 'high',
@@ -55,13 +60,6 @@ function metaboxes( array $meta_boxes ) {
           'textarea_rows' => 4,
         ),
       ),
-      array(
-        'name' => 'Content Banner Text',
-        'desc' => 'Shows in banner above content',
-        'id'   => $prefix . 'content_banner_text',
-        'type' => 'text',
-      ),
-
     ),
   );
 

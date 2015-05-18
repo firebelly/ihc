@@ -37,7 +37,7 @@ function post_type() {
     'label'               => 'program',
     'description'         => 'Programs',
     'labels'              => $labels,
-    'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail', ),
+    'supports'            => array( 'title', 'excerpt', 'thumbnail', ),
     'hierarchical'        => false,
     'public'              => true,
     'show_ui'             => true,
