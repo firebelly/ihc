@@ -152,7 +152,7 @@ function get_thought_of_the_day() {
     $author = get_post_meta( $post->ID, '_cmb2_author', true );
     
     if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
-      $author .= '<br>'.$focus->name;
+      $author .= '<br><a href="'.get_term_link($focus).'">'.$focus->name.'</a>';
     else 
       $author .= '<br>Humanities';
 
