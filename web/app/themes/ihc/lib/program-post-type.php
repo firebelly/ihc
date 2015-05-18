@@ -75,7 +75,7 @@ register_taxonomy( 'focus_area',
       'new_item_name' => 'New Focus Area',
     ),
     'show_admin_column' => true, 
-    'show_ui' => false,
+    'show_ui' => true,
     'query_var' => true,
     'rewrite' => array( 
       'slug' => 'focus-area',
