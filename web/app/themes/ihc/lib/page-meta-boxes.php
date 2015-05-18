@@ -9,6 +9,24 @@ namespace Firebelly\PostTypes\Pages;
 function metaboxes( array $meta_boxes ) {
   $prefix = '_cmb2_';
 
+  $meta_boxes['page_header_metabox'] = array(
+    'id'            => 'page_header_metabox',
+    'title'         => __( 'Header Banner Text', 'cmb2' ),
+    'object_types'  => array( 'page' ),
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => false,
+    'fields'        => array(
+      array(
+        // 'name' => 'Header Banner Text',
+        'desc' => 'Shows in banner above Header Text',
+        'id'   => $prefix . 'header_banner_text',
+        'type' => 'textarea_small',
+      ),
+    ),
+  );
+
+
   $meta_boxes['page_metabox'] = array(
     'id'            => 'page_metabox',
     'title'         => __( 'Header Fields', 'cmb2' ),
@@ -19,12 +37,6 @@ function metaboxes( array $meta_boxes ) {
     'fields'        => array(
       
       // Header fields
-      array(
-        'name' => 'Header Banner Text',
-        'desc' => 'Shows in banner above Header Text for Pages',
-        'id'   => $prefix . 'header_banner_text',
-        'type' => 'textarea_small',
-      ),
       array(
         'name' => 'Header Text',
         'desc' => 'Shows at top of page behind featured image',

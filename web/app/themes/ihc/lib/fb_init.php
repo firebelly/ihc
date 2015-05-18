@@ -30,7 +30,6 @@ add_action('wp_before_admin_bar_render', __NAMESPACE__ . '\events_admin_edit_lin
 /**
  * FB theme inits
  */
-
 function setup() {
   // Register wp_nav_menu() menus
   // http://codex.wordpress.org/Function_Reference/register_nav_menus

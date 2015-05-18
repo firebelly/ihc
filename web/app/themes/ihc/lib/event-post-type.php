@@ -68,7 +68,7 @@ function edit_columns($columns){
     'title' => 'Title',
     '_cmb2_event_start' => 'Date',
     '_cmb2_venue' => 'Venue',
-    'taxonomy-focus_area' => 'Focus Area(s)',
+    'taxonomy-focus_area' => 'Focus Area',
   );
   return $columns;
 }

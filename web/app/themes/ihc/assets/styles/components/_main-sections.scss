@@ -56,6 +56,9 @@ aside.main {
       background: $dk-blue;
     }
     padding-bottom: 30px;
+    .article .article-date {
+      color: $white;
+    }
   }
   @include tablet {
     float: right;
@@ -80,11 +83,11 @@ aside.main {
       margin-top: 0;
     }
   }
+  a {
+    border-bottom: 1px solid $dk-blue;
+  }
   p {
     margin: 10px 0;
-  }
-  a {
-    border-bottom: 1px solid $color-bg;
   }
 
   // Dark bg sidebars
@@ -98,6 +101,9 @@ aside.main {
     }
     p {
       color: $color-bg;
+    }
+    a {
+      border-bottom: 1px solid $color-bg;
     }
   }
 

@@ -75,7 +75,7 @@ register_taxonomy( 'focus_area',
       'new_item_name' => 'New Focus Area',
     ),
     'show_admin_column' => true, 
-    'show_ui' => true,
+    'show_ui' => false,
     'query_var' => true,
     'rewrite' => array( 
       'slug' => 'focus-area',
@@ -89,7 +89,7 @@ function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
-    'taxonomy-focus_area' => 'Focus Area(s)',
+    'taxonomy-focus_area' => 'Focus Area',
     'featured_image' => 'Image',
   );
   return $columns;

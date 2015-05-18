@@ -41,17 +41,50 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
+  $meta_boxes['post_category'] = array(
+    'id'            => 'post_category',
+    'title'         => __( 'Category', 'cmb2' ),
+    'object_types'  => array( 'post', ),
+    'context'       => 'side',
+    'priority'      => 'default',
+    'show_names'    => false,
+    'fields'        => array(
+      array(
+          'id'       => $prefix . 'post_category',
+          'type'     => 'taxonomy_select',
+          'taxonomy' => 'category',
+      ),
+    ),
+  );
+
+  $meta_boxes['focus_area'] = array(
+    'id'            => 'focus_area',
+    'title'         => __( 'Focus Area', 'cmb2' ),
+    'object_types'  => array( 'event', 'post', 'program', ),
+    'context'       => 'side',
+    'priority'      => 'default',
+    'show_names'    => false,
+    'fields'        => array(
+      array(
+          // 'name'     => 'Focus Area',
+          'id'       => $prefix . 'focus_area',
+          'type'     => 'taxonomy_select',
+          'taxonomy' => 'focus_area',
+      ),
+    ),
+  );
+
   $meta_boxes['related_program'] = array(
     'id'            => 'related_program',
-    'title'         => __( 'Related Program(s)', 'cmb2' ),
+    'title'         => __( 'Related Program', 'cmb2' ),
     'object_types'  => array( 'event', 'post', ),
     'context'       => 'side',
-    'priority'      => 'low',
+    'priority'      => 'default',
     'show_names'    => true,
     'fields'        => array(
       array(
           // 'name'     => 'If set, will trump finding a related program by Focus Area',
-          'desc'     => 'Select Program(s)...',
+          // 'desc'     => 'Select Program(s)...',
           'id'       => $prefix . 'related_program',
           'type'     => 'select',
           'show_option_none' => true,
@@ -67,15 +100,17 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
- * Remove tags
+ * Remove unused WP Tags UI in admin, also hide default Category meta_box to use CMB2 select
  */
-add_action('admin_menu', __NAMESPACE__ . '\remove_sub_menus');
 function remove_sub_menus() {
-    remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post_tag');
+  remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post_tag');
+  remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=category');
 }
 function remove_post_metaboxes() {
-  remove_meta_box( 'tagsdiv-post_tag','post','normal' ); // Tags Metabox
+  remove_meta_box( 'tagsdiv-post_tag','post','normal' );
+  remove_meta_box( 'categorydiv','post','normal' );
 }
+add_action('admin_menu', __NAMESPACE__ . '\remove_sub_menus');
 add_action('admin_menu', __NAMESPACE__ . '\remove_post_metaboxes');
 
 /**

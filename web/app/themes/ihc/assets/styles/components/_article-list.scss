@@ -4,10 +4,11 @@
 .article-date {
   position: absolute;
   min-width: 50px;
-  padding: 7px 13px;
+  padding: 7px 10px 5px;
   top: 0;
   right: 0;
   color: $dk-blue;
+  text-align: center;
   @include font-style1;
   -webkit-font-smoothing: antialiased;
 }
@@ -37,8 +38,8 @@
   }
 
   .day {
-    @include font-style2;
-    font-size: $lg;
+    font: 300 #{$xl}/30px $sans;
+    letter-spacing: 0;
   }    
 }
 
@@ -70,7 +71,8 @@
   article {
     width: 100%;
   }
-  .article {
+  &.masonry .article,
+  &.masonry .event {
     margin-bottom: 4px;
   }
   @include tablet {
@@ -102,6 +104,7 @@
     .article-category {
       @include font-style1;
       color: $dk-blue;
+      margin-bottom: 4px;
     }
 
     .article-content-wrap {
@@ -137,9 +140,14 @@
     .article-content .article-title {
       margin-bottom: 20px;
     }
-    // Give space for date block
+    // Give space around date block
     h1 {
-      padding-right: 25px;
+      &::before {
+        content: '';
+        float: right;
+        width: 32px;
+        height: 30px;
+      }
     }
   }
   .related-events .event,
@@ -147,7 +155,6 @@
     .article-content {
       background: $dk-blue;
     }
-    margin-bottom: 4px;
   }
   .event-details p {
     @include font-style1;
