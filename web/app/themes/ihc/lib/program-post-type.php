@@ -51,12 +51,34 @@ function post_type() {
     'exclude_from_search' => false,
     'publicly_queryable'  => true,
     'rewrite'             => $rewrite,
-    'capability_type'     => 'page',
+    'capability_type'     => 'program',
+    'map_meta_cap'        => true
   );
   register_post_type( 'program', $args );
 
 }
 add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
+
+/**
+ * Add capabilities to control permissions of Post Type via roles
+ */
+function add_capabilities() {
+  $role_admin = get_role('administrator');
+  $role_admin->add_cap('edit_program');
+  $role_admin->add_cap('read_program');
+  $role_admin->add_cap('delete_program');
+  $role_admin->add_cap('edit_others_programs');
+  $role_admin->add_cap('publish_programs');
+  $role_admin->add_cap('edit_programs');
+  $role_admin->add_cap('read_private_programs');
+  $role_admin->add_cap('delete_programs');
+  $role_admin->add_cap('delete_private_programs');
+  $role_admin->add_cap('delete_published_programs');
+  $role_admin->add_cap('delete_others_programs');
+  $role_admin->add_cap('edit_private_programs');
+  $role_admin->add_cap('edit_published_programs');
+}
+add_action('switch_theme', __NAMESPACE__ . 'add_capabilities');
 
 // Custom taxonomy Focus Areas
 register_taxonomy( 'focus_area', 
@@ -243,4 +265,3 @@ function shortcode_filters($atts) {
 
   return $output;
 }
-
