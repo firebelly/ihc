@@ -196,6 +196,12 @@ function metaboxes( array $meta_boxes ) {
       ),
   ) );
 
+  $cmb_group->add_group_field( $group_field_id, array(
+      'name' => 'Hide Block',
+      // 'desc' => 'Check this to hide Page Block from the front end',
+      'id'   => 'hide_block',
+      'type' => 'checkbox',
+  ) );
 
   return $meta_boxes;
 }
