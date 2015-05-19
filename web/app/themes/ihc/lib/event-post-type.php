@@ -52,12 +52,36 @@ function post_type() {
     'exclude_from_search' => false,
     'publicly_queryable'  => true,
     'rewrite'             => $rewrite,
-    'capability_type'     => 'page',
+    'capability_type'     => 'event',
+    'map_meta_cap'        => true
   );
   register_post_type( 'event', $args );
 
 }
 add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
+
+/**
+ * Add capabilities to control permissions of Post Type via roles
+ */
+function add_capabilities() {
+  $role_admin = get_role('administrator');
+  // programs
+  $role_admin->add_cap('edit_event');
+  $role_admin->add_cap('read_event');
+  $role_admin->add_cap('delete_event');
+  $role_admin->add_cap('edit_events');
+  $role_admin->add_cap('edit_others_events');
+  $role_admin->add_cap('publish_events');
+  $role_admin->add_cap('read_private_events');
+  $role_admin->add_cap('delete_events');
+  $role_admin->add_cap('delete_private_events');
+  $role_admin->add_cap('delete_published_events');
+  $role_admin->add_cap('delete_others_events');
+  $role_admin->add_cap('edit_private_events');
+  $role_admin->add_cap('edit_published_events');
+  $role_admin->add_cap('create_events');
+}
+add_action('switch_theme', __NAMESPACE__ . 'add_capabilities');
 
 /**
  * Custom admin columns for post type
