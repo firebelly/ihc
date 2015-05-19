@@ -1,4 +1,6 @@
 // Sitewide elements
+
+// Base flag style for triangle overhangs
 .flag {
   display: inline-block;
   position: absolute;
@@ -27,6 +29,19 @@
   }
 }
 
+// Share blocks
+.share {
+  display: none;
+  @include font-style1;
+  color:$dk-blue;
+  a {
+    text-decoration: none;
+    padding-left: 10px;
+    color:$dk-blue;
+  }
+}
+
+// Load more buttons
 .load-more {
   a:before {
     content: '+ ';
@@ -37,6 +52,7 @@
   }
 }
 
+// General button style
 .button {
   @include font-style1;
   transition: all $transition-speed;

@@ -7,17 +7,6 @@
       margin: 0 0 100px;
     }
   }
-  .share {
-    display: block;
-    margin: 20px 0;
-    @include tablet {
-      margin: 0;
-      width: 120px;
-      position: absolute;
-      top: 25px;
-      right: 10px;
-    }
-  }
 
   .article-thumb {
     min-height:270px;

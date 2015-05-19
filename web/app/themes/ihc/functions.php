@@ -34,6 +34,7 @@ $firebelly_includes = [
   'lib/post-meta-boxes.php',       // Extra CMB2 Post fields
   'lib/taxonomy-meta-boxes.php',   // Extra CMB2 Taxonomy fields
   'lib/short-codes.php',           // Custom short codes
+  'lib/focus-area-taxonomy.php',   // Focus Areas
   'lib/event-post-type.php',       // Events
   'lib/program-post-type.php',     // Programs
   'lib/thought-post-type.php',     // Thoughts

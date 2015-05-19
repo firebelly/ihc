@@ -64,12 +64,13 @@ add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
  */
 function add_capabilities() {
   $role_admin = get_role('administrator');
+  // programs
   $role_admin->add_cap('edit_program');
   $role_admin->add_cap('read_program');
   $role_admin->add_cap('delete_program');
+  $role_admin->add_cap('edit_programs');
   $role_admin->add_cap('edit_others_programs');
   $role_admin->add_cap('publish_programs');
-  $role_admin->add_cap('edit_programs');
   $role_admin->add_cap('read_private_programs');
   $role_admin->add_cap('delete_programs');
   $role_admin->add_cap('delete_private_programs');
@@ -77,34 +78,9 @@ function add_capabilities() {
   $role_admin->add_cap('delete_others_programs');
   $role_admin->add_cap('edit_private_programs');
   $role_admin->add_cap('edit_published_programs');
+  $role_admin->add_cap('create_programs');
 }
 add_action('switch_theme', __NAMESPACE__ . 'add_capabilities');
-
-// Custom taxonomy Focus Areas
-register_taxonomy( 'focus_area', 
-  array('program', 'page', 'post', 'thought', 'event'),
-  array('hierarchical' => true, // if this is true, it acts like categories
-    'labels' => array(
-      'name' => 'Focus Areas',
-      'singular_name' => 'Focus Area',
-      'search_items' =>  'Search Focus Areas',
-      'all_items' => 'All Focus Areas',
-      'parent_item' => 'Parent Focus Area',
-      'parent_item_colon' => 'Parent Focus Area:',
-      'edit_item' => 'Edit Focus Area',
-      'update_item' => 'Update Focus Area',
-      'add_new_item' => 'Add New Focus Area',
-      'new_item_name' => 'New Focus Area',
-    ),
-    'show_admin_column' => true, 
-    'show_ui' => true,
-    'query_var' => true,
-    'rewrite' => array( 
-      'slug' => 'focus-area',
-      'with_front' => false 
-    ),
-  )
-);
 
 // Custom admin columns for post type
 function edit_columns($columns){
