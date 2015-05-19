@@ -43,6 +43,39 @@
   }    
 }
 
+// Article images with cutout
+.article-thumb {
+  display: block;
+  min-height:170px;
+  width:100%;
+  background: no-repeat;
+  background-size: cover;
+
+  // Cutout triangle on thumb
+  &::before,
+  &::after {
+    position: absolute;
+    top:150px;
+    content: '';
+    transition: all $transition-speed;
+  }
+
+  &::before {
+    left: 0;
+    right: 25px;
+    height: 20px;
+    background: $white;
+  }
+
+  &::after {
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-right: 25px solid $white;
+  }
+}
+
 // Links
 .article-list {
   .actions {
@@ -92,6 +125,12 @@
           color: $white !important;
           border-bottom-color: $white;
         }
+        .article-thumb::after {
+          border-right-color: $dk-blue;
+        }
+        .article-thumb::before {
+          background: $dk-blue;
+        }
       }
     }
   }
@@ -125,6 +164,10 @@
         border-bottom: 1px $dk-blue solid;
       }
     }
+  }
+  // Less padding for articles with image header
+  .article.has-image .article-content .article-content-wrap {
+    padding-top: 10px;
   }
 }
 

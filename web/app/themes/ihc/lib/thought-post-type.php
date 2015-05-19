@@ -5,9 +5,6 @@
 
 namespace Firebelly\PostTypes\Thought;
 
-// Custom image size for post type?
-add_image_size( 'thought-thumb', 350, null, null );
-
 /**
  * Register Custom Post Type
  */

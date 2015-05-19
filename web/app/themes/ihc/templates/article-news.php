@@ -5,15 +5,13 @@ $article_tags = Utils\get_article_tags($news_post);
 // support legacy publication_dates via custom field
 $publication_date = get_post_meta($news_post->ID, '_cmb2_publication_date', true);
 $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($news_post->post_date);
+$has_image_class = has_post_thumbnail($news_post->ID) ? 'has-image' : '';
 ?>
-<article class="article">
-  <?php 
-  if (!empty($show_images) && has_post_thumbnail($news_post->ID)) {
-    $thumb = wp_get_attachment_url(get_post_thumbnail_id($news_post->ID));
-    echo '<a href="'.get_the_permalink($news_post).'" class="article-thumb" style="background-image:url('.$thumb.');"><span class="clip"></span></a>';
-  } 
-  ?>
+<article class="article <?= $has_image_class ?>">
   <div class="article-content">
+    <?php if ($thumb = \Firebelly\Media\get_post_thumbnail($post->ID)): ?>
+      <a href="<?= get_the_permalink($post) ?>" class="article-thumb" style="background-image:url(<?= $thumb ?>);"></a>
+    <?php endif; ?>
     <time class="article-date" datetime="<?= date('c', $post_date_timestamp); ?>"><?= date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
     <div class="article-content-wrap">
       <header class="article-header">

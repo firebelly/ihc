@@ -9,7 +9,7 @@ $focus_area_contacts = Taxonomy_MetaData::get(get_query_var('taxonomy'), $focus_
 $header_image = Taxonomy_MetaData::get(get_query_var('taxonomy'), $focus_area->term_id, 'featured_image');
 if ($header_image) {
   $with_image_class = 'with-image';
-  $header_bg = \Firebelly\Utils\get_header_bg($header_image, $focus_area->term_id);
+  $header_bg = \Firebelly\Media\get_header_bg($header_image, $focus_area->term_id);
 }
 $header_text = $focus_area->description;
 ?>

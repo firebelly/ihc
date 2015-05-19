@@ -10,31 +10,9 @@
 
   .article-thumb {
     min-height:270px;
-    width:100%;
-    background: no-repeat;
-    background-size: cover;
-
-    // Cutout triangle on thumb
     &::before,
     &::after {
-      position: absolute;
       top:250px;
-      content: '';
-    }
-
-    &::before {
-      left: 0;
-      right: 25px;
-      height: 20px;
-      background: $white;
-    }
-
-    &::after {
-      right: 0;
-      width: 0;
-      height: 0;
-      border-top: 20px solid transparent;
-      border-right: 25px solid $white;
     }
   }
 

@@ -5,7 +5,7 @@
 
 $total_events = \Firebelly\PostTypes\Event\get_num_events();
 $total_news = wp_count_posts('post')->publish;
-$header_bg = \Firebelly\Utils\get_header_bg($post);
+$header_bg = \Firebelly\Media\get_header_bg($post);
 $header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));
 $header_text = apply_filters('the_content', get_post_meta($post->ID, '_cmb2_header_text', true));
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);

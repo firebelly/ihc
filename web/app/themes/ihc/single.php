@@ -12,10 +12,9 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
       <h4 class="flag"><a href="<?= get_term_link($category); ?>"><?php echo $category->name; ?></a></h4>
     <?php endif; ?>
     <time class="article-date" datetime="<?php echo date('c', $post_date_timestamp); ?>"><?php echo date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
-    <?php if (has_post_thumbnail()) {
-      $thumb = wp_get_attachment_url(get_post_thumbnail_id());
-      echo '<div class="article-thumb" style="background-image:url('.$thumb.');"></div>';
-    } ?>
+    <?php if ($thumb = \Firebelly\Media\get_post_thumbnail($post->ID, 'large')): ?>
+      <div class="article-thumb" style="background-image:url(<?= $thumb ?>);"></div>
+    <?php endif; ?>
     <div class="post-inner">
       <header class="<?= $with_image_class ?>">
         <h1 class="article-title"><?php the_title(); ?></h1>
