@@ -68,14 +68,6 @@
     // padding-right: #{$column-width * 4};
   }
   
-  p.accent {
-    @include font-style1;
-    margin-bottom: 20px;
-
-    &::before {
-      content: "\bb  ";
-    }
-  }
 }
 
 .secondary-header-text {

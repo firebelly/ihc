@@ -1,6 +1,21 @@
 // Home page
 
 .home.page {
+  .page-header {
+    p.accent {
+      @include font-style1;
+      margin-bottom: 20px;
+
+      &::before {
+        content: "\bb  ";
+      }
+      @include tablet {
+        position: absolute;
+        bottom: 40px;
+        left: 80px;
+      }
+    }
+  }
   .button {
     min-width: 170px;
   }
