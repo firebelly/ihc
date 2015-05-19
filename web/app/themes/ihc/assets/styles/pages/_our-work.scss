@@ -20,13 +20,16 @@
       margin: 0;
       width: 120px;
       position: absolute;
-      top: 58px;
+      top: 8px;
       right: 30px;
       color: $white;
       a {
         color: $white;
       }
     }
+  }
+  .with-image .share {
+    top: 58px;
   }
   .page-block {
     position: relative;
