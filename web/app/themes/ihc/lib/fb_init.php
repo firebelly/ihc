@@ -131,3 +131,46 @@ function simplify_tinymce($settings) {
   return $settings;
 }
 add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');
+
+
+/**
+ * Custom Site Options page for various fields
+ */
+function add_site_options() {
+  add_options_page('Site Settings', 'Site Settings', 'manage_options', 'functions', __NAMESPACE__ . '\site_options');
+}
+function site_options() {
+?>
+    <div class="wrap">
+        <h2>Site Options</h2>
+
+        <form method="post" action="options.php">
+          <?php wp_nonce_field('update-options') ?>
+          <table class="form-table">
+              <tr>
+                <th scope="row"><label for="twitter_id">Twitter Account:</label></th>
+                <td><input type="text" id="twitter_id" name="twitter_id" size="45" value="<?php echo get_option('twitter_id'); ?>" /></td>
+              </tr>
+              <tr>
+                <th scope="row"><label for="facebook_id">Facebook Account:</label></th>
+                <td><input type="text" id="facebook_id" name="facebook_id" size="45" value="<?php echo get_option('facebook_id'); ?>" /></td>
+              </tr>
+              <tr>
+                <th scope="row"><label for="instagram_id">Instagram Account:</label></th>
+                <td><input type="text" id="instagram_id" name="instagram_id" size="45" value="<?php echo get_option('instagram_id'); ?>" /></td>
+              </tr>
+              <tr>
+                <th scope="row"><label for="media_contact">Media Contact:</label></th>
+                <td><?php wp_editor( get_option('media_contact'), 'media_contact', ['teeny' => true, 'textarea_rows' => 5] ); ?><br>
+                <em>Used for the [media_contact] shortcode</em></td>
+              </tr>
+          </table>
+          <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes" /></p>
+
+          <input type="hidden" name="action" value="update" />
+          <input type="hidden" name="page_options" value="twitter_id,facebook_id,instagram_id,media_contact" />
+        </form>
+    </div>
+<?php
+}
+add_action('admin_menu', __NAMESPACE__ . '\add_site_options');
