@@ -47,9 +47,6 @@ function metaboxes( array $meta_boxes ) {
         'desc' => 'Shows at top of page behind featured image',
         'id'   => $prefix . 'header_text',
         'type' => 'wysiwyg',
-        'options' => array(
-          'textarea_rows' => 4,
-        ),
       ),
       array(
         'name' => 'Secondary Header Text',

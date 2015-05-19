@@ -98,9 +98,11 @@ function simplify_tinymce($settings) {
   $settings['toolbar3'] = '';
   $settings['toolbar4'] = '';
 
+  // $settings['autoresize_min_height'] = 250;
+  $settings['autoresize_max_height'] = 1000;
+
   // Clear most formatting when pasting text directly in the editor
   $settings['paste_as_text'] = 'true';
-  // print_r($settings); exit;
 
   $style_formats = array(  
     // array(  
