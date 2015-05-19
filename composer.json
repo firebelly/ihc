@@ -58,7 +58,6 @@
     "johnpbloch/wordpress": ">=4.2.2",
     "wpackagist-plugin/post-thumbnail-editor" : "*",
     "wpackagist-plugin/limit-login-attempts" : "*",
-    "wpackagist-plugin/wordpress-importer" : "*",
     "wpackagist-plugin/intuitive-custom-post-order": "*",
     "wpackagist-plugin/cmb2": ">=2.0.5",
     "wpackagist-plugin/accordion-shortcodes": ">=2.2.0",
