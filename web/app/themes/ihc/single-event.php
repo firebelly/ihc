@@ -36,8 +36,16 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
         <br><?= $event->address['address-2'] ?>
       <?php endif; ?>
       <br><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?>
+      </p>
 
-      <?php if (!($event->archived)): ?></p>
+      <?php if (!empty($event->sponsor)): ?>
+        <div class="sponsors">
+          <h3>Sponsors:</h3>
+          <?= apply_filters('the_content', $event->sponsor); ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if (!($event->archived)): ?>
         <h3>Cost:</h3>
         <p class="cost">
           <?php if (!$event->cost): ?>

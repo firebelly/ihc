@@ -190,6 +190,7 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
       a,
       h3 {
         color: $accent-color;
+        border-bottom-color: $accent-color;
       }
     }
 

@@ -162,9 +162,12 @@ function metaboxes( array $meta_boxes ) {
           'type'    => 'address',
       ),
       array(
-          'name'    => 'Sponsor Organization',
+          'name'    => 'Sponsor Organization(s)',
           'id'      => $prefix . 'sponsor',
-          'type'    => 'text',
+          'type'    => 'wysiwyg',
+          'options' => array(
+            'textarea_rows' => 4,
+          ),
       ),
       // array(
       //     'name'    => 'Lat',
@@ -416,6 +419,7 @@ function get_event_details($post) {
     'event_start' => get_post_meta($post->ID, '_cmb2_event_start', true),
     'event_end' => get_post_meta( $post->ID, '_cmb2_event_end', true),
     'venue' => get_post_meta($post->ID, '_cmb2_venue', true),
+    'sponsor' => get_post_meta($post->ID, '_cmb2_sponsor', true),
     'cost' => get_post_meta($post->ID, '_cmb2_cost', true),
     'registration_url' => get_post_meta($post->ID, '_cmb2_registration_url', true),
     'lat' => get_post_meta($post->ID, '_cmb2_lat', true),

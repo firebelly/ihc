@@ -27,6 +27,15 @@
     p { 
       margin-bottom:30px;
     }
+    .sponsors {
+      margin-bottom: 30px;
+      p {
+        margin-bottom: 0;
+      }
+      a {
+        border-bottom: 1px solid $color-accent;
+      }
+    }
   }
 }
 
