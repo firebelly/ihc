@@ -78,18 +78,6 @@
   }
 }
 
-// Share blocks
-.share {
-  display: none;
-  @include font-style1;
-  color:$dk-blue;
-  a {
-    text-decoration: none;
-    padding-left: 10px;
-    color:$dk-blue;
-  }
-}
-
 .secondary-header-text {
   @include font-style2;
   position: relative;
