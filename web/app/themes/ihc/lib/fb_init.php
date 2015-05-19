@@ -164,11 +164,16 @@ function site_options() {
                 <td><?php wp_editor( get_option('media_contact'), 'media_contact', ['teeny' => true, 'textarea_rows' => 5] ); ?><br>
                 <em>Used for the [media_contact] shortcode</em></td>
               </tr>
+              <tr>
+                <th scope="row"><label for="thought_of_day_email">Thought of the Day Submissions Email:</label></th>
+                <td><input type="text" id="thought_of_day_email" name="thought_of_day_email" size="45" value="<?php echo get_option('thought_of_day_email'); ?>" /><br>
+                <em>An email is sent here when someone submits a Thought of the Day</em></td>
+              </tr>
           </table>
           <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes" /></p>
 
           <input type="hidden" name="action" value="update" />
-          <input type="hidden" name="page_options" value="twitter_id,facebook_id,instagram_id,media_contact" />
+          <input type="hidden" name="page_options" value="twitter_id,facebook_id,instagram_id,media_contact,thought_of_day_email" />
         </form>
     </div>
 <?php
