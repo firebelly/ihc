@@ -88,7 +88,7 @@ function edit_columns($columns){
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
     'taxonomy-focus_area' => 'Focus Area',
-    'featured_image' => 'Image',
+    // 'featured_image' => 'Image',
   );
   return $columns;
 }
