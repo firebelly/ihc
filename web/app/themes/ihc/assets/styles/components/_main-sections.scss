@@ -83,7 +83,7 @@ aside.main {
       margin-top: 0;
     }
   }
-  a {
+  a:not(.img-link) {
     border-bottom: 1px solid $dk-blue;
   }
   p {

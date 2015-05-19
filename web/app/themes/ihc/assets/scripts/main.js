@@ -46,6 +46,9 @@ var IHC = (function($) {
         $('.disclaimer').slideDown();
       });
 
+      // Add class to sidebar image links to target with CSS
+      $('.sidebar-content a:has(img)').addClass('img-link');
+
       // init behavior for various sections
       _initThoughtSubmit();
       _initSearch();

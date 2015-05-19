@@ -36,6 +36,11 @@ function setup() {
   register_nav_menus([
     'footer_links' => __('Footer Links', 'sage')
   ]);
+
+  // Default Image options
+  update_option( 'image_default_align', 'none' );
+  update_option( 'image_default_link_type', 'none' );
+  update_option( 'image_default_size', 'large' );
 }
 add_action('after_setup_theme', __NAMESPACE__ . '\setup');
 
