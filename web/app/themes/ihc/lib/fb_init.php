@@ -179,3 +179,13 @@ function site_options() {
 <?php
 }
 add_action('admin_menu', __NAMESPACE__ . '\add_site_options');
+
+/**
+ * Remove Press Release posts from everything but search & category pages
+ */
+function exclude_press_release_posts($wp_query) {
+  if (!is_search() && !is_archive()) {
+    set_query_var('category__not_in', [9]);
+  }
+}
+add_action('pre_get_posts', __NAMESPACE__ . '\exclude_press_release_posts');

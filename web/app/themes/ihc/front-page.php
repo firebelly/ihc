@@ -51,7 +51,7 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
   <div class="load-more-container article-list masonry">
     <?php 
     // Recent Blog & News posts
-    $news_posts = get_posts(['numberposts' => 4]);
+    $news_posts = get_posts(['numberposts' => 4, 'category__not_in' => [9]]);
     if ($news_posts):
       foreach ($news_posts as $news_post) {
         include(locate_template('templates/article-news.php'));
