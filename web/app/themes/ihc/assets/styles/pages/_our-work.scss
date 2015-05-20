@@ -117,6 +117,7 @@
       }
     }
     @include tablet {
+      cursor: pointer;
       &:hover {
         .info {
           h1 a,

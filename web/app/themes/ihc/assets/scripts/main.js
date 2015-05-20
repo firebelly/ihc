@@ -73,7 +73,7 @@ var IHC = (function($) {
   }
 
   function _initBigClicky() {
-    $(document).on('click', '.article-list article', function(e) {
+    $(document).on('click', '.article-list article, .focus-list-large article', function(e) {
       if (!$(e.target).is('a')) {
         e.preventDefault();
         var href = $(this).find('h1:first a').attr('href');
