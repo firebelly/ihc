@@ -19,7 +19,7 @@ add_action('switch_theme', __NAMESPACE__ . 'add_capabilities');
 
 // Custom taxonomy Focus Areas
 register_taxonomy( 'focus_area', 
-  array('program', 'page', 'post', 'thought', 'event'),
+  array('program', 'post', 'thought', 'event'),
   array('hierarchical' => true, // if this is true, it acts like categories
     'labels' => array(
       'name' => 'Focus Areas',

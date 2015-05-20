@@ -107,6 +107,7 @@ function remove_sub_menus() {
   remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=category');
   remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=focus_area');
   remove_submenu_page('edit.php?post_type=event', 'edit-tags.php?taxonomy=focus_area&amp;post_type=event');
+  remove_submenu_page('edit.php?post_type=thought', 'edit-tags.php?taxonomy=focus_area&amp;post_type=thought');
 }
 function remove_post_metaboxes() {
   remove_meta_box( 'focus_areadiv','event','normal' ); // hide default Focus Area UI
