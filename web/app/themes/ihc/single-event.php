@@ -62,16 +62,9 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
         </ul>
       <?php endif; ?>
     </div>
-    
-    <div class="related article-list">
-      <h4 class="flag">Blog & News</h4>
-      <?php 
-      while (have_posts()) : the_post();
-        $news_post = $post;
-        include(locate_template('templates/article-news.php'));
-      endwhile; 
-      ?>
-      <p class="view-all"><a href="/news/" class="button">View All Articles</a></p>
+
+    <div class="article-list">
+      <?= \Firebelly\Utils\get_related_news_post($post) ?>
     </div>
   </aside>
 </article>
