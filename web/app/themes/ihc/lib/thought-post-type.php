@@ -49,12 +49,35 @@ function post_type() {
     'exclude_from_search' => false,
     'publicly_queryable'  => true,
     'rewrite'             => $rewrite,
-    'capability_type'     => 'page',
+    'capability_type'     => 'thought',
+    'map_meta_cap'        => true
   );
   register_post_type( 'thought', $args );
 
 }
 add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
+
+/**
+ * Add capabilities to control permissions of Post Type via roles
+ */
+function add_capabilities() {
+  $role_admin = get_role('administrator');
+  $role_admin->add_cap('edit_thought');
+  $role_admin->add_cap('read_thought');
+  $role_admin->add_cap('delete_thought');
+  $role_admin->add_cap('edit_thoughts');
+  $role_admin->add_cap('edit_others_thoughts');
+  $role_admin->add_cap('publish_thoughts');
+  $role_admin->add_cap('read_private_thoughts');
+  $role_admin->add_cap('delete_thoughts');
+  $role_admin->add_cap('delete_private_thoughts');
+  $role_admin->add_cap('delete_published_thoughts');
+  $role_admin->add_cap('delete_others_thoughts');
+  $role_admin->add_cap('edit_private_thoughts');
+  $role_admin->add_cap('edit_published_thoughts');
+  $role_admin->add_cap('create_thoughts');
+}
+add_action('switch_theme', __NAMESPACE__ . 'add_capabilities');
 
 /**
  * Custom admin columns for post type
@@ -82,11 +105,11 @@ function custom_columns($column){
       echo get_the_content();
       // echo edit_post_link(get_the_content()) . ($post->post_status != 'publish' ? " - <strong class=\"post-status\">{$post->post_status}</strong>" : '');
     elseif ( $column == '_cmb2_thought_of_the_day' )
-      if (!empty($custom[$column][0])) echo '✓';
+      echo !empty($custom[$column][0]) ? '✓' : '';
     else {
-      $custom = get_post_custom();
       if (array_key_exists($column, $custom))
         echo $custom[$column][0];
+      else echo $column;
     }
   }
 }
@@ -220,6 +243,56 @@ function check_thought_of_day( $post_id ) {
     $wpdb->query("DELETE FROM wp_postmeta WHERE meta_key='_cmb2_thought_of_the_day'");
     $wpdb->query("INSERT INTO wp_postmeta SET meta_key='_cmb2_thought_of_the_day', meta_value='on', post_id={$post_id}");
   }
-
 }
 add_action('save_post', __NAMESPACE__ . '\check_thought_of_day');
+
+
+/**
+ * Handle AJAX response from CSV import form
+ */
+add_action( 'wp_ajax_thought_csv_upload', __NAMESPACE__ . '\thought_csv_upload' );
+function thought_csv_upload() {
+  global $wpdb;
+  require_once 'csv-import/thought-csv-importer.php';
+
+  $importer = new \ThoughtCSVImporter;
+  $return = $importer->handle_post(true);
+
+  // Spits out json-encoded $return & die()s
+  wp_send_json($return);
+}
+
+/**
+ * Show link to CSV Import page
+ */
+add_action('admin_menu', __NAMESPACE__ . '\import_csv_admin_menu');
+function import_csv_admin_menu() {
+  add_submenu_page('edit.php?post_type=thought', 'Import CSV', 'Import CSV', 'manage_options', 'csv-importer', __NAMESPACE__ . '\import_csv_admin_form');
+}
+
+/**
+ * Basic CSV Importer admin page
+ */
+function import_csv_admin_form() {
+  if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
+    require_once 'thought-csv-importer.php';
+    $importer = new ThoughtCSVImporter;
+    $importer->handle_post();
+  }
+
+?>
+  <div class="wrap">
+    <h2>Import CSV</h2>
+    <form method="post" id="csv-upload-form" enctype="multipart/form-data" action="">
+      <fieldset>
+        <label for="csv_import">Upload file(s):</label>
+        <input name="csv_import[]" id="csv-import" type="file" multiple>
+        <div id="filedrag">or drop files here</div>
+      </fieldset>
+      <div class="progress-bar"><div class="progress-done"></div></div>
+      <input type="hidden" name="action" value="thought_csv_upload">
+      <p class="submit"><input type="submit" class="button" id="csv-submit" name="submit" value="Import"></p>
+    </form>
+  </div>
+<?php
+}

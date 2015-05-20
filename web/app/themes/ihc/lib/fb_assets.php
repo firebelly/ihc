@@ -1,10 +1,10 @@
 <?php
 
-namespace Firebelly\Assets;
-
 /**
  * Scripts and stylesheets
  */
+
+namespace Firebelly\Assets;
 
 function crufty_ie_scripts() {
   // <IE9 js (from http://stackoverflow.com/a/16221114/1001675)
@@ -27,13 +27,17 @@ function scripts() {
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__.'\\scripts', 100);
 
-
 function admin_scripts() {
-    wp_register_style('select2css', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css', false, '1.0', 'all');
-    wp_register_script('select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js', ['jquery'], null, true);
-    wp_enqueue_style('select2css');
-    wp_enqueue_script('select2');
-    }
+  wp_register_style('fb_admin_css', \Roots\Sage\Assets\asset_path('styles/admin.css'), false, '1.0', 'all');
+  wp_enqueue_style('fb_admin_css');
+  wp_register_script('fb_admin_js', \Roots\Sage\Assets\asset_path('scripts/admin.js'), ['jquery'], null, true);
+  wp_enqueue_script('fb_admin_js');
+
+  wp_register_style('select2css', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css', false, '1.0', 'all');
+  wp_enqueue_style('select2css');
+  wp_register_script('select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js', ['jquery'], null, true);
+  wp_enqueue_script('select2');
+}
 add_action('admin_enqueue_scripts', __NAMESPACE__ . '\admin_scripts');
 
 function admin_scripts_inline() {
