@@ -1,13 +1,12 @@
 /*
  * IL Humanities admin - Firebelly 2015
-*/
+ */
 
 // Good design for good reason for good namespace
 var IHC_admin = (function($) {
 
   var _uploadFiles,
       _uploadCount = 0,
-      _uploadedEntries = 0,
       _uploadTime = 0;
 
   function _init() {
@@ -38,10 +37,7 @@ var IHC_admin = (function($) {
           $('#csv-upload-form .wrap').slideUp();
 
           // Reset stats
-          _uploadCount = _uploadedEntries = _uploadTime = 0;
-
-          // Extract HTML5 multifile input value
-          // _uploadFiles = $('#csv-import')[0].files;
+          _uploadCount = _uploadTime = 0;
 
           if (_uploadFiles && _uploadFiles.length > 0) {
             // Submit uploads and process CSV files
@@ -63,17 +59,17 @@ var IHC_admin = (function($) {
     _updateFileDrag();
   }
   function _updateFileDrag() {
-    $('#filedrag').text((_uploadFiles.length > 0) ? _uploadFiles.length + ' files to import' : 'or drop files here');
+    $('#filedrag').text((_uploadFiles.length) ? _uploadFiles.length + ' file' + (_uploadFiles.length===1 ? '' : 's') + ' to import' : 'or drop files here');
     $('#csv-submit').prop('disabled', (_uploadFiles.length===0));
   }
 
   function _handleUploadFile() {
     // Disable form elements to avoid interrupting upload
-    $('#csv-upload-form input').prop('disabled', true);
+    $('#csv-upload-form input[type=file]').prop('disabled', true);
+    $('#csv-submit').prop('disabled', true).val('Uploading');
 
     // Build FormData object to submit with each file
     var data = new FormData();
-    $('#csv-upload-form input[type=submit]').val('Uploading...');
     data.append('csv_import[]', _uploadFiles[_uploadCount]);
 
     // This sets action to trigger AJAX function
@@ -91,11 +87,6 @@ var IHC_admin = (function($) {
         processData: false,
         success: function(data) {
           _uploadCount++;
-          // update stats if upload was successful
-          if (typeof data.stats !== 'undefined') {
-            _uploadedEntries += parseInt(data.stats.entries);
-            _uploadTime += parseFloat(data.stats.exec_time);
-          }
           // If error, show and stop uploading
           if (typeof data.error !== 'undefined') {
             $('<div class="wrap"><div class="error"><p>' + data.error[0] + '</p></div></div>').insertAfter('.progress-bar');
@@ -115,8 +106,8 @@ var IHC_admin = (function($) {
 
   // Resets form after uploads
   function _resetCSVUploadForm() {
-    $('#csv-upload-form input').prop('disabled', false).val('');
-    $('#csv-upload-form input[type=submit]').val('Import');
+    $('#csv-upload-form input[type=file]').prop('disabled', false).val('');
+    $('#csv-submit').prop('disabled', false).val('Import');
     _uploadFiles = [];
     _updateFileDrag();
   }
@@ -124,7 +115,7 @@ var IHC_admin = (function($) {
   // public functions
   return {
     init: _init,
-    dragHover: _dragHover,
+    dragHover: function(e) { _dragHover(e); },
     dragDrop: _dragDrop
   };
 

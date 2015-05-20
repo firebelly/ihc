@@ -256,7 +256,7 @@ function thought_csv_upload() {
   require_once 'csv-import/thought-csv-importer.php';
 
   $importer = new \ThoughtCSVImporter;
-  $return = $importer->handle_post(true);
+  $return = $importer->handle_post();
 
   // Spits out json-encoded $return & die()s
   wp_send_json($return);
@@ -274,12 +274,6 @@ function import_csv_admin_menu() {
  * Basic CSV Importer admin page
  */
 function import_csv_admin_form() {
-  if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
-    require_once 'thought-csv-importer.php';
-    $importer = new ThoughtCSVImporter;
-    $importer->handle_post();
-  }
-
 ?>
   <div class="wrap">
     <h2>Import CSV</h2>
@@ -293,6 +287,14 @@ function import_csv_admin_form() {
       <input type="hidden" name="action" value="thought_csv_upload">
       <p class="submit"><input type="submit" class="button" id="csv-submit" name="submit" value="Import"></p>
     </form>
+
+    <div class="import-notes">
+      <h3>Format Guide:</h3>
+<pre>quote,author,focus_area
+lorem ipsum,john doe,Media & Journalism
+dolor sit amet,jane doe,Business</pre>
+    </div>
+
   </div>
 <?php
 }
