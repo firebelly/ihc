@@ -25,6 +25,7 @@ function cmb2_taxonomy_meta_initiate() {
         'name' => 'Contacts',
         'id'   => 'contacts',
         'type' => 'wysiwyg',
+        'options' => [ 'teeny' => true ],
       ),
     )
   );
