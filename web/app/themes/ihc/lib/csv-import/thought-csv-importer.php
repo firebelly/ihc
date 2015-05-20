@@ -76,12 +76,13 @@ class ThoughtCSVImporter {
         foreach ($csv->connect() as $csv_data) {
           // Check if post already exists in db
           $existing_post_id = $wpdb->get_var($wpdb->prepare(
-            "SELECT ID FROM `wp_posts` WHERE post_content = '%s' AND post_type = 'thought'", 
+            "SELECT ID FROM `wp_posts` WHERE post_content = '%s' AND post_type = 'thought' AND post_status = 'publish'", 
             convert_chars($csv_data['quote'])
           ));
           if ($existing_post_id) {
             // wp_delete_post($existing_post_id, true);
             update_post_meta($existing_post_id, '_cmb2_author', $csv_data['author']); 
+            wp_update_post(['ID' => $existing_post_id, 'post_title' => 'Quote from '.$csv_data['author']]); 
             $this->set_focus_area($existing_post_id, $csv_data['focus_area']);
             $num_updated++;
           } else {
