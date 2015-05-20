@@ -14,6 +14,8 @@ var IHC_admin = (function($) {
     // AJAX CSV import handling
     if ($('body[class*="csv-importer"]').length) {
       if (window.File && window.FileList && window.FileReader) {
+        $('#csv-submit').prop('disabled', true);
+
         // Init drag-and-drop dropzone if supported
         var filedrag = $('#filedrag')[0];
         filedrag.addEventListener('dragover', IHC_admin.dragHover, false);
@@ -62,6 +64,7 @@ var IHC_admin = (function($) {
   }
   function _updateFileDrag() {
     $('#filedrag').text((_uploadFiles.length > 0) ? _uploadFiles.length + ' files to import' : 'or drop files here');
+    $('#csv-submit').prop('disabled', (_uploadFiles.length===0));
   }
 
   function _handleUploadFile() {
