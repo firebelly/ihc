@@ -290,7 +290,7 @@ function import_csv_admin_form() {
 
     <div class="import-notes">
       <h3>Format Guide:</h3>
-<pre>quote,author,focus_area
+<pre>thought,author,focus_area
 lorem ipsum,john doe,Media & Journalism
 dolor sit amet,jane doe,Business</pre>
     </div>

@@ -5,7 +5,7 @@
 
 class ThoughtCSVImporter {
   var $defaults = array(
-      'quote'       => null,
+      'thought'       => null,
       'author'     => null,
       'focus_area' => null,
   );
@@ -76,7 +76,7 @@ class ThoughtCSVImporter {
       foreach ($csv->connect() as $csv_data) {
         // Check if post already exists in db
         $existing_post_id = $wpdb->get_var($wpdb->prepare(
-          "SELECT ID FROM `wp_posts` WHERE post_content LIKE %s AND post_type = 'thought' AND post_status = 'publish'", convert_chars($csv_data['quote'])
+          "SELECT ID FROM `wp_posts` WHERE post_content LIKE %s AND post_type = 'thought' AND post_status = 'publish'", convert_chars($csv_data['thought'])
         ));
         if ($existing_post_id) {
           // wp_delete_post($existing_post_id, true);
@@ -122,7 +122,7 @@ class ThoughtCSVImporter {
     $data = array_merge($this->defaults, $data);
     $new_post = array(
       'post_title'   => 'Thought from ' . convert_chars($data['author']),
-      'post_content' => convert_chars($data['quote']),
+      'post_content' => convert_chars($data['thought']),
       'post_status'  => 'publish',
       'post_type'    => 'thought',
     );
