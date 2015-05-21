@@ -14,8 +14,6 @@ class ThoughtCSVImporter {
 
   /**
    * Handle POST submission
-   *
-   * @return void
    */
   function handle_post() {
     global $wpdb;
@@ -37,7 +35,7 @@ class ThoughtCSVImporter {
       } else $files[] = $fdata;
     }
 
-    // Nothing to process!
+    // Nothing to process?
     if (count($files) == 0) {
       $this->log['error'][] = 'No file uploaded, aborting.';
       return $this->log;
@@ -55,9 +53,10 @@ class ThoughtCSVImporter {
     $time_start = microtime(true);
     $i = $num_skipped = $num_updated = $num_imported = 0;
 
+    // Get focus areas to match for import
     $this->focus_areas = get_terms('focus_area', array('hide_empty' => 0));
 
-    // temp disable autocommit
+    // Temp disable autocommit
     $wpdb->query( 'SET autocommit = 0;' );
 
     foreach($files as $file_upload) {
@@ -93,7 +92,7 @@ class ThoughtCSVImporter {
         }
       }
 
-      // remove temp upload file
+      // Remove temp upload file
       if (file_exists($file)) {
         @unlink($file);
       }
@@ -104,20 +103,23 @@ class ThoughtCSVImporter {
     $wpdb->query( 'COMMIT;' );
     $wpdb->query( 'SET autocommit = 1;' );
 
-    $exec_time = microtime(true) - $time_start;
+    // Build response notices
     if ($num_skipped)
-      $this->log['notice'][] = "skipped {$num_skipped} entries";
+      $this->log['notice'][] = sprintf("skipped %s entries", $num_skipped);
 
     if ($num_updated)
-      $this->log['notice'][] = "updated {$num_updated} entries";
+      $this->log['notice'][] = sprintf("updated %s entries", $num_updated);
 
     if ($num_imported)
-      $this->log['notice'][] = sprintf("imported %s entries", $num_imported, $exec_time);
+      $this->log['notice'][] = sprintf("imported %s entries", $num_imported);
 
+    $exec_time = microtime(true) - $time_start;
     $this->log['stats']['exec_time'] = sprintf("%.2f", $exec_time);
+
     return $this->log;
   }
 
+  // Create a new post with CSV data
   function create_post($data) {
     $data = array_merge($this->defaults, $data);
     $new_post = array(
@@ -128,6 +130,7 @@ class ThoughtCSVImporter {
     );
     $id = wp_insert_post($new_post);
 
+    // Set taxonomy and custom fields
     $this->set_focus_area($id, $data['focus_area']);
     update_post_meta($id, '_cmb2_author', $data['author']); 
 

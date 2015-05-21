@@ -90,7 +90,7 @@ function edit_columns($columns){
   $columns = array(
     'cb' => '<input type="checkbox" />',
     'title' => 'Title',
-    '_cmb2_event_start' => 'Date',
+    'event_dates' => 'Date',
     '_cmb2_venue' => 'Venue',
     'taxonomy-focus_area' => 'Focus Area',
   );
@@ -104,9 +104,15 @@ function custom_columns($column){
     $custom = get_post_custom();
     if ( $column == 'featured_image' )
       echo the_post_thumbnail( 'event-thumb' );
-    elseif ( $column == '_cmb2_event_start' ) {
-      $timestamp = $custom[$column][0];
-      echo date( 'm/d/Y g:iA', $timestamp ) . ($timestamp < time() ? ' - <strong class="post-state">Past Event</strong>' : '');
+    elseif ( $column == 'event_dates' ) {
+      $timestamp_start = $custom['_cmb2_event_start'][0];
+      $timestamp_end = !empty($custom['_cmb2_event_end'][0]) ? $custom['_cmb2_event_end'][0] : $timestamp_start;
+      if ($timestamp_end != $timestamp_start) {
+        $date_txt = date('m/d/Y g:iA', $timestamp_start) . ' – ' . date('m/d/Y g:iA', $timestamp_end);
+      } else {
+        $date_txt = date('m/d/Y g:iA', $timestamp_start);
+      }
+      echo $date_txt . ($timestamp_end < time() ? ' - <strong class="post-state">Past Event</strong>' : '');
     } else {
       if (array_key_exists($column, $custom))
         echo $custom[$column][0];
@@ -136,7 +142,7 @@ function metaboxes( array $meta_boxes ) {
       ),
       array(
           'name'    => 'End Date',
-          'desc'    => '(Optional)',
+          // 'desc'    => '(Optional)',
           'id'      => $prefix . 'event_end',
           'type'    => 'text_datetime_timestamp',
       ),
@@ -218,7 +224,7 @@ function get_num_events($past='', $focus_area='', $program='') {
     "
     SELECT COUNT(*) FROM `wp_posts` wp
     INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_start')
-    WHERE wp.post_status = 'publish' 
+    WHERE wp.post_status = 'publish'
     AND wp.post_type = 'event'
     AND wm.meta_value " . ($past ? '<=' : '>') . " %s
     ",
@@ -263,7 +269,7 @@ function get_events($num_posts='', $focus_area='', $program='') {
       'compare' => 'IN',
     );
   }
- 
+
   $event_posts = get_posts($args);
   if (!$event_posts) return false;
   $output = '';
@@ -278,7 +284,7 @@ function get_events($num_posts='', $focus_area='', $program='') {
 /**
  * Geocode address for event and save in custom fields
  */
-function geocode_address($post_id, $post) {
+function geocode_address($post_id, $post='') {
   $address = get_post_meta($post_id, '_cmb2_address', 1);
   $address = wp_parse_args($address, array(
       'address-1' => '',
@@ -378,10 +384,10 @@ function get_ical_date($time, $incl_time=true){
 //         $leavename? '' : '%postname%',
 //         '%post_id%',
 //     );
- 
+
 //     if ( '' != $permalink && !in_array($post->post_status, array('draft', 'pending', 'auto-draft')) ) {
 //         $unixtime = strtotime($post->post_date);
-     
+
 //         $date = explode(" ",date('Y m d H i s', $unixtime));
 //         $rewritereplace =
 //         array(
@@ -427,7 +433,7 @@ function get_event_details($post) {
     'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time()
   ];
   $event['start_time'] = date('g:iA', $event['event_start']);
-  $event['time_txt'] = $event['start_time'] . (!empty($event['event_end']) ? '–' . date('g:iA', $event['event_end']) : '');
+  $event['time_txt'] = $event['start_time'] . ((!empty($event['event_end']) && $event['event_end'] != $event['event_start']) ? '–' . date('g:iA', $event['event_end']) : '');
   $event['archived'] = ($event['event_start'] < time());
   $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt'];
   $event['year'] = date('Y', $event['event_start']);
@@ -448,7 +454,7 @@ function get_event_details($post) {
  * if "past_events" is set, only shows archived events
  */
 // currently site is just using get_events() in event-post-type.php
-// 
+//
 // function event_query($query){
 //   global $wp_the_query;
 //   if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
@@ -479,3 +485,48 @@ function get_event_details($post) {
 //   }
 // }
 // add_action('pre_get_posts', __NAMESPACE__ . '\\event_query');
+
+
+/**
+ * Handle AJAX response from CSV import form
+ */
+add_action( 'wp_ajax_event_csv_upload', __NAMESPACE__ . '\event_csv_upload' );
+function event_csv_upload() {
+  global $wpdb;
+  require_once 'import/event-csv-importer.php';
+
+  $importer = new \EventCSVImporter;
+  $return = $importer->handle_post();
+
+  // Spits out json-encoded $return & die()s
+  wp_send_json($return);
+}
+
+/**
+ * Show link to CSV Import page
+ */
+add_action('admin_menu', __NAMESPACE__ . '\import_csv_admin_menu');
+function import_csv_admin_menu() {
+  add_submenu_page('edit.php?post_type=event', 'Import CSV', 'Import CSV', 'manage_options', 'csv-importer', __NAMESPACE__ . '\import_csv_admin_form');
+}
+
+/**
+ * Basic CSV Importer admin page
+ */
+function import_csv_admin_form() {
+?>
+  <div class="wrap">
+    <h2>Import CSV</h2>
+    <form method="post" id="csv-upload-form" enctype="multipart/form-data" action="">
+      <fieldset>
+        <label for="csv_import">Upload file(s):</label>
+        <input name="csv_import[]" id="csv-import" type="file" multiple>
+        <div id="filedrag">or drop files here</div>
+      </fieldset>
+      <div class="progress-bar"><div class="progress-done"></div></div>
+      <input type="hidden" name="action" value="event_csv_upload">
+      <p class="submit"><input type="submit" class="button" id="csv-submit" name="submit" value="Import"></p>
+    </form>
+  </div>
+<?php
+}

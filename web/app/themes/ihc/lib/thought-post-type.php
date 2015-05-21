@@ -253,7 +253,7 @@ add_action('save_post', __NAMESPACE__ . '\check_thought_of_day');
 add_action( 'wp_ajax_thought_csv_upload', __NAMESPACE__ . '\thought_csv_upload' );
 function thought_csv_upload() {
   global $wpdb;
-  require_once 'csv-import/thought-csv-importer.php';
+  require_once 'import/thought-csv-importer.php';
 
   $importer = new \ThoughtCSVImporter;
   $return = $importer->handle_post();

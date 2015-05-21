@@ -34,7 +34,7 @@ var IHC_admin = (function($) {
           e.preventDefault();
 
           // Hide any previous notices
-          $('#csv-upload-form .wrap').slideUp();
+          $('#csv-upload-form').find('.error,.updated').slideUp();
 
           // Reset stats
           _uploadCount = _uploadTime = 0;
@@ -107,8 +107,10 @@ var IHC_admin = (function($) {
         success: function(data) {
           _uploadCount++;
           // If error, show and stop uploading
-          if (typeof data.error !== 'undefined') {
-            $('<div class="wrap"><div class="error"><p>' + data.error[0] + '</p></div></div>').insertAfter('.progress-bar');
+          if (typeof data === 'string' || typeof data.error !== 'undefined') {
+            var err_txt = (typeof data === 'string') ? 'Error: '+data : data.error[0];
+            $('<div class="error"><p>' + err_txt + '</p></div>').insertBefore('#csv-upload-form fieldset');
+            $('.progress-bar').fadeOut('slow').removeClass('active');
             _resetCSVUploadForm();
           } else if (_uploadCount < _uploadFiles.length) {
             // Otherwise, move onto processing next file
@@ -116,7 +118,7 @@ var IHC_admin = (function($) {
           } else {
             // If we're all done, hide progress bar, show stats, and reset the form
             $('.progress-bar').fadeOut('slow').removeClass('active');
-            $('<div class="wrap"><div class="updated">Success: ' + data.notice.join(' and ') + ' in ' + _uploadTime.toFixed(2) + ' seconds.</div></div>').insertBefore('#csv-upload-form fieldset');
+            $('<div class="updated">Success: ' + data.notice.join(' and ') + ' in ' + _uploadTime.toFixed(2) + ' seconds.</div>').insertBefore('#csv-upload-form fieldset');
             _resetCSVUploadForm();
           }
         },
