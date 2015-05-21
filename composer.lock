@@ -236,15 +236,15 @@
         },
         {
             "name": "wpackagist-plugin/accordion-shortcodes",
-            "version": "2.2.1",
+            "version": "2.2.3",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/accordion-shortcodes/",
-                "reference": "tags/2.2.1"
+                "reference": "tags/2.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.2.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.2.3.zip",
                 "reference": null,
                 "shasum": null
             },
