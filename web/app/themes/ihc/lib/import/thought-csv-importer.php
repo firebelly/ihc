@@ -120,19 +120,19 @@ class ThoughtCSVImporter {
   }
 
   // Create a new post with CSV data
-  function create_post($data) {
-    $data = array_merge($this->defaults, $data);
+  function create_post($csv_data) {
+    $csv_data = array_merge($this->defaults, $csv_data);
     $new_post = array(
-      'post_title'   => 'Thought from ' . convert_chars($data['author']),
-      'post_content' => convert_chars($data['thought']),
+      'post_title'   => 'Thought from ' . convert_chars($csv_data['author']),
+      'post_content' => convert_chars($csv_data['thought']),
       'post_status'  => 'publish',
       'post_type'    => 'thought',
     );
     $id = wp_insert_post($new_post);
 
     // Set taxonomy and custom fields
-    $this->set_focus_area($id, $data['focus_area']);
-    update_post_meta($id, '_cmb2_author', $data['author']); 
+    $this->set_focus_area($id, $csv_data['focus_area']);
+    update_post_meta($id, '_cmb2_author', $csv_data['author']); 
 
     return $id;
   }

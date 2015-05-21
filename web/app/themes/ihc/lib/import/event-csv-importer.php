@@ -13,7 +13,6 @@ class EventCSVImporter {
       'Ev_Note_1_02_Actual_Notes'      => null, // cost
       'Ev_Note_1_03_Actual_Notes'      => null, // title
       'Ev_Prt_1_01_CnBio_Name'         => null, // sponsor
-      'Ev_Prt_1_01_CnBio_Import_ID'    => null, // sponsor
       'Ev_Prt_1_02_CnBio_Name'         => null, // location
       'Ev_Prt_1_02_CnAdrPrf_Addrline1' => null,
       'Ev_Prt_1_02_CnAdrPrf_Addrline2' => null,
@@ -89,8 +88,15 @@ class EventCSVImporter {
 
       foreach ($csv->connect() as $csv_data) {
         // Check if post already exists in db
-        $existing_post_id = $wpdb->get_var($wpdb->prepare(
-          "SELECT ID FROM `wp_posts` WHERE post_content LIKE %s AND post_type = 'event' AND post_status = 'publish'", convert_chars($csv_data['Ev_Note_1_01_Actual_Notes'])
+        $event_start = strtotime($csv_data['Ev_Start_Date'] . ' ' . $csv_data['Ev_Start_Time']);
+        $existing_post_id = $wpdb->get_var($wpdb->prepare("
+          SELECT ID FROM `wp_posts` p
+          LEFT JOIN wp_postmeta pm ON (p.ID=pm.post_id AND pm.meta_key='_cmb2_event_start')
+          WHERE p.post_title = %s 
+          AND p.post_type = 'event' 
+          AND pm.meta_value = %d
+          AND (p.post_status = 'publish' OR p.post_status = 'draft')
+          ", $csv_data['Ev_Note_1_03_Actual_Notes'], $event_start
         ));
         if ($existing_post_id)
           wp_delete_post($existing_post_id, true);
@@ -130,11 +136,11 @@ class EventCSVImporter {
   }
 
   // Create a new post with CSV data
-  function create_post($data) {
-    $data = array_merge($this->defaults, $data);
+  function create_post($csv_data) {
+    $csv_data = array_merge($this->defaults, $csv_data);
     $new_post = array(
-      'post_title'   => $data['Ev_Note_1_03_Actual_Notes'],
-      'post_content' => $data['Ev_Note_1_01_Actual_Notes'],
+      'post_title'   => $csv_data['Ev_Note_1_03_Actual_Notes'],
+      'post_content' => $csv_data['Ev_Note_1_01_Actual_Notes'],
       'post_status'  => 'draft',
       'post_type'    => 'event',
     );
@@ -142,37 +148,37 @@ class EventCSVImporter {
 
     if ($post_id) {
       // Add Sponsor
-      if ($data['Ev_Prt_1_01_CnBio_Name']) {
-        update_post_meta($post_id, $this->prefix.'sponsor', $data['Ev_Prt_1_01_CnBio_Name']);
+      if ($csv_data['Ev_Prt_1_01_CnBio_Name']) {
+        update_post_meta($post_id, $this->prefix.'sponsor', $csv_data['Ev_Prt_1_01_CnBio_Name']);
       }
       
       // Only add price info if "free" isn't in description
-      if ($data['Ev_Note_1_02_Actual_Notes'] && !preg_match('/free/i',$data['Ev_Note_1_02_Actual_Notes'])) {
-        update_post_meta($post_id, $this->prefix.'cost', $data['Ev_Note_1_02_Actual_Notes']);
+      if ($csv_data['Ev_Note_1_02_Actual_Notes'] && !preg_match('/free/i',$csv_data['Ev_Note_1_02_Actual_Notes'])) {
+        update_post_meta($post_id, $this->prefix.'cost', $csv_data['Ev_Note_1_02_Actual_Notes']);
       }
 
       // Keep county data for giggles
-      if ($data['Ev_Prt_1_02_CnAdrPrf_County'])
-        update_post_meta($post_id, $this->prefix.'county', $data['Ev_Prt_1_02_CnAdrPrf_County']);
+      if ($csv_data['Ev_Prt_1_02_CnAdrPrf_County'])
+        update_post_meta($post_id, $this->prefix.'county', $csv_data['Ev_Prt_1_02_CnAdrPrf_County']);
 
       // Set times
-      $event_start = strtotime($data['Ev_Start_Date'] . ' ' . $data['Ev_Start_Time']);
-      if (!$data['Ev_End_Date']) {
+      $event_start = strtotime($csv_data['Ev_Start_Date'] . ' ' . $csv_data['Ev_Start_Time']);
+      if (!$csv_data['Ev_End_Date']) {
         $event_end = $event_start;
       } else {
-        $event_end = strtotime($data['Ev_End_Date'] . ' ' . $data['Ev_End_Time']);
+        $event_end = strtotime($csv_data['Ev_End_Date'] . ' ' . $csv_data['Ev_End_Time']);
       }
       update_post_meta($post_id, $this->prefix.'event_start', $event_start);
       update_post_meta($post_id, $this->prefix.'event_end', $event_end);
 
       // Venue and address
-      update_post_meta($post_id, $this->prefix.'venue', $data['Ev_Prt_1_02_CnBio_Name']);
+      update_post_meta($post_id, $this->prefix.'venue', $csv_data['Ev_Prt_1_02_CnBio_Name']);
       $address = [
-        'address-1' => $data['Ev_Prt_1_02_CnAdrPrf_Addrline1'],
-        'address-2' => $data['Ev_Prt_1_02_CnAdrPrf_Addrline2'],
-        'city' => $data['Ev_Prt_1_02_CnAdrPrf_City'],
-        'state' => $data['Ev_Prt_1_02_CnAdrPrf_State'],
-        'zip' => $data['Ev_Prt_1_02_CnAdrPrf_ZIP'],
+        'address-1' => $csv_data['Ev_Prt_1_02_CnAdrPrf_Addrline1'],
+        'address-2' => $csv_data['Ev_Prt_1_02_CnAdrPrf_Addrline2'],
+        'city' => $csv_data['Ev_Prt_1_02_CnAdrPrf_City'],
+        'state' => $csv_data['Ev_Prt_1_02_CnAdrPrf_State'],
+        'zip' => $csv_data['Ev_Prt_1_02_CnAdrPrf_ZIP'],
       ];
       update_post_meta($post_id, $this->prefix.'address', $address);
 
@@ -181,7 +187,7 @@ class EventCSVImporter {
       //   update_post_meta($post_id, $this->prefix.'registration_url', $registration_url);
 
       // Set focus area
-      // $this->set_focus_area($post_id, $data['focus_area']);
+      // $this->set_focus_area($post_id, $csv_data['focus_area']);
 
       // Trigger geolocation routines
       \Firebelly\PostTypes\Event\geocode_address($post_id);

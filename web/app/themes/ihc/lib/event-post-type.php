@@ -430,12 +430,17 @@ function get_event_details($post) {
     'registration_url' => get_post_meta($post->ID, '_cmb2_registration_url', true),
     'lat' => get_post_meta($post->ID, '_cmb2_lat', true),
     'lng' => get_post_meta($post->ID, '_cmb2_lng', true),
-    'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time()
+    'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time(),
   ];
   $event['start_time'] = date('g:iA', $event['event_start']);
-  $event['time_txt'] = $event['start_time'] . ((!empty($event['event_end']) && $event['event_end'] != $event['event_start']) ? '–' . date('g:iA', $event['event_end']) : '');
-  $event['archived'] = ($event['event_start'] < time());
-  $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt'];
+  if (!empty($event['event_end']) && $event['event_end'] != $event['event_start']) {
+    $event['time_txt'] = $event['start_time'] . '–' . date('g:iA', $event['event_end']);
+  } else {
+    $event['time_txt'] = $event['start_time'];
+  }
+  
+  $event['archived'] = ($event['event_end'] < time());
+  $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt']; // used in map pins
   $event['year'] = date('Y', $event['event_start']);
 
   $address = get_post_meta($post->ID, '_cmb2_address', true);
@@ -527,6 +532,26 @@ function import_csv_admin_form() {
       <input type="hidden" name="action" value="event_csv_upload">
       <p class="submit"><input type="submit" class="button" id="csv-submit" name="submit" value="Import"></p>
     </form>
+
+   <div class="import-notes">
+      <h3>Uses these fields from Raiser's Edge export:</h3>
+<pre>
+Ev_Start_Date
+Ev_End_Date
+Ev_Start_Time
+Ev_End_Time
+Ev_Note_1_01_Actual_Notes     (Body)
+Ev_Note_1_02_Actual_Notes     (Fee)
+Ev_Note_1_03_Actual_Notes     (Title)
+Ev_Prt_1_01_CnBio_Name        (Sponsor)
+Ev_Prt_1_02_CnBio_Name        (Location)
+Ev_Prt_1_02_CnAdrPrf_Addrline1
+Ev_Prt_1_02_CnAdrPrf_Addrline2
+Ev_Prt_1_02_CnAdrPrf_City
+Ev_Prt_1_02_CnAdrPrf_State
+Ev_Prt_1_02_CnAdrPrf_ZIP
+Ev_Prt_1_02_CnAdrPrf_County
+</pre>
   </div>
 <?php
 }
