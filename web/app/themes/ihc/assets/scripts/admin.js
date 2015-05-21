@@ -46,6 +46,25 @@ var IHC_admin = (function($) {
         });
       }
     }
+
+    // event date/time handlers
+    $('#_cmb2_event_start_date').change(function() {
+      if ($('#_cmb2_event_end_date').val()==='') {
+        $('#_cmb2_event_end_date').val($('#_cmb2_event_start_date').val());
+      } else {
+        var end = Date.parse($('#_cmb2_event_end_date').val());
+        var start = Date.parse($('#_cmb2_event_start_date').val());
+        if (end < start) {
+          $('#_cmb2_event_end_date').val($('#_cmb2_event_start_date').val());
+        }
+      }
+    });
+    $('#_cmb2_event_start_time').change(function() {
+      if ($('#_cmb2_event_end_time').val()==='') {
+        $('#_cmb2_event_end_time').val($('#_cmb2_event_start_time').val());
+      }
+    });
+
   }
 
   function _dragHover(e) {
