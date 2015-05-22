@@ -16,7 +16,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
       <h4 class="flag"><?= $content_banner_text ?></h4>
     <?php endif; ?>
 
-    <div class="grid">
+    <div class="grid bigclicky">
       <div class="flex-item one-half user-content">
         <?= get_the_block('Support Us Page Block 1') ?>
       </div>

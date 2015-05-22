@@ -9,6 +9,22 @@
       margin: 2px 2px 4px;
       padding: 30px 25px;
       background: $white;
+      @include tablet {
+        transition: all $transition-speed;
+        cursor: pointer;
+        &:hover {
+          color: #fff;
+          a,
+          h2,
+          p {
+            color: #fff;
+            border-bottom-color: $white;
+          }
+          .button {
+            border-color: $white;
+          }
+        }
+      }
 
       h2 {
         @include font-style1;

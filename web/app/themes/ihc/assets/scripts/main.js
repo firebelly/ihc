@@ -73,12 +73,13 @@ var IHC = (function($) {
   }
 
   function _initBigClicky() {
-    $(document).on('click', '.article-list article, .focus-list-large article', function(e) {
+    $(document).on('click', '.article-list article, .focus-list-large article, .bigclicky .flex-item', function(e) {
       if (!$(e.target).is('a')) {
         e.preventDefault();
-        var href = $(this).find('h1:first a').attr('href');
+        var link = $(this).find('h1:first a,h2:first a');
+        var href = link.attr('href');
         if (href) { 
-          if (e.metaKey) {
+          if (e.metaKey || link.attr('target')) {
             window.open(href);
           } else {
             location.href = href; 
