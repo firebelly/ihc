@@ -5,6 +5,7 @@
 
 class EventCSVImporter {
   var $defaults = array(
+      'Ev_Group'                       => null, // program
       'Ev_Start_Date'                  => null,
       'Ev_End_Date'                    => null,
       'Ev_Start_Time'                  => null,
@@ -20,6 +21,8 @@ class EventCSVImporter {
       'Ev_Prt_1_02_CnAdrPrf_State'     => null,
       'Ev_Prt_1_02_CnAdrPrf_ZIP'       => null,
       'Ev_Prt_1_02_CnAdrPrf_County'    => null,
+      'focus_area'                     => null,
+      'registration_url'               => null,
   );
 
   var $log = array();
