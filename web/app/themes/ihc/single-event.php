@@ -53,6 +53,9 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
           <?php else: ?>
             <?= $event->cost ?>
           <?php endif; ?>
+          <?php if ($event->registration_url): ?>
+            RSVP is required.
+          <?php endif; ?>
         </p>
         <ul class="actions">
           <?php if (!empty($event->registration_url)): ?>

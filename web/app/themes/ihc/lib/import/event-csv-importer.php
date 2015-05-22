@@ -24,6 +24,7 @@ class EventCSVImporter {
 
   var $log = array();
   var $focus_areas;
+  var $program_cache = array();
   var $prefix = '_cmb2_';
 
   /**
@@ -182,12 +183,17 @@ class EventCSVImporter {
       ];
       update_post_meta($post_id, $this->prefix.'address', $address);
 
-      // Todo: find how to build reg_url from CSV import
-      // if ($registration_url)
-      //   update_post_meta($post_id, $this->prefix.'registration_url', $registration_url);
+      // Find/set related program
+      if ($csv_data['Ev_Group'])
+        $this->set_program($post_id, $csv_data['Ev_Group']);
+
+      // Set Registration URL
+      if ($csv_data['registration_url'])
+        update_post_meta($post_id, $this->prefix.'registration_url', $csv_data['registration_url']);
 
       // Set focus area
-      // $this->set_focus_area($post_id, $csv_data['focus_area']);
+      if ($csv_data['focus_area'])
+        $this->set_focus_area($post_id, $csv_data['focus_area']);
 
       // Trigger geolocation routines
       \Firebelly\PostTypes\Event\geocode_address($post_id);
@@ -198,14 +204,26 @@ class EventCSVImporter {
     }
   }
 
-  // Assign Focus Area to Thought
-  function set_focus_area($post_id,$focus_area) {
+  // Assign Focus Area
+  function set_focus_area($post_id, $focus_area) {
     $cat_ids = array();
     foreach($this->focus_areas as $focus_area_obj) {
       if ($focus_area_obj->name == esc_html($focus_area))
         $cat_ids[] = (int)$focus_area_obj->term_id;
     }
     wp_set_object_terms($post_id, $cat_ids, 'focus_area');
+  }
+
+  // Find/set related program
+  function set_program($post_id, $program_title) {
+    if (array_key_exists($program_title, $this->program_cache)) {
+      update_post_meta($post_id, $this->prefix.'related_program', $this->program_cache[$program_title]);
+    } else {
+      if ($program = get_page_by_title($program_title, OBJECT, 'program')) {
+        $this->program_cache[$program_title] = $program->ID;
+        update_post_meta($post_id, $this->prefix.'related_program', $program->ID);
+      }
+    }
   }
 
 }

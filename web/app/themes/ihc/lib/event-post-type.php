@@ -536,15 +536,16 @@ function import_csv_admin_form() {
    <div class="import-notes">
       <h3>Uses these fields from Raiser's Edge export:</h3>
 <pre>
+Ev_Group                        (Related Program)
 Ev_Start_Date
 Ev_End_Date
 Ev_Start_Time
 Ev_End_Time
-Ev_Note_1_01_Actual_Notes     (Body)
-Ev_Note_1_02_Actual_Notes     (Fee)
-Ev_Note_1_03_Actual_Notes     (Title)
-Ev_Prt_1_01_CnBio_Name        (Sponsor)
-Ev_Prt_1_02_CnBio_Name        (Location)
+Ev_Note_1_01_Actual_Notes       (Body)
+Ev_Note_1_02_Actual_Notes       (Fee)
+Ev_Note_1_03_Actual_Notes       (Title)
+Ev_Prt_1_01_CnBio_Name          (Sponsor)
+Ev_Prt_1_02_CnBio_Name          (Location)
 Ev_Prt_1_02_CnAdrPrf_Addrline1
 Ev_Prt_1_02_CnAdrPrf_Addrline2
 Ev_Prt_1_02_CnAdrPrf_City
