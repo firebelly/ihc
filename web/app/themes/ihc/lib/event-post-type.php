@@ -204,7 +204,7 @@ function metaboxes( array $meta_boxes ) {
       ),
       array(
           'name'    => 'Registration URL',
-          'desc'    => 'If set, shows "Register for Event" link.',
+          'desc'    => 'If set, shows "Register for Event" link, and adds "RSVP is required." to the Cost text.',
           'id'      => $prefix . 'registration_url',
           'type'    => 'text_url',
       ),
