@@ -6,8 +6,7 @@
 var IHC_admin = (function($) {
 
   var _uploadFiles,
-      _uploadCount = 0,
-      _uploadTime = 0;
+      _uploadCount = 0;
 
   function _init() {
     // AJAX CSV import handling
@@ -37,7 +36,7 @@ var IHC_admin = (function($) {
           $('#csv-upload-form').find('.error,.updated').slideUp();
 
           // Reset stats
-          _uploadCount = _uploadTime = 0;
+          _uploadCount = 0;
 
           if (_uploadFiles && _uploadFiles.length > 0) {
             // Submit uploads and process CSV files
@@ -118,7 +117,7 @@ var IHC_admin = (function($) {
           } else {
             // If we're all done, hide progress bar, show stats, and reset the form
             $('.progress-bar').fadeOut('slow').removeClass('active');
-            $('<div class="updated">Success: ' + data.notice.join(' and ') + ' in ' + _uploadTime.toFixed(2) + ' seconds.</div>').insertBefore('#csv-upload-form fieldset');
+            $('<div class="updated">Success: ' + data.notice.join(' and ') + ' in ' + data.stats.exec_time + ' seconds.</div>').insertBefore('#csv-upload-form fieldset');
             _resetCSVUploadForm();
           }
         },
