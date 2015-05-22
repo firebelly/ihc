@@ -109,7 +109,7 @@ var IHC = (function($) {
       $('.search-form').addClass('active');
       $('.search-field').focus();
     });
-    $('.search-close').on('click', _hideSearch);
+    $('.search-form .close-button').on('click', _hideSearch);
   }
 
   function _hideSearch() {
@@ -307,6 +307,8 @@ var IHC = (function($) {
       e.preventDefault();
       $('.thought-of-the-day').addClass('submitting-thought');
     });
+    $('.thought-of-the-day .close-button').on('click', _cancelThoughtSubmit);
+
     // handle ajax submit of new thought
     $document.on('submit', 'form.new-thought-form', function(e) {
       e.preventDefault();

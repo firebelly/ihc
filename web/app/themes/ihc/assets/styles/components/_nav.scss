@@ -63,7 +63,7 @@
 .icon-search {
   font-size: 18px;
 }
-.search-close {
+.close-button {
   @include close-x;
   display: none;
   position: absolute;
@@ -72,6 +72,7 @@
   top: 0;
   left: -34px;
   @include tablet {
+    cursor: pointer;
     top: 4px;
   }
 }
@@ -236,7 +237,7 @@
   &.active {
     .search-field,
     .search-submit,
-    .search-close {
+    .close-button {
       display: inline-block;
     }
   }
