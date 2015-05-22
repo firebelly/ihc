@@ -22,6 +22,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
         <?php 
         while (have_posts()) : the_post();
           $news_post = $post;
+          $show_images = true;
           include(locate_template('templates/article-news.php'));
         endwhile; 
         ?>

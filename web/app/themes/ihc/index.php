@@ -10,10 +10,12 @@
 <?php while (have_posts()) : the_post(); ?>
 
   <?php 
+  $show_images = is_search();
+
   if ($post->post_type=='post'):
 
-      $news_post = $post;
-      include(locate_template('templates/article-news.php'));
+    $news_post = $post;
+    include(locate_template('templates/article-news.php'));
 
   elseif (preg_match('/(event)/',$post->post_type)):
 
