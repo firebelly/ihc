@@ -1,6 +1,6 @@
 // IHC - Firebelly 2015
 
-// good design for good reason for good namespace
+// GOOD Design for Good Reason for Good Namespace
 var IHC = (function($) {
 
   var screen_width = 0,
@@ -20,22 +20,18 @@ var IHC = (function($) {
       loadingTimer;
 
   function _init() {
-      // set screen size vars
+      // Set screen size vars
       _resize();
 
       $document = $(document);
       $content = $('main');
 
-      // fit them vids!
+      // Fit them vids!
       $content.fitVids();
 
-      // homepage
+      // Homepage
       if ($('.home.page').length) {
-        // duplicate thought of the day for mobile
-        var mobileThought = $('.thought-of-the-day').addClass('show-for-medium-up').clone();
-        mobileThought.removeClass('show-for-medium-up').addClass('hide-for-medium-up').appendTo('.content');
-
-        // homepage has a funky load-more in events that is part of masonry until clicked
+        // Homepage has a funky load-more in events that is part of masonry until clicked
         if (breakpoint_medium) {
           $('.event-cal .events-buttons').clone().addClass('masonry-me').appendTo('.event-cal .events');
         }
@@ -49,7 +45,7 @@ var IHC = (function($) {
       // Add class to sidebar image links to target with CSS
       $('.sidebar-content a:has(img)').addClass('img-link');
 
-      // init behavior for various sections
+      // Init behavior for various sections
       _initThoughtSubmit();
       _initSearch();
       _initNav();
@@ -59,7 +55,7 @@ var IHC = (function($) {
       _initLoadMore();
       _initBigClicky();
 
-      // esc handlers
+      // Esc handlers
       $(document).keyup(function(e) {
         if (e.keyCode === 27) {
           _hideSearch();
@@ -67,7 +63,7 @@ var IHC = (function($) {
         }
       });
 
-      // add span to accordion titles to style +/- icons
+      // Add span to accordion titles to style +/- icons
       $('.accordion-title').prepend('<span class="open-status"></span>');
 
   }
@@ -118,13 +114,13 @@ var IHC = (function($) {
   }
 
   function _initMap() {
-    if ($('#map').length) {
+    if ($('#map').length && (breakpoint_medium || $('body.single').length)) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
       map = L.mapbox.map('map', 'firebellydesign.0238ce0b', { zoomControl: false, attributionControl: false }).setView([41.843, -88.075], 11);
       
       mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 
-      // set custom icons
+      // Set custom icons
       mapFeatureLayer.on('layeradd', function(e) {
         var marker = e.layer,
           feature = marker.feature;
@@ -138,7 +134,7 @@ var IHC = (function($) {
   function _getMapPoints() {
     var $mapPoints = $('.map-point:not(.mapped)');
     if ($mapPoints.length) {
-      // any map-points on page? add to map
+      // Any map-points on page? add to map
       $mapPoints.each(function() {
         var $point = $(this).addClass('mapped');
         if ($point.data('lng')) {
@@ -162,21 +158,21 @@ var IHC = (function($) {
           });
         }
       });
-      // add the array of point objects
+      // Add the array of point objects
       mapFeatureLayer.setGeoJSON(mapGeoJSON);
-      // set bounds to markers
+      // Set bounds to markers
       if ($('#map').hasClass('large')) {
-        // larger map centers on IL
+        // Larger map centers on IL
         map.setView([41.7068, -88.3658], 9);
       } else {
-        // smaller map zooms in on single point
+        // Smaller map zooms in on single point
         map.fitBounds(mapFeatureLayer.getBounds());
         map.setZoom(6);
       }
     }
   }
 
-  // handles main nav
+  // Handles main nav
   function _initNav() {
     // SEO-useless nav toggler
     $('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>')
@@ -196,7 +192,7 @@ var IHC = (function($) {
   function _initSliders(){
     $('.slider').slick({
       slide: '.slide-item',
-      // autoplay: $('.home.page').length>0,
+      // Autoplay: $('.home.page').length>0,
       autoplaySpeed: 8000,
       speed: 800,
       appendArrows: $('.slide-wrap-inner'),
@@ -214,14 +210,14 @@ var IHC = (function($) {
       _showFaq($this.attr('href'), 1);
     });
     
-    // check if we're linking to #faq2 (not currently used)
+    // Check if we're linking to #faq2 (not currently used)
     if (location.hash !== '' && location.hash.match(/faq/)) {
       _showFaq(location.hash);
-      // scroll to FAQ section
+      // Scroll to FAQ section
       _scrollBody($('.faq'), 250, 0);
     }
     if ($('.faq-nav li.active').length === 0) {
-      // make first FAQ active if none selected
+      // Make first FAQ active if none selected
       _showFaq($('.faq-nav li:first a').attr('href'));
     }
   }
@@ -261,10 +257,10 @@ var IHC = (function($) {
       var more_container = $load_more.parents('section,main').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
 
-      // homepage has a funky load-more in events that is part of masonry until clicked
+      // Homepage has a funky load-more in events that is part of masonry until clicked
       if (breakpoint_medium && $('.home.page').length && $('.events .events-buttons').length) {
         var lm = $('.event-cal').addClass('loaded-more').find('.events .events-buttons');
-        // remove load-more from masonry and relayout
+        // Remove load-more from masonry and relayout
         $('.events').masonry('remove', lm);
         $('.events').masonry();
       }
@@ -293,7 +289,7 @@ var IHC = (function($) {
               _getMapPoints();
             }
 
-            // hide load more if last page
+            // Hide load more if last page
             if ($load_more.attr('data-total-pages') <= page + 1) {
                 $load_more.addClass('hide');
             }
@@ -309,7 +305,7 @@ var IHC = (function($) {
     });
     $('.thought-of-the-day .close-button').on('click', _cancelThoughtSubmit);
 
-    // handle ajax submit of new thought
+    // Handle ajax submit of new thought
     $document.on('submit', 'form.new-thought-form', function(e) {
       e.preventDefault();
       var $form = $(this);
@@ -334,17 +330,17 @@ var IHC = (function($) {
     $('.thought-of-the-day').removeClass('submitting-thought');
   }
 
-  // track ajax pages in Analytics
+  // Track ajax pages in Analytics
   function _trackPage() {
     if (typeof ga !== 'undefined') { ga('send', 'pageview', document.location.href); }
   }
 
-  // track events in Analytics
+  // Track events in Analytics
   function _trackEvent(category, action) {
     if (typeof ga !== 'undefined') { ga('send', 'event', category, action); }
   }
 
-  // called in quick succession as window is resized
+  // Called in quick succession as window is resized
   function _resize() {
     screenWidth = document.documentElement.clientWidth;
     breakpoint_small = (screenWidth > 480);
@@ -353,14 +349,14 @@ var IHC = (function($) {
     breakpoint_huge = (screenWidth > 3000);
   }
 
-  // called periodically for more intensive resize tasks
+  // Called periodically for more intensive resize tasks
   function _delayed_resize() {
-    // if (!breakpoint_medium) {
+    // If (!breakpoint_medium) {
     //   $('.masonry').masonry('destroy');
     // } 
   }
 
-  // public functions
+  // Public functions
   return {
     init: _init,
     resize: _resize,
@@ -372,30 +368,16 @@ var IHC = (function($) {
 
 })(jQuery);
 
-// fire up the mothership
+// Fire up the mothership
 jQuery(document).ready(IHC.init);
-// zig-zag the mothership
+// Zig-zag the mothership
 jQuery(window).resize(IHC.resize);
 
 jQuery(window).resize(function($){
-    // instant resize functions
+    // Instant resize functions
     IHC.resize();
 
-    // delayed resize for more intensive tasks
+    // Delayed resize for more intensive tasks
     if(IHC.delayed_resize_timer) { clearTimeout(IHC.delayed_resize_timer); }
     IHC.delayed_resize_timer = setTimeout(IHC.delayed_resize, 150);
 });
-
-
-(function($){
-  // internal helper (from Ajaxify)
-  $.expr[':'].internal = function(obj, index, meta, stack){
-    var
-      $this = $(obj),
-      url = $this.attr('href')||'',
-      isInternalLink,
-      rootUrl = History.getRootUrl();
-    isInternalLink = url.substring(0,rootUrl.length) === rootUrl || url.indexOf(':') === -1;
-    return isInternalLink;
-  };
-})(jQuery);

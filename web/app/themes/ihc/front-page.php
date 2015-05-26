@@ -19,8 +19,6 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
   </div>
 </header>
 
-<?php include(locate_template('templates/thought-of-the-day.php')); ?>
-
 <section class="focus-areas">
   <h4 class="flag">Our Focus Areas</h4>
   <ul class="focus-list">
@@ -63,4 +61,8 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
     <div class="load-more" data-page-at="1" data-per-page="4" data-total-pages="<?= ceil($total_news/4) ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
     <p class="view-all"><a href="/news/" class="button">All Articles</a></p>
   </div>
+</section>
+
+<section class="thought">
+  <?php include(locate_template('templates/thought-of-the-day.php')); ?>
 </section>

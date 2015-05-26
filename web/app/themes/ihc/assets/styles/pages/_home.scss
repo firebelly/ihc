@@ -20,7 +20,6 @@
     min-width: 170px;
   }
   .thought-of-the-day {
-    display: none;
     @include tablet {
       display: block;
       position: absolute;
@@ -33,7 +32,7 @@
       @include tablet {
         width: #{$column-width * 7};
         left: #{$column-width * 16};
-        margin-left: 1.09%; // 24/22
+        margin-left: 1.09%; // 24 col / 22 col
       }
     }
   }
@@ -128,6 +127,13 @@
 
     .load-more {
       margin: 20px 0 10px;
+    }
+  }
+
+  section.thought {
+    margin: 0 #{$column-width * 1} 80px;
+    @include tablet {
+      margin: 0;
     }
   }
   

@@ -166,24 +166,22 @@ function get_thought_of_the_day() {
 
   $thought_posts = get_posts($args);
   if (!$thought_posts) return false;
-  $output = '<div class="thoughts">';
   foreach ($thought_posts as $post):
     $body = apply_filters('the_content', $post->post_content);
     $author = get_post_meta( $post->ID, '_cmb2_author', true );
     
     if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
       $author .= '<br><a href="'.get_term_link($focus).'">'.$focus->name.'</a>';
-    else 
+    else
       $author .= '<br>Humanities';
 
-    $output .= <<<HTML
-     <article class="thought">
+    $output = <<<HTML
+     <article>
        <blockquote>{$body}</blockquote>
        <cite>{$author}</cite>
      </article>
 HTML;
   endforeach;
-  $output .= '</div>';
   return $output;
 }
 
