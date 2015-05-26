@@ -8,8 +8,8 @@ $filter_focus_area = get_query_var('filter_focus_area', '');
 $past_events = get_query_var('past_events', 0);
 $post_type = is_post_type_archive('event') ? 'event' : 'post';
 ?>
-  <form class="filters grid" action="/<?= $post_type == 'event' ? 'events' : 'news' ?>/" method="get">
-    <div class="program-topic flex-item flex-40">Program: 
+  <form class="filters" action="/<?= $post_type == 'event' ? 'events' : 'news' ?>/" method="get">
+    <div class="program-topic">Program: 
       <?php if ($post_type==='event'): ?>
         <input type="hidden" name="past_events" value="<?= $past_events ?>">
       <?php endif ?>
@@ -48,7 +48,7 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
         </select>
       </div>
     </div>
-    <div class="focus-area-topic flex-item flex-40">Focus Area:
+    <div class="focus-area-topic">Focus Area:
       <div class="select-wrapper">
         <select name="filter_focus_area">
           <option value="">ALL</option>
@@ -59,7 +59,7 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
         </select>
       </div>
     </div>
-    <div class="flex-item flex-20">
+    <div class="actions">
       <button class="button" type="submit">Filter</button>
     </div>
   </form>

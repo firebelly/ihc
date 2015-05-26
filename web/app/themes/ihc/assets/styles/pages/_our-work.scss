@@ -37,8 +37,11 @@
     .user-content {
       position: relative;
       background: $white;
-      padding: 30px 25px 10px;
+      padding: 30px #{$column-width/2} 10px;
       margin-bottom: 60px;
+      @include tablet {
+        padding: 30px #{$column-width/2} 10px;
+      }
     }
   }
 }
@@ -69,13 +72,14 @@
       transition: background $transition-speed, color $transition-speed;
       position: relative;
       background: $white;
-      padding: 40px 50px 50px 25px;
+      padding: 40px 25px 50px;
 
       p {
         margin-bottom: 30px;
       }
 
       @include tablet {
+        padding: 40px #{$column-width/2 * 22/15} 50px #{$column-width/2 * 22/15}; // container element is 15col in 22col grid
         float: left;
         width: 63.33%;
       }
@@ -83,7 +87,7 @@
 
     .related {
       transition: background $transition-speed, color $transition-speed;
-      padding: 40px 50px 25px 25px;
+      padding: 40px 25px 25px;
       &::after {
         transition: background $transition-speed, color $transition-speed;
         content: '';
@@ -96,6 +100,7 @@
         bottom: 0;
       }
       @include tablet {
+        padding: 40px #{$column-width/2 * 22/15} 25px #{$column-width/2 * 22/15};
         width: 36.67%;
         float: left;
       }
@@ -173,6 +178,7 @@
         margin: 10px 0 25px;
       }
       @include tablet {
+        padding: 30px #{$column-width/2 * 22/8};
         margin-right: 4px;
         &:hover {
           p,

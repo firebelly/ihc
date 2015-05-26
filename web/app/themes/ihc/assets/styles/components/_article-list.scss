@@ -147,7 +147,10 @@
     }
 
     .article-content-wrap {
-      padding: 30px 25px 30px 25px;
+      padding: 30px 25px;
+      @include tablet {
+        padding: 30px #{$column-width/2 * 22/5};
+      }
 
       .article-excerpt p {
         color:$dk-blue;

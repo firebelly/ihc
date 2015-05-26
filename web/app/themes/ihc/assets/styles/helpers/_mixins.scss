@@ -15,7 +15,6 @@
 @mixin font-style3 {
   font: italic 700 27px/30px $serif;
   @extend .smooth;
-  color: $white;
 }
 
 // Clearfix

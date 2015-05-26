@@ -10,10 +10,6 @@
     right: 20px;
   }
 
-  .thought {
-    // width: 83.33%;
-  }
-
   blockquote {
     margin: 40px 0 10px;
     @extend .smooth;
@@ -52,14 +48,15 @@
     }
     background: $white;
     @include tablet {
-      // margin-right: -22%;
+      margin-right: #{-$column-width * 22/5 - 2%}; // container element is 5col in 22col grid, extra 2% is for outer margin
+      margin-left:  -$column-width/2 * 22/5;
+      padding: #{$column-width/2 * 22/5};
     }
     .thought-wrapper {
       display: none;
     }
     .submit-thought-wrapper {
       display: block;
-      padding: 30px 50px 50px;
     }
     .submit-thought {
       color: $dk-blue;

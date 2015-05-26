@@ -7,7 +7,7 @@
     .flex-item {
       min-height: 280px;
       margin: 2px 2px 4px;
-      padding: 30px 25px;
+      padding: 30px #{$column-width/2 * 22/15};
       background: $white;
       @include tablet {
         transition: all $transition-speed;
