@@ -19,7 +19,7 @@
   .button {
     min-width: 170px;
   }
-  .thought-of-the-day {
+  .thought-of-the-day-wrapper {
     margin: 0 #{$column-width * 1} 80px;
 
     @include tablet {
@@ -30,15 +30,6 @@
       left: #{$column-width * 17};
     }
 
-    &.submitting-thought {
-      @include tablet {
-        margin: 0;
-        padding: #{$column-width/2};
-        width: #{$column-width * 7};
-        left: #{$column-width * 16};
-        margin-left: 1.09%; // 24 col / 22 col
-      }
-    }
   }
 
   // Focus areas
