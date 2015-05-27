@@ -41,9 +41,7 @@
     font-size: $small;
     font-style: normal;
   }
-  @include tablet {
-    min-height: 300px;
-  }
+
   // Submitting thought, show form
   &.submitting-thought {
     .close-button {
@@ -57,10 +55,10 @@
       padding: #{$column-width/2 * 22/5};
     }
     .thought-wrapper {
-      // display: none;
+      display: none;
     }
     .submit-thought-wrapper {
-      // display: block;
+      display: block;
     }
     .submit-thought {
       color: $dk-blue;

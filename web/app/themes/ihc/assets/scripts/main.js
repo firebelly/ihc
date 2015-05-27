@@ -39,7 +39,7 @@ var IHC = (function($) {
 
       $('<li class="hide-for-medium-up"><a href="#">Disclaimer</a></li>').prependTo('#menu-footer-links').on('click', function(e) {
         e.preventDefault();
-        $('.disclaimer').slideDown();
+        $('.disclaimer').velocity('slideDown');
       });
 
       // Add class to sidebar image links to target with CSS
@@ -257,15 +257,11 @@ var IHC = (function($) {
       if ($('.thought-of-the-day').hasClass('submitting-thought')) {
         _cancelThoughtSubmit();
       } else {
-        $('.thought-wrapper').velocity({opacity: 0}, { duration: 250, display: 'none',
+        $('.thought-of-the-day').velocity({opacity: 0, left: "-=50"}, { easing: 'easeInSine', duration: 250,
           complete: function(e) {
-            $('.thought-of-the-day').addClass('submitting-thought');
-            $('.submit-thought-wrapper').velocity({ opacity: 1 }, { duration: 250, display: 'block', 
-              complete: function() { 
-              }
-            });
-           } 
-       });
+            $('.thought-of-the-day').css('left','+=100').addClass('submitting-thought').velocity({opacity: 1, left: "-=50"}, {  easing: 'easeOutSine', duration: 250 });
+          }
+        });
       }
     });
     $('.thought-of-the-day .close-button').on('click', _cancelThoughtSubmit);
@@ -292,12 +288,13 @@ var IHC = (function($) {
   }
 
   function _cancelThoughtSubmit() {
-    $('.submit-thought-wrapper').velocity({ opacity: 0 }, { duration: 250, display: 'none',
-      complete: function() {
-        $('.thought-of-the-day').removeClass('submitting-thought');
-        $('.thought-wrapper').velocity({opacity: 1}, { duration: 250, display: 'block' });
-      }
-    });
+    if ($('.thought-of-the-day').hasClass('submitting-thought')) {
+      $('.thought-of-the-day').velocity({opacity: 0, left: "+=50"}, { easing: 'easeInSine', duration: 250,
+        complete: function(e) {
+          $('.thought-of-the-day').css('left','-=100').removeClass('submitting-thought').velocity({opacity: 1, left: "+=50"}, {  easing: 'easeOutSine', duration: 250 });
+        }
+      });
+    }
   }
 
   // Track ajax pages in Analytics
