@@ -63,6 +63,4 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
   </div>
 </section>
 
-<section class="thought">
-  <?php include(locate_template('templates/thought-of-the-day.php')); ?>
-</section>
+<?php include(locate_template('templates/thought-of-the-day.php')); ?>

@@ -20,8 +20,10 @@
     min-width: 170px;
   }
   .thought-of-the-day {
+    margin: 0 #{$column-width * 1} 80px;
+
     @include tablet {
-      display: block;
+      margin: 0;
       position: absolute;
       top: 330px;
       width: #{$column-width * 5};
@@ -30,6 +32,8 @@
 
     &.submitting-thought {
       @include tablet {
+        margin: 0;
+        padding: #{$column-width/2};
         width: #{$column-width * 7};
         left: #{$column-width * 16};
         margin-left: 1.09%; // 24 col / 22 col
@@ -127,13 +131,6 @@
 
     .load-more {
       margin: 20px 0 10px;
-    }
-  }
-
-  section.thought {
-    margin: 0 #{$column-width * 1} 80px;
-    @include tablet {
-      margin: 0;
     }
   }
   

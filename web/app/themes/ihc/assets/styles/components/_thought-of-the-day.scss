@@ -1,4 +1,5 @@
 // Thought of the Day
+
 .thought-of-the-day {
   @include clearfix;
   position: relative;
@@ -40,12 +41,15 @@
     font-size: $small;
     font-style: normal;
   }
-
+  @include tablet {
+    min-height: 300px;
+  }
   // Submitting thought, show form
   &.submitting-thought {
     .close-button {
       display: block;
     }
+
     background: $white;
     @include tablet {
       margin-right: #{-$column-width * 22/5 - 2%}; // container element is 5col in 22col grid, extra 2% is for outer margin
@@ -53,10 +57,10 @@
       padding: #{$column-width/2 * 22/5};
     }
     .thought-wrapper {
-      display: none;
+      // display: none;
     }
     .submit-thought-wrapper {
-      display: block;
+      // display: block;
     }
     .submit-thought {
       color: $dk-blue;
@@ -89,8 +93,5 @@
       margin: 0 0 10px;
       background: $bg-pink;
     }
-  }
-  @include phone {
-    display: none;
   }
 }

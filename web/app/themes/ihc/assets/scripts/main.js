@@ -50,7 +50,6 @@ var IHC = (function($) {
       _initSearch();
       _initNav();
       _initMap();
-      _initSliders();
       _initMasonry();
       _initLoadMore();
       _initBigClicky();
@@ -189,52 +188,6 @@ var IHC = (function($) {
     _hideSearch();
   }
 
-  function _initSliders(){
-    $('.slider').slick({
-      slide: '.slide-item',
-      // Autoplay: $('.home.page').length>0,
-      autoplaySpeed: 8000,
-      speed: 800,
-      appendArrows: $('.slide-wrap-inner'),
-      prevArrow:  '<svg class="slick-prev icon icon-arrow-left" role="img"><use xlink:href="#icon-arrow-left"></use></svg>',
-      nextArrow: '<svg class="slick-next icon icon-arrow-right" role="img"><use xlink:href="#icon-arrow-right"></use></svg>'
-    });
-  }
-
-  function _initFaq(){
-    $('.faq-answer').velocity('slideUp', { duration: 0 });
-    $document.on('click', '.faq-nav a', function(e) {
-      e.preventDefault();
-      var $this = $(this);
-      if ($this.closest('li').hasClass('active')) { return false; }
-      _showFaq($this.attr('href'), 1);
-    });
-    
-    // Check if we're linking to #faq2 (not currently used)
-    if (location.hash !== '' && location.hash.match(/faq/)) {
-      _showFaq(location.hash);
-      // Scroll to FAQ section
-      _scrollBody($('.faq'), 250, 0);
-    }
-    if ($('.faq-nav li.active').length === 0) {
-      // Make first FAQ active if none selected
-      _showFaq($('.faq-nav li:first a').attr('href'));
-    }
-  }
-
-  function _showFaq(faq, update_url) {
-    $('.faq-nav li').removeClass('active');
-    $('.faq-nav li a[href="'+faq+'"]').closest('li').addClass('active');
-
-    var faq_answer = $(faq + '.faq-answer');
-
-    $('.faq-answer.active').velocity("slideUp", { duration: 150 });
-    faq_answer.addClass('active').velocity("slideDown", { delay: 200, duration: 400 });
-    if (typeof update_url !== 'undefined') {
-      History.replaceState({}, null, faq);
-    }
-  }
-
   function _initMasonry(){
     if (breakpoint_medium) {
       $('.masonry').masonry({
@@ -301,7 +254,19 @@ var IHC = (function($) {
   function _initThoughtSubmit() {
     $document.on('click', '.submit-thought a', function(e) {
       e.preventDefault();
-      $('.thought-of-the-day').addClass('submitting-thought');
+      if ($('.thought-of-the-day').hasClass('submitting-thought')) {
+        _cancelThoughtSubmit();
+      } else {
+        $('.thought-wrapper').velocity({opacity: 0}, { duration: 250, display: 'none',
+          complete: function(e) {
+            $('.thought-of-the-day').addClass('submitting-thought');
+            $('.submit-thought-wrapper').velocity({ opacity: 1 }, { duration: 250, display: 'block', 
+              complete: function() { 
+              }
+            });
+           } 
+       });
+      }
     });
     $('.thought-of-the-day .close-button').on('click', _cancelThoughtSubmit);
 
@@ -327,7 +292,12 @@ var IHC = (function($) {
   }
 
   function _cancelThoughtSubmit() {
-    $('.thought-of-the-day').removeClass('submitting-thought');
+    $('.submit-thought-wrapper').velocity({ opacity: 0 }, { duration: 250, display: 'none',
+      complete: function() {
+        $('.thought-of-the-day').removeClass('submitting-thought');
+        $('.thought-wrapper').velocity({opacity: 1}, { duration: 250, display: 'block' });
+      }
+    });
   }
 
   // Track ajax pages in Analytics
