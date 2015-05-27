@@ -52,33 +52,8 @@
   }
 }
 
-.search-toggle {
-  padding: 5px;
-  position: absolute;
-  top: 2px;
-  left: 0;
-  margin: 0 0 0 -4px;
-  cursor: pointer;
-}
 .icon-search {
   font-size: 18px;
-}
-.close-button {
-  @include close-x;
-  display: none;
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 0;
-  left: -34px;
-  @include tablet {
-    cursor: pointer;
-    top: 4px;
-  }
-}
-
-.search-open .icon-search {
-  display: none;
 }
 
 // Main site nav
@@ -87,15 +62,31 @@
   padding:0;
 
   @media only screen and (max-width: 768px) {
+    display: block;
+    position: fixed;
+    transition: all $transition-speed;
+    transform: translateY(-100%);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+    padding: 40px $column-width;
     &.active {
+      transform: translateY(0);
+      .close-button {
+        display: block;
+        opacity: 1;
+        left: 85%;
+        top: 17px;
+      }
+    }
+    .search-form {
+      margin: 10px 0 40px;
       display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 5;
-      padding: 40px $column-width;
+      .search-field {
+        width: 90%;
+      }
     }
   }
 
@@ -151,9 +142,13 @@
   position: absolute;
   left: 0;
   width: 20px;
-  top: 37px;
+  height: 14px;
+  top: 24px;
   padding: 6px 0;
   z-index: 10;
+  @include tablet {
+    display:none;
+  }
 
   &::before, &::after {
     transition: all .1s .25s;
@@ -164,7 +159,6 @@
     height: 2px;
     background: $dk-blue;
   } 
-
   &::before {
     top: 0;
     transform-origin: top left;
@@ -173,50 +167,40 @@
     bottom: 0;
     transform-origin: bottom left;
   }
-
   .menu-bar {
     width: 20px;
     height: 2px;
     background: $dk-blue;
   }
-  
-  @include tablet {
-    display:none;
-  }
-
   &.menu-open {
-    top: 40px;
-    left: $column-width * 20;
-
-    .menu-bar {
-      display: none;
-    }
-
-    &::before {
-      top: -3px;
-      transform: rotate(45deg);
-    }
-    &::after{
-      transform: rotate(-45deg);
-    }
+    display: none;
+    // top: 40px;
+    // left: $column-width * 20;
   }
-
 }
 
 .search-form {
   height: 44px;
-
-  .search-field {
-    display: none;
-    @include font-style3;
-    @include tablet {
-      width: 400px;
-      float: left;
+  display: none;
+  @include tablet {
+    display: block;
+    &.mobile-search {
+      display: none;
     }
-    color: $dk-blue;
+  }
+
+  .search-field,
+  .search-submit {
     background: none;
     border: none;
     outline: none;
+    color: $dk-blue;
+    padding: 0;
+  }
+  .search-field {
+    @include font-style3;
+    width: 0;
+    transition: all $transition-speed;
 
     &::placeholder {
       color: rgba($dk-blue,.5);
@@ -225,20 +209,28 @@
   }
 
   .search-submit {
-    display: none;
-    color: $dk-blue;
-    background: none;
-    border: none;
-    padding: 0;
+    margin-left: -10px;
     width: 30px;
     height: 30px;
   }
+  @include tablet {
+    .close-button {
+      display: block;
+      opacity: 0;
+      left: -64px;
+      transition: all $transition-speed;
+    }
+  }
 
   &.active {
-    .search-field,
-    .search-submit,
-    .close-button {
-      display: inline-block;
+    .search-field {
+      width: 400px;
+    }
+    @include tablet {
+      .close-button {
+        opacity: 1;
+        left: -34px;
+      }
     }
   }
 }

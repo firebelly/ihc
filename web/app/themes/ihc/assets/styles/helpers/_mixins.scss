@@ -64,22 +64,3 @@
     @content;
   }
 }
-
-@mixin close-x {
-  &:before, 
-  &:after {
-    content:'';
-    position:absolute;
-    top: 15px;
-    left: 4px;
-    width: 20px;
-    height: 2px;
-    background: $dk-blue;
-  }
-  &:before {
-    transform: rotate(45deg);
-  }
-  &:after {
-    transform: rotate(-45deg);
-  }
-}

@@ -47,8 +47,8 @@ var IHC = (function($) {
 
       // Init behavior for various sections
       _initThoughtSubmit();
-      _initSearch();
       _initNav();
+      _initSearch();
       _initMap();
       _initMasonry();
       _initLoadMore();
@@ -59,6 +59,7 @@ var IHC = (function($) {
         if (e.keyCode === 27) {
           _hideSearch();
           _cancelThoughtSubmit();
+          _hideMobileNav();
         }
       });
 
@@ -98,17 +99,22 @@ var IHC = (function($) {
   } 
 
   function _initSearch() {
-    $('.search-toggle').on('click', function (e) {
-      e.preventDefault();
-      $('.search-toggle').addClass('search-open');
-      $('.search-form').addClass('active');
-      $('.search-field').focus();
+    $('.search-form:not(.mobile-search) .search-submit').on('click', function (e) {
+      if ($('.search-form').hasClass('active')) {
+
+      } else {
+        e.preventDefault();
+        $('.search-form').addClass('active');
+        $('.search-field').focus();
+      }
     });
-    $('.search-form .close-button').on('click', _hideSearch);
+    $('.search-form .close-button').on('click', function() {
+      _hideSearch();
+      _hideMobileNav();
+    });
   }
 
   function _hideSearch() {
-    $('.search-toggle').removeClass('search-open');
     $('.search-form').removeClass('active');
   }
 
@@ -174,25 +180,30 @@ var IHC = (function($) {
   // Handles main nav
   function _initNav() {
     // SEO-useless nav toggler
-    $('<div class="menu-toggle"><div class="menu-bar"><span class="viz-hide">Menu</span></div></div>')
-      .insertAfter('.search-toggle')
+    $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
+      .prependTo('header.banner')
       .on('click', function(e) {
-        e.preventDefault();
-        _toggleMobileMenu();
+        _showMobileNav();
       });
+    var mobileSearch = $('.search-form').clone();
+    mobileSearch.addClass('mobile-search').prependTo('.site-nav');
   }
 
-  function _toggleMobileMenu() {
-    $('.menu-toggle').toggleClass('menu-open');
-    $('.site-nav').toggleClass('active');
-    _hideSearch();
+  function _showMobileNav() {
+    $('.menu-toggle').addClass('menu-open');
+    $('.site-nav').addClass('active');
+  }
+
+  function _hideMobileNav() {
+    $('.menu-toggle').removeClass('menu-open');
+    $('.site-nav').removeClass('active');
   }
 
   function _initMasonry(){
     if (breakpoint_medium) {
       $('.masonry').masonry({
         itemSelector: 'article,.masonry-me',
-        transitionDuration: '.3s'
+        transitionDuration: '.35s'
       });
     }
   }
@@ -257,9 +268,9 @@ var IHC = (function($) {
       if ($('.thought-of-the-day').hasClass('submitting-thought')) {
         _cancelThoughtSubmit();
       } else {
-        $('.thought-of-the-day').velocity({opacity: 0, left: -50}, { easing: 'easeInSine', duration: 250,
+        $('.thought-of-the-day').velocity({opacity: 0, left: -50}, { easing: 'easeInSine', duration: 150,
           complete: function(e) {
-            $('.thought-of-the-day').css('left',50).addClass('submitting-thought').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 250 });
+            $('.thought-of-the-day').css('left',50).addClass('submitting-thought').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 150 });
           }
         });
       }
@@ -289,9 +300,9 @@ var IHC = (function($) {
 
   function _cancelThoughtSubmit() {
     if ($('.thought-of-the-day').hasClass('submitting-thought')) {
-      $('.thought-of-the-day').velocity({opacity: 0, left: 50}, { easing: 'easeInSine', duration: 250,
+      $('.thought-of-the-day').velocity({opacity: 0, left: 50}, { easing: 'easeInSine', duration: 150,
         complete: function(e) {
-          $('.thought-of-the-day').css('left',-50).removeClass('submitting-thought').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 250 });
+          $('.thought-of-the-day').css('left',-50).removeClass('submitting-thought').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 150 });
         }
       });
     }
