@@ -291,7 +291,7 @@ var IHC = (function($) {
     if ($('.thought-of-the-day').hasClass('submitting-thought')) {
       $('.thought-of-the-day').velocity({opacity: 0, left: 50}, { easing: 'easeInSine', duration: 250,
         complete: function(e) {
-          $('.thought-of-the-day').removeClass('submitting-thought').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 250 });
+          $('.thought-of-the-day').css('left',-50).removeClass('submitting-thought').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 250 });
         }
       });
     }
