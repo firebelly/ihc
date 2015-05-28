@@ -35,6 +35,14 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       border-bottom-color: $bg-color;
     }
 
+    // TOD
+    .thought-of-the-day {
+      input[type=text],
+      select {
+        background: $bg-color;
+      }
+    }
+
     // Button hovers
     @include tablet {
       .button:hover {

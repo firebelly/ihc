@@ -42,12 +42,36 @@
     font-style: normal;
   }
 
+  textarea {
+    @include font-style3;
+    width: 100%;
+    height: 140px;
+    background: none;
+    border: none;
+    color: $dk-blue;
+    outline: none;
+    margin-bottom: 10px;
+    resize: none;
+  }
+  input[type=text] {
+    border: none;
+    outline: none;
+  }
+  input[type=text],
+  select {
+    @include font-style1;
+    color: $dk-blue;
+    padding: 6px 10px;
+    line-height: 30px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    width: 100%;
+    margin: 0 0 10px;
+    background: $bg-pink;
+  }
+
   // Submitting thought, show form
   &.submitting-thought {
-    .close-button {
-      display: block;
-    }
-
     background: $white;
     @include tablet {
       margin-right: #{-$column-width * 22/5 - 2%}; // container element is 5col in 22col grid, extra 2% is for outer margin
@@ -57,39 +81,9 @@
     .thought-wrapper {
       display: none;
     }
+    .close-button,
     .submit-thought-wrapper {
       display: block;
-    }
-    .submit-thought {
-      color: $dk-blue;
-    }
-    
-    textarea {
-      @include font-style3;
-      width: 100%;
-      height: 140px;
-      background: none;
-      border: none;
-      color: $dk-blue;
-      outline: none;
-      margin-bottom: 10px;
-      resize: none;
-    }
-    input[type=text] {
-      border: none;
-      outline: none;
-    }
-    input[type=text],
-    select {
-      @include font-style1;
-      color: $dk-blue;
-      padding: 6px 10px;
-      line-height: 30px;
-      padding: 0 10px;
-      text-transform: uppercase;
-      width: 100%;
-      margin: 0 0 10px;
-      background: $bg-pink;
     }
   }
 }
