@@ -12,10 +12,12 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
 ?>
 
 <header class="page-header with-image">
-  <div class="container"<?= $header_bg ?>>
-    <h4 class="flag"><?= $header_banner_text ?></h4>
-    <?= $header_text ?>
-    <p class="accent"><?= $secondary_header_text ?></p>
+  <div class="container">
+    <div class="image-wrap"<?= $header_bg ?>>
+      <h4 class="flag"><?= $header_banner_text ?></h4>
+      <?= $header_text ?>
+      <p class="accent"><?= $secondary_header_text ?></p>
+    </div>
   </div>
 </header>
 

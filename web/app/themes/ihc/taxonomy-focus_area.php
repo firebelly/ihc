@@ -19,11 +19,13 @@ $with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header
 <div class="content-wrap <?= $with_image_class ?>">
 
   <header class="page-header <?= $with_image_class ?> <?= $with_secondary_header_class ?>">
-    <div class="container" <?= $header_bg ?>>
-      <h4 class="flag"><?= $focus_area->name ?></h4>
+    <div class="container">
+      <div class="image-wrap"<?= $header_bg ?>>
+        <h4 class="flag"><?= $focus_area->name ?></h4>
 
-      <div class="header-text">
-        <h1><?= $header_text ?></h1>
+        <div class="header-text">
+          <h1><?= $header_text ?></h1>
+        </div>
       </div>
     </div>
     <?php if ($secondary_header_text): ?>

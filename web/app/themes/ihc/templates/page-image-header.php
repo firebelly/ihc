@@ -19,15 +19,17 @@ if ($secondary_header_text)
 ?>
 
 <header class="page-header <?= $header_class ?>">
-  <div class="container" <?= $header_bg ?>>
-    <?php if ($header_banner_text): ?>
-    <h4 class="flag"><?= $header_banner_text ?></h4>
-    <?php endif; ?>
+  <div class="container">
+    <div class="image-wrap"<?= $header_bg ?>>
+      <?php if ($header_banner_text): ?>
+      <h4 class="flag"><?= $header_banner_text ?></h4>
+      <?php endif; ?>
 
-    <?php get_template_part('templates/share'); ?>
+      <?php get_template_part('templates/share'); ?>
 
-    <div class="header-text">
-      <?= $header_text ?>
+      <div class="header-text">
+        <?= $header_text ?>
+      </div>
     </div>
   </div>
   <?php if ($secondary_header_text): ?>
