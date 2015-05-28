@@ -32,13 +32,12 @@
     margin: 10px 0;
     @include tablet {
       float: left;
-      width: #{$column-width * 6 * 22/15};
+      margin-right: 30px;
     }
   }
   .actions {
     @include tablet {
-      margin: 0;
-      width: #{$column-width * 3 * 22/15};
+      margin-top: 0;
       float: right;
     }
   }
