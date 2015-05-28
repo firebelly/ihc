@@ -7,10 +7,11 @@
   padding: 7px 10px 5px;
   top: 0;
   right: 0;
-  color: $dk-blue;
+  color: $white;
   text-align: center;
   @include font-style1;
   -webkit-font-smoothing: antialiased;
+  transition: color $transition-speed;
 }
 
 .article-tags {
@@ -22,6 +23,7 @@
 // Event dates
 .article-date.flagged {
   width: 50px;
+  color: $dk-blue;
   &::after {
     top: 100%;
     right: 0;
@@ -120,6 +122,9 @@
       
       .article-content:hover {
         background: $dk-blue;
+        .article-date {
+          color: $dk-blue;
+        }
         p,
         a {
           color: $white !important;
