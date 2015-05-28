@@ -12,6 +12,7 @@ if ($header_image) {
   $header_bg = \Firebelly\Media\get_header_bg($header_image, $focus_area->term_id);
 }
 $header_text = $focus_area->description;
+$secondary_header_text = Taxonomy_MetaData::get(get_query_var('taxonomy'), $focus_area->term_id, 'secondary_header_text');
 ?>
 
 <div class="content-wrap <?= $with_image_class ?>">
@@ -24,6 +25,9 @@ $header_text = $focus_area->description;
         <h1><?= $header_text ?></h1>
       </div>
     </div>
+    <?php if ($secondary_header_text): ?>
+      <div class="secondary-header-text"><?= $secondary_header_text ?></div>
+    <?php endif; ?>
   </header>
 
   <main>

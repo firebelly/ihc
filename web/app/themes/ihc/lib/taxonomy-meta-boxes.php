@@ -13,13 +13,18 @@ function cmb2_taxonomy_meta_initiate() {
     'id'         => 'cat_options',
     // 'key' and 'value' should be exactly as follows
     'show_on'    => array( 'key' => 'options-page', 'value' => array( 'unknown', ), ),
-    'show_names' => true, // Show field names on the left
+    'show_names' => true,
     'fields'     => array(
       array(
         'name' => 'Featured Image',
-        // 'desc' => 'Used in header background images',
         'id'   => 'featured_image',
         'type' => 'file',
+      ),
+      array(
+        'name' => 'Secondary Header Text',
+        'id'   => 'secondary_header_text',
+        'type' => 'wysiwyg',
+        'options' => [ 'teeny' => true ],
       ),
       array(
         'name' => 'Contacts',
