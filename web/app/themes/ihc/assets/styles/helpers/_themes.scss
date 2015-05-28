@@ -71,6 +71,12 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         }
       }
     }
+    @include tablet {
+      .focus-areas a:hover {
+        color: $bg-color;
+        border-bottom-color: $bg-color;
+      }
+    }
 
     // Events
     .related-events .button {

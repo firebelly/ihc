@@ -45,10 +45,11 @@
       font-size: $lg;
       line-height: 40px;
       @extend .smooth;
-      li a {
-        border-bottom: 4px solid $dk-blue;
-      }
     }
+    a {
+      border-bottom: 4px solid $dk-blue;
+    }
+
 
     @include tablet {
       margin: 0 0 0 #{$column-width * 4};
