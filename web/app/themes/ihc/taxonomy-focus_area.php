@@ -13,11 +13,12 @@ if ($header_image) {
 }
 $header_text = $focus_area->description;
 $secondary_header_text = Taxonomy_MetaData::get(get_query_var('taxonomy'), $focus_area->term_id, 'secondary_header_text');
+$with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header' : '';
 ?>
 
 <div class="content-wrap <?= $with_image_class ?>">
 
-  <header class="page-header <?= $with_image_class ?>">
+  <header class="page-header <?= $with_image_class ?> <?= $with_secondary_header_class ?>">
     <div class="container" <?= $header_bg ?>>
       <h4 class="flag"><?= $focus_area->name ?></h4>
 
