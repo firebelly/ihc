@@ -69,6 +69,9 @@
     margin: 0 0 10px;
     background: $bg-pink;
   }
+  h2.response {
+    padding: 0 50px 0 0;
+  }
 
   // Submitting thought, show form
   &.thought-submitted,
