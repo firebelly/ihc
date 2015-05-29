@@ -145,11 +145,11 @@ function get_related_event_post($post_or_focus_area) {
   } else {
     $focus_area = $post_or_focus_area;
   }
-  if ($event = \Firebelly\PostTypes\Event\get_events(1, $focus_area)) {
+  if ($event = \Firebelly\PostTypes\Event\get_events(['num_posts' => 1, 'focus_area' => $focus_area, 'show_view_all_button' => true])) {
     $output = '<div class="related related-events">';
     $output .= '<h4 class="flag">Attend an Event</h4>';
     $output .= $event;
-    $output .= '<p class="view-all"><a class="button" href="/events/">View All Events</a></p>';
+    // $output .= '<p class="view-all"><a class="button" href="/events/">View All Events</a></p>';
     $output .= '</div>';
   }
   return $output;
@@ -162,6 +162,7 @@ function get_related_news_post($post_or_focus_area) {
   global $news_post;
   $output = false;
   if (is_object($post_or_focus_area)) {
+    // todo: if post_type=='program' see if there's a directly related post
     $focus_area = get_focus_area($post_or_focus_area);
   } else {
     $focus_area = $post_or_focus_area;
@@ -170,11 +171,11 @@ function get_related_news_post($post_or_focus_area) {
   if ($posts) {
     $output = '<div class="related related-news">';
     $output .= '<h4 class="flag">Blog &amp; News</h4>';
+    $show_view_all_button = true;
     ob_start();
     foreach ($posts as $news_post)
       include(locate_template('templates/article-news.php'));
     $output .= ob_get_clean();
-    $output .= '<p class="view-all"><a class="button" href="/news/">View All Articles</a></p>';
     $output .= '</div>';
   }
   return $output;

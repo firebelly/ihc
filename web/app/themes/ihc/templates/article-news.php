@@ -22,6 +22,7 @@ $has_image_class = !empty($show_images) && has_post_thumbnail($news_post->ID) ? 
         <p><?= Utils\get_excerpt($news_post); ?></p>
       </div>
       <?php if ($article_tags): ?><div class="article-tags"><?= $article_tags ?></div><?php endif; ?>
+      <?php if (!empty($show_view_all_button)): ?><p class="view-all"><a class="button" href="/news/">View All Articles</a></p><?php endif; ?>
     </div>
   </div>
 </article>

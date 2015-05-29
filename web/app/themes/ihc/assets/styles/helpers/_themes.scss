@@ -79,17 +79,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     }
 
     // Events
-    .related-events .button {
-      border-color: $bg-color;
-      color: $bg-color;
-      &:hover {
-        border-color: $white !important;
-        background: $white;
-        color: $dk-blue;
-      }
-    }
-    .related-events .event,
-    .article-list.masonry .event {
+    .article-list .event {
       .article-content {
         color: $bg-color;
         p,
@@ -99,6 +89,29 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
 
         .article-title a {
           border-bottom-color: $bg-color;
+        }
+      }
+      .button {
+        border-color: $bg-color;
+        color: $bg-color;
+      }
+      @include tablet {
+        &:hover {
+          color: $dk-blue;
+          p,
+          a {
+            color: $dk-blue;
+          }
+
+          .article-title a {
+            border-bottom-color: $dk-blue;
+          }
+          .button {
+            border-color: $dk-blue;
+            &:hover {
+              color: $white;
+            }
+          }
         }
       }
     }

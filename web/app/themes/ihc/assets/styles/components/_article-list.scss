@@ -119,25 +119,29 @@
         min-height: 250px;
         margin-right: 4px;
       }
-      
-      .article-content:hover {
+    }
+    .article-content:hover {
+      background: $dk-blue;
+      .article-date {
+        color: $dk-blue;
+      }
+      .article-title a,
+      p,
+      a {
+        color: $white;
+        border-bottom-color: $white;
+      }
+      .article-thumb::after {
+        border-right-color: $dk-blue;
+      }
+      .article-thumb::before {
         background: $dk-blue;
-        .article-date {
-          color: $dk-blue;
-        }
-        p,
-        a {
-          color: $white !important;
-          border-bottom-color: $white;
-        }
-        .article-thumb::after {
-          border-right-color: $dk-blue;
-        }
-        .article-thumb::before {
-          background: $dk-blue;
-        }
+      }
+      .button {
+        border-color: $white;
       }
     }
+    
   }
 
   .article-content {
@@ -147,7 +151,7 @@
 
     .article-category {
       @include font-style1;
-      color: $dk-blue;
+      // color: $dk-blue;
       margin-bottom: 4px;
     }
 
@@ -155,10 +159,6 @@
       padding: 30px 25px;
       @include tablet {
         padding: 30px #{$column-width/2 * 22/5};
-      }
-
-      .article-excerpt p {
-        color:$dk-blue;
       }
     }
 
@@ -212,25 +212,23 @@
     line-height: 20px;
   }
   @include tablet {
+    .event .article-content:hover {
+      background: $white;
+      color: $dk-blue;
+      .article-title a,
+      p,
+      a {
+        color: $dk-blue;
+        border-bottom-color: $dk-blue;
+      }
+    }
+
     &.masonry .event {
       cursor: pointer;
       width: 33.3%;
       float: left;
       .article-content {
         margin-right: 4px;
-        &:hover {
-          background: $white;
-          .article-content-wrap {
-            color: $dk-blue;
-            p,
-            a {
-              color: $dk-blue;
-            }
-            .article-title a {
-              border-bottom-color: $dk-blue;
-            }
-          }
-        }
       }
     }
   }

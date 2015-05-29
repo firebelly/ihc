@@ -8,7 +8,7 @@ $per_page = get_option('posts_per_page');
 $past_events = get_query_var('past_events', 0);
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
-$total_events = \Firebelly\PostTypes\Event\get_num_events($past_events, $filter_program, $filter_focus_area);
+$total_events = \Firebelly\PostTypes\Event\get_num_events(['past_events' => $past_events, 'filter_program' => $filter_program, 'filter_focus_area' => $filter_focus_area);
 $total_pages = ceil($total_events / $per_page);
 
 $post = get_page_by_path('/events');
@@ -28,7 +28,7 @@ $page_content = apply_filters('the_content', $post->post_content);
     <?php include(locate_template('templates/filters.php')); ?>
 
     <div class="events load-more-container article-list masonry">
-      <?php if ($event_posts = \Firebelly\PostTypes\Event\get_events('', $filter_focus_area, $filter_program)): ?>
+      <?php if ($event_posts = \Firebelly\PostTypes\Event\get_events(['focus_area' => $filter_focus_area, 'program' => $filter_program])): ?>
         <?= $event_posts ?>
       <?php else: ?>
         <div class="notice">

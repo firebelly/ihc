@@ -218,15 +218,16 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 /**
  * Get Num Events, past or future
  */
-function get_num_events($past='', $focus_area='', $program='') {
+function get_num_events($options=[]) {
   global $wpdb;
+  // todo: also filter by focus_area and program in $options!
   $count = $wpdb->get_var($wpdb->prepare(
     "
     SELECT COUNT(*) FROM `wp_posts` wp
     INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_start')
     WHERE wp.post_status = 'publish'
     AND wp.post_type = 'event'
-    AND wm.meta_value " . ($past ? '<=' : '>') . " %s
+    AND wm.meta_value " . (!empty($options['past']) ? '<=' : '>') . " %s
     ",
     time()
   ));
@@ -236,10 +237,10 @@ function get_num_events($past='', $focus_area='', $program='') {
 /**
  * Get Events
  */
-function get_events($num_posts='', $focus_area='', $program='') {
-  if (!$num_posts) $num_posts = get_option('posts_per_page');
+function get_events($options=[]) {
+  if (empty($options['num_posts'])) $options['num_posts'] = get_option('posts_per_page');
   $args = [
-    'numberposts' => $num_posts,
+    'numberposts' => $options['num_posts'],
     'post_type' => 'event',
     'meta_key' => '_cmb2_event_start',
     'orderby' => 'meta_value_num',
@@ -253,19 +254,19 @@ function get_events($num_posts='', $focus_area='', $program='') {
       'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
     ]
   ];
-  if ($focus_area != '') {
+  if (!empty($options['focus_area'])) {
     $args['tax_query'] = array(
         array(
             'taxonomy' => 'focus_area',
             'field' => 'slug',
-            'terms' => $focus_area,
+            'terms' => $options['focus_area'],
         )
     );
   }
-  if (!empty($program)) {
+  if (!empty($options['program'])) {
     $args['meta_query'][] = array(
       'key' => '_cmb2_related_program',
-      'value' => array( (int)$program ),
+      'value' => array( (int)$options['program'] ),
       'compare' => 'IN',
     );
   }
@@ -273,6 +274,7 @@ function get_events($num_posts='', $focus_area='', $program='') {
   $event_posts = get_posts($args);
   if (!$event_posts) return false;
   $output = '';
+  $show_view_all_button = (!empty($options['show_view_all_button']));
   foreach ($event_posts as $event_post):
     ob_start();
     include(locate_template('templates/article-event.php'));

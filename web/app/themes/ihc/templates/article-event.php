@@ -18,8 +18,9 @@ $article_tags = \Firebelly\Utils\get_article_tags($event_post);
         <?php if (!empty($event->registration_url)): ?>
           <a target="_blank" class="register" href="<?= $event->registration_url ?>">Register</a>
         <?php endif; ?>
-        <li><a class="more" href="<?= get_permalink($event->ID); ?>">More Details</a></p></li>
+        <li><a class="more" href="<?= get_permalink($event->ID); ?>">More Details</a></li>
       </ul>
+      <?php if (!empty($show_view_all_button)): ?><p class="view-all"><a class="button" href="/events/">View All Articles</a></p><?php endif; ?>
     </div>
   </div>
 </article>
