@@ -51,7 +51,9 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
     <?php endif; ?>
 
     <?php if ($addl_info): ?>
-      <?= apply_filters('the_content', $addl_info); ?>
+      <div class="user-content">
+        <?= apply_filters('the_content', $addl_info); ?>
+      </div>
     <?php endif; ?>
     </div>
   </aside>

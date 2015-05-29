@@ -31,6 +31,13 @@
   .with-image .share {
     top: 58px;
   }
+  ul.resources {
+    font: 300 #{$med}/1.43 $sans;
+    margin-bottom: 30px;
+    li {
+      margin: 10px 0;
+    }
+  }
   .page-block {
     position: relative;
 
