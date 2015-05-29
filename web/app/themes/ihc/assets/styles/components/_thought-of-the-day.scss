@@ -73,10 +73,10 @@
   // Submitting thought, show form
   &.submitting-thought {
     background: $white;
+    padding: #{$column-width/2 * 22/5};
     @include tablet {
       margin-right: #{-$column-width * 22/5 - 2%}; // container element is 5col in 22col grid, extra 2% is for outer margin
       margin-left:  -$column-width/2 * 22/5;
-      padding: #{$column-width/2 * 22/5};
     }
     .thought-wrapper {
       display: none;
