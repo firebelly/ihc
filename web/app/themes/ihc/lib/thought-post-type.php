@@ -40,14 +40,15 @@ function post_type() {
     'public'              => true,
     'show_ui'             => true,
     'show_in_menu'        => true,
-    'show_in_nav_menus'   => true,
-    'show_in_admin_bar'   => true,
+    'show_in_nav_menus'   => false,
+    'show_in_admin_bar'   => false,
     'menu_position'       => 20,
     'menu_icon'           => 'dashicons-admin-post',
     'can_export'          => false,
     'has_archive'         => false,
-    'exclude_from_search' => false,
-    'publicly_queryable'  => true,
+    'exclude_from_search' => true,
+    'publicly_queryable'  => false,
+    'query_var'           => false,
     'rewrite'             => $rewrite,
     'capability_type'     => 'thought',
     'map_meta_cap'        => true
@@ -208,21 +209,72 @@ function submit_form() {
  * Handle a Thought submission
  */
 function thought_submission() {
+  $thought = filter_var($_REQUEST['thought'], FILTER_SANITIZE_STRING);
+  $author = filter_var($_REQUEST['author'], FILTER_SANITIZE_STRING);
+  $cat = filter_var($_REQUEST['cat'], FILTER_SANITIZE_NUMBER_INT);
+
   if (!wp_verify_nonce($_REQUEST['_wpnonce'], 'new_thought')) {
     wp_send_json_error(['message' => 'Failed security check']);
   } elseif (!empty($_REQUEST['die_bots_5000'])) {
     wp_send_json_error(['message' => 'Failed bot check']);
   } else {
-    $my_post = [
-      'post_title'    => sprintf('Submission from %s', $_REQUEST['author']),
-      'post_content'  => $_REQUEST['thought'],
-      'post_type'     => 'thought',
-      'post_author'   => 1,
-      'tax_input'     => ['focus_area' => $_REQUEST['cat']]
-    ];
-    $post_id = wp_insert_post($my_post);
-    update_post_meta($post_id, '_cmb2_author', $_REQUEST['author']);
-    wp_send_json_success(['message' => sprintf('Thought from %s added ok', $_REQUEST['author'])]);
+
+    $is_spam = 'false';
+
+    // Check with Akismet if possible
+    if(function_exists('akismet_http_post')) {
+      if (akismet_get_key()) {
+        global $akismet_api_host, $akismet_api_port;
+
+        $data = array( 
+          'comment_author'        => $author,
+          'comment_content'       => $thought,
+          'user_ip'               => $_SERVER['REMOTE_ADDR'],
+          'blog'                  => site_url(),
+        );
+        $query_string = http_build_query($data);
+        $response = akismet_http_post($query_string, $akismet_api_host, '/1.1/comment-check', $akismet_api_port);
+        $is_spam = (is_array( $response) && isset( $response[1])) ? $response[1] : 'false';
+      }
+    }
+
+    if ($is_spam !== 'false') {
+      wp_send_json_error(['message' => 'Akismet has marked this as spam']);
+    } else {
+      $my_post = [
+        'post_title'    => sprintf('Submission from %s', $author),
+        'post_content'  => $thought,
+        'post_type'     => 'thought',
+        'post_author'   => 1,
+        'tax_input'     => ['focus_area' => $cat]
+      ];
+      $post_id = wp_insert_post($my_post);
+      update_post_meta($post_id, '_cmb2_author', $author);
+
+      // Notify admin of submission?
+      $thought_of_day_email = get_option('thought_of_day_email');
+      if ($thought_of_day_email && is_email($thought_of_day_email)) {
+        if ($cat>0) {
+          $focus_area = get_term($cat, 'focus_area');
+          $focus_area_name = $focus_area->name;
+        } else {
+          $focus_area_name = 'Humanities';
+        }
+        $email_txt = "You have a new Thought of the Day submission!";
+        $email_txt .= "\n\nThought: " . $thought;
+        $email_txt .= "\n\nAuthor: " . $author;
+        $email_txt .= "\n\nFocus Area: " . $focus_area_name;
+        $email_txt .= "\n\nEdit/Publish: ".admin_url('post.php?post=' . $post_id . '&action=edit');
+
+        // Email user set in Site Settings
+        wp_mail($thought_of_day_email, sprintf('New Thought of the Day submission from %s', $author), $email_txt);
+      }
+
+      // Pull response copy from Site Settings and return via json
+      $thought_of_day_response = get_option('thought_of_day_response', 'Your submission is in review.');
+      wp_send_json_success(['message' => sprintf($thought_of_day_response, $author)]);
+    }
+
   }
 }
 add_action('wp_ajax_thought_submission', __NAMESPACE__ . '\\thought_submission');

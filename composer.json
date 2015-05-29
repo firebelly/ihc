@@ -62,11 +62,12 @@
     "wpackagist-plugin/accordion-shortcodes": ">=2.2.0",
     "wpackagist-plugin/multiple-content-blocks": ">=3.2",
     "wpackagist-plugin/user-roles-and-capabilities": "1.1",
-    "mustardBees/cmb-field-select2": ">=2.0.4"
+    "mustardBees/cmb-field-select2": ">=2.0.4",
+    "wpackagist-plugin/akismet": "3.1.1"
   },
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin", "roots/soil", "wpackagist-plugin/cmb2", "mustardBees/cmb-field-select2"],
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin", "roots/soil", "wpackagist-plugin/cmb2", "mustardBees/cmb-field-select2", "wpackagist-plugin/akismet"],
       "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
       "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },

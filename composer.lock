@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25a5497ce6fae0cbf4ba6cf418646bbd",
+    "hash": "638eade6f5cffec095344212f7c9060f",
     "packages": [
         {
             "name": "composer/installers",
@@ -255,8 +255,28 @@
             "homepage": "https://wordpress.org/plugins/accordion-shortcodes/"
         },
         {
+            "name": "wpackagist-plugin/akismet",
+            "version": "3.1.1",
+            "source": {
+                "type": "svn",
+                "url": "http://plugins.svn.wordpress.org/akismet/",
+                "reference": "tags/3.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/akismet/"
+        },
+        {
             "name": "wpackagist-plugin/cmb2",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/cmb2/",
