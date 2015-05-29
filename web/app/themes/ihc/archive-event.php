@@ -8,7 +8,7 @@ $per_page = get_option('posts_per_page');
 $past_events = get_query_var('past_events', 0);
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
-$total_events = \Firebelly\PostTypes\Event\get_num_events(['past_events' => $past_events, 'filter_program' => $filter_program, 'filter_focus_area' => $filter_focus_area);
+$total_events = \Firebelly\PostTypes\Event\get_num_events(['past_events' => $past_events, 'filter_program' => $filter_program, 'filter_focus_area' => $filter_focus_area]);
 $total_pages = ceil($total_events / $per_page);
 
 $post = get_page_by_path('/events');
