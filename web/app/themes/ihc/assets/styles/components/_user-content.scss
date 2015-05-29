@@ -34,9 +34,9 @@
   p {
     font: 300 #{$med}/20px $sans;
     margin: 10px 0 20px;
-    a {
-      border-bottom: 1px solid $dk-blue;
-    }
+  }
+  a:not(.img-link) {
+    border-bottom: 1px solid $dk-blue;
   }
 
   blockquote {
