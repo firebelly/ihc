@@ -71,6 +71,7 @@
   }
 
   // Submitting thought, show form
+  &.thought-submitted,
   &.submitting-thought {
     background: $white;
     padding: #{$column-width/2 * 22/5};
@@ -78,6 +79,7 @@
       margin-right: #{-$column-width * 22/5 - 2%}; // container element is 5col in 22col grid, extra 2% is for outer margin
       margin-left:  -$column-width/2 * 22/5;
     }
+    .thought-submitted-wrapper,
     .thought-wrapper {
       display: none;
     }
@@ -85,5 +87,16 @@
     .submit-thought-wrapper {
       display: block;
     }
+  }
+  &.thought-submitted {
+    .submit-thought-wrapper,
+    .thought-wrapper {
+      display: none;
+    }
+    .close-button,
+    .thought-submitted-wrapper {
+      display: block;
+    }
+    min-height: 300px;
   }
 }

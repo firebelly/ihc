@@ -9,7 +9,6 @@
 }
 @mixin font-style2 {
   font: 300 #{$med}/1.43 $sans;
-  font-weight: 300;
   letter-spacing: 0.04em;
 }
 @mixin font-style3 {

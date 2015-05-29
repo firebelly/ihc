@@ -7,16 +7,11 @@ var IHC = (function($) {
       breakpoint_small = false,
       breakpoint_medium = false,
       breakpoint_large = false,
-      breakpoint_huge = false,
-      page_cache = [],
       $content,
-      $backnav,
       $document,
       map,
       mapFeatureLayer,
       mapGeoJSON = [],
-      History = window.History,
-      rootUrl = History.getRootUrl(),
       loadingTimer;
 
   function _init() {
@@ -289,9 +284,16 @@ var IHC = (function($) {
           success: function(response) {
             $form.removeClass('working');
             if (response.success) {
-              $form.append(response.data.message);
+              $('.thought-of-the-day').velocity({opacity: 0, left: -50}, { easing: 'easeInSine', duration: 150,
+                complete: function(e) {
+                  $('.new-thought-form')[0].reset();
+                  $('.thought-of-the-day .response').text(response.data.message);
+                  $('.thought-of-the-day').css('left',50).removeClass('submitting-thought').addClass('thought-submitted').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 150 });
+                }
+              });
+
             } else {
-              alert(response.data.message);
+              alert('There was an error: '+response.data.message);
             }
           }
       });
@@ -299,10 +301,10 @@ var IHC = (function($) {
   }
 
   function _cancelThoughtSubmit() {
-    if ($('.thought-of-the-day').hasClass('submitting-thought')) {
+    if ($('.thought-of-the-day').is('.submitting-thought,.thought-submitted')) {
       $('.thought-of-the-day').velocity({opacity: 0, left: 50}, { easing: 'easeInSine', duration: 150,
         complete: function(e) {
-          $('.thought-of-the-day').css('left',-50).removeClass('submitting-thought').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 150 });
+          $('.thought-of-the-day').css('left',-50).removeClass('submitting-thought thought-submitted').velocity({opacity: 1, left: 0}, {  easing: 'easeOutSine', duration: 150 });
         }
       });
     }
@@ -324,7 +326,6 @@ var IHC = (function($) {
     breakpoint_small = (screenWidth > 480);
     breakpoint_medium = (screenWidth > 768);
     breakpoint_large = (screenWidth > 1024);
-    breakpoint_huge = (screenWidth > 3000);
   }
 
   // Called periodically for more intensive resize tasks

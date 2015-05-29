@@ -176,16 +176,34 @@ function site_options() {
                 <td><input type="text" id="thought_of_day_email" name="thought_of_day_email" size="45" value="<?php echo get_option('thought_of_day_email'); ?>" /><br>
                 <em>An email is sent here when someone submits a Thought of the Day</em></td>
               </tr>
+              <tr>
+                <th scope="row"><label for="thought_of_day_response">Thought of the Day Submisssion Response:</label></th>
+                <td><textarea id="thought_of_day_response" name="thought_of_day_response" rows="5" cols="60"><?php echo get_option('thought_of_day_response'); ?></textarea><br>
+                <em>Copy that shows after a user submits a Thought</em></td>
+              </tr>
           </table>
           <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes" /></p>
 
           <input type="hidden" name="action" value="update" />
-          <input type="hidden" name="page_options" value="twitter_id,facebook_id,instagram_id,media_contact,thought_of_day_email" />
+          <input type="hidden" name="page_options" value="twitter_id,facebook_id,instagram_id,media_contact,thought_of_day_email,thought_of_day_response" />
         </form>
     </div>
 <?php
 }
 add_action('admin_menu', __NAMESPACE__ . '\add_site_options');
+
+/**
+ * Add link to Site Settings in main admin dropdown
+ */
+add_action('admin_bar_menu', __NAMESPACE__ . '\add_link_to_admin_bar',999);
+function add_link_to_admin_bar($wp_admin_bar) {         
+  $wp_admin_bar->add_node( array(
+    'parent' => 'site-name',
+    'id'     => 'site-settings',
+    'title'  => 'Site Settings',
+    'href'   => esc_url( admin_url( 'options-general.php?page=functions' ) ),
+  ));
+}
 
 /**
  * Remove Press Release posts from everything but search & category pages
