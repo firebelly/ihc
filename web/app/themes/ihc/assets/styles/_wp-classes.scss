@@ -7,16 +7,13 @@
   margin-right: 0;
   max-width: 100%;
 }
+.alignleft,
+.alignright,
 .aligncenter {
   display: block;
   margin: 1em auto;
 }
-.alignleft,
-.alignright {
-  margin-bottom: 1em;
-}
-@media (min-width: 480px) {
-  // Only float if not on an extra small device
+@include tablet {
   .alignleft {
     float: left;
     margin-right: 1em;
