@@ -7,6 +7,7 @@ var IHC = (function($) {
       breakpoint_small = false,
       breakpoint_medium = false,
       breakpoint_large = false,
+      breakpoint_array = [480,1000,1200],
       $content,
       $document,
       map,
@@ -100,7 +101,7 @@ var IHC = (function($) {
       } else {
         e.preventDefault();
         $('.search-form').addClass('active');
-        $('.search-field').focus();
+        $('.search-field:first').focus();
       }
     });
     $('.search-form .close-button').on('click', function() {
@@ -323,9 +324,9 @@ var IHC = (function($) {
   // Called in quick succession as window is resized
   function _resize() {
     screenWidth = document.documentElement.clientWidth;
-    breakpoint_small = (screenWidth > 480);
-    breakpoint_medium = (screenWidth > 768);
-    breakpoint_large = (screenWidth > 1024);
+    breakpoint_small = (screenWidth > breakpoint_array[0]);
+    breakpoint_medium = (screenWidth > breakpoint_array[1]);
+    breakpoint_large = (screenWidth > breakpoint_array[2]);
   }
 
   // Called periodically for more intensive resize tasks
