@@ -9,6 +9,18 @@ $past_events = get_query_var('past_events', 0);
 $post_type = is_post_type_archive('event') ? 'event' : 'post';
 ?>
   <form class="filters" action="/<?= $post_type == 'event' ? 'events' : 'news' ?>/" method="get">
+    <div class="focus-area-topic">Focus Area:
+      <div class="select-wrapper">
+        <select name="filter_focus_area">
+          <option value="">ALL</option>
+            <?php $focus_areas = get_terms('focus_area');
+            foreach ($focus_areas as $focus_area): ?>
+            <option <?= $filter_focus_area==$focus_area->slug ? 'selected' : '' ?> value="<?= $focus_area->slug ?>"><?= $focus_area->name ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+    </div>
+
     <div class="program-topic">Program: 
       <?php if ($post_type==='event'): ?>
         <input type="hidden" name="past_events" value="<?= $past_events ?>">
@@ -48,17 +60,7 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
         </select>
       </div>
     </div>
-    <div class="focus-area-topic">Focus Area:
-      <div class="select-wrapper">
-        <select name="filter_focus_area">
-          <option value="">ALL</option>
-            <?php $focus_areas = get_terms('focus_area');
-            foreach ($focus_areas as $focus_area): ?>
-            <option <?= $filter_focus_area==$focus_area->slug ? 'selected' : '' ?> value="<?= $focus_area->slug ?>"><?= $focus_area->name ?></option>
-          <?php endforeach; ?>
-        </select>
-      </div>
-    </div>
+
     <div class="actions">
       <button class="button" type="submit">Filter</button>
     </div>
