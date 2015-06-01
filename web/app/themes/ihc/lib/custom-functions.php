@@ -138,18 +138,28 @@ function get_resources($post) {
  * @param  [Object or String] $post_or_focus_area [$post object or $focus_area slug]
  */
 function get_related_event_post($post_or_focus_area) {
-  $output = false;
+  $output = $event = false;
+  
   if (is_object($post_or_focus_area)) {
-    // todo: if post_type=='program' see if there's a directly related event
-    $focus_area = get_focus_area($post_or_focus_area);
+    // If post_type is Program see if there's a directly related Event
+    if ($post_or_focus_area->post_type == 'program') {
+      $event = \Firebelly\PostTypes\Event\get_events(['num_posts' => 1, 'program' => $post_or_focus_area->ID, 'show_view_all_button' => true]);
+    }
+    // Can't find one? Get the Focus Area for query below
+    if (!$event)
+      $focus_area = get_focus_area($post_or_focus_area);
   } else {
     $focus_area = $post_or_focus_area;
   }
-  if ($event = \Firebelly\PostTypes\Event\get_events(['num_posts' => 1, 'focus_area' => $focus_area, 'show_view_all_button' => true])) {
+
+  // If we didn't find a directly related event above, try to find one by Focus Area
+  if (!$event)
+    $event = \Firebelly\PostTypes\Event\get_events(['num_posts' => 1, 'focus_area' => $focus_area, 'show_view_all_button' => true]);
+  
+  if ($event) {
     $output = '<div class="related related-events">';
     $output .= '<h4 class="flag">Attend an Event</h4>';
     $output .= $event;
-    // $output .= '<p class="view-all"><a class="button" href="/events/">View All Events</a></p>';
     $output .= '</div>';
   }
   return $output;
@@ -160,14 +170,30 @@ function get_related_event_post($post_or_focus_area) {
  */
 function get_related_news_post($post_or_focus_area) {
   global $news_post;
-  $output = false;
+  $output = $posts = false;
   if (is_object($post_or_focus_area)) {
-    // todo: if post_type=='program' see if there's a directly related post
-    $focus_area = get_focus_area($post_or_focus_area);
+    // If post_type is Program see if there's a directly related Post
+    if ($post_or_focus_area->post_type == 'program') {
+      $posts = get_posts([
+        'numberposts' => 1,
+        'meta_query' => [
+          'key' => '_cmb2_related_program',
+          'value' => [$post_or_focus_area->ID],
+          'compare' => 'IN'
+        ]
+      ]);
+    }
+    // Can't find one? Get the Focus Area for query below
+    if (!$posts)
+      $focus_area = get_focus_area($post_or_focus_area);
   } else {
     $focus_area = $post_or_focus_area;
   }
-  $posts = get_posts('numberposts=1&focus_area='.$focus_area);
+
+  // Didn't find a blog article directly related above? Find one by Focus Area
+  if (!$posts)
+    $posts = get_posts('numberposts=1&focus_area='.$focus_area);
+
   if ($posts) {
     $output = '<div class="related related-news">';
     $output .= '<h4 class="flag">Blog &amp; News</h4>';
