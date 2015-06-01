@@ -8,7 +8,8 @@
   .close-button {
     left: auto;
     top: 30px;
-    right: 20px;
+    right: #{$column-width/2 * 22/7};
+    margin-right: -6px;
   }
 
   blockquote {
