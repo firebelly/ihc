@@ -1,15 +1,4 @@
-// Our Work page
-
-.our-work.page {
-  // section.main {
-  //   float: left;
-  //   width: 68.1%;
-  // }
-
-  // .focus-list {
-  //   padding:0 0 20px;
-  // }
-}
+// Our Work pages
 
 // Single program page
 .single-program {
@@ -155,50 +144,6 @@
           }
         }
       }
-    }
-  }
-}
-
-// Focus Area programs
-.program-list {
-  .program {
-    @include tablet {
-      width: 50%;
-      float: left;
-      cursor: pointer;
-    }
-    .article-content {
-      padding: 30px 25px;
-      margin-bottom: 4px;
-      transition: all $transition-speed;
-      h1 {
-        font: 900 #{$lg}/40px $sans;
-        text-transform: uppercase;
-        margin-top: -5px;
-        letter-spacing: .1em;
-        @extend .smooth;
-        a {
-          border-bottom: 3px solid $dk-blue;
-        }
-      }
-      p {
-        margin: 10px 0 25px;
-      }
-      @include tablet {
-        padding: 30px #{$column-width/2 * 22/8};
-        margin-right: 4px;
-        &:hover {
-          p,
-          a {
-            border-color: $white;
-            color: $white;
-          }
-          h2 {
-            border-bottom-color: $white;
-          }
-        }
-      }
-      
     }
   }
 }

@@ -15,7 +15,7 @@ function add_capabilities() {
   $role_admin->add_cap('delete_focus_areas');
   $role_admin->add_cap('assign_focus_areas');
 }
-add_action('switch_theme', __NAMESPACE__ . 'add_capabilities');
+add_action('switch_theme', __NAMESPACE__ . '\add_capabilities');
 
 // Custom taxonomy Focus Areas
 register_taxonomy( 'focus_area', 
@@ -48,4 +48,3 @@ register_taxonomy( 'focus_area',
     ),
   )
 );
-

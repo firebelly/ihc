@@ -1,35 +1,43 @@
-<?php get_template_part('templates/page', 'header'); ?>
+<div class="content-wrap">
+  <main>
 
-<?php if (!have_posts()) : ?>
-  <div class="alert alert-warning">
-    <?php _e('Sorry, no results were found.', 'sage'); ?>
-  </div>
-<?php endif; ?>
+  <?php if (!have_posts()) : ?>
 
-<div class="masonry article-list">
-<?php while (have_posts()) : the_post(); ?>
+    <div class="alert alert-warning">
+      <?php _e('Sorry, no results were found.', 'sage'); ?>
+    </div>
 
-  <?php 
-  $show_images = is_search();
+  <?php else: ?>
 
-  if ($post->post_type=='post'):
+    <div class="masonry article-list">
+    <?php while (have_posts()) : the_post(); ?>
 
-    $news_post = $post;
-    include(locate_template('templates/article-news.php'));
+      <?php 
+      $show_images = is_search();
 
-  elseif (preg_match('/(event)/',$post->post_type)):
+      if ($post->post_type=='post'):
 
-  	$event_post = $post;
-    include(locate_template('templates/article-event.php'));
+        $news_post = $post;
+        include(locate_template('templates/article-news.php'));
 
-  elseif (preg_match('/(program|page)/',$post->post_type)):
+      elseif (preg_match('/(event)/',$post->post_type)):
 
-    include(locate_template('templates/article-search.php'));
+        $event_post = $post;
+        include(locate_template('templates/article-event.php'));
 
-  endif;
-  ?>
+      elseif (preg_match('/(program|page)/',$post->post_type)):
 
-<?php endwhile; ?>
+        include(locate_template('templates/article-search.php'));
+
+      endif;
+      ?>
+
+    <?php endwhile; ?>
+    </div>
+
+    <?php the_posts_navigation(); ?>
+
+  <?php endif; ?>
+
+  </main>
 </div>
-
-<?php the_posts_navigation(); ?>

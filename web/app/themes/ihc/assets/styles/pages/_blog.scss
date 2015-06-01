@@ -1,4 +1,5 @@
 // Blog (what we're learning) Page
+
 .blog {
   .share {
     display:none;
@@ -17,28 +18,5 @@
   .alert {
     margin-left: 0;
     max-width: 66.66666%;
-  }
-}
-
-.filters {
-  background: $white;
-  min-height: 70px;
-  padding: 20px #{$column-width/2 * 22/15};
-  margin-bottom: 30px;
-
-  .program-topic,
-  .focus-area-topic {
-    @include font-style1;
-    margin: 10px 0;
-    @include tablet {
-      float: left;
-      margin-right: 30px;
-    }
-  }
-  .actions {
-    @include tablet {
-      margin-top: 0;
-      float: right;
-    }
   }
 }

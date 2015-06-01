@@ -61,7 +61,7 @@
   display: none;
   padding:0;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: $breakpoint-medium) {
     display: block;
     position: fixed;
     transition: transform $transition-speed;
@@ -180,6 +180,31 @@
   }
 }
 
+.search-field,
+.search-submit {
+  background: none;
+  border: none;
+  outline: none;
+  color: $dk-blue;
+  padding: 0;
+}
+.search-field {
+  @include font-style3;
+  width: 0;
+  transition: all $transition-speed;
+
+  &::placeholder {
+    color: rgba($dk-blue,.5);
+    padding-top: 5px; // wtf?
+  }
+}
+
+.search-submit {
+  margin-left: -10px;
+  width: 30px;
+  height: 30px;
+}
+
 .search-form {
   height: 44px;
   display: none;
@@ -190,30 +215,6 @@
     }
   }
 
-  .search-field,
-  .search-submit {
-    background: none;
-    border: none;
-    outline: none;
-    color: $dk-blue;
-    padding: 0;
-  }
-  .search-field {
-    @include font-style3;
-    width: 0;
-    transition: all $transition-speed;
-
-    &::placeholder {
-      color: rgba($dk-blue,.5);
-      padding-top: 5px; // wtf?
-    }
-  }
-
-  .search-submit {
-    margin-left: -10px;
-    width: 30px;
-    height: 30px;
-  }
   @include tablet {
     .close-button {
       display: block;

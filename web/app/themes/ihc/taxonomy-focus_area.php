@@ -39,7 +39,7 @@ $with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header
     if ($related_programs):
     ?>
       <h4 class="flag"><?= $focus_area->name ?> Programs:</h4>
-      <div class="program-list article-list masonry">
+      <div class="article-list masonry">
         <?php foreach ($related_programs as $program_post): ?>
           <?php include(locate_template('templates/article-program.php')); ?>
         <?php endforeach; ?>

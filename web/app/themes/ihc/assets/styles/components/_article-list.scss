@@ -141,7 +141,6 @@
         border-color: $white;
       }
     }
-    
   }
 
   .article-content {
@@ -233,4 +232,47 @@
     }
   }
 
+}
+
+// Programs
+.article-list {
+  .program {
+    @include tablet {
+      width: 50%;
+      float: left;
+      cursor: pointer;
+    }
+  }
+}
+// Programs are 1/3 width on Search pages
+body.search .article-list {
+  .program {
+    margin-bottom: 4px;
+    @include tablet {
+      width: 33.3%;
+      .article-content {
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+// Program and Page list styles
+.article-list .program,
+.article-list .page {
+  .article-content {
+    h1 {
+      font: 900 #{$lg}/40px $sans;
+      text-transform: uppercase;
+      margin-top: -5px;
+      letter-spacing: .1em;
+      @extend .smooth;
+      a {
+        border-bottom: 3px solid $dk-blue;
+      }
+    }
+    p {
+      margin: 10px 0 25px;
+    }
+  }
 }
