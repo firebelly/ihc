@@ -37,10 +37,10 @@
     background: #fff;
     @include clearfix;
     position: relative;
-    margin: -80px #{$column-width * 1} 80px;
+    margin: -80px 0 80px;
+    padding: 30px #{$column-width};
 
     .focus-list {
-      padding: 26px 0 40px 25px;
       @include font-style1;
       font-size: $lg;
       line-height: 40px;
@@ -52,10 +52,10 @@
 
 
     @include tablet {
+      padding: 30px #{$column-width/2};
       margin: 0 0 0 #{$column-width * 4};
       width: #{$column-width * 10};
       .focus-list {
-        padding: 26px 0 40px 25px;
         font-size: $xl;
         line-height: 50px;
       }
