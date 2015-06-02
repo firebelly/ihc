@@ -1,11 +1,9 @@
-<?php use Roots\Sage\Titles; ?>
-
 <div class="content-wrap">
   <header class="page-header">
     <div class="container">
       <div class="image-wrap">
         <div class="header-text">
-          <h1><?= Titles\title(); ?></h1>
+          <h1><?= \Roots\Sage\Titles\title(); ?></h1>
         </div>
       </div>
     </div>
@@ -24,8 +22,6 @@
     <?php while (have_posts()) : the_post(); ?>
 
       <?php 
-      $show_images = is_search();
-
       if ($post->post_type=='post'):
 
         $news_post = $post;
@@ -36,9 +32,14 @@
         $event_post = $post;
         include(locate_template('templates/article-event.php'));
 
-      elseif (preg_match('/(program|page)/',$post->post_type)):
+      elseif (preg_match('/(program)/',$post->post_type)):
 
-        include(locate_template('templates/article-search.php'));
+        $program_post = $post;
+        include(locate_template('templates/article-program.php'));
+
+      elseif (preg_match('/(page)/',$post->post_type)):
+
+        include(locate_template('templates/article-page.php'));
 
       endif;
       ?>

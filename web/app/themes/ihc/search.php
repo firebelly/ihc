@@ -32,7 +32,7 @@ $page_content = apply_filters('the_content', $post->post_content);
       <?php while (have_posts()) : the_post(); ?>
 
         <?php 
-        $show_images = is_search();
+        $show_images = true;
 
         if ($post->post_type=='post'):
 

@@ -5,7 +5,7 @@
     <div class="container">
       <div class="image-wrap">
         <div class="header-text">
-          <h1>404: Page not found</h1>
+          <h1><?= \Roots\Sage\Titles\title(); ?></h1>
         </div>
       </div>
     </div>

@@ -218,3 +218,13 @@ function exclude_press_release_posts($wp_query) {
   }
 }
 add_action('pre_get_posts', __NAMESPACE__ . '\exclude_press_release_posts');
+
+/**
+ * Override Press Release category title to "Press Releases"
+ */
+add_filter('get_the_archive_title', function($title){
+  if(is_category() && single_cat_title('',false)=='Press Release') {
+    $title = 'Press Releases';
+  }
+  return $title;
+});
