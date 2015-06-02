@@ -20,3 +20,14 @@
     max-width: 66.66666%;
   }
 }
+
+.nav-links {
+  margin: 40px 0 0;
+  text-align: center;
+  @include font-style1;
+  .nav-previous,
+  .nav-next {
+    display: inline-block;
+    margin: 0 10px;
+  }
+}

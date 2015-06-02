@@ -1,6 +1,17 @@
-<div class="content-wrap">
-  <main>
+<?php use Roots\Sage\Titles; ?>
 
+<div class="content-wrap">
+  <header class="page-header">
+    <div class="container">
+      <div class="image-wrap">
+        <div class="header-text">
+          <h1><?= Titles\title(); ?></h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
   <?php if (!have_posts()) : ?>
 
     <div class="alert alert-warning">
