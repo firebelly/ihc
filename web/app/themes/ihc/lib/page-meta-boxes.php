@@ -60,6 +60,23 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
+  $meta_boxes['page_secure_metabox'] = array(
+    'id'           => 'secure_post_metabox',
+    'title'        => 'Secure page?',
+    'object_types' => array( 'page', 'post', ),
+    'context'      => 'side',
+    'priority'     => 'low',
+    'show_names'   => true,
+    'fields'       => array(
+      array(
+        'desc' => 'Make this page secure',
+        // 'desc' => '',
+        'id'   => $prefix . 'force_ssl',
+        'type' => 'checkbox',
+      ),
+    ),
+  );
+
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );

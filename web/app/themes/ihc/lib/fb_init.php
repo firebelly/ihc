@@ -5,9 +5,9 @@ namespace Firebelly\Init;
 /**
  * Don't run wpautop before shortcodes are run! wtf Wordpress. from http://stackoverflow.com/a/14685465/1001675
  */
-remove_filter( 'the_content', 'wpautop' );
-add_filter( 'the_content', 'wpautop' , 99);
-add_filter( 'the_content', 'shortcode_unautop',100 );
+remove_filter('the_content', 'wpautop');
+add_filter('the_content', 'wpautop' , 99);
+add_filter('the_content', 'shortcode_unautop',100);
 
 /**
  * Add Edit Page link for Events archive page
@@ -15,8 +15,8 @@ add_filter( 'the_content', 'shortcode_unautop',100 );
 function events_admin_edit_link() {
   global $wp_admin_bar;
 
-  if ( is_post_type_archive( 'event' ) ) {
-    $page = get_page_by_title( 'Events' );
+  if (is_post_type_archive('event' ) ) {
+    $page = get_page_by_title('Events');
     $wp_admin_bar->add_menu(array(
       'id' => 'edit',
       'class' => 'ab-item',
@@ -38,9 +38,9 @@ function setup() {
   ]);
 
   // Default Image options
-  update_option( 'image_default_align', 'none' );
-  update_option( 'image_default_link_type', 'none' );
-  update_option( 'image_default_size', 'large' );
+  update_option('image_default_align', 'none');
+  update_option('image_default_link_type', 'none');
+  update_option('image_default_size', 'large');
 }
 add_action('after_setup_theme', __NAMESPACE__ . '\setup');
 
@@ -66,7 +66,7 @@ if (!is_admin()) { add_filter('nav_menu_css_class', __NAMESPACE__ . '\custom_nav
 /**
  * Custom theme classes added to body
  */
-function body_class( $classes ) {
+function body_class($classes ) {
   // Array of background hex values
   $background_array = ['C2D6D9', 'B8DEBA', 'EDBABA', 'E5D4BE', 'C7C9CC', 'EBC7B0'];
 
@@ -86,7 +86,7 @@ add_filter('body_class', __NAMESPACE__ . '\body_class');
 
 
 function mce_buttons_2($buttons) {
-  array_unshift( $buttons, 'styleselect' );
+  array_unshift($buttons, 'styleselect');
   return $buttons;
 }
 add_filter('mce_buttons_2', __NAMESPACE__ . '\mce_buttons_2');
@@ -113,31 +113,31 @@ function simplify_tinymce($settings) {
   // Clear most formatting when pasting text directly in the editor
   $settings['paste_as_text'] = 'true';
 
-  $style_formats = array(  
-    // array(  
+  $style_formats = array( 
+    // array( 
     //   'title' => 'Two Column',
     //   'block' => 'div',
     //   'classes' => 'two-column',
     //   'wrapper' => true,
     // ),  
-    array(  
+    array( 
       'title' => 'Three Column',
       'block' => 'div',
       'classes' => 'three-column',
       'wrapper' => true,
     ),
-    array(  
+    array( 
       'title' => 'Button',
       'block' => 'span',
       'classes' => 'button',
     ),
-    array(  
+    array( 
       'title' => '» Arrow Link',
       'block' => 'span',
       'classes' => 'arrow-link',
     ),
-  );  
-  $settings['style_formats'] = json_encode( $style_formats );
+ );  
+  $settings['style_formats'] = json_encode($style_formats);
 
   return $settings;
 }
@@ -172,7 +172,7 @@ function site_options() {
               </tr>
               <tr>
                 <th scope="row"><label for="media_contact">Media Contact:</label></th>
-                <td><?php wp_editor( get_option('media_contact'), 'media_contact', ['teeny' => true, 'textarea_rows' => 5] ); ?><br>
+                <td><?php wp_editor(get_option('media_contact'), 'media_contact', ['teeny' => true, 'textarea_rows' => 5]); ?><br>
                 <em>Used for the [media_contact] shortcode</em></td>
               </tr>
               <tr>
@@ -201,11 +201,11 @@ add_action('admin_menu', __NAMESPACE__ . '\add_site_options');
  */
 add_action('admin_bar_menu', __NAMESPACE__ . '\add_link_to_admin_bar',999);
 function add_link_to_admin_bar($wp_admin_bar) {         
-  $wp_admin_bar->add_node( array(
+  $wp_admin_bar->add_node(array(
     'parent' => 'site-name',
     'id'     => 'site-settings',
     'title'  => 'Site Settings',
-    'href'   => esc_url( admin_url( 'options-general.php?page=functions' ) ),
+    'href'   => esc_url(admin_url('options-general.php?page=functions' ) ),
   ));
 }
 
@@ -228,3 +228,30 @@ add_filter('get_the_archive_title', function($title){
   }
   return $title;
 });
+
+/**
+ * Force page to SSL if force_ssl is true
+ */
+add_action('template_redirect', __NAMESPACE__ . '\ssl_template_redirect', 1);
+function ssl_template_redirect() {
+  global $post;
+  $force_ssl = get_post_meta($post->ID, '_cmb2_force_ssl', true);
+
+  if (WP_ENV !== 'development' && $force_ssl && !is_ssl() ) {
+    if (0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
+        wp_redirect(preg_replace('|^http://|', 'https://', $_SERVER['REQUEST_URI']), 301);
+        exit();
+    } else {
+        wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301);
+        exit();
+    }
+  } elseif (WP_ENV !== 'development' && !$force_ssl && is_ssl() ) {
+    if (0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
+        wp_redirect(preg_replace('|^https://|', 'http://', $_SERVER['REQUEST_URI']), 301);
+        exit();
+    } else {
+        wp_redirect('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301);
+        exit();
+    }
+  }
+}
