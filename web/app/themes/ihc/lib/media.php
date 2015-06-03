@@ -61,3 +61,27 @@ function get_post_thumbnail($post_id, $size='medium') {
 	}
 	return $return;
 }
+
+
+/**
+ * Delete background images when attachment is deleted
+ */
+add_action('delete_attachment', __NAMESPACE__ . '\delete_background_images');
+function delete_background_images($post_id) {
+  // Get attachment image metadata
+  $metadata = wp_get_attachment_metadata($post_id);
+  if (!$metadata || empty($metadata['file']))
+    return;
+
+  $pathinfo = pathinfo($metadata['file']);
+  $upload_dir = wp_upload_dir();
+  $base_dir = $upload_dir['basedir'] . '/backgrounds/';
+  $files = scandir($base_dir);
+
+  foreach($files as $file) {
+    // If filename matches background file, delete it
+    if (strpos($file,$pathinfo['filename']) !== false) {
+      @unlink($base_dir . '/' . $file);
+    }
+  }
+}
