@@ -166,8 +166,8 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
             background: $accent-color;
           }
           .related {
-            &::after{
-              background: lighten($accent-color, 25%);
+            &::after {
+              background: rgba($accent-color, .75);
             }
           }
         }

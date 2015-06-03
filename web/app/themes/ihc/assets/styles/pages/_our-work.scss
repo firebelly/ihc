@@ -87,7 +87,7 @@
       &::after {
         transition: background $transition-speed, color $transition-speed;
         content: '';
-        background: rgba($white, .8);
+        background: rgba($white, .75);
         position: absolute;
         top: 0;
         right: 0;
