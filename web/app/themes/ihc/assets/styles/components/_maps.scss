@@ -14,7 +14,24 @@
       width: 1200px;
       z-index: -1;
       height: 1000px;
-      &::after {
+      &.sticky {
+        top: 0;
+        right: -$column-width;
+        position: fixed;
+      }
+      // .marker-blue {
+      //   opacity: .6;
+      // }
+      // Give leaflet panes layout to match #map
+      .leaflet-map-pane,
+      .leaflet-tile-pane {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      // Gradient just above the leaflet-tile-pane (not above markers)
+      .leaflet-tile-pane::after {
        content: '';
        position: absolute;
        box-shadow: inset 0 0 300px 300px $color-bg;
@@ -22,13 +39,13 @@
        left: 0;
        right: 0;
        bottom: 0;
-       z-index: 200;
       }
+
     }
   }
 }
 
-// tmp mapbox fix
+// Mapbox fix URLs
 .leaflet-control-attribution:after,
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out,

@@ -13,9 +13,13 @@ var IHC = (function($) {
       map,
       mapFeatureLayer,
       mapGeoJSON = [],
+      mapIconRed,
+      mapIconBlue,
+      mapTop,
       loadingTimer;
 
   function _init() {
+
       // Set screen size vars
       _resize();
 
@@ -25,7 +29,7 @@ var IHC = (function($) {
       // Fit them vids!
       $content.fitVids();
 
-      // Homepage
+      // Homepage (pre _initMasonry)
       if ($('.home.page').length) {
         // Homepage has a funky load-more in events that is part of masonry until clicked
         if (breakpoint_medium) {
@@ -62,6 +66,15 @@ var IHC = (function($) {
       // Add span to accordion titles to style +/- icons
       $('.accordion-title').prepend('<span class="open-status"></span>');
 
+      // Events landing page
+      if ($('.post-type-archive-event').length) {
+        if (breakpoint_medium) {
+          // Set initial mapTop position
+          mapTop = $('#map').offset().top;
+          // Onscroll toggle sticky class on large map
+          $(window).on('scroll', _scroll);
+        }
+      }
   }
 
   function _initBigClicky() {
@@ -115,17 +128,33 @@ var IHC = (function($) {
   }
 
   function _initMap() {
+    // Only init Mapbox if > breakpoint_medium, or on a body.single page (small sidebar maps)
     if ($('#map').length && (breakpoint_medium || $('body.single').length)) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
       map = L.mapbox.map('map', 'firebellydesign.0238ce0b', { zoomControl: false, attributionControl: false }).setView([41.843, -88.075], 11);
       
       mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 
+      mapIconRed = L.icon({
+        iconUrl: "/app/themes/ihc/dist/images/mapbox/marker-red.png",
+        iconSize: [25, 42],
+        iconAnchor: [12, 40],
+        popupAnchor: [0, -40],
+        className: "marker-red"
+      });
+      mapIconBlue = L.icon({
+        iconUrl: "/app/themes/ihc/dist/images/mapbox/marker-blue.png",
+        iconSize: [25, 42],
+        iconAnchor: [12, 40],
+        popupAnchor: [0, -40],
+        className: "marker-blue"
+      });
+
       // Set custom icons
       mapFeatureLayer.on('layeradd', function(e) {
         var marker = e.layer,
           feature = marker.feature;
-        marker.setIcon(L.icon(feature.properties.icon));
+        marker.setIcon(feature.properties.icon);
       });
 
       _getMapPoints();
@@ -137,7 +166,10 @@ var IHC = (function($) {
     if ($mapPoints.length) {
       // Any map-points on page? add to map
       $mapPoints.each(function() {
-        var $point = $(this).addClass('mapped');
+        var event_id = $(this).data('id');
+        var $point = $(this).addClass('mapped').hover(function() {
+          _highlightMapPoint(event_id);
+        }, _unHighlightMapPoints);
         if ($point.data('lng')) {
           mapGeoJSON.push({
               type: 'Feature',
@@ -147,14 +179,9 @@ var IHC = (function($) {
               },
               properties: {
                   title: $point.data('title'),
+                  event_id: $point.data('id'),
                   description: $point.data('desc'),
-                  icon: {
-                    "iconUrl": "/app/themes/ihc/dist/images/mapbox/marker.png",
-                    "iconSize": [25, 40],
-                    "iconAnchor": [12, 40],
-                    "popupAnchor": [0, -40],
-                    "className": "marker"
-                  }
+                  icon: mapIconRed
               }
           });
         }
@@ -164,13 +191,33 @@ var IHC = (function($) {
       // Set bounds to markers
       if ($('#map').hasClass('large')) {
         // Larger map centers on IL
-        map.setView([41.7068, -88.3658], 9);
+        map.setView([39.9, -90.5], 7);
       } else {
         // Smaller map zooms in on single point
         map.fitBounds(mapFeatureLayer.getBounds());
         map.setZoom(6);
       }
     }
+  }
+
+  function _highlightMapPoint(event_id) {
+    mapFeatureLayer.eachLayer(function(marker) {
+      if (marker.feature.properties.event_id === event_id) {
+        marker.setIcon(mapIconRed);
+        marker.setZIndexOffset(1000);
+      } else {
+        marker.setIcon(mapIconBlue);
+        marker.setZIndexOffset(0);
+      }
+    });
+    // mapFeatureLayer.setGeoJSON(mapGeoJSON);
+  }
+  function _unHighlightMapPoints() {
+    mapFeatureLayer.eachLayer(function(marker) {
+      marker.setIcon(mapIconRed);
+      marker.setZIndexOffset(0);
+    });
+    // mapFeatureLayer.setGeoJSON(mapGeoJSON);
   }
 
   // Handles main nav
@@ -336,6 +383,12 @@ var IHC = (function($) {
     // } 
   }
 
+  // Called on scroll
+  function _scroll(dir) {
+    var wintop = $(window).scrollTop();
+    $('#map').toggleClass('sticky', (wintop > mapTop));
+  }
+
   // Public functions
   return {
     init: _init,
@@ -343,6 +396,9 @@ var IHC = (function($) {
     delayed_resize: _delayed_resize,
     scrollBody: function(section, duration, delay) {
       _scrollBody(section, duration, delay);
+    },
+    setMapView: function(lat, lng, zoom) {
+      map.setView([lat, lng], zoom);
     }
   };
 

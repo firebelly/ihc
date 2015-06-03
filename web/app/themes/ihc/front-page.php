@@ -34,6 +34,10 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
 </section>
 
 <div id="map" class="large"></div>
+<?php 
+// homepage shows all current events on map
+echo \Firebelly\PostTypes\Event\get_events(['num_posts' => -1, 'map-points' => true]);
+?>
 
 <section class="event-cal">
   <h4 class="flag">Attend an Event</h4>

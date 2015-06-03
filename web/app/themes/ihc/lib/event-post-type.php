@@ -276,9 +276,14 @@ function get_events($options=[]) {
   $output = '';
   $show_view_all_button = (!empty($options['show_view_all_button']));
   foreach ($event_posts as $event_post):
-    ob_start();
-    include(locate_template('templates/article-event.php'));
-    $output .= ob_get_clean();
+    if (!empty($options['map-points'])):
+      $event = get_event_details($event_post);
+      $output .= '<span class="map-point" data-lat="' . $event->lat . '" data-lng="' . $event->lng . '" data-title="' . $event->title . '" data-desc="' . $event->desc . '" data-id="' . $event->ID . '"></span>';
+    else:
+      ob_start();
+      include(locate_template('templates/article-event.php'));
+      $output .= ob_get_clean();
+    endif;
   endforeach;
   return $output;
 }
