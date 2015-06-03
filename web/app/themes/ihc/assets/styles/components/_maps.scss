@@ -14,11 +14,6 @@
       width: 1200px;
       z-index: -1;
       height: 1000px;
-      &.sticky {
-        top: 0;
-        right: -$column-width;
-        position: fixed;
-      }
       // .marker-blue {
       //   opacity: .6;
       // }

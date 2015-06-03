@@ -5,8 +5,15 @@
   #map {
     top: 700px;
     left: auto;
-    right: -10%;
+    right: -500px;
+    margin-right: 15%;
     margin-left: 0;
+    &.sticky {
+      top: 0;
+      right: -500px;
+      margin-right: 18.15%; // don't ask
+      position: fixed;
+    }
   }
 }
 
