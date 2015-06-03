@@ -520,4 +520,3 @@ $wp_filter['wp_redirect_status'][10]['batcache'] = array( 'function' => array(&$
 ob_start(array(&$batcache, 'ob'));
 
 // It is safer to omit the final PHP closing tag.
-

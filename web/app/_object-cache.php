@@ -402,4 +402,3 @@ class WP_Object_Cache {
 		$this->cache_misses =& $this->stats['add'];
 	}
 }
-?>
