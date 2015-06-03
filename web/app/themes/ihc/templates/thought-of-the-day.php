@@ -15,7 +15,7 @@ if ($thought = \Firebelly\PostTypes\Thought\get_thought_of_the_day(!empty($focus
 
   <div class="thought-submitted-wrapper hide">
     <h4 class="flag">Thanks For Submitting</h4>
-    <h2 class="response">Thanks yo</h2>
+    <h2 class="response"></h2>
   </div>
 
   <div class="close-button"></div>
