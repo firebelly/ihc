@@ -38,7 +38,7 @@ function post_type() {
     'label'               => 'event',
     'description'         => 'Events',
     'labels'              => $labels,
-    'supports'            => array( 'title', 'editor'),
+    'supports'            => array( 'title', 'editor', 'thumbnail', ),
     'hierarchical'        => false,
     'public'              => true,
     'show_ui'             => true,
@@ -281,6 +281,7 @@ function get_events($options=[]) {
       $output .= '<span class="map-point" data-lat="' . $event->lat . '" data-lng="' . $event->lng . '" data-title="' . $event->title . '" data-desc="' . $event->desc . '" data-id="' . $event->ID . '"></span>';
     else:
       ob_start();
+      $show_images = !empty($options['show_images']);
       include(locate_template('templates/article-event.php'));
       $output .= ob_get_clean();
     endif;

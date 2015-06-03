@@ -1,4 +1,3 @@
-<?php while (have_posts()) : the_post(); ?>
 <?php 
 // support legacy publication_dates via custom field
 $publication_date = get_post_meta($post->ID, '_cmb2_publication_date', true);
@@ -42,4 +41,3 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
     </div>
   </aside>
 </article>
-<?php endwhile; ?>

@@ -28,7 +28,7 @@ $page_content = apply_filters('the_content', $post->post_content);
     <?php include(locate_template('templates/filters.php')); ?>
 
     <div class="events load-more-container article-list masonry">
-      <?php if ($event_posts = \Firebelly\PostTypes\Event\get_events(['focus_area' => $filter_focus_area, 'program' => $filter_program])): ?>
+      <?php if ($event_posts = \Firebelly\PostTypes\Event\get_events(['focus_area' => $filter_focus_area, 'program' => $filter_program, 'show_images' => true])): ?>
         <?= $event_posts ?>
       <?php else: ?>
         <div class="notice">

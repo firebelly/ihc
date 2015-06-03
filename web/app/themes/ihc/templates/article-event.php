@@ -1,9 +1,13 @@
 <?php 
 $event = \Firebelly\PostTypes\Event\get_event_details($event_post);
 $article_tags = \Firebelly\Utils\get_article_tags($event_post);
+$has_image_class = !empty($show_images) && has_post_thumbnail($event_post->ID) ? 'has-image' : '';
 ?>
-<article class="event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
+<article class="event map-point <?= $has_image_class ?>" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
   <div class="article-content">
+    <?php if (!empty($show_images) && $thumb = \Firebelly\Media\get_post_thumbnail($event_post->ID)): ?>
+      <a href="<?= get_the_permalink($event_post) ?>" class="article-thumb" style="background-image:url(<?= $thumb ?>);"></a>
+    <?php endif; ?>
     <time class="article-date flagged" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
     <div class="article-content-wrap"> 
       <h1 class="article-title"><a href="<?= get_permalink($event->ID); ?>"><?= $event->title ?></a></h1>
