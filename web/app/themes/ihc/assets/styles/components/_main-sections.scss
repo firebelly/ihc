@@ -69,12 +69,12 @@ aside.main {
   }
 }
 @include tablet {
-  aside.main {
+  .with-image aside.main {
     margin-top: -270px;
   }
-  .no-header-text aside.main {
-    margin-top: 0;
-  }
+  // .no-header-text aside.main {
+  //   margin-top: 0;
+  // }
 }
 .sidebar-content {
   h3 {

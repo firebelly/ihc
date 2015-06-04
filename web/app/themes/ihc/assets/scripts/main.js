@@ -10,6 +10,8 @@ var IHC = (function($) {
       breakpoint_array = [480,1000,1200],
       $content,
       $document,
+      $sidebar,
+      no_header_text,
       map,
       mapFeatureLayer,
       mapGeoJSON = [],
@@ -20,11 +22,14 @@ var IHC = (function($) {
 
   function _init() {
 
-      // Set screen size vars
-      _resize();
-
+      // Cache some common DOM queries
       $document = $(document);
       $content = $('main');
+      $sidebar = $('aside.main');
+      no_header_text = $('header.no-header-text').length;
+
+      // Set screen size vars
+      _resize();
 
       // Fit them vids!
       $content.fitVids();
@@ -83,11 +88,11 @@ var IHC = (function($) {
         e.preventDefault();
         var link = $(this).find('h1:first a,h2:first a');
         var href = link.attr('href');
-        if (href) { 
+        if (href) {
           if (e.metaKey || link.attr('target')) {
             window.open(href);
           } else {
-            location.href = href; 
+            location.href = href;
           }
         }
       }
@@ -100,12 +105,12 @@ var IHC = (function($) {
     } else {
       wpOffset = 0;
     }
-    element.velocity("scroll", { 
+    element.velocity("scroll", {
       duration: duration,
       delay: delay,
       offset: -wpOffset
     }, "easeOutSine");
-  } 
+  }
 
   function _initSearch() {
     $('.search-form:not(.mobile-search) .search-submit').on('click', function (e) {
@@ -132,7 +137,7 @@ var IHC = (function($) {
     if ($('#map').length && (breakpoint_medium || $('body.single').length)) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
       map = L.mapbox.map('map', 'firebellydesign.0238ce0b', { zoomControl: false, attributionControl: false }).setView([41.843, -88.075], 11);
-      
+
       mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 
       mapIconRed = L.icon({
@@ -374,13 +379,19 @@ var IHC = (function($) {
     breakpoint_small = (screenWidth > breakpoint_array[0]);
     breakpoint_medium = (screenWidth > breakpoint_array[1]);
     breakpoint_large = (screenWidth > breakpoint_array[2]);
+    if (breakpoint_medium && !no_header_text && $sidebar.length) {
+      var header_height = $('header.page-header').height();
+      $sidebar.css('margin-top', -(header_height-290));
+    } else {
+      $sidebar.css('margin-top', '');
+    }
   }
 
   // Called periodically for more intensive resize tasks
   function _delayed_resize() {
     // If (!breakpoint_medium) {
     //   $('.masonry').masonry('destroy');
-    // } 
+    // }
   }
 
   // Called on scroll
@@ -406,9 +417,8 @@ var IHC = (function($) {
 
 // Fire up the mothership
 jQuery(document).ready(IHC.init);
-// Zig-zag the mothership
-jQuery(window).resize(IHC.resize);
 
+// Zig-zag the mothership
 jQuery(window).resize(function($){
     // Instant resize functions
     IHC.resize();
