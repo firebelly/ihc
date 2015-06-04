@@ -25,7 +25,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
       </header>
 
       <div class="entry-content user-content">
-        <?php the_content(); ?>
+        <?php echo apply_filters('the_content', $post->post_content); ?>
       </div>
       <footer>
         <?php if ($article_tags): ?><div class="article-tags"><?= $article_tags ?></div><?php endif; ?>
