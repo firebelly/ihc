@@ -233,8 +233,7 @@ var IHC = (function($) {
       .on('click', function(e) {
         _showMobileNav();
       });
-    var mobileSearch = $('.search-form').clone();
-    mobileSearch.addClass('mobile-search').prependTo('.site-nav');
+    $('.search-form').clone().addClass('mobile-search').prependTo('.site-nav');
   }
 
   function _showMobileNav() {
