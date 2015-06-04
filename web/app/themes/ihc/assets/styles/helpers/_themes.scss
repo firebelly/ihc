@@ -151,6 +151,16 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
       }
     }
 
+    // Colored image headers
+    .page-header:not(.with-image) {
+      .container {
+        .image-wrap {
+          background-color: rgba($accent-color, .5);
+        }
+      }
+    }
+
+
     // Nav elements
     @include tablet {
       .site-nav li a:hover {

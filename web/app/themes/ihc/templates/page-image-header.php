@@ -16,6 +16,8 @@ $header_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_te
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 if ($secondary_header_text)
   $header_class .= ' with-secondary-header';
+if (!$header_text)
+  $header_class .= ' no-header-text';
 ?>
 
 <header class="page-header <?= $header_class ?>">

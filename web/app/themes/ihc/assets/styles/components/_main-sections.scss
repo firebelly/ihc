@@ -22,7 +22,7 @@ main {
   .columns {
     display: flex;
     .column {
-      
+
     }
   }
   .one-column {
@@ -44,7 +44,7 @@ main {
       float: left;
     }
   }
-}  
+}
 
 // Sidebars
 aside.main {
@@ -68,12 +68,14 @@ aside.main {
     margin: 30px 0 0;
   }
 }
-.with-image aside.main {
-  @include tablet {
+@include tablet {
+  aside.main {
     margin-top: -270px;
   }
+  .no-header-text aside.main {
+    margin-top: 0;
+  }
 }
-
 .sidebar-content {
   h3 {
     color: $color-bg;
@@ -136,7 +138,7 @@ aside.page-with-img {
 
   .our-work-sidebar p {
       margin-bottom: 20px;
-    
+
     a {
       @include font-style1;
       border: none;

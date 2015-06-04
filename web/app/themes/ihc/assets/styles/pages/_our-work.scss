@@ -5,19 +5,19 @@
   .share {
     display: block;
     margin: 20px 0;
+    color: $white;
+    a {
+      color: $white;
+    }
     @include tablet {
       margin: 0;
       width: 120px;
       position: absolute;
       top: 8px;
       right: 30px;
-      color: $white;
-      a {
-        color: $white;
-      }
     }
   }
-  .with-image .share {
+  .share {
     top: 58px;
   }
   ul.resources {

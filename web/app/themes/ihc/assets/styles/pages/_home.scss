@@ -2,6 +2,12 @@
 
 .home.page {
   .page-header {
+    .container .image-wrap {
+      margin-bottom: 80px;
+      @include tablet {
+        margin-bottom: 0;
+      }
+    }
     p.accent {
       @include font-style1;
       margin-bottom: 20px;
@@ -102,7 +108,7 @@
           display: block;
           margin: 20px 0 30px;
         }
-        
+
         .view-all {
           display: block;
         }
@@ -126,18 +132,18 @@
       margin: 20px 0 10px;
     }
   }
-  
+
   .events-buttons,
   .news-buttons {
     @include tablet {
-      margin: 30px 0 100px; 
+      margin: 30px 0 100px;
       text-align: center;
-      
+
       .view-all,
       .load-more {
         display: inline;
       }
-      
+
       a {
         display: inline-block;
         margin: 0;
