@@ -1,4 +1,4 @@
-<?php 
+<?php
 $event = \Firebelly\PostTypes\Event\get_event_details($post);
 $banner_text = $event->archived ? 'Past Event' : 'Attend An Event';
 $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
@@ -13,7 +13,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
     <?php endif; ?>
     <div class="post-inner">
       <header class="<?= $with_image_class ?>">
-        <h1 class="entry-title"><span><?= $post->post_title ?></span></h1>
+        <h1 class="article-title"><span><?= $post->post_title ?></span></h1>
       </header>
       <div class="entry-content user-content">
         <?= $event->body ?>
@@ -35,7 +35,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
 
       <h3>Where:</h3>
       <p><?= $event->venue ?>
-      <br><?= $event->address['address-1'] ?> 
+      <br><?= $event->address['address-1'] ?>
       <?php if (!empty($event->address['address-2'])): ?>
         <br><?= $event->address['address-2'] ?>
       <?php endif; ?>
