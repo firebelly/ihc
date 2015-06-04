@@ -42,7 +42,7 @@
   .day {
     font: 300 #{$xl}/30px $sans;
     letter-spacing: 0;
-  }    
+  }
 }
 
 // Article images with cutout
@@ -94,7 +94,7 @@
   .register::before {
     content: "\bb  ";
   }
-  .more::before,  
+  .more::before,
   .add-to-calendar::before {
     content: '+ ';
   }
@@ -106,6 +106,7 @@
   article {
     width: 100%;
   }
+  &.masonry .program,
   &.masonry .article,
   &.masonry .event {
     margin-bottom: 4px;
@@ -117,8 +118,10 @@
       width: 33.3%;
       .article-content {
         min-height: 250px;
-        margin-right: 4px;
       }
+    }
+    &.masonry .article-content {
+      margin-right: 4px;
     }
     .article-content:hover {
       background: $dk-blue;
@@ -166,7 +169,7 @@
       font: 300 #{$lg}/30px $sans;
       text-transform: capitalize;
       letter-spacing: .04em;
-        
+
       a {
         border-bottom: 1px $dk-blue solid;
       }
@@ -238,9 +241,6 @@
       cursor: pointer;
       width: 33.3%;
       float: left;
-      .article-content {
-        margin-right: 4px;
-      }
     }
   }
 
@@ -262,9 +262,6 @@ body.search .article-list {
     margin-bottom: 4px;
     @include tablet {
       width: 33.3%;
-      .article-content {
-        margin-right: 4px;
-      }
     }
   }
 }
