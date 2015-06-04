@@ -1,4 +1,4 @@
-<?php 
+<?php
 // support legacy publication_dates via custom field
 $publication_date = get_post_meta($post->ID, '_cmb2_publication_date', true);
 $post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($post->post_date);
@@ -15,7 +15,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
       <div class="article-thumb" style="background-image:url(<?= $thumb ?>);"></div>
     <?php endif; ?>
     <div class="post-inner">
-      <header class="<?= $with_image_class ?>">
+      <header class="no-header-text <?= $with_image_class ?>">
         <h1 class="article-title"><?php the_title(); ?></h1>
         <?php if ($byline_area = get_post_meta($post->ID, '_cmb2_post_byline', true)): ?>
           <div class="byline-area user-content">
@@ -34,7 +34,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
     </div>
     <?php comments_template('/templates/comments.php'); ?>
   </main>
-  
+
   <aside class="main">
     <div class="article-list">
       <?= \Firebelly\Utils\get_related_event_post($post) ?>

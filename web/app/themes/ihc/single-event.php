@@ -12,7 +12,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
       <div class="article-thumb" style="background-image:url(<?= $thumb ?>);"></div>
     <?php endif; ?>
     <div class="post-inner">
-      <header class="<?= $with_image_class ?>">
+      <header class="no-header-text <?= $with_image_class ?>">
         <h1 class="article-title"><span><?= $post->post_title ?></span></h1>
       </header>
       <div class="entry-content user-content">
