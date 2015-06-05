@@ -1,15 +1,14 @@
 <div class="content-wrap">
-  <header class="page-header">
+  <header class="page-header no-header-text">
     <div class="container">
       <div class="image-wrap">
-        <div class="header-text">
-          <h1><?= \Roots\Sage\Titles\title(); ?></h1>
-        </div>
+        <div class="header-text"></div>
       </div>
     </div>
   </header>
 
   <main>
+  <h4 class="flag"><?= \Roots\Sage\Titles\title(); ?></h4>
   <?php if (!have_posts()) : ?>
 
     <div class="alert alert-warning">
@@ -52,4 +51,10 @@
   <?php endif; ?>
 
   </main>
+
+  <aside class="main">
+    <div class="sidebar-content dark">
+    <?= do_shortcode('[focus_areas]') ?>
+    </div>
+  </aside>
 </div>
