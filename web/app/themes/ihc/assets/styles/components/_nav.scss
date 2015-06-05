@@ -189,7 +189,7 @@
 }
 .search-field {
   @include font-style3;
-  width: 0;
+  width: 1px;
   transition: all $transition-speed;
 
   &::placeholder {
