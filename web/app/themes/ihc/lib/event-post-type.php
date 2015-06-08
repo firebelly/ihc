@@ -175,6 +175,22 @@ function metaboxes( array $meta_boxes ) {
             'textarea_rows' => 4,
           ),
       ),
+      array(
+          'name'    => 'Partner(s)',
+          'id'      => $prefix . 'partner',
+          'type'    => 'wysiwyg',
+          'options' => array(
+            'textarea_rows' => 4,
+          ),
+      ),
+      array(
+          'name'    => 'Funder(s)',
+          'id'      => $prefix . 'funder',
+          'type'    => 'wysiwyg',
+          'options' => array(
+            'textarea_rows' => 4,
+          ),
+      ),
       // array(
       //     'name'    => 'Lat',
       //     'id'      => $prefix . 'lat',
@@ -197,16 +213,26 @@ function metaboxes( array $meta_boxes ) {
     'show_names'    => true, // Show field names on the left
     'fields'        => array(
       array(
-          'name'    => 'Cost',
-          'desc'    => 'Leave blank or set to 0 to show "Free. Open to the public."',
-          'id'      => $prefix . 'cost',
-          'type'    => 'text',
+        'name'    => 'Cost',
+        'desc'    => 'Leave blank or set to 0 to show "Free. Open to the public."',
+        'id'      => $prefix . 'cost',
+        'type'    => 'text',
       ),
       array(
-          'name'    => 'Registration URL',
-          'desc'    => 'If set, shows "Register for Event" link, and adds "RSVP is required." to the Cost text.',
-          'id'      => $prefix . 'registration_url',
-          'type'    => 'text_url',
+        'name'    => 'Registration URL',
+        'desc'    => 'If set, shows "Register for Event" link, and adds "RSVP is required." to the Cost text.',
+        'id'      => $prefix . 'registration_url',
+        'type'    => 'text_url',
+      ),
+      array(
+        'name'    => 'RSVP',
+        'id'      => $prefix . 'rsvp_text',
+        'type'    => 'radio_inline',
+        'show_option_none' => true,
+        'options' => array(
+          'required' => 'Required',
+          'recommended' => 'Recommended',
+        )
       ),
     ),
   );
@@ -434,8 +460,11 @@ function get_event_details($post) {
     'event_end' => get_post_meta( $post->ID, '_cmb2_event_end', true),
     'venue' => get_post_meta($post->ID, '_cmb2_venue', true),
     'sponsor' => get_post_meta($post->ID, '_cmb2_sponsor', true),
+    'funder' => get_post_meta($post->ID, '_cmb2_funder', true),
+    'partner' => get_post_meta($post->ID, '_cmb2_partner', true),
     'cost' => get_post_meta($post->ID, '_cmb2_cost', true),
     'registration_url' => get_post_meta($post->ID, '_cmb2_registration_url', true),
+    'rsvp_text' => get_post_meta($post->ID, '_cmb2_rsvp_text', true),
     'lat' => get_post_meta($post->ID, '_cmb2_lat', true),
     'lng' => get_post_meta($post->ID, '_cmb2_lng', true),
     'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time(),

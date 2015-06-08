@@ -5,24 +5,27 @@
 
 class EventCSVImporter {
   var $defaults = array(
+      'Ev_Type'                        => null, // focus area
+      'Ev_AtrCat_3_01_Description'     => null, // sub-focus area (not currently used)
       'Ev_Group'                       => null, // program
       'Ev_Start_Date'                  => null,
       'Ev_End_Date'                    => null,
       'Ev_Start_Time'                  => null,
       'Ev_End_Time'                    => null,
-      'Ev_Note_1_01_Actual_Notes'      => null, // body
-      'Ev_Note_1_02_Actual_Notes'      => null, // cost
-      'Ev_Note_1_03_Actual_Notes'      => null, // title
-      'Ev_Prt_1_01_CnBio_Name'         => null, // sponsor
-      'Ev_Prt_1_02_CnBio_Name'         => null, // location
-      'Ev_Prt_1_02_CnAdrPrf_Addrline1' => null,
-      'Ev_Prt_1_02_CnAdrPrf_Addrline2' => null,
-      'Ev_Prt_1_02_CnAdrPrf_City'      => null,
-      'Ev_Prt_1_02_CnAdrPrf_State'     => null,
-      'Ev_Prt_1_02_CnAdrPrf_ZIP'       => null,
-      'Ev_Prt_1_02_CnAdrPrf_County'    => null,
-      'focus_area'                     => null,
-      'registration_url'               => null,
+      'Ev_Note_1_01_Actual_Notes'      => null, // event registration URL
+      'Ev_Note_1_02_Actual_Notes'      => null, // body
+      'Ev_AtrCat_4_01_Description'     => null, // RSVP required (Yes or no/blank)
+      'Ev_AtrCat_4_01_Comments'        => null, // RSVP text (required/recommended)
+      'Ev_AtrCat_2_01_Description'     => null, // cost
+      'Ev_Note_1_04_Actual_Notes'      => null, // title
+      'Ev_Prt_2_01_Name'               => null, // sponsor
+      'Ev_Prt_1_01_CnBio_Name'         => null, // location
+      'Ev_Prt_1_01_CnAdrPrf_Addrline1' => null,
+      'Ev_Prt_1_01_CnAdrPrf_Addrline2' => null,
+      'Ev_Prt_1_01_CnAdrPrf_City'      => null,
+      'Ev_Prt_1_01_CnAdrPrf_State'     => null,
+      'Ev_Prt_1_01_CnAdrPrf_ZIP'       => null,
+      'Ev_Prt_1_01_CnAdrPrf_County'    => null,
   );
 
   var $log = array();
@@ -120,8 +123,8 @@ class EventCSVImporter {
     }
 
     // Commit query queue
-    $wpdb->query( 'COMMIT;' );
-    $wpdb->query( 'SET autocommit = 1;' );
+    $wpdb->query('COMMIT;');
+    $wpdb->query('SET autocommit = 1;');
 
     // Build response notices
     if ($num_skipped)
@@ -143,32 +146,30 @@ class EventCSVImporter {
   function create_post($csv_data) {
     $csv_data = array_merge($this->defaults, $csv_data);
     $new_post = array(
-      'post_title'   => $csv_data['Ev_Note_1_03_Actual_Notes'],
-      'post_content' => $csv_data['Ev_Note_1_01_Actual_Notes'],
+      'post_title'   => $csv_data['Ev_Note_1_04_Actual_Notes'],
+      'post_content' => $csv_data['Ev_Note_1_02_Actual_Notes'],
       'post_status'  => 'draft',
       'post_type'    => 'event',
     );
     $post_id = wp_insert_post($new_post);
 
     if ($post_id) {
-      // Add Sponsor
-      if ($csv_data['Ev_Prt_1_01_CnBio_Name']) {
-        update_post_meta($post_id, $this->prefix.'sponsor', $csv_data['Ev_Prt_1_01_CnBio_Name']);
-      }
-      
       // Only add price info if "free" isn't in description
-      if ($csv_data['Ev_Note_1_02_Actual_Notes'] && !preg_match('/free/i',$csv_data['Ev_Note_1_02_Actual_Notes'])) {
-        update_post_meta($post_id, $this->prefix.'cost', $csv_data['Ev_Note_1_02_Actual_Notes']);
+      // if ($csv_data['Ev_Note_1_02_Actual_Notes'] && !preg_match('/free/i',$csv_data['Ev_Note_1_02_Actual_Notes'])) {
+      if ($csv_data['Ev_AtrCat_2_01_Description']) {
+        update_post_meta($post_id, $this->prefix.'cost', $csv_data['Ev_AtrCat_2_01_Description']);
       }
 
       // Keep county data for giggles
-      if ($csv_data['Ev_Prt_1_02_CnAdrPrf_County'])
-        update_post_meta($post_id, $this->prefix.'county', $csv_data['Ev_Prt_1_02_CnAdrPrf_County']);
+      if ($csv_data['Ev_Prt_1_01_CnAdrPrf_County'])
+        update_post_meta($post_id, $this->prefix.'county', $csv_data['Ev_Prt_1_01_CnAdrPrf_County']);
 
       // Set times
       $event_start = strtotime($csv_data['Ev_Start_Date'] . ' ' . $csv_data['Ev_Start_Time']);
-      if (!$csv_data['Ev_End_Date']) {
+      if (!$csv_data['Ev_End_Date'] && !$csv_data['Ev_End_Time']) {
         $event_end = $event_start;
+      } else if ($csv_data['Ev_End_Time']) {
+        $event_end = strtotime($csv_data['Ev_Start_Date'] . ' ' . $csv_data['Ev_End_Time']);
       } else {
         $event_end = strtotime($csv_data['Ev_End_Date'] . ' ' . $csv_data['Ev_End_Time']);
       }
@@ -176,13 +177,13 @@ class EventCSVImporter {
       update_post_meta($post_id, $this->prefix.'event_end', $event_end);
 
       // Venue and address
-      update_post_meta($post_id, $this->prefix.'venue', $csv_data['Ev_Prt_1_02_CnBio_Name']);
+      update_post_meta($post_id, $this->prefix.'venue', $csv_data['Ev_Prt_1_01_CnBio_Name']);
       $address = [
-        'address-1' => $csv_data['Ev_Prt_1_02_CnAdrPrf_Addrline1'],
-        'address-2' => $csv_data['Ev_Prt_1_02_CnAdrPrf_Addrline2'],
-        'city' => $csv_data['Ev_Prt_1_02_CnAdrPrf_City'],
-        'state' => $csv_data['Ev_Prt_1_02_CnAdrPrf_State'],
-        'zip' => $csv_data['Ev_Prt_1_02_CnAdrPrf_ZIP'],
+        'address-1' => $csv_data['Ev_Prt_1_01_CnAdrPrf_Addrline1'],
+        'address-2' => $csv_data['Ev_Prt_1_01_CnAdrPrf_Addrline2'],
+        'city' => $csv_data['Ev_Prt_1_01_CnAdrPrf_City'],
+        'state' => $csv_data['Ev_Prt_1_01_CnAdrPrf_State'],
+        'zip' => $csv_data['Ev_Prt_1_01_CnAdrPrf_ZIP'],
       ];
       update_post_meta($post_id, $this->prefix.'address', $address);
 
@@ -191,12 +192,51 @@ class EventCSVImporter {
         $this->set_program($post_id, $csv_data['Ev_Group']);
 
       // Set Registration URL
-      if ($csv_data['registration_url'])
-        update_post_meta($post_id, $this->prefix.'registration_url', $csv_data['registration_url']);
+      if ($csv_data['Ev_Note_1_01_Actual_Notes'])
+        update_post_meta($post_id, $this->prefix.'registration_url', $csv_data['Ev_Note_1_01_Actual_Notes']);
+
+      // RSVP text
+      if ($csv_data['Ev_AtrCat_4_01_Description'] && preg_match('/yes/i',$csv_data['Ev_AtrCat_4_01_Description'])) {
+        if ($csv_data['Ev_AtrCat_4_01_Comments']) {
+          if (preg_match('/required/i',$csv_data['Ev_AtrCat_4_01_Comments'])) {
+            update_post_meta($post_id, $this->prefix.'rsvp_text', 'required');
+          } else if (preg_match('/recommended/i',$csv_data['Ev_AtrCat_4_01_Comments'])) {
+            update_post_meta($post_id, $this->prefix.'rsvp_text', 'recommended');
+          }
+        }
+      }
+
+      // Get sponsor/partner/funder fields
+      $sponsoring_orgs = $partners = $funders = [];
+      for ($i=1; $i <= 4; $i++) {
+        if ($csv_data['Ev_Prt_2_0'.$i.'_Name']) {
+          $sponsoring_orgs[] = $csv_data['Ev_Prt_2_0'.$i.'_Name'];
+        }
+        if ($csv_data['Ev_Prt_3_0'.$i.'_Name']) {
+          $partners[] = $csv_data['Ev_Prt_3_0'.$i.'_Name'];
+        }
+        if ($csv_data['Ev_Prt_4_0'.$i.'_Name']) {
+          $funders[] = $csv_data['Ev_Prt_4_0'.$i.'_Name'];
+        }
+      }
+
+      // Set sponsor/partner/funder fields
+      if (count($sponsoring_orgs)>0) {
+        update_post_meta($post_id, $this->prefix.'sponsor', implode('<br>', $sponsoring_orgs));
+      }
+      if (count($partners)>0) {
+        update_post_meta($post_id, $this->prefix.'partner', implode('<br>', $partners));
+      }
+      if (count($funders)>0) {
+        update_post_meta($post_id, $this->prefix.'funder', implode('<br>', $funders));
+      }
 
       // Set focus area
-      if ($csv_data['focus_area'])
-        $this->set_focus_area($post_id, $csv_data['focus_area']);
+      if ($csv_data['Ev_Type'])
+        $this->set_focus_area($post_id, $csv_data['Ev_Type']);
+
+      // if ($csv_data['Ev_AtrCat_3_01_Description'])
+      // todo: sub focus area handling
 
       // Trigger geolocation routines
       \Firebelly\PostTypes\Event\geocode_address($post_id);

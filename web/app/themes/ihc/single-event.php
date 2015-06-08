@@ -49,6 +49,20 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
         </div>
       <?php endif; ?>
 
+      <?php if (!empty($event->partner)): ?>
+        <div class="partners">
+          <h3>Partners:</h3>
+          <?= apply_filters('the_content', $event->partner); ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if (!empty($event->funder)): ?>
+        <div class="funders">
+          <h3>Funders:</h3>
+          <?= apply_filters('the_content', $event->funder); ?>
+        </div>
+      <?php endif; ?>
+
       <?php if (!($event->archived)): ?>
         <h3>Cost:</h3>
         <p class="cost">
@@ -57,8 +71,8 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
           <?php else: ?>
             <?= $event->cost ?>
           <?php endif; ?>
-          <?php if ($event->registration_url): ?>
-            <br>RSVP is required.
+          <?php if ($event->rsvp_text): ?>
+            <br>RSVP is <?= $event->rsvp_text ?>.
           <?php endif; ?>
         </p>
         <ul class="actions">
