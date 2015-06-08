@@ -114,26 +114,6 @@ function get_total_pages($category, $per_page) {
 }
 
 /**
- * Get related resources
- */
-function get_resources($post) {
-  $files = get_post_meta($post->ID, '_cmb2_resources', true);
-  if (empty($files)) return false;
-
-  $output = '<ul class="resources">';
-  foreach ((array)$files as $attachment_id => $attachment_url) {
-    $post = get_post($attachment_id);
-    if ($post) {
-      $output .= '<li><a target="_blank" href="' . $attachment_url . '">' . $post->post_title . '</a></li>';
-    } else {
-      $output .= '<li>Attachment not found.</li>';
-    }
-  }
-  $output .= '</ul>';
-  return $output;
-}
-
-/**
  * Get Related Event
  * @param  [Object or String] $post_or_focus_area [$post object or $focus_area slug]
  */

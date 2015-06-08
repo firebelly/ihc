@@ -127,6 +127,15 @@ function metaboxes( array $meta_boxes ) {
         'type' => 'file_list',
       ),
       array(
+        'name' => 'Resource Links',
+        'desc' => 'Shows below list of Resources',
+        'id'   => $prefix . 'resource_links',
+        'type' => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 4,
+        ),
+      ),
+      array(
         'name' => 'Additional Info',
         'desc' => 'Partners, Program Directors, etc',
         'id'   => $prefix . 'addl_info',
@@ -244,3 +253,33 @@ function shortcode_filters($atts) {
 
   return $output;
 }
+
+/**
+ * Get related resources
+ */
+function get_resources($post) {
+  $files = get_post_meta($post->ID, '_cmb2_resources', true);
+  $links = get_post_meta($post->ID, '_cmb2_resource_links', true);
+  if (!$files && !$links) return false;
+
+  $output = '<ul class="resources">';
+  if ($files) {
+    foreach ((array)$files as $attachment_id => $attachment_url) {
+      $post = get_post($attachment_id);
+      if ($post) {
+        $output .= '<li><a target="_blank" href="' . $attachment_url . '">' . $post->post_title . '</a></li>';
+      } else {
+        $output .= '<li>Attachment not found.</li>';
+      }
+    }
+  }
+  // Break up the resource_links field into LIs we can shove into the UL
+  if ($links) {
+    foreach (explode("\n", str_replace("\n\n","\n",strip_tags($links, '<a>'))) as $link) {
+      $output .= '<li>' . $link . '</li>';
+    }
+  }
+  $output .= '</ul>';
+  return $output;
+}
+

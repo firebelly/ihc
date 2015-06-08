@@ -45,7 +45,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
     </div>
     
     <div class="sidebar-content">
-    <?php if ($resources = Utils\get_resources($post)): ?>
+    <?php if ($resources = \Firebelly\PostTypes\Program\get_resources($post)): ?>
       <h3>Resources</h3>
       <?= $resources ?>
     <?php endif; ?>
