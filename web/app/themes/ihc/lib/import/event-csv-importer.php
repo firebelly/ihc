@@ -18,7 +18,6 @@ class EventCSVImporter {
       'Ev_AtrCat_4_01_Comments'        => null, // RSVP text (required/recommended)
       'Ev_AtrCat_2_01_Description'     => null, // cost
       'Ev_Note_1_04_Actual_Notes'      => null, // title
-      'Ev_Prt_2_01_Name'               => null, // sponsor
       'Ev_Prt_1_01_CnBio_Name'         => null, // location
       'Ev_Prt_1_01_CnAdrPrf_Addrline1' => null,
       'Ev_Prt_1_01_CnAdrPrf_Addrline2' => null,
