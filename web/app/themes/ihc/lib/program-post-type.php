@@ -64,7 +64,7 @@ add_action( 'init', __NAMESPACE__ . '\post_type', 0 );
  */
 function add_capabilities() {
   $role_admin = get_role('administrator');
-  // programs
+
   $role_admin->add_cap('edit_program');
   $role_admin->add_cap('read_program');
   $role_admin->add_cap('delete_program');
@@ -152,7 +152,8 @@ function metaboxes( array $meta_boxes ) {
       'title'        => __( 'Program Page Blocks', 'cmb2' ),
       'priority'      => 'low',
       'object_types' => array( 'program', ),
-    ) );
+    ) 
+  );
 
   $group_field_id = $cmb_group->add_field( array(
       'id'          => $prefix . 'page_blocks',
@@ -162,7 +163,7 @@ function metaboxes( array $meta_boxes ) {
           'group_title'   => __( 'Block {#}', 'cmb' ),
           'add_button'    => __( 'Add Another Block', 'cmb' ),
           'remove_button' => __( 'Remove Block', 'cmb' ),
-          'sortable'      => true, // beta
+          // 'sortable'      => true, // beta
       ),
   ) );
 
