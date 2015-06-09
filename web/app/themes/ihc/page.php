@@ -23,6 +23,9 @@ $has_header_text_class = get_post_meta($post->ID, '_cmb2_header_text', true) ? '
         <?= $body_content ?>
       </div>
     </div>
+
+    <?= \Firebelly\Utils\get_page_blocks($post) ?>
+
   </main>
 
   <?php if ($sidebar_content): ?>

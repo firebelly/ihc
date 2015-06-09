@@ -149,9 +149,9 @@ function metaboxes( array $meta_boxes ) {
    */
   $cmb_group = new_cmb2_box( array(
       'id'           => $prefix . 'metabox',
-      'title'        => __( 'Program Page Blocks', 'cmb2' ),
+      'title'        => __( 'Page Blocks', 'cmb2' ),
       'priority'      => 'low',
-      'object_types' => array( 'program', ),
+      'object_types' => array( 'program', 'page', ),
     ) 
   );
 

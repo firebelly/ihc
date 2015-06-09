@@ -15,27 +15,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
   <?php get_template_part('templates/page', 'image-header'); ?>
 
   <main>
-    <?php
-    $page_blocks = get_post_meta($post->ID, '_cmb2_page_blocks', true);
-
-    if ($page_blocks):
-      foreach ($page_blocks as $page_block):
-        if (empty($page_block['hide_block'])):
-          $block_title = $block_body = '';
-          if (!empty($page_block['title']))
-            $block_title = $page_block['title'];
-          if (!empty($page_block['body']))
-            $block_body = apply_filters('the_content', $page_block['body']);
-          ?>
-          <div class="page-block">
-            <?php if ($block_title): ?>
-              <h4 class="flag"><?= $block_title ?></h4>
-            <?php endif ?>
-            <div class="user-content"><?= $block_body ?></div>
-          </div>
-        <?php endif; ?>
-      <?php endforeach; ?>
-    <?php endif; ?>
+    <?= Utils\get_page_blocks($post) ?>
   </main>
 
   <aside class="main">

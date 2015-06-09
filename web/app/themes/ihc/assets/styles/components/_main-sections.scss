@@ -30,7 +30,8 @@ main {
     background: $white;
     min-height: 140px;
     .user-content {
-      padding: 20px;
+      padding: 20px #{$column-width/2 * 22/15};
+      margin-bottom: 60px;
       @include tablet {
         padding: 20px #{$column-width/2 * 22/15};
       }
@@ -42,6 +43,21 @@ main {
     .column {
       background: $white;
       float: left;
+    }
+  }
+}
+
+// Page blocks (used on pages and programs)
+.page-block {
+  position: relative;
+
+  .user-content {
+    position: relative;
+    background: $white;
+    padding: 20px #{$column-width/2 * 22/15};
+    margin-bottom: 60px;
+    @include tablet {
+      padding: 20px #{$column-width/2 * 22/15};
     }
   }
 }
