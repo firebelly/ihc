@@ -11,8 +11,11 @@ if ($post->post_type == 'program')
   $header_banner_text = $post->post_title;
 else
   $header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));
+
 // Custom fields for header text
-$header_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_text', true));
+$header_text = get_post_meta($post->ID, '_cmb2_header_text', true);
+$header_text = str_replace("\n","<br>",strip_tags($header_text, '<u><br><br/>'));
+
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 if ($secondary_header_text)
   $header_class .= ' with-secondary-header';
@@ -30,7 +33,7 @@ if (!$header_text)
       <?php get_template_part('templates/share'); ?>
 
       <div class="header-text">
-        <?= $header_text ?>
+        <h1><?= $header_text ?></h1>
       </div>
     </div>
   </div>
