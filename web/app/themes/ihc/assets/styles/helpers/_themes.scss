@@ -152,7 +152,7 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
     }
 
     // Colored image headers
-    .page-header:not(.with-image) {
+    .page-header:not(.with-image):not(.no-header-text) {
       .container {
         .image-wrap {
           background-color: rgba($accent-color, .5);
