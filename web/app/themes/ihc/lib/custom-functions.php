@@ -150,7 +150,7 @@ function get_related_event_post($post_or_focus_area) {
  */
 function get_related_news_post($post_or_focus_area) {
   global $news_post;
-  $output = $posts = false;
+  $output = $posts = $focus_area = false;
   if (is_object($post_or_focus_area)) {
     // If post_type is Program see if there's a directly related Post
     if ($post_or_focus_area->post_type == 'program') {
@@ -171,7 +171,7 @@ function get_related_news_post($post_or_focus_area) {
   }
 
   // Didn't find a blog article directly related above? Find one by Focus Area
-  if (!$posts)
+  if (!$posts && !empty($focus_area))
     $posts = get_posts('numberposts=1&focus_area='.$focus_area);
 
   if ($posts) {
