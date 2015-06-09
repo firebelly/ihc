@@ -157,10 +157,12 @@ function get_related_news_post($post_or_focus_area) {
       $posts = get_posts([
         'numberposts' => 1,
         'meta_query' => [
-          'key' => '_cmb2_related_program',
-          'value' => [$post_or_focus_area->ID],
-          'compare' => 'IN'
-        ]
+          [
+            'key' => '_cmb2_related_program',
+            'value' => [$post_or_focus_area->ID],
+            'compare' => 'IN'
+          ],
+        ],
       ]);
     }
     // Can't find one? Get the Focus Area for query below
