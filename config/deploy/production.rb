@@ -1,4 +1,6 @@
 set :stage, :production
+set :application, 'ih_wp'
+set :login, 'ilhumanities'
 
 # Simple Role Syntax
 # ==================
@@ -8,7 +10,7 @@ set :stage, :production
 
 # Extended Server Syntax
 # ======================
-server 'ihc.firebelly.co', user: fetch(:login), roles: %w{web app db}
+server 'ilhumanities.webfactional.com', user: fetch(:login), roles: %w{web app db}
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
@@ -21,4 +23,3 @@ server 'ihc.firebelly.co', user: fetch(:login), roles: %w{web app db}
 #  }
 
 fetch(:default_env).merge!(wp_env: :production)
-
