@@ -138,6 +138,11 @@ var IHC = (function($) {
       L.mapbox.accessToken = 'pk.eyJ1IjoiZmlyZWJlbGx5ZGVzaWduIiwiYSI6IlZMd0JwWWcifQ.k9GG6CFOLrVk7kW75z6ZZA';
       map = L.mapbox.map('map', 'firebellydesign.0238ce0b', { zoomControl: false, attributionControl: false }).setView([41.843, -88.075], 11);
 
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.doubleClickZoom.disable();
+      map.scrollWheelZoom.disable();
+
       mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 
       mapIconRed = L.icon({
@@ -160,6 +165,30 @@ var IHC = (function($) {
         var marker = e.layer,
           feature = marker.feature;
         marker.setIcon(feature.properties.icon);
+      });
+
+      mapFeatureLayer.on('click', function(e) {
+        e.layer.closePopup();
+        var event_url = e.layer.feature.properties.event_url;
+        location.href = event_url;
+      });
+      mapFeatureLayer.on('mouseover', function(e) {
+        // e.layer.openPopup();
+        var event_id = e.layer.feature.properties.event_id;
+        var article = $('.events article[data-id='+event_id+']');
+        if (article.length) {
+          article.addClass('hover');
+        }
+        _highlightMapPoint(event_id);
+      });
+      mapFeatureLayer.on('mouseout', function(e) {
+        e.layer.closePopup();
+        var event_id = e.layer.feature.properties.event_id;
+        var article = $('.events article[data-id='+event_id+']');
+        if (article.length) {
+          article.removeClass('hover');
+        }
+        _unHighlightMapPoints();
       });
 
       _getMapPoints();
@@ -185,6 +214,7 @@ var IHC = (function($) {
               properties: {
                   title: $point.data('title'),
                   event_id: $point.data('id'),
+                  event_url: $point.data('url'),
                   description: $point.data('desc'),
                   icon: mapIconRed
               }
@@ -233,7 +263,8 @@ var IHC = (function($) {
       .on('click', function(e) {
         _showMobileNav();
       });
-    $('.search-form').clone().addClass('mobile-search').prependTo('.site-nav');
+    var mobileSearch = $('.search-form').clone().addClass('mobile-search');
+    mobileSearch.prependTo('.site-nav');
   }
 
   function _showMobileNav() {

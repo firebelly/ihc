@@ -11,6 +11,8 @@ $header_text = apply_filters('the_content', get_post_meta($post->ID, '_cmb2_head
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
 ?>
 
+<div id="map" class="large"></div>
+
 <header class="page-header with-image">
   <div class="container">
     <div class="image-wrap"<?= $header_bg ?>>
@@ -33,7 +35,6 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
   </ul>
 </section>
 
-<div id="map" class="large"></div>
 <?php 
 // homepage shows all current events on map
 echo \Firebelly\PostTypes\Event\get_events(['num_posts' => -1, 'map-points' => true]);

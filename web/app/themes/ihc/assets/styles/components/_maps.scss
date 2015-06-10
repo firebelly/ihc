@@ -12,11 +12,8 @@
       left: -500px;
       margin-left: 10%;
       width: 1200px;
-      z-index: -1;
       height: 1000px;
-      // .marker-blue {
-      //   opacity: .6;
-      // }
+      cursor: default;
       // Give leaflet panes layout to match #map
       .leaflet-map-pane,
       .leaflet-tile-pane {

@@ -304,7 +304,8 @@ function get_events($options=[]) {
   foreach ($event_posts as $event_post):
     if (!empty($options['map-points'])):
       $event = get_event_details($event_post);
-      $output .= '<span class="map-point" data-lat="' . $event->lat . '" data-lng="' . $event->lng . '" data-title="' . $event->title . '" data-desc="' . $event->desc . '" data-id="' . $event->ID . '"></span>';
+      $url = get_permalink($event_post);
+      $output .= '<span class="map-point" data-url="' . $url . '" data-lat="' . $event->lat . '" data-lng="' . $event->lng . '" data-title="' . $event->title . '" data-desc="' . $event->desc . '" data-id="' . $event->ID . '"></span>';
     else:
       ob_start();
       $show_images = !empty($options['show_images']);

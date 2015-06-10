@@ -123,6 +123,7 @@
     &.masonry .article-content {
       margin-right: 4px;
     }
+    .hover .article-content,
     .article-content:hover {
       background: $dk-blue;
       .article-date {
@@ -220,6 +221,7 @@
     line-height: 20px;
   }
   @include tablet {
+    .event.hover .article-content,
     .event .article-content:hover {
       background: $white;
       color: $dk-blue;
