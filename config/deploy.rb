@@ -2,9 +2,6 @@ set :application, 'ihc'
 set :login, 'firebelly'
 set :repo_url, 'git@github.com:firebelly/ihc.git'
 
-# path to composer
-SSHKit.config.command_map[:composer] = "php54 /home/#{fetch(:login)}/bin/composer.phar"
-
 # Branch options
 # Prompts for the branch name (defaults to current branch)
 #ask :branch, -> { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -15,7 +12,7 @@ set :branch, :master
 
 set :deploy_to, -> { "/home/#{fetch(:login)}/webapps/#{fetch(:application)}" }
 
-set :tmp_dir, "/home/#{fetch(:login)}/tmp"
+set :tmp_dir, -> { "/home/#{fetch(:login)}/tmp" }
 
 # Use :debug for more verbose output when troubleshooting
 set :log_level, :info
@@ -74,7 +71,16 @@ end
 set :theme_path, Pathname.new('web/app/themes/ihc')
 set :local_app_path, Pathname.new(File.dirname(__FILE__)).join('../')
 set :local_theme_path, fetch(:local_app_path).join(fetch(:theme_path))
- 
+
+# Set path to composer
+namespace :deploy do
+  before :starting, :map_composer_command do
+      on roles(:app) do |server|
+          SSHKit.config.command_map[:composer] = "php54 /home/#{fetch(:login)}/bin/composer.phar"
+      end
+  end
+end
+
 namespace :deploy do
   task :compile_assets do
     run_locally do
