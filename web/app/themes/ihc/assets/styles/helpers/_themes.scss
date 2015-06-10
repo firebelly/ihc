@@ -96,6 +96,7 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         color: $bg-color;
       }
       @include tablet {
+        &.hover,
         &:hover {
           color: $dk-blue;
           p,
