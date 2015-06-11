@@ -24,6 +24,7 @@
     height: 150px;
   }
   .event-details {
+    @include clearfix;
     background: $white;
     padding: 25px;
     margin-bottom: 60px;
