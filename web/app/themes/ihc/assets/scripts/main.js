@@ -293,7 +293,7 @@ var IHC = (function($) {
       var post_type = $load_more.attr('data-post-type') ? $load_more.attr('data-post-type') : 'news';
       var page = parseInt($load_more.attr('data-page-at'));
       var per_page = parseInt($load_more.attr('data-per-page'));
-      var past_events = (post_type==='events') ? parseInt($load_more.attr('data-past-events')) : 0;
+      var past_events = (post_type==='event') ? parseInt($load_more.attr('data-past-events')) : 0;
       var focus_area = $load_more.attr('data-focus-area');
       var program = $load_more.attr('data-program');
       var more_container = $load_more.parents('section,main').find('.load-more-container');
