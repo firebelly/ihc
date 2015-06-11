@@ -96,7 +96,7 @@ class EventCSVImporter {
         // Check if post already exists in db
         $event_start = strtotime($csv_data['Ev_Start_Date'] . ' ' . $csv_data['Ev_Start_Time']);
         $existing_post_id = $wpdb->get_var($wpdb->prepare("
-          SELECT ID FROM `wp_posts` p
+          SELECT ID FROM {$wpdb->posts} p
           LEFT JOIN wp_postmeta pm ON (p.ID=pm.post_id AND pm.meta_key='_cmb2_event_start')
           WHERE p.post_title = %s 
           AND p.post_type = 'event' 

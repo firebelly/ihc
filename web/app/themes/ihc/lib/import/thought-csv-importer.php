@@ -75,7 +75,7 @@ class ThoughtCSVImporter {
       foreach ($csv->connect() as $csv_data) {
         // Check if post already exists in db
         $existing_post_id = $wpdb->get_var($wpdb->prepare(
-          "SELECT ID FROM `wp_posts` WHERE post_content LIKE %s AND post_type = 'thought' AND post_status = 'publish'", convert_chars($csv_data['thought'])
+          "SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE %s AND post_type = 'thought' AND post_status = 'publish'", convert_chars($csv_data['thought'])
         ));
         if ($existing_post_id) {
           // wp_delete_post($existing_post_id, true);
