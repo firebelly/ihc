@@ -198,9 +198,6 @@ function get_programs($focus_area='') {
   $args = array(
     'numberposts' => -1,
     'post_type' => 'program',
-    'orderby' => ['title' => 'ASC'],
-    // 'meta_key' => '_cmb2_program_year',
-    // 'orderby' => ['meta_value_num' => 'DESC', 'title' => 'ASC'],
     );
   if ($focus_area != '') {
     $args['tax_query'] = array(
