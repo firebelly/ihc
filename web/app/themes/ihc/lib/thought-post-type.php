@@ -170,11 +170,12 @@ function get_thought_of_the_day() {
   foreach ($thought_posts as $post):
     $body = apply_filters('the_content', $post->post_content);
     $author = get_post_meta( $post->ID, '_cmb2_author', true );
-    
-    if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
-      $author .= '<br><a href="'.get_term_link($focus).'">'.$focus->name.'</a>';
-    else
-      $author .= '<br>Humanities';
+
+    // hiding Focus Area, see http://issues.firebelly.co/issues/2067 6/11/15
+    // if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
+    //   $author .= '<br><a href="'.get_term_link($focus).'">'.$focus->name.'</a>';
+    // else
+    //   $author .= '<br>Humanities';
 
     $output = <<<HTML
      <article>
