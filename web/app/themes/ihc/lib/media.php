@@ -75,7 +75,7 @@ function delete_background_images($post_id) {
 
   $pathinfo = pathinfo($metadata['file']);
   $upload_dir = wp_upload_dir();
-  $base_dir = $upload_dir['basedir'] . '/backgrounds/';
+  $base_dir = trailingslashit($upload_dir['basedir']) . 'backgrounds/';
   $files = scandir($base_dir);
 
   foreach($files as $file) {
