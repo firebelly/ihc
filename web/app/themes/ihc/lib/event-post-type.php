@@ -477,7 +477,7 @@ function get_event_details($post) {
     $event['time_txt'] = $event['start_time'];
   }
   
-  $event['archived'] = ($event['event_end'] < time());
+  $event['archived'] = empty($event['event_end']) ? ($event['event_start'] < time()) : ($event['event_end'] < time());
   $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt']; // used in map pins
   $event['year'] = date('Y', $event['event_start']);
 
