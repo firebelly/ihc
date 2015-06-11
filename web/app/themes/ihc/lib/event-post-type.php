@@ -112,7 +112,7 @@ function custom_columns($column){
       } else {
         $date_txt = date('m/d/Y g:iA', $timestamp_start);
       }
-      echo $date_txt . ($timestamp_end < time() ? ' - <strong class="post-state">Past Event</strong>' : '');
+      echo $date_txt . ($timestamp_end < current_time('timestamp') ? ' - <strong class="post-state">Past Event</strong>' : '');
     } else {
       if (array_key_exists($column, $custom))
         echo $custom[$column][0];
@@ -255,7 +255,7 @@ function get_num_events($options=[]) {
     AND wp.post_type = 'event'
     AND wm.meta_value " . (!empty($options['past']) ? '<=' : '>') . " %s
     ",
-    time()
+    current_time('timestamp')
   ));
   return $count;
 }
@@ -276,7 +276,7 @@ function get_events($options=[]) {
   $args['meta_query'] = [
     [
       'key' => '_cmb2_event_start',
-      'value' => time(),
+      'value' => current_time('timestamp'),
       'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
     ]
   ];
@@ -468,7 +468,7 @@ function get_event_details($post) {
     'rsvp_text' => get_post_meta($post->ID, '_cmb2_rsvp_text', true),
     'lat' => get_post_meta($post->ID, '_cmb2_lat', true),
     'lng' => get_post_meta($post->ID, '_cmb2_lng', true),
-    'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . time(),
+    'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . current_time('timestamp'),
   ];
   $event['start_time'] = date('g:iA', $event['event_start']);
   if (!empty($event['event_end']) && $event['event_end'] != $event['event_start']) {
@@ -477,7 +477,7 @@ function get_event_details($post) {
     $event['time_txt'] = $event['start_time'];
   }
   
-  $event['archived'] = empty($event['event_end']) ? ($event['event_start'] < time()) : ($event['event_end'] < time());
+  $event['archived'] = empty($event['event_end']) ? ($event['event_start'] < current_time('timestamp')) : ($event['event_end'] < current_time('timestamp'));
   $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt']; // used in map pins
   $event['year'] = date('Y', $event['event_start']);
 
@@ -504,7 +504,7 @@ function get_event_details($post) {
 //     $meta_query = array(
 //       array(
 //         'key' => '_cmb2_event_start',
-//         'value' => time(),
+//         'value' => current_time('timestamp'),
 //         'compare' => (get_query_var('past_events') ? '<=' : '>')
 //       )
 //     );
