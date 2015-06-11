@@ -198,6 +198,7 @@ function get_programs($focus_area='') {
   $args = array(
     'numberposts' => -1,
     'post_type' => 'program',
+    'orderby' => ['title' => 'ASC'],
     );
   if ($focus_area != '') {
     $args['tax_query'] = array(
