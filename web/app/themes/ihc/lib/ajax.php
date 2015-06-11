@@ -39,7 +39,7 @@ function load_more_posts() {
     $args['meta_query'] = [
       [
         'key' => '_cmb2_event_start',
-        'value' => time(),
+        'value' => current_time('timestamp'),
         'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
       ]
     ];
