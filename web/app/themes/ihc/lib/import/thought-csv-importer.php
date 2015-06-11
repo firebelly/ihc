@@ -72,7 +72,10 @@ class ThoughtCSVImporter {
       // pad shorter rows with empty values
       $csv->symmetrize();
 
-      foreach ($csv->connect() as $csv_data) {
+      foreach ($csv->connect() as $csv_row) {
+        // Merge row with defaults
+        $csv_data = wp_parse_args($csv_row, $this->defaults);
+
         // Check if post already exists in db
         $existing_post_id = $wpdb->get_var($wpdb->prepare(
           "SELECT ID FROM {$wpdb->posts} WHERE post_content LIKE %s AND post_type = 'thought' AND post_status = 'publish'", convert_chars($csv_data['thought'])

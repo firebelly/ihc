@@ -550,7 +550,7 @@ function event_csv_upload() {
  */
 add_action('admin_menu', __NAMESPACE__ . '\import_csv_admin_menu');
 function import_csv_admin_menu() {
-  add_submenu_page('edit.php?post_type=event', 'Import CSV', 'Import CSV', 'manage_options', 'csv-importer', __NAMESPACE__ . '\import_csv_admin_form');
+  add_submenu_page('edit.php?post_type=event', 'Import CSV', 'Import CSV', 'manage_options', 'events-csv-importer', __NAMESPACE__ . '\import_csv_admin_form');
 }
 
 /**

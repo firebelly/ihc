@@ -317,7 +317,7 @@ function thought_csv_upload() {
  */
 add_action('admin_menu', __NAMESPACE__ . '\import_csv_admin_menu');
 function import_csv_admin_menu() {
-  add_submenu_page('edit.php?post_type=thought', 'Import CSV', 'Import CSV', 'manage_options', 'csv-importer', __NAMESPACE__ . '\import_csv_admin_form');
+  add_submenu_page('edit.php?post_type=thought', 'Import CSV', 'Import CSV', 'manage_options', 'thoughts-csv-importer', __NAMESPACE__ . '\import_csv_admin_form');
 }
 
 /**

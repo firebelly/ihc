@@ -92,7 +92,10 @@ class EventCSVImporter {
       // pad shorter rows with empty values
       $csv->symmetrize();
 
-      foreach ($csv->connect() as $csv_data) {
+      foreach ($csv->connect() as $csv_row) {
+        // Merge row with defaults
+        $csv_data = wp_parse_args($csv_row, $this->defaults);
+
         // Check if post already exists in db
         $event_start = strtotime($csv_data['Ev_Start_Date'] . ' ' . $csv_data['Ev_Start_Time']);
         $existing_post_id = $wpdb->get_var($wpdb->prepare("
