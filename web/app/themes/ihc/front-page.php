@@ -10,7 +10,7 @@ $header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_he
 $header_text = apply_filters('the_content', get_post_meta($post->ID, '_cmb2_header_text', true));
 $header_text = str_replace("\n","<br>",strip_tags($header_text, '<u><br><br/>'));
 $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text', true);
-$secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><br><br/><p>');
+$secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><br><br/>');
 ?>
 
 <div id="map" class="large"></div>
@@ -19,7 +19,7 @@ $secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><
   <div class="container">
     <div class="image-wrap"<?= $header_bg ?>>
       <h2 class="flag"><?= $header_banner_text ?></h2>
-      <?= $header_text ?>
+      <h1><?= $header_text ?></h1>
       <p class="accent"><?= $secondary_header_text ?></p>
     </div>
   </div>
