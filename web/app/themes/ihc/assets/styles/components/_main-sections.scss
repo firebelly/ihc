@@ -132,7 +132,7 @@ aside.main {
     }
   }
 
-  // sidebar large focus lists
+  // Sidebar large Focus Area lists
   .focus-list {
     margin: 20px 0;
     padding: 0;
@@ -150,42 +150,6 @@ aside.main {
         color: $color-bg;
         border-bottom: 2px solid $color-bg;
       }
-    }
-  }
-}
-
-//pages with header img & thought of day section
-aside.page-with-img {
-  margin-top: -270px;
-
-  .our-work-sidebar p {
-      margin-bottom: 20px;
-
-    a {
-      @include font-style1;
-      border: none;
-      margin-bottom: 50px;
-    }
-  }
-
-  .support-us-sidebar p a {
-      color: $white;
-      border-bottom: 1px solid $white;
-      font-weight: 700;
-  }
-
-  .single-program-sidebar,
-  .contacts {
-    padding: 30px #{$column-width/2 * 22/5} 30px 0;
-  }
-
-  .single-program-sidebar {
-    h4 {
-      text-transform: capitalize;
-      color: $dk-blue;
-      font-size: 14px;
-      margin-bottom: 0;
-      font-weight: 700;
     }
   }
 }
