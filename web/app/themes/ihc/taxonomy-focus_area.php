@@ -13,6 +13,7 @@ if ($header_image) {
 }
 $header_text = $focus_area->description;
 $secondary_header_text = Taxonomy_MetaData::get(get_query_var('taxonomy'), $focus_area->term_id, 'secondary_header_text');
+$secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><br><br/><p>');
 $with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header' : '';
 ?>
 
