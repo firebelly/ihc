@@ -61,6 +61,7 @@
     }
   }
   &.no-header-text .container {
+    margin-top: 80px;
     .image-wrap {
       padding: 0;
     }
@@ -70,7 +71,6 @@
         min-height: 0;
       }
       float: left;
-      margin-top: 50px;
       width: #{$column-width * 15};
     }
   }
