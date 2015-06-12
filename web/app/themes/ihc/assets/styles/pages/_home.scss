@@ -133,6 +133,10 @@
     }
   }
 
+  .events-buttons.masonry-me {
+    display: none;
+  }
+
   .events-buttons,
   .news-buttons {
     @include tablet {

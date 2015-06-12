@@ -130,13 +130,15 @@ aside.main {
 
   // sidebar large focus lists
   .focus-list {
-    margin-top: 20px;
+    margin: 20px 0 0 0;
+    padding: 0;
     li {
       font: 900 #{$lg}/30px $sans;
       text-transform: uppercase;
       letter-spacing: .2em;
       @extend .smooth;
       margin-bottom: 20px;
+      padding: 0;
       &:last-child {
         margin-bottom: 0;
       }
