@@ -31,7 +31,7 @@ $has_header_text_class = get_post_meta($post->ID, '_cmb2_header_text', true) ? '
   <?php if ($sidebar_content): ?>
     <aside class="main">
       <?php if ($post->post_title==='About Us') include(locate_template('templates/thought-of-the-day.php')); ?>
-      <div class="sidebar-content dark">
+      <div class="sidebar-content user-content dark">
         <?= $sidebar_content ?>
       </div>
     </aside>

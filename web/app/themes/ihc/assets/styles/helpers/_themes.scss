@@ -53,11 +53,25 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
     // Sidebars
     .sidebar-content {
       &.dark {
-        h3 {
-          color: $bg-color;
-        }
+        h3,
+        figcaption,
         p {
           color: $bg-color;
+        }
+        .button {
+          color: $bg-color;
+          a { 
+            color: $bg-color;
+          }
+          border-color: $bg-color;
+          &:hover {
+            background: $bg-color;
+            a {
+              color: $dk-blue;
+            }
+            color: $dk-blue;
+            border-color: $bg-color !important;
+          }
         }
         .focus-list a {
           color: $bg-color;
