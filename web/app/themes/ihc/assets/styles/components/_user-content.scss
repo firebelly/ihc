@@ -1,34 +1,16 @@
 // Styling of content that is editable in wysiwyg
 
 .user-content {
-  h1 {
-    @include font-style2;
-    font-size: $xl;
-
-    a {
-      border-bottom: 3px solid $dk-blue;
-    }
-  }
-  h2 {
-    @include font-style1;
-    font-size: $lg;
-    display:inline-block;
-    line-height: 40px;
-    span {
-      border-bottom:3px solid $dk-blue;
-    }
-  }
+  h1,
+  h2,
   h3 {
     margin: 20px 0;
     @include font-style1;
-    color: $dk-blue;
   }
   h4 {
-    color: $dk-blue;
     font: 700 #{$med}/1.4 $sans;
     letter-spacing: 0;
     text-transform: none;
-    margin: 0;
   }
   // div,
   figcaption,

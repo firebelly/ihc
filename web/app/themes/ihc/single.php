@@ -19,7 +19,11 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
         <h1 class="article-title"><?php the_title(); ?></h1>
         <?php if ($byline_area = get_post_meta($post->ID, '_cmb2_post_byline', true)): ?>
           <div class="byline-area user-content">
-            <?php echo apply_filters('the_content', $byline_area); ?>
+            <?php 
+            $byline_area = str_replace(['<h4>','</h4>'],['<p>','</p>'],$byline_area);
+            $byline_area = strip_tags($byline_area, '<a><br><br/><p>');
+            echo apply_filters('the_content', $byline_area); 
+            ?>
           </div>
         <?php endif; ?>
       </header>
