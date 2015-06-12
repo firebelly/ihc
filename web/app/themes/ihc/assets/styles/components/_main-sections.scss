@@ -93,6 +93,7 @@ aside.main {
   // }
 }
 .sidebar-content {
+  @include clearfix;
   h3 {
     color: $color-bg;
     margin: 30px 0 10px;
