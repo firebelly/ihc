@@ -13,7 +13,7 @@
      </nav>
      <div class="disclaimer show-for-medium-up">
       <p>Illinois Humanities respects the privacy of its audiences and will at no time sell or distribute personal information to any party not directly affiliated with Illinois Humanities and its programs.</p>
-      <p>Illinois Humanities is supported in part by the National Endowment for the Humanities (NEH) and the Illinois General Assembly [through the Illinois Arts Council, a state agency], as well as by contributions from individuals, foundations and corporations.</p>
+      <p>Illinois Humanities is supported in part by the National Endowment for the Humanities (NEH) and the Illinois General Assembly [through the Illinois Arts Council Agency], as well as by contributions from individuals, foundations and corporations.</p>
       <p>Any views, findings, conclusions, or recommendations expressed by speakers, program participants, or audiences do not necessarily reflect those of the NEH, the Illinois Humanities, our partnering organizations or our funders.</p>
      </div>
      <?php
