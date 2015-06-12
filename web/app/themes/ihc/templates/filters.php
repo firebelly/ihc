@@ -34,7 +34,7 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
             if ($post_type=='event') {
               $event_posts = $wpdb->get_results(
                 "SELECT ID FROM {$wpdb->posts} p
-                INNER JOIN {$wpdb->postmeta} pm ON (pm.post_id=p.iD AND pm.meta_key='_cmb2_event_start')
+                INNER JOIN {$wpdb->postmeta} pm ON (pm.post_id=p.iD AND pm.meta_key='_cmb2_event_end')
                 WHERE p.post_type='event' AND pm.meta_value " . (!empty($_REQUEST['past_events']) ? '<=' : '>') . current_time('timestamp')
               );
               $event_ids = [];

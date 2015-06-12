@@ -250,7 +250,7 @@ function get_num_events($options=[]) {
   $count = $wpdb->get_var($wpdb->prepare(
     "
     SELECT COUNT(*) FROM `wp_posts` wp
-    INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_start')
+    INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_end')
     WHERE wp.post_status = 'publish'
     AND wp.post_type = 'event'
     AND wm.meta_value " . (!empty($options['past']) ? '<=' : '>') . " %s
@@ -268,14 +268,14 @@ function get_events($options=[]) {
   $args = [
     'numberposts' => $options['num_posts'],
     'post_type' => 'event',
-    'meta_key' => '_cmb2_event_start',
+    'meta_key' => '_cmb2_event_end',
     'orderby' => 'meta_value_num',
   ];
   // make sure we're only pulling upcoming or past events
   $args['order'] = !empty($_REQUEST['past_events']) ? 'DESC' : 'ASC';
   $args['meta_query'] = [
     [
-      'key' => '_cmb2_event_start',
+      'key' => '_cmb2_event_end',
       'value' => current_time('timestamp'),
       'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
     ]
@@ -503,14 +503,14 @@ function get_event_details($post) {
 //   if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
 //     $meta_query = array(
 //       array(
-//         'key' => '_cmb2_event_start',
+//         'key' => '_cmb2_event_end',
 //         'value' => current_time('timestamp'),
 //         'compare' => (get_query_var('past_events') ? '<=' : '>')
 //       )
 //     );
 //     $query->set('meta_query', $meta_query);
 //     $query->set('orderby', 'meta_value_num');
-//     $query->set('meta_key', '_cmb2_event_start');
+//     $query->set('meta_key', '_cmb2_event_end');
 //     // show events oldest->newest
 //     $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
 
