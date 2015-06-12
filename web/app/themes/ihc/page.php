@@ -15,7 +15,7 @@ $has_header_text_class = get_post_meta($post->ID, '_cmb2_header_text', true) ? '
 
   <main>
     <?php if ($content_banner_text): ?>
-      <h4 class="flag"><?= $content_banner_text ?></h4>
+      <h2 class="flag"><?= $content_banner_text ?></h2>
     <?php endif; ?>
 
     <div class="one-column">

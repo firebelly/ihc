@@ -28,7 +28,7 @@ if (!$header_text)
   <div class="container">
     <div class="image-wrap"<?= $header_bg ?>>
       <?php if ($header_banner_text): ?>
-      <h4 class="flag"><?= $header_banner_text ?></h4>
+      <h2 class="flag"><?= $header_banner_text ?></h2>
       <?php endif; ?>
 
       <?php get_template_part('templates/share'); ?>

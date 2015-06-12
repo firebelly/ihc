@@ -8,7 +8,7 @@
   </header>
 
   <main>
-  <h4 class="flag"><?= \Roots\Sage\Titles\title(); ?></h4>
+  <h2 class="flag"><?= \Roots\Sage\Titles\title(); ?></h2>
   <?php if (!have_posts()) : ?>
 
     <div class="alert alert-warning">

@@ -13,7 +13,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 
   <main>
     <?php if ($content_banner_text): ?>
-      <h4 class="flag"><?= $content_banner_text ?></h4>
+      <h2 class="flag"><?= $content_banner_text ?></h2>
     <?php endif; ?>
 
     <div class="grid bigclicky">
@@ -26,7 +26,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
     </div>
 
     <div class="one-column">
-      <h4 class="flag">Support Through your purchases</h4>
+      <h2 class="flag">Support Through your purchases</h2>
       <div class="user-content">
         <?= get_the_block('Support Us Page Block 3') ?>
       </div>

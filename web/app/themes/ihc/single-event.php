@@ -6,7 +6,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
 ?>
 <article class="post event map-point" data-lat="<?= $event->lat ?>" data-lng="<?= $event->lng ?>" data-title="<?= $event->title ?>" data-desc="<?= $event->desc ?>" data-id="<?= $event->ID ?>">
   <main>
-    <h4 class="flag"><?= $banner_text ?></h4>
+    <h2 class="flag"><?= $banner_text ?></h2>
     <time class="article-date flagged" datetime="<?= date('c', $event->event_start); ?>"><span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?></time>
     <?php if ($thumb = \Firebelly\Media\get_post_thumbnail($post->ID, 'large')): ?>
       <div class="article-thumb" style="background-image:url(<?= $thumb ?>);"></div>
@@ -26,7 +26,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
   </main>
 
   <aside class="main">
-    <h4 class="flag">Event Details</h4>
+    <h2 class="flag">Event Details</h2>
     <div id="map"></div>
     <div class="event-details">
       <h3>When:</h3>

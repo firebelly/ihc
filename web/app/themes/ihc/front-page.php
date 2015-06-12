@@ -16,7 +16,7 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
 <header class="page-header with-image">
   <div class="container">
     <div class="image-wrap"<?= $header_bg ?>>
-      <h4 class="flag"><?= $header_banner_text ?></h4>
+      <h2 class="flag"><?= $header_banner_text ?></h2>
       <?= $header_text ?>
       <p class="accent"><?= $secondary_header_text ?></p>
     </div>
@@ -24,7 +24,7 @@ $secondary_header_text = get_post_meta($post->ID, '_cmb2_secondary_header_text',
 </header>
 
 <section class="focus-areas">
-  <h4 class="flag">Our Focus Areas</h4>
+  <h2 class="flag">Our Focus Areas</h2>
   <ul class="focus-list">
     <?php 
     $focus_areas = get_terms('focus_area');
@@ -41,7 +41,7 @@ echo \Firebelly\PostTypes\Event\get_events(['num_posts' => -1, 'map-points' => t
 ?>
 
 <section class="event-cal">
-  <h4 class="flag">Attend an Event</h4>
+  <h2 class="flag">Attend an Event</h2>
   <div class="events load-more-container article-list masonry">
     <?php echo \Firebelly\PostTypes\Event\get_events(['num_posts' => 3]); ?>
   </div>
@@ -52,7 +52,7 @@ echo \Firebelly\PostTypes\Event\get_events(['num_posts' => -1, 'map-points' => t
 </section>
 
 <section class="news">
-  <h4 class="flag">Blog &amp; News</h4>
+  <h2 class="flag">Blog &amp; News</h2>
   <div class="load-more-container article-list masonry">
     <?php 
     // Recent Blog & News posts

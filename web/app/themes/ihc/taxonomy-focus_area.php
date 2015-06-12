@@ -21,7 +21,7 @@ $with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header
   <header class="page-header <?= $with_image_class ?> <?= $with_secondary_header_class ?>">
     <div class="container">
       <div class="image-wrap"<?= $header_bg ?>>
-        <h4 class="flag"><?= $focus_area->name ?></h4>
+        <h2 class="flag"><?= $focus_area->name ?></h2>
 
         <div class="header-text">
           <h1><?= $header_text ?></h1>
@@ -38,7 +38,7 @@ $with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header
     $related_programs = \Firebelly\PostTypes\Program\get_programs($focus_area->slug);
     if ($related_programs):
     ?>
-      <h4 class="flag"><?= $focus_area->name ?> Programs:</h4>
+      <h2 class="flag"><?= $focus_area->name ?> Programs:</h2>
       <div class="article-list masonry">
         <?php foreach ($related_programs as $program_post): ?>
           <?php include(locate_template('templates/article-program.php')); ?>

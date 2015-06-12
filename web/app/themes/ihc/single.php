@@ -8,7 +8,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
 <article <?php post_class(); ?>>
   <main>
     <?php if ($category = \Firebelly\Utils\get_first_term($post)): ?>
-      <h4 class="flag"><a href="<?= get_term_link($category); ?>"><?php echo $category->name; ?></a></h4>
+      <h2 class="flag"><a href="<?= get_term_link($category); ?>"><?php echo $category->name; ?></a></h2>
     <?php endif; ?>
     <time class="article-date" datetime="<?php echo date('c', $post_date_timestamp); ?>"><?php echo date('n/j', $post_date_timestamp); ?><?= (date('Y', $post_date_timestamp) != date('Y') ? '<span class="year">'.date('/Y', $post_date_timestamp).'</span>' : '') ?></time>
     <?php if ($thumb = \Firebelly\Media\get_post_thumbnail($post->ID, 'large')): ?>

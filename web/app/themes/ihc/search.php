@@ -12,7 +12,7 @@ $page_content = apply_filters('the_content', $post->post_content);
   <?php get_template_part('templates/page', 'image-header'); ?>
   <main>
     <div class="search-results-form">
-      <h4 class="flag">Search Results For</h4>
+      <h2 class="flag">Search Results For</h2>
       <form role="search" method="get" action="<?= esc_url(home_url('/')); ?>">
         <label class="sr-only"><?php _e('Search for:', 'sage'); ?></label>
         <input type="search" value="<?= get_search_query(); ?>" autocomplete="off" name="s" class="search-field form-control" placeholder="Search" required>

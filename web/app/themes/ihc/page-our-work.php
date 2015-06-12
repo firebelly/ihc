@@ -12,7 +12,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
   <?php get_template_part('templates/page', 'image-header'); ?>
 
   <main>
-    <h4 class="flag">Our Focus Areas</h4>
+    <h2 class="flag">Our Focus Areas</h2>
     <ul class="focus-list-large">
       <?php 
       $focus_areas = get_terms('focus_area');

@@ -138,7 +138,7 @@ function get_related_event_post($post_or_focus_area) {
   
   if ($event) {
     $output = '<div class="related related-events">';
-    $output .= '<h4 class="flag">Attend an Event</h4>';
+    $output .= '<h2 class="flag">Attend an Event</h2>';
     $output .= $event;
     $output .= '</div>';
   }
@@ -178,7 +178,7 @@ function get_related_news_post($post_or_focus_area) {
 
   if ($posts) {
     $output = '<div class="related related-news">';
-    $output .= '<h4 class="flag">Blog &amp; News</h4>';
+    $output .= '<h2 class="flag">Blog &amp; News</h2>';
     $show_view_all_button = true;
     ob_start();
     foreach ($posts as $news_post)
@@ -205,7 +205,7 @@ function get_page_blocks($post) {
           $block_body = apply_filters('the_content', $page_block['body']);
           $output .= '<div class="page-block">';
           if ($block_title) {
-            $output .= '<h4 class="flag">' . $block_title . '</h4>';
+            $output .= '<h2 class="flag">' . $block_title . '</h2>';
           }
           $output .= '<div class="user-content">' . $block_body . '</div>';
           $output .= '</div>';
