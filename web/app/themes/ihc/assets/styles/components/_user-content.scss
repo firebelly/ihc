@@ -71,6 +71,11 @@
 }
 
 .user-content {
+  .three-column {
+    :first-of-type {
+      margin-top: 0;
+    }
+  }
   @include phablet {
     .three-column {
       column-count: 2;
@@ -140,12 +145,12 @@
   }
   .accordion-content {
     // First p,h3,h4,etc no margin on top
-    ::first-of-type {
-      margin-top: 0px;
+    :first-of-type {
+      margin-top: 0;
     }
     padding-bottom: 30px;
     // Last accordion no padding on bottom
-    ::last-of-type,
+    :last-of-type,
     &::last-of-type {
       padding-bottom: 0;
     }
