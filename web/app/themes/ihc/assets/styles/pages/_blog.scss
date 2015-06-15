@@ -1,25 +1,4 @@
-// Blog (what we're learning) Page
-
-.blog {
-  .share {
-    display:none;
-  }
-}
-#comments {
-  display: none
-}
-
-@include tablet {
-  .page-header {
-    h1 {
-    }
-  }
-
-  .alert {
-    margin-left: 0;
-    max-width: 66.66666%;
-  }
-}
+// Blog 
 
 .nav-links {
   margin: 40px 0 0;
