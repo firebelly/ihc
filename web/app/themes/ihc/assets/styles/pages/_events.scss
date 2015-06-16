@@ -102,8 +102,14 @@
   }
   .actions {
     @include tablet {
-      margin-top: 0;
+      clear: left;
+      padding-top: 20px;
+    }
+    @media screen and (min-width: 1248px) {
+      clear: none;
       float: right;
+      margin-top: 0;
+      padding-top: 0;
     }
   }
 }
