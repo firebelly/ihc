@@ -136,6 +136,26 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       color: $bg-color;
       border-bottom: 1px solid $bg-color;
     }
+    .article-list {
+      .article-content:hover {
+        .article-tags a:hover {
+          color: $bg-color;
+        }
+      }
+    }
+
+    // Article list
+    .article-list {
+      .article-content {
+        // Hover state
+        &:hover {
+          .button:hover {
+            color: $bg-color;
+            border-color: $bg-color !important;
+          }
+        }
+      }
+    }
 
     // Time stamps
     .article-date {

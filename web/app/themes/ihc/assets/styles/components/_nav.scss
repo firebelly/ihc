@@ -76,8 +76,9 @@
       .close-button {
         display: block;
         opacity: 1;
-        left: 85%;
+        left: auto;
         top: 17px;
+        right: $column-width;
       }
     }
     .search-form {
@@ -86,6 +87,10 @@
       .search-field {
         width: 90%;
       }
+    }
+    .search-submit {
+      width: 10%;
+      text-align: right;
     }
   }
 

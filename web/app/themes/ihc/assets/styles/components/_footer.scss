@@ -37,12 +37,17 @@ footer.main {
 
   // Main footer nav
   nav {
-    margin: 0 0 50px;
+    margin: -6px 0 50px;
     @include font-style1;
 
     li {
       display: inline-block;
       margin-right: 25px;
+    }
+
+    a {
+      padding: 6px 0;
+      display: block;
     }
 
     // Hide these links in Footer

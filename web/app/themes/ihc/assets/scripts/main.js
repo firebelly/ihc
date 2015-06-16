@@ -143,6 +143,10 @@ var IHC = (function($) {
       map.doubleClickZoom.disable();
       map.scrollWheelZoom.disable();
 
+      // Prevent the listeners from disabling default
+      // actions (http://bingbots.com/questions/1428306/mapbox-scroll-page-on-touch)
+      L.DomEvent.preventDefault = function(e) {return;};
+
       mapFeatureLayer = L.mapbox.featureLayer().addTo(map);
 
       mapIconRed = L.icon({
