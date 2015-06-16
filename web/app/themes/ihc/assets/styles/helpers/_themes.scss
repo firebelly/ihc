@@ -144,6 +144,19 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       }
     }
 
+    // Article list
+    .article-list {
+      .article-content {
+        // Hover state
+        &:hover {
+          .button:hover {
+            color: $bg-color;
+            border-color: $bg-color !important;
+          }
+        }
+      }
+    }
+
     // Time stamps
     .article-date {
       background: $bg-color;
