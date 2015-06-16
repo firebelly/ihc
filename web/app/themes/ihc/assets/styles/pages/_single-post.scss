@@ -56,10 +56,14 @@
 
     .article-title {
       display: inline;
-      font: 900 #{$xl}/50px $sans;
+      font: 900 #{$lg}/40px $sans;
       letter-spacing: .2em;
       text-transform: uppercase;
       border-bottom: 3px solid $dk-blue;
+
+      @include phablet {
+        font: 900 #{$xl}/50px $sans;
+      }
     }
 
     .byline-area {
