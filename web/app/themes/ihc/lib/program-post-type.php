@@ -282,3 +282,18 @@ function get_resources($post) {
   return $output;
 }
 
+/**
+ * Redirect 404s for Programs to Archive page 
+ */
+add_filter('404_template', __NAMESPACE__ . '\redirect_archived_programs');
+function redirect_archived_programs($template) {
+  global $wp_query;
+  
+  if (!is_404() || empty($wp_query->query_vars['program']))
+    return $template;
+
+  $permalink = get_option('home') . '/archived-programs/';
+
+  wp_redirect($permalink, 301);
+  exit;
+}
