@@ -20,7 +20,9 @@ $secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><
     <div class="image-wrap"<?= $header_bg ?>>
       <h2 class="flag"><?= $header_banner_text ?></h2>
       <h1><?= $header_text ?></h1>
-      <p class="accent"><?= $secondary_header_text ?></p>
+      <?php if ($secondary_header_text) { ?>
+        <p class="accent"><?= $secondary_header_text ?></p>
+      <?php } ?>
     </div>
   </div>
 </header>
