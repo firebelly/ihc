@@ -62,7 +62,7 @@
       margin: 0 0 0 #{$column-width * 4};
       width: #{$column-width * 10};
       .focus-list {
-        margin: 30px #{$column-width/2 * 22/10};
+        padding: 30px #{$column-width/2 * 22/10};
         font-size: $xl;
         line-height: 50px;
       }

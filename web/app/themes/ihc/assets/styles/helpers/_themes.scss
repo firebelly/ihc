@@ -164,6 +164,17 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         border-top-color: $bg-color;
       }
     }
+
+    // Accordions
+    .user-content {
+      .accordion-title {
+        border-top: 1px solid $bg-color;
+        &:first-child {
+          border-top: none;
+        }
+      }
+    }
+
   }
 } // End of bg-color
 
