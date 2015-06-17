@@ -8,9 +8,6 @@
     color: $white;
     a {
       color: $white;
-      &:hover {
-        color: $dk-blue;
-      }
     }
     @include tablet {
       margin: 0;
