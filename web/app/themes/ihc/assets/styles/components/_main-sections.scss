@@ -119,9 +119,10 @@ aside.main {
   &.dark {
     background: $dk-blue;
     color: $color-bg;
-    padding: 30px #{$column-width * 22/5} 30px #{$column-width/2 * 22/5};
     margin: -20px 0 100px;
+    padding: 30px $column-width;
     @include tablet {
+      padding: 30px #{$column-width * 22/5 + 2%} 30px #{$column-width/2 * 22/5};
       margin: 0 #{-$column-width * 22/5 - 2%} 0 #{-$column-width/2 * 22/5}; // container element is 5col in 22col grid, extra 2% is for outer margin
     }
     p {
@@ -141,6 +142,7 @@ aside.main {
       text-transform: uppercase;
       letter-spacing: .2em;
       @extend .smooth;
+      list-style: none;
       margin-bottom: 20px;
       padding: 0;
       &:last-child {
