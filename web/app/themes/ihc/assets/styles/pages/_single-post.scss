@@ -4,7 +4,7 @@
   position: relative;
   .share {
     display: block;
-    margin-top: 18px;
+    margin-top: 20px;
   }
   #map {
     display: block;
@@ -12,7 +12,7 @@
   @include tablet {
     .share {
       float: right;
-      margin-top: -20px;
+      margin-top: -18px;
     }
     .article-tags {
       padding-right: 130px;
