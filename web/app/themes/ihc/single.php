@@ -1,7 +1,5 @@
 <?php
-// support legacy publication_dates via custom field
-$publication_date = get_post_meta($post->ID, '_cmb2_publication_date', true);
-$post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($post->post_date);
+$post_date_timestamp = strtotime($post->post_date);
 $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 $article_tags = \Firebelly\Utils\get_article_tags($post);
 ?>

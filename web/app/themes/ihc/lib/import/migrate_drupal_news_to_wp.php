@@ -98,7 +98,12 @@ foreach($nodes as $node) {
       // print_r($news_row);
       $publication_date_value = $news_row['field_news_publication_date_value'];
       if ($publication_date_value) {
-        update_post_meta($post_id, $prefix.'publication_date', date('m/d/Y', strtotime($publication_date_value)));
+        $post_date = date('Y-m-d H:i:s', strtotime($publication_date_value));
+        wp_update_post([
+          'ID'            => $post_id,
+          'post_date'     => $post_date,
+          'post_date_gmt' => $post_date,
+        ]);
       }
 
       // Featured image?

@@ -32,12 +32,6 @@ function metaboxes( array $meta_boxes ) {
           'textarea_rows' => 4,
         ),
       ),
-      array(
-        'name' => 'Publication Date',
-        'desc' => 'Overrides Post Date if set (migrated from old news posts)',
-        'id'   => $prefix . 'publication_date',
-        'type' => 'text_date',
-      ),
     ),
   );
 

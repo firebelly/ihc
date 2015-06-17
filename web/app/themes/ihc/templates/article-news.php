@@ -2,9 +2,7 @@
 use Firebelly\Utils;
 $category = Utils\get_category($news_post);
 $article_tags = Utils\get_article_tags($news_post);
-// support legacy publication_dates via custom field
-$publication_date = get_post_meta($news_post->ID, '_cmb2_publication_date', true);
-$post_date_timestamp = $publication_date ? strtotime($publication_date) : strtotime($news_post->post_date);
+$post_date_timestamp = strtotime($news_post->post_date);
 $has_image_class = !empty($show_images) && has_post_thumbnail($news_post->ID) ? 'has-image' : '';
 ?>
 <article class="article <?= $has_image_class ?>">
