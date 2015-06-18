@@ -3,7 +3,7 @@
  * Template Name: Homepage
  */
 
-$total_events = \Firebelly\PostTypes\Event\get_num_events();
+$total_events = \Firebelly\PostTypes\Event\get_events(['countposts' => 1]);
 $total_news = wp_count_posts('post')->publish;
 $header_bg = \Firebelly\Media\get_header_bg($post);
 $header_banner_text = str_replace("\n","<br>",get_post_meta($post->ID, '_cmb2_header_banner_text', true));

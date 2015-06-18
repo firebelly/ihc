@@ -8,8 +8,13 @@ $per_page = get_option('posts_per_page');
 $past_events = get_query_var('past_events', 0);
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
-$total_events = \Firebelly\PostTypes\Event\get_num_events(['past_events' => $past_events, 'filter_program' => $filter_program, 'filter_focus_area' => $filter_focus_area]);
-$total_pages = ceil($total_events / $per_page);
+$total_events = \Firebelly\PostTypes\Event\get_events([
+  'countposts' => 1,
+  'past_events' => $past_events,
+  'program' => $filter_program,
+  'focus_area' => $filter_focus_area
+]);
+$total_pages = ($total_events > 0) ? ceil($total_events / $per_page) : 1;
 
 $post = get_page_by_path('/events');
 $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
@@ -37,7 +42,9 @@ $page_content = apply_filters('the_content', $post->post_content);
       <?php endif; ?>
     </div>
     
-    <div class="load-more" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+    <?php if ($total_pages>1): ?>
+      <div class="load-more" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+    <?php endif; ?>
   </main>
   <aside class="main">
       <?php include(locate_template('templates/thought-of-the-day.php')); ?>

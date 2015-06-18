@@ -242,42 +242,24 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
- * Get Num Events, past or future
- */
-function get_num_events($options=[]) {
-  global $wpdb;
-  // todo: also filter by focus_area and program in $options!
-  $count = $wpdb->get_var($wpdb->prepare(
-    "
-    SELECT COUNT(*) FROM `wp_posts` wp
-    INNER JOIN `wp_postmeta` wm ON (wm.`post_id` = wp.`ID` AND wm.`meta_key`='_cmb2_event_end')
-    WHERE wp.post_status = 'publish'
-    AND wp.post_type = 'event'
-    AND wm.meta_value " . (!empty($options['past']) ? '<=' : '>') . " %s
-    ",
-    current_time('timestamp')
-  ));
-  return $count;
-}
-
-/**
  * Get Events
  */
 function get_events($options=[]) {
   if (empty($options['num_posts'])) $options['num_posts'] = get_option('posts_per_page');
+  if (!empty($_REQUEST['past_events'])) $options['past_events'] = 1;
   $args = [
     'numberposts' => $options['num_posts'],
     'post_type' => 'event',
     'meta_key' => '_cmb2_event_end',
     'orderby' => 'meta_value_num',
   ];
-  // make sure we're only pulling upcoming or past events
-  $args['order'] = !empty($_REQUEST['past_events']) ? 'DESC' : 'ASC';
+  // Make sure we're only pulling upcoming or past events
+  $args['order'] = !empty($options['past_events']) ? 'DESC' : 'ASC';
   $args['meta_query'] = [
     [
       'key' => '_cmb2_event_end',
       'value' => current_time('timestamp'),
-      'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
+      'compare' => (!empty($options['past_events']) ? '<=' : '>')
     ]
   ];
   if (!empty($options['focus_area'])) {
@@ -296,24 +278,34 @@ function get_events($options=[]) {
       'compare' => 'IN',
     );
   }
+  if (!empty($options['countposts'])) {
 
-  $event_posts = get_posts($args);
-  if (!$event_posts) return false;
-  $output = '';
-  $show_view_all_button = (!empty($options['show_view_all_button']));
-  foreach ($event_posts as $event_post):
-    if (!empty($options['map-points'])):
-      $event = get_event_details($event_post);
-      $url = get_permalink($event_post);
-      $output .= '<span class="map-point" data-url="' . $url . '" data-lat="' . $event->lat . '" data-lng="' . $event->lng . '" data-title="' . $event->title . '" data-desc="' . $event->desc . '" data-id="' . $event->ID . '"></span>';
-    else:
-      ob_start();
-      $show_images = !empty($options['show_images']);
-      include(locate_template('templates/article-event.php'));
-      $output .= ob_get_clean();
-    endif;
-  endforeach;
-  return $output;
+    // Just count posts (used for load-more buttons)
+    $args ['posts_per_page'] = -1;
+    $count_query = new \WP_Query($args);
+    return $count_query->found_posts;
+
+  } else {
+
+    // Display all matching events using article-event.php
+    $event_posts = get_posts($args);
+    if (!$event_posts) return false;
+    $output = '';
+    $show_view_all_button = (!empty($options['show_view_all_button']));
+    foreach ($event_posts as $event_post):
+      if (!empty($options['map-points'])):
+        $event = get_event_details($event_post);
+        $url = get_permalink($event_post);
+        $output .= '<span class="map-point" data-url="' . $url . '" data-lat="' . $event->lat . '" data-lng="' . $event->lng . '" data-title="' . $event->title . '" data-desc="' . $event->desc . '" data-id="' . $event->ID . '"></span>';
+      else:
+        ob_start();
+        $show_images = !empty($options['show_images']);
+        include(locate_template('templates/article-event.php'));
+        $output .= ob_get_clean();
+      endif;
+    endforeach;
+    return $output;
+  }
 }
 
 /**
