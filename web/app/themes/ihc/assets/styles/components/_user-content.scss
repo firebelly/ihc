@@ -102,6 +102,15 @@
     }
   }
 
+  // Buttons from the user-content format dropdown
+  span.button {
+    padding: 0;
+    a {
+      display: inline-block;
+      padding: 6px 20px 5px;
+    }
+  }
+
   .accordion-title {
     position: relative;
     padding: 20px 0;
