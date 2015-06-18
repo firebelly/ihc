@@ -150,8 +150,22 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
         // Hover state
         &:hover {
           .button:hover {
-            color: $bg-color;
+            color: $dk-blue;
+            background: $bg-color;
             border-color: $bg-color !important;
+          }
+        }
+      }
+      // Dark article that changes to white
+      .related-events .event,
+      &.masonry .event {
+        .article-content {
+          &:hover {
+            .button:hover {
+              color: $white;
+              background: $dk-blue;
+              border-color: $dk-blue !important;
+            }
           }
         }
       }
