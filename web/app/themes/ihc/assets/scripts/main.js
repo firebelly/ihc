@@ -246,7 +246,7 @@ var IHC = (function($) {
       } else {
         // Smaller map zooms in on single point
         map.fitBounds(mapFeatureLayer.getBounds());
-        map.setZoom(6);
+        map.setZoom(8);
       }
     }
   }
