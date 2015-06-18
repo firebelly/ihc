@@ -59,12 +59,12 @@
 .site-nav {
   display: none;
   padding:0;
+  transform: translateY(-170%);
 
   @media only screen and (max-width: $breakpoint-medium) {
     display: block;
     position: fixed;
     transition: transform $transition-speed;
-    transform: translateY(-170%);
     top: 0;
     left: 0;
     bottom: 0;
@@ -131,6 +131,7 @@
   }
 
   @include tablet {
+    transform: translateY(0);
     display: block;
     li {
       display: inline-block;
