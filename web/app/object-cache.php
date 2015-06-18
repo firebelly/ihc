@@ -380,11 +380,17 @@ class WP_Object_Cache {
 			$this->mc[$bucket] = new Memcache();
 			foreach ( $servers as $server  ) {
 				list ( $node, $port ) = explode(':', $server);
-				if ( !$port )
-					$port = ini_get('memcache.default_port');
-				$port = intval($port);
-				if ( !$port )
-					$port = 11211;
+				if ( $node == 'unix' ) {
+					// support for unix sockets
+					$node = $server;
+					$port = 0;
+				} else {
+					if ( !$port )
+						$port = ini_get('memcache.default_port');
+					$port = intval($port);
+					if ( !$port )
+						$port = 11211;
+				}
 				$this->mc[$bucket]->addServer($node, $port, true, 1, 1, 15, true, array($this, 'failure_callback'));
 				$this->mc[$bucket]->setCompressThreshold(20000, 0.2);
 			}

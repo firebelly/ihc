@@ -7,7 +7,7 @@ $webroot_dir = $root_dir . '/web';
  */
 $dotenv = new Dotenv\Dotenv($root_dir);
 if (file_exists($root_dir . '/.env')) {
-	$dotenv->load();
+  $dotenv->load();
 }
 $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'WP_HOME', 'WP_SITEURL']);
 
@@ -21,6 +21,13 @@ $env_config = dirname(__FILE__) . '/environments/' . WP_ENV . '.php';
 
 if (file_exists($env_config)) {
   require_once $env_config;
+}
+
+if (getenv('MEMCACHED_SERVER') && WP_ENV !== 'development') {
+  define('WP_CACHE', true);
+  $memcached_servers = [
+    'default' => [ getenv('MEMCACHED_SERVER') ]
+  ];
 }
 
 /**
