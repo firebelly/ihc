@@ -26,6 +26,7 @@ var IHC = (function($) {
 
     // Cache some common DOM queries
     $document = $(document);
+    $('body').addClass('loaded');
     $content = $('main');
     $sidebar = $('aside.main');
     no_header_text = $('header.no-header-text').length;
