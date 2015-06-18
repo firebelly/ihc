@@ -122,9 +122,16 @@ var IHC = (function($) {
         $('.search-field:first').focus();
       }
     });
-    $('.search-form .close-button').on('click', function() {
-      _hideSearch();
-      _hideMobileNav();
+    $('.search-form .close-button').on('touchstart click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      if(e.handled !== true) {
+        _hideSearch();
+        _hideMobileNav();
+        e.handled = true;
+      } else {
+        return false;
+      }
     });
   }
 
@@ -276,8 +283,15 @@ var IHC = (function($) {
     // SEO-useless nav toggler
     $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
       .prependTo('header.banner')
-      .on('click', function(e) {
-        _showMobileNav();
+      .on('touchstart click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        if(e.handled !== true) {
+          _showMobileNav();
+          e.handled = true;
+        } else {
+          return false;
+        }
       });
     var mobileSearch = $('.search-form').clone().addClass('mobile-search');
     mobileSearch.prependTo('.site-nav');

@@ -64,7 +64,7 @@
     display: block;
     position: fixed;
     transition: transform $transition-speed;
-    transform: translateY(-100%);
+    transform: translateY(-170%);
     top: 0;
     left: 0;
     bottom: 0;
@@ -121,9 +121,11 @@
       font-weight: 400;
       text-decoration: underline;
       -webkit-font-smoothing: subpixel-antialiased;
-      &:hover {
-        border: none;
-        color: $white;
+      @include tablet {
+        &:hover {
+          border: none;
+          color: $white;
+        }
       }
     }
   }
