@@ -21,65 +21,67 @@ var IHC = (function($) {
       loadingTimer;
 
   function _init() {
+    // touch-friendly fast clicks
+    FastClick.attach(document.body);
 
-      // Cache some common DOM queries
-      $document = $(document);
-      $content = $('main');
-      $sidebar = $('aside.main');
-      no_header_text = $('header.no-header-text').length;
+    // Cache some common DOM queries
+    $document = $(document);
+    $content = $('main');
+    $sidebar = $('aside.main');
+    no_header_text = $('header.no-header-text').length;
 
-      // Set screen size vars
-      _resize();
+    // Set screen size vars
+    _resize();
 
-      // Fit them vids!
-      $content.fitVids();
+    // Fit them vids!
+    $content.fitVids();
 
-      // Homepage (pre _initMasonry)
-      if ($('.home.page').length) {
-        // Homepage has a funky load-more in events that is part of masonry until clicked
-        if (breakpoint_medium) {
-          $('.event-cal .events-buttons').clone().addClass('masonry-me').appendTo('.event-cal .events');
-        }
+    // Homepage (pre _initMasonry)
+    if ($('.home.page').length) {
+      // Homepage has a funky load-more in events that is part of masonry until clicked
+      if (breakpoint_medium) {
+        $('.event-cal .events-buttons').clone().addClass('masonry-me').appendTo('.event-cal .events');
       }
+    }
 
-      $('<li class="hide-for-medium-up"><a href="#">Disclaimer</a></li>').prependTo('#menu-footer-links').on('click', function(e) {
-        e.preventDefault();
-        $('.disclaimer').velocity('slideDown');
-      });
+    $('<li class="hide-for-medium-up"><a href="#">Disclaimer</a></li>').prependTo('#menu-footer-links').on('click', function(e) {
+      e.preventDefault();
+      $('.disclaimer').velocity('slideDown');
+    });
 
-      // Add class to sidebar image links to target with CSS
-      $('.sidebar-content a,.user-content a').has('img').addClass('img-link');
+    // Add class to sidebar image links to target with CSS
+    $('.sidebar-content a,.user-content a').has('img').addClass('img-link');
 
-      // Init behavior for various sections
-      _initThoughtSubmit();
-      _initNav();
-      _initSearch();
-      _initMap();
-      _initMasonry();
-      _initLoadMore();
-      _initBigClicky();
+    // Init behavior for various sections
+    _initThoughtSubmit();
+    _initNav();
+    _initSearch();
+    _initMap();
+    _initMasonry();
+    _initLoadMore();
+    _initBigClicky();
 
-      // Esc handlers
-      $(document).keyup(function(e) {
-        if (e.keyCode === 27) {
-          _hideSearch();
-          _cancelThoughtSubmit();
-          _hideMobileNav();
-        }
-      });
-
-      // Add span to accordion titles to style +/- icons
-      $('.accordion-title').prepend('<span class="open-status"></span>');
-
-      // Events landing page
-      if ($('.post-type-archive-event').length) {
-        if (breakpoint_medium) {
-          // Set initial mapTop position
-          mapTop = $('#map').offset().top;
-          // Onscroll toggle sticky class on large map
-          $(window).on('scroll', _scroll);
-        }
+    // Esc handlers
+    $(document).keyup(function(e) {
+      if (e.keyCode === 27) {
+        _hideSearch();
+        _cancelThoughtSubmit();
+        _hideMobileNav();
       }
+    });
+
+    // Add span to accordion titles to style +/- icons
+    $('.accordion-title').prepend('<span class="open-status"></span>');
+
+    // Events landing page
+    if ($('.post-type-archive-event').length) {
+      if (breakpoint_medium) {
+        // Set initial mapTop position
+        mapTop = $('#map').offset().top;
+        // Onscroll toggle sticky class on large map
+        $(window).on('scroll', _scroll);
+      }
+    }
   }
 
   function _initBigClicky() {
@@ -122,16 +124,9 @@ var IHC = (function($) {
         $('.search-field:first').focus();
       }
     });
-    $('.search-form .close-button').on('touchstart click', function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-      if(e.handled !== true) {
-        _hideSearch();
-        _hideMobileNav();
-        e.handled = true;
-      } else {
-        return false;
-      }
+    $('.search-form .close-button').on('click', function() {
+      _hideSearch();
+      _hideMobileNav();
     });
   }
 
@@ -283,15 +278,8 @@ var IHC = (function($) {
     // SEO-useless nav toggler
     $('<div class="menu-toggle"><div class="menu-bar"><span class="sr-only">Menu</span></div></div>')
       .prependTo('header.banner')
-      .on('touchstart click', function(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        if(e.handled !== true) {
-          _showMobileNav();
-          e.handled = true;
-        } else {
-          return false;
-        }
+      .on('click', function(e) {
+        _showMobileNav();
       });
     var mobileSearch = $('.search-form').clone().addClass('mobile-search');
     mobileSearch.prependTo('.site-nav');
