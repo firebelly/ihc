@@ -20,9 +20,11 @@
     aside.main {
       margin: 0 0 100px;
     }
-    .article-tags a:hover {
-      color: $dk-blue;
-      border-bottom-color: $dk-blue;
+    main {
+      .article-tags a:hover {
+        color: $dk-blue;
+        border-bottom-color: $dk-blue;
+      }
     }
   }
 
