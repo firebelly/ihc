@@ -228,31 +228,3 @@ add_filter('get_the_archive_title', function($title){
   }
   return $title;
 });
-
-/**
- * Force page to SSL if force_ssl is true
- */
-add_action('template_redirect', __NAMESPACE__ . '\ssl_template_redirect', 1);
-function ssl_template_redirect() {
-  global $post;
-  if (!$post) return;
-  $force_ssl = get_post_meta($post->ID, '_cmb2_force_ssl', true);
-
-  if (WP_ENV !== 'development' && $force_ssl && !is_ssl() ) {
-    if (0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
-        wp_redirect(preg_replace('|^http://|', 'https://', $_SERVER['REQUEST_URI']), 301);
-        exit();
-    } else {
-        wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301);
-        exit();
-    }
-  } elseif (WP_ENV !== 'development' && !$force_ssl && is_ssl() ) {
-    if (0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
-        wp_redirect(preg_replace('|^https://|', 'http://', $_SERVER['REQUEST_URI']), 301);
-        exit();
-    } else {
-        wp_redirect('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301);
-        exit();
-    }
-  }
-}

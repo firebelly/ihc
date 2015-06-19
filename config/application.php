@@ -23,7 +23,8 @@ if (file_exists($env_config)) {
   require_once $env_config;
 }
 
-if (getenv('MEMCACHED_SERVER') && WP_ENV !== 'development') {
+if (getenv('MEMCACHED_SERVER') && WP_ENV === 'production') {
+  define('FORCE_SSL_ADMIN', true);
   define('WP_CACHE', true);
   $memcached_servers = [
     'default' => [ getenv('MEMCACHED_SERVER') ]
