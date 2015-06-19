@@ -566,29 +566,40 @@ function import_csv_admin_form() {
    <div class="import-notes">
       <h3>Uses these fields from Raiser's Edge export:</h3>
 <pre>
-Ev_Type                        (Focus Area)
-Ev_Group                       (Program)
+Ev_Type                         (Focus Area)
+Ev_Group                        (Related Program)
 Ev_Start_Date                  
 Ev_End_Date                    
 Ev_Start_Time                  
 Ev_End_Time                    
-Ev_Note_1_01_Actual_Notes      (Event registration URL)
-Ev_Note_1_02_Actual_Notes      (Body)
-Ev_AtrCat_4_01_Description     (RSVP: Yes/No)
-Ev_AtrCat_4_01_Comments        (RSVP: Required/Recommended)
-Ev_AtrCat_2_01_Description     (Cost)
-Ev_Note_1_04_Actual_Notes      (Title)
-Ev_Prt_1_01_CnBio_Name         (Location)
+Ev_Event_ID                    
+Ev_Import_ID                   
+Attendee Cost                   (Cost)
+Attendee Cost Details           (Cost details)
+RSVP                            (yes/no)
+Required/Recommended            (required/recommended)
+Web Title                       (Title)
+Web Description                 (Body)
+RSVP URL                        (Registration URL)
+Location                        
 Ev_Prt_1_01_CnAdrPrf_Addrline1 
 Ev_Prt_1_01_CnAdrPrf_Addrline2 
 Ev_Prt_1_01_CnAdrPrf_City      
 Ev_Prt_1_01_CnAdrPrf_State     
 Ev_Prt_1_01_CnAdrPrf_ZIP       
 Ev_Prt_1_01_CnAdrPrf_County    
-Ev_Prt_2_01/02/03/04_Name      (Sponsors)
-Ev_Prt_3_01/02/03/04_Name      (Partners)
-Ev_Prt_4_01/02/03/04_Name      (Funders)
-
+Sponsoring Organization1        
+Sponsoring Organization2       
+Sponsoring Organization3       
+Sponsoring Organization4       
+Partner1                       
+Partner2                       
+Partner3                       
+Partner4                       
+Funder1                        
+Funder2                        
+Funder3                        
+Funder4                        
 </pre>
   </div>
 <?php

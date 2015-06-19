@@ -5,26 +5,43 @@
 
 class EventCSVImporter {
   var $defaults = array(
-      'Ev_Type'                        => null, // focus area
-      'Ev_AtrCat_3_01_Description'     => null, // sub-focus area (not currently used)
-      'Ev_Group'                       => null, // program
-      'Ev_Start_Date'                  => null,
-      'Ev_End_Date'                    => null,
-      'Ev_Start_Time'                  => null,
-      'Ev_End_Time'                    => null,
-      'Ev_Note_1_01_Actual_Notes'      => null, // event registration URL
-      'Ev_Note_1_02_Actual_Notes'      => null, // body
-      'Ev_AtrCat_4_01_Description'     => null, // RSVP required (Yes or no/blank)
-      'Ev_AtrCat_4_01_Comments'        => null, // RSVP text (required/recommended)
-      'Ev_AtrCat_2_01_Description'     => null, // cost
-      'Ev_Note_1_04_Actual_Notes'      => null, // title
-      'Ev_Prt_1_01_CnBio_Name'         => null, // location
-      'Ev_Prt_1_01_CnAdrPrf_Addrline1' => null,
-      'Ev_Prt_1_01_CnAdrPrf_Addrline2' => null,
-      'Ev_Prt_1_01_CnAdrPrf_City'      => null,
-      'Ev_Prt_1_01_CnAdrPrf_State'     => null,
-      'Ev_Prt_1_01_CnAdrPrf_ZIP'       => null,
-      'Ev_Prt_1_01_CnAdrPrf_County'    => null,
+    'Ev_Type'                        => null, // Focus Area
+    'Ev_Group'                       => null, // Related Program
+    'Ev_Start_Date'                  => null,
+    'Ev_End_Date'                    => null,
+    'Ev_Start_Time'                  => null,
+    'Ev_End_Time'                    => null,
+    'Ev_Event_ID'                    => null,
+    'Ev_Import_ID'                   => null,
+    'Attendee Cost'                  => null, // Cost
+    'Attendee Cost Details'          => null, // Cost details
+    // Cost = "Free, open to the public" if Cost=0 and Cost Details=blank
+    // Cost = "Free. [Attendee Cost Details field contents]" if Cost=0 and Cost Details not blank
+    'RSVP'                           => null, // RSVP required (Yes or no/blank)
+    'Required/Recommended'           => null, // RSVP text (required/recommended)
+    'Sub-Focus Area'                 => null, // Sub-focus area (not currently used)
+    'Web Title'                      => null, // Title
+    'Web Description'                => null, // Body
+    'RSVP URL'                       => null, // Event registration URL
+    'Location'                       => null, // Location
+    'Ev_Prt_1_01_CnAdrPrf_Addrline1' => null,
+    'Ev_Prt_1_01_CnAdrPrf_Addrline2' => null,
+    'Ev_Prt_1_01_CnAdrPrf_City'      => null,
+    'Ev_Prt_1_01_CnAdrPrf_State'     => null,
+    'Ev_Prt_1_01_CnAdrPrf_ZIP'       => null,
+    'Ev_Prt_1_01_CnAdrPrf_County'    => null,
+    'Sponsoring Organization1'       => null, // Sponsors/partners/funders
+    'Sponsoring Organization2'       => null,
+    'Sponsoring Organization3'       => null,
+    'Sponsoring Organization4'       => null,
+    'Partner1'                       => null,
+    'Partner2'                       => null,
+    'Partner3'                       => null,
+    'Partner4'                       => null,
+    'Funder1'                        => null,
+    'Funder2'                        => null,
+    'Funder3'                        => null,
+    'Funder4'                        => null,
   );
 
   var $log = array();
@@ -105,7 +122,7 @@ class EventCSVImporter {
           AND p.post_type = 'event' 
           AND pm.meta_value = %d
           AND (p.post_status = 'publish' OR p.post_status = 'draft')
-          ", $csv_data['Ev_Note_1_03_Actual_Notes'], $event_start
+          ", $csv_data['Web Title'], $event_start
         ));
         if ($existing_post_id)
           wp_delete_post($existing_post_id, true);
@@ -148,18 +165,31 @@ class EventCSVImporter {
   function create_post($csv_data) {
     $csv_data = array_merge($this->defaults, $csv_data);
     $new_post = array(
-      'post_title'   => $csv_data['Ev_Note_1_04_Actual_Notes'],
-      'post_content' => $csv_data['Ev_Note_1_02_Actual_Notes'],
+      'post_title'   => $csv_data['Web Title'],
+      'post_content' => $csv_data['Web Description'],
       'post_status'  => 'draft',
       'post_type'    => 'event',
     );
     $post_id = wp_insert_post($new_post);
 
     if ($post_id) {
-      // Only add price info if "free" isn't in description
-      // if ($csv_data['Ev_Note_1_02_Actual_Notes'] && !preg_match('/free/i',$csv_data['Ev_Note_1_02_Actual_Notes'])) {
-      if ($csv_data['Ev_AtrCat_2_01_Description']) {
-        update_post_meta($post_id, $this->prefix.'cost', $csv_data['Ev_AtrCat_2_01_Description']);
+
+      // Cost = "Free, open to the public" if Cost=0 and Cost Details=blank
+      // Cost = "Free. [Attendee Cost Details]" if Cost=0 and Cost Details not blank
+      // Cost = "[Attendee Cost]" if Cost!=0 and Cost Details blank
+      // Cost = "[Attendee Cost] [Attendee Cost Details]" if Cost!=0 and Cost Details not blank
+      if (!$csv_data['Attendee Cost']) {
+        if (!$csv_data['Attendee Cost Details']) {
+          update_post_meta($post_id, $this->prefix.'cost', 'Free. Open to the public.');
+        } else {
+          update_post_meta($post_id, $this->prefix.'cost', 'Free. ' . $csv_data['Attendee Cost Details']);
+        }
+      } else {
+        if (!$csv_data['Attendee Cost Details']) {
+          update_post_meta($post_id, $this->prefix.'cost', $csv_data['Attendee Cost']);
+        } else {
+          update_post_meta($post_id, $this->prefix.'cost', $csv_data['Attendee Cost'] . ' ' . $csv_data['Attendee Cost Details']);
+        }
       }
 
       // Keep county data for giggles
@@ -179,7 +209,7 @@ class EventCSVImporter {
       update_post_meta($post_id, $this->prefix.'event_end', $event_end);
 
       // Venue and address
-      update_post_meta($post_id, $this->prefix.'venue', $csv_data['Ev_Prt_1_01_CnBio_Name']);
+      update_post_meta($post_id, $this->prefix.'venue', $csv_data['Location']);
       $address = [
         'address-1' => $csv_data['Ev_Prt_1_01_CnAdrPrf_Addrline1'],
         'address-2' => $csv_data['Ev_Prt_1_01_CnAdrPrf_Addrline2'],
@@ -194,15 +224,15 @@ class EventCSVImporter {
         $this->set_program($post_id, $csv_data['Ev_Group']);
 
       // Set Registration URL
-      if ($csv_data['Ev_Note_1_01_Actual_Notes'])
-        update_post_meta($post_id, $this->prefix.'registration_url', $csv_data['Ev_Note_1_01_Actual_Notes']);
+      if ($csv_data['RSVP URL'])
+        update_post_meta($post_id, $this->prefix.'registration_url', $csv_data['RSVP URL']);
 
       // RSVP text
-      if ($csv_data['Ev_AtrCat_4_01_Description'] && preg_match('/yes/i',$csv_data['Ev_AtrCat_4_01_Description'])) {
-        if ($csv_data['Ev_AtrCat_4_01_Comments']) {
-          if (preg_match('/required/i',$csv_data['Ev_AtrCat_4_01_Comments'])) {
+      if ($csv_data['RSVP'] && preg_match('/yes/i',$csv_data['RSVP'])) {
+        if ($csv_data['Required/Recommended']) {
+          if (preg_match('/required/i',$csv_data['Required/Recommended'])) {
             update_post_meta($post_id, $this->prefix.'rsvp_text', 'required');
-          } else if (preg_match('/recommended/i',$csv_data['Ev_AtrCat_4_01_Comments'])) {
+          } else if (preg_match('/recommended/i',$csv_data['Required/Recommended'])) {
             update_post_meta($post_id, $this->prefix.'rsvp_text', 'recommended');
           }
         }
@@ -211,14 +241,14 @@ class EventCSVImporter {
       // Get sponsor/partner/funder fields
       $sponsoring_orgs = $partners = $funders = [];
       for ($i=1; $i <= 4; $i++) {
-        if ($csv_data['Ev_Prt_2_0'.$i.'_Name']) {
-          $sponsoring_orgs[] = $csv_data['Ev_Prt_2_0'.$i.'_Name'];
+        if ($csv_data['Sponsoring Organization'.$i]) {
+          $sponsoring_orgs[] = $csv_data['Sponsoring Organization'.$i];
         }
-        if ($csv_data['Ev_Prt_3_0'.$i.'_Name']) {
-          $partners[] = $csv_data['Ev_Prt_3_0'.$i.'_Name'];
+        if ($csv_data['Partner'.$i]) {
+          $partners[] = $csv_data['Partner'.$i];
         }
-        if ($csv_data['Ev_Prt_4_0'.$i.'_Name']) {
-          $funders[] = $csv_data['Ev_Prt_4_0'.$i.'_Name'];
+        if ($csv_data['Funder'.$i]) {
+          $funders[] = $csv_data['Funder'.$i];
         }
       }
 
