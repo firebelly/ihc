@@ -282,7 +282,7 @@ $accent-colors: $red $lt-blue $green $aqua $orange;
 
     // Events
     &.single-event .event-details {
-      a,
+      a:not(.img-link),
       h3 {
         color: $accent-color;
         border-bottom-color: $accent-color;

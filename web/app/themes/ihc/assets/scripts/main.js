@@ -51,7 +51,7 @@ var IHC = (function($) {
     });
 
     // Add class to sidebar image links to target with CSS
-    $('.sidebar-content a,.user-content a').has('img').addClass('img-link');
+    $('.sidebar-content a,.user-content a,.event-details a').has('img').addClass('img-link');
 
     // Init behavior for various sections
     _initThoughtSubmit();
