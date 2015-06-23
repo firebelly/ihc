@@ -442,27 +442,23 @@ var IHC = (function($) {
     if (!no_header_text && $sidebar.length) {
       if (breakpoint_medium) {
         var sidebar_height = $sidebar.height();
-        var adjustment = 0;
-        // smaller sidebars
-        if (sidebar_height <= 466) {
-          adjustment = sidebar_height - 196;
-        } else {
-          adjustment = 270;
+        var adjustment = 270;
+        // Shorter TOD giving sidebars guff
+        if ($tod.length && $tod.height() <= 406) {
+          adjustment = $tod.height() - 136;
         }
         $sidebar.css('margin-top', -adjustment);
       } else {
         $sidebar.css('margin-top', '');
       }
     } else if (page_at === 'homepage' && $tod.length) {
-      // homepage TOD adjustment
+      // Homepage TOD adjustment
       if (breakpoint_medium) {
         var header_height = $('header.page-header').height();
         var tod_height = $tod.height();
-        var top = 0;
-        if (tod_height > 346) {
-          top = (header_height - 270);
-        } else {
-          top = (header_height - 270 + (406 - tod_height));
+        var top = header_height - 270;
+        if (tod_height <= 346) {
+          top = top + 406 - tod_height;
         }
         $('.thought-of-the-day-wrapper').css('top', top);
       } else {
