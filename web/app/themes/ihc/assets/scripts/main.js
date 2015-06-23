@@ -432,10 +432,13 @@ var IHC = (function($) {
       var header_height = $('header.page-header').height();
       var sidebar_height = $sidebar.height();
       var adjustment = 0;
-      if (sidebar_height < 520) {
-        adjustment = 520 - sidebar_height;
+      // smaller quotes
+      if (sidebar_height <= 466) {
+        adjustment = sidebar_height - 196;
+      } else {
+        adjustment = 270;
       }
-      $sidebar.css('margin-top', -(header_height - adjustment - 290));
+      $sidebar.css('margin-top', -adjustment);
     } else {
       $sidebar.css('margin-top', '');
     }
