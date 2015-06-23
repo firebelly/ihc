@@ -49,12 +49,13 @@ var IHC = (function($) {
       }
     }
 
+    // Disclaimer mobile link that reveals hidden disclaimer block
     $('<li class="hide-for-medium-up"><a href="#">Disclaimer</a></li>').prependTo('#menu-footer-links').on('click', function(e) {
       e.preventDefault();
       $('.disclaimer').velocity('slideDown');
     });
 
-    // Add class to sidebar image links to target with CSS
+    // Add .img-link class to sidebar image links to target with CSS
     $('.sidebar-content a,.user-content a,.event-details a').has('img').addClass('img-link');
 
     // Init behavior for various sections
@@ -87,6 +88,10 @@ var IHC = (function($) {
         $(window).on('scroll', _scroll);
       }
     }
+
+    // Run resize again in case anything needs adjusting
+    _resize();
+
   }
 
   function _initBigClicky() {
@@ -432,6 +437,7 @@ var IHC = (function($) {
     breakpoint_small = (screenWidth > breakpoint_array[0]);
     breakpoint_medium = (screenWidth > breakpoint_array[1]);
     breakpoint_large = (screenWidth > breakpoint_array[2]);
+
     // Adjust sidebar with quote
     if (!no_header_text && $sidebar.length) {
       if (breakpoint_medium) {
@@ -448,11 +454,11 @@ var IHC = (function($) {
         $sidebar.css('margin-top', '');
       }
     } else if (page_at === 'homepage' && $tod.length) {
+      // homepage TOD adjustment
       if (breakpoint_medium) {
         var header_height = $('header.page-header').height();
         var tod_height = $tod.height();
         var top = 0;
-        // smaller quotes
         if (tod_height > 346) {
           top = (header_height - 270);
         } else {
@@ -465,13 +471,6 @@ var IHC = (function($) {
     }
   }
 
-  // Called periodically for more intensive resize tasks
-  function _delayed_resize() {
-    // If (!breakpoint_medium) {
-    //   $('.masonry').masonry('destroy');
-    // }
-  }
-
   // Called on scroll
   function _scroll(dir) {
     var wintop = $(window).scrollTop();
@@ -482,7 +481,6 @@ var IHC = (function($) {
   return {
     init: _init,
     resize: _resize,
-    delayed_resize: _delayed_resize,
     scrollBody: function(section, duration, delay) {
       _scrollBody(section, duration, delay);
     },
@@ -497,11 +495,4 @@ var IHC = (function($) {
 jQuery(document).ready(IHC.init);
 
 // Zig-zag the mothership
-jQuery(window).resize(function($){
-  // Instant resize functions
-  IHC.resize();
-
-  // Delayed resize for more intensive tasks
-  if(IHC.delayed_resize_timer) { clearTimeout(IHC.delayed_resize_timer); }
-  IHC.delayed_resize_timer = setTimeout(IHC.delayed_resize, 150);
-});
+jQuery(window).resize(IHC.resize);
