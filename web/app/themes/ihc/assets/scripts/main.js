@@ -430,7 +430,12 @@ var IHC = (function($) {
     breakpoint_large = (screenWidth > breakpoint_array[2]);
     if (breakpoint_medium && !no_header_text && $sidebar.length) {
       var header_height = $('header.page-header').height();
-      $sidebar.css('margin-top', -(header_height-290));
+      var sidebar_height = $sidebar.height();
+      var adjustment = 0;
+      if (sidebar_height < 520) {
+        adjustment = 520 - sidebar_height;
+      }
+      $sidebar.css('margin-top', -(header_height - adjustment - 290));
     } else {
       $sidebar.css('margin-top', '');
     }
