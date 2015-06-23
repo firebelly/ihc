@@ -11,6 +11,7 @@ var IHC = (function($) {
       $content,
       $document,
       $sidebar,
+      $tod,
       no_header_text,
       map,
       mapFeatureLayer,
@@ -18,7 +19,8 @@ var IHC = (function($) {
       mapIconRed,
       mapIconBlue,
       mapTop,
-      loadingTimer;
+      loadingTimer,
+      page_at;
 
   function _init() {
     // touch-friendly fast clicks
@@ -29,6 +31,7 @@ var IHC = (function($) {
     $('body').addClass('loaded');
     $content = $('main');
     $sidebar = $('aside.main');
+    $tod = $('section.thought-of-the-day');
     no_header_text = $('header.no-header-text').length;
 
     // Set screen size vars
@@ -39,6 +42,7 @@ var IHC = (function($) {
 
     // Homepage (pre _initMasonry)
     if ($('.home.page').length) {
+      page_at = 'homepage';
       // Homepage has a funky load-more in events that is part of masonry until clicked
       if (breakpoint_medium) {
         $('.event-cal .events-buttons').clone().addClass('masonry-me').appendTo('.event-cal .events');
@@ -428,19 +432,36 @@ var IHC = (function($) {
     breakpoint_small = (screenWidth > breakpoint_array[0]);
     breakpoint_medium = (screenWidth > breakpoint_array[1]);
     breakpoint_large = (screenWidth > breakpoint_array[2]);
-    if (breakpoint_medium && !no_header_text && $sidebar.length) {
-      var header_height = $('header.page-header').height();
-      var sidebar_height = $sidebar.height();
-      var adjustment = 0;
-      // smaller quotes
-      if (sidebar_height <= 466) {
-        adjustment = sidebar_height - 196;
+    // Adjust sidebar with quote
+    if (!no_header_text && $sidebar.length) {
+      if (breakpoint_medium) {
+        var sidebar_height = $sidebar.height();
+        var adjustment = 0;
+        // smaller sidebars
+        if (sidebar_height <= 466) {
+          adjustment = sidebar_height - 196;
+        } else {
+          adjustment = 270;
+        }
+        $sidebar.css('margin-top', -adjustment);
       } else {
-        adjustment = 270;
+        $sidebar.css('margin-top', '');
       }
-      $sidebar.css('margin-top', -adjustment);
-    } else {
-      $sidebar.css('margin-top', '');
+    } else if (page_at === 'homepage' && $tod.length) {
+      if (breakpoint_medium) {
+        var header_height = $('header.page-header').height();
+        var tod_height = $tod.height();
+        var top = 0;
+        // smaller quotes
+        if (tod_height > 346) {
+          top = (header_height - 270);
+        } else {
+          top = (header_height - 270 + (406 - tod_height));
+        }
+        $('.thought-of-the-day-wrapper').css('top', top);
+      } else {
+        $('.thought-of-the-day-wrapper').css('top', '');
+      }
     }
   }
 
@@ -477,10 +498,10 @@ jQuery(document).ready(IHC.init);
 
 // Zig-zag the mothership
 jQuery(window).resize(function($){
-    // Instant resize functions
-    IHC.resize();
+  // Instant resize functions
+  IHC.resize();
 
-    // Delayed resize for more intensive tasks
-    if(IHC.delayed_resize_timer) { clearTimeout(IHC.delayed_resize_timer); }
-    IHC.delayed_resize_timer = setTimeout(IHC.delayed_resize, 150);
+  // Delayed resize for more intensive tasks
+  if(IHC.delayed_resize_timer) { clearTimeout(IHC.delayed_resize_timer); }
+  IHC.delayed_resize_timer = setTimeout(IHC.delayed_resize, 150);
 });
