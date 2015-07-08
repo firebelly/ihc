@@ -41,3 +41,7 @@ bin
 
 # OSX junk
 .DS_Store
+
+# Cache
+web/app/cache
+web/app/wp-cache-config.php
