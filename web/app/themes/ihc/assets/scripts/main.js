@@ -1,6 +1,6 @@
 // IHC - Firebelly 2015
 
-// GOOD Design for Good Reason for Good Namespace
+// Good Design for Good Reason for Good Namespace
 var IHC = (function($) {
 
   var screen_width = 0,
@@ -8,7 +8,6 @@ var IHC = (function($) {
       breakpoint_medium = false,
       breakpoint_large = false,
       breakpoint_array = [480,1000,1200],
-      $content,
       $document,
       $sidebar,
       $tod,
@@ -29,7 +28,6 @@ var IHC = (function($) {
     // Cache some common DOM queries
     $document = $(document);
     $('body').addClass('loaded');
-    $content = $('main');
     $sidebar = $('aside.main');
     $tod = $('section.thought-of-the-day');
     no_header_text = $('header.no-header-text').length;
@@ -38,7 +36,7 @@ var IHC = (function($) {
     _resize();
 
     // Fit them vids!
-    $content.fitVids();
+    $('main').fitVids();
 
     // Homepage (pre _initMasonry)
     if ($('.home.page').length) {
@@ -438,7 +436,7 @@ var IHC = (function($) {
     breakpoint_medium = (screenWidth > breakpoint_array[1]);
     breakpoint_large = (screenWidth > breakpoint_array[2]);
 
-    // Adjust sidebar with quote
+    // Adjust position of Thought of the Day for smaller quotes
     if (!no_header_text && $sidebar.length) {
       if (breakpoint_medium) {
         var sidebar_height = $sidebar.height();
