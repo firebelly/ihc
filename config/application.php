@@ -23,12 +23,21 @@ if (file_exists($env_config)) {
   require_once $env_config;
 }
 
+/**
+ * Memcache setup
+ */
 if (getenv('MEMCACHED_SERVER') && WP_ENV === 'production') {
-  define('FORCE_SSL_ADMIN', true);
   define('WP_CACHE', true);
   $memcached_servers = [
     'default' => [ getenv('MEMCACHED_SERVER') ]
   ];
+}
+
+/**
+ * Enable SSL for admin on production
+ */
+if (WP_ENV === 'production') {
+  define('FORCE_SSL_ADMIN', true);
 }
 
 /**
@@ -39,7 +48,7 @@ define('WP_CONTENT_DIR', $webroot_dir . CONTENT_DIR);
 define('WP_CONTENT_URL', WP_HOME . CONTENT_DIR);
 
 /**
- * Cache config
+ * WP Super Cache config
  */
 define('WPCACHEHOME', WP_CONTENT_DIR . '/plugins/wp-super-cache/');
 
