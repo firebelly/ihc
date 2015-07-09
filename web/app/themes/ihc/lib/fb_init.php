@@ -244,3 +244,15 @@ function ssl_template_redirect() {
     }
   }
 }
+
+/**
+ * Allow <script> tags for Multiple Page Blocks (mostly for BlackBaud donation form)
+ */
+function allow_script_tags() {
+  global $allowedposttags;
+  $allowedposttags['script'] = array(
+   'type' => array(),
+   'src' => array()
+ );
+}
+add_action('init', __NAMESPACE__.'\allow_script_tags', 10);
