@@ -282,6 +282,7 @@ function get_events($options=[]) {
 
     // Just count posts (used for load-more buttons)
     $args ['posts_per_page'] = -1;
+    $args ['fields'] = 'ids';
     $count_query = new \WP_Query($args);
     return $count_query->found_posts;
 
