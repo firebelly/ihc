@@ -94,6 +94,18 @@ form {
     }
   }
 
+  .BBFormSubSectionHeading {
+    width: 100%;
+    margin-bottom: 20px;
+    @include font-style1;
+    padding-bottom: .5em;
+    display: inline-block;
+    border-bottom: 1px solid #EBEBEB;
+    &:empty {
+      display: none;
+    }
+  }
+
   .BBFormSection {
     margin: 0;
     padding-bottom: 40px;
@@ -110,6 +122,12 @@ form {
     @extend .button;
     border-radius: 0;
     box-shadow: none;
+  }
+
+  // Table style
+  .BBFormTable {
+    background: none;
+    border-radius: 0;
   }
 
   // Radio buttons
@@ -150,6 +168,17 @@ form {
 
     #divClientError {
       margin-bottom: 90px;
+    }
+  }
+
+  // Email signup sepcific
+  #bboxsignup-d0c2fec0-dae5-4399-b40c-71a58c118a84_lblHeadingSignup {
+    padding: 0;
+    color: $dk-blue;
+    background: none;
+    margin-bottom: 20px !important;
+    &:after {
+      display: none;
     }
   }
 }
