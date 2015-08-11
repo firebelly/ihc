@@ -22,6 +22,8 @@ $event_url = get_permalink($event_post);
       <ul class="actions">
         <?php if (!empty($event->registration_url)): ?>
           <a target="_blank" class="register" href="<?= $event->registration_url ?>">Register</a>
+        <?php elseif (!empty($event->registration_embed)): ?>
+          <a class="register" href="<?= get_the_permalink($event_post) ?>#register">Register</a>
         <?php endif; ?>
         <li><a class="more" href="<?= $event_url ?>">More Details</a></li>
       </ul>

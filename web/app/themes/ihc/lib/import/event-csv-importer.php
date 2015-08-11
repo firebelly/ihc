@@ -19,6 +19,7 @@ class EventCSVImporter {
     // Cost = "Free. [Attendee Cost Details field contents]" if Cost=0 and Cost Details not blank
     'RSVP'                           => null, // RSVP required (Yes or no/blank)
     'Required/Recommended'           => null, // RSVP text (required/recommended)
+    'RSVP Embed'                     => null, // RSVP embed code
     'Sub-Focus Area'                 => null, // Sub-focus area (not currently used)
     'Web Title'                      => null, // Title
     'Web Description'                => null, // Body
@@ -226,6 +227,10 @@ class EventCSVImporter {
       // Set Registration URL
       if ($csv_data['RSVP URL'])
         update_post_meta($post_id, $this->prefix.'registration_url', $csv_data['RSVP URL']);
+
+      // Set Registration Embed Code
+      if ($csv_data['RSVP Embed'])
+        update_post_meta($post_id, $this->prefix.'registration_embed', $csv_data['RSVP Embed']);
 
       // RSVP text
       if ($csv_data['RSVP'] && preg_match('/yes/i',$csv_data['RSVP'])) {

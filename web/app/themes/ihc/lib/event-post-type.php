@@ -225,6 +225,12 @@ function metaboxes( array $meta_boxes ) {
         'type'    => 'text_url',
       ),
       array(
+        'name'    => 'Registration Embed Code',
+        'desc'    => 'If set, same behavior as Registration URL, but shows embedded registration form on Single Event page.',
+        'id'      => $prefix . 'registration_embed',
+        'type'    => 'textarea',
+      ),
+      array(
         'name'    => 'RSVP',
         'id'      => $prefix . 'rsvp_text',
         'type'    => 'radio_inline',
@@ -459,6 +465,7 @@ function get_event_details($post) {
     'cost' => get_post_meta($post->ID, '_cmb2_cost', true),
     'registration_url' => get_post_meta($post->ID, '_cmb2_registration_url', true),
     'rsvp_text' => get_post_meta($post->ID, '_cmb2_rsvp_text', true),
+    'registration_embed' => get_post_meta($post->ID, '_cmb2_registration_embed', true),
     'lat' => get_post_meta($post->ID, '_cmb2_lat', true),
     'lng' => get_post_meta($post->ID, '_cmb2_lng', true),
     'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . current_time('timestamp'),
@@ -489,39 +496,41 @@ function get_event_details($post) {
  * Alter WP query for Event archive pages
  * if "past_events" is set, only shows archived events
  */
-// currently site is just using get_events() in event-post-type.php
-//
-// function event_query($query){
-//   global $wp_the_query;
-//   if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
-//     $meta_query = array(
-//       array(
-//         'key' => '_cmb2_event_end',
-//         'value' => current_time('timestamp'),
-//         'compare' => (get_query_var('past_events') ? '<=' : '>')
-//       )
-//     );
-//     $query->set('meta_query', $meta_query);
-//     $query->set('orderby', 'meta_value_num');
-//     $query->set('meta_key', '_cmb2_event_end');
-//     // show events oldest->newest
-//     $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
 
-//     // focus area?
-//     if (get_query_var('event_focus_area')) {
-//       $tax_query = array(
-//         array(
-//           'taxonomy' => 'focus_area',
-//           'field' => 'id',
-//           'terms' => get_query_var('event_focus_area')
-//         )
-//       );
-//       $query->set('tax_query', $tax_query);
-//     }
-//   }
-// }
-// add_action('pre_get_posts', __NAMESPACE__ . '\\event_query');
+/*
+ * currently site is just using get_events() in event-post-type.php
 
+function event_query($query){
+  global $wp_the_query;
+  if ($wp_the_query === $query && !is_admin() && is_post_type_archive('event')) {
+    $meta_query = array(
+      array(
+        'key' => '_cmb2_event_end',
+        'value' => current_time('timestamp'),
+        'compare' => (get_query_var('past_events') ? '<=' : '>')
+      )
+    );
+    $query->set('meta_query', $meta_query);
+    $query->set('orderby', 'meta_value_num');
+    $query->set('meta_key', '_cmb2_event_end');
+    // show events oldest->newest
+    $query->set('order', (get_query_var('past_events') ? 'DESC' : 'ASC'));
+
+    // focus area?
+    if (get_query_var('event_focus_area')) {
+      $tax_query = array(
+        array(
+          'taxonomy' => 'focus_area',
+          'field' => 'id',
+          'terms' => get_query_var('event_focus_area')
+        )
+      );
+      $query->set('tax_query', $tax_query);
+    }
+  }
+}
+add_action('pre_get_posts', __NAMESPACE__ . '\\event_query');
+*/
 
 /**
  * Handle AJAX response from CSV import form

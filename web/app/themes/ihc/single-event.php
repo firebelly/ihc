@@ -23,6 +23,15 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
         <?php get_template_part('templates/share'); ?>
       </footer>
     </div>
+
+    <?php if (!empty($event->registration_embed)): ?>
+      <div class="page-block registration-embed" id="register">
+        <h2 class="flag">Register for Event</h2>
+        <div class="entry-content user-content">
+          <?= $event->registration_embed ?>
+        </div>
+      </div>
+    <?php endif; ?>
   </main>
 
   <aside class="main">
