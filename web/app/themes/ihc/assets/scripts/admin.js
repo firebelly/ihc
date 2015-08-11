@@ -6,7 +6,8 @@
 var IHC_admin = (function($) {
 
   var _uploadFiles,
-      _uploadCount = 0;
+      _uploadCount = 0,
+      _updateTimer;
 
   function _init() {
     // AJAX CSV import handling
@@ -62,6 +63,18 @@ var IHC_admin = (function($) {
       if ($('#_cmb2_event_end_time').val()==='') {
         $('#_cmb2_event_end_time').val($('#_cmb2_event_start_time').val());
       }
+    });
+
+    // hack the update from bottom plugin to show it earlier
+    $(window).scroll(function(){
+      _updateTimer = setTimeout(function() {
+        clearTimeout(_updateTimer);
+        if($(window).scrollTop() > $('#submitdiv').height()) {
+          $('#updatefrombottom').show();
+        } else {
+          $('#updatefrombottom').hide();
+        }
+      }, 250);
     });
 
   }
