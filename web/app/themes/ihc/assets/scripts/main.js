@@ -90,6 +90,20 @@ var IHC = (function($) {
     // Run resize again in case anything needs adjusting
     _resize();
 
+    // Smoothscroll links
+    $('a.smoothscroll').click(function(e) {
+      e.preventDefault();
+      var href = $(this).attr('href');
+      _scrollBody($(href));
+    });
+
+    // Scroll down to hash afer page load
+    $(window).load(function() {
+      if (window.location.hash) {
+        _scrollBody($(window.location.hash)); 
+      }
+    });
+
   }
 
   function _initBigClicky() {
