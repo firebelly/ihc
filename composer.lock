@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a85a56ade2d511f1aec9edde8aa4cd79",
+    "hash": "630a51cfa7b6af8985eb244075dcb701",
     "packages": [
         {
             "name": "composer/installers",
@@ -92,16 +92,16 @@
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.2.2",
+            "version": "4.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "998358f3b7a2c75caae11ff3c79e514951aac7f6"
+                "reference": "7ba0030c15a88c63b3ba2e8ebee1215e211aa9a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/998358f3b7a2c75caae11ff3c79e514951aac7f6",
-                "reference": "998358f3b7a2c75caae11ff3c79e514951aac7f6",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/7ba0030c15a88c63b3ba2e8ebee1215e211aa9a1",
+                "reference": "7ba0030c15a88c63b3ba2e8ebee1215e211aa9a1",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "blog",
                 "cms"
             ],
-            "time": "2015-05-07 01:46:09"
+            "time": "2015-08-04 12:01:12"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -316,7 +316,7 @@
         },
         {
             "name": "wpackagist-plugin/cmb2",
-            "version": "2.0.8",
+            "version": "2.1.0",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/cmb2/",
@@ -336,7 +336,7 @@
         },
         {
             "name": "wpackagist-plugin/intuitive-custom-post-order",
-            "version": "3.0.4",
+            "version": "3.0.6",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/intuitive-custom-post-order/",
@@ -416,15 +416,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "2.1.1",
+            "version": "2.1.5",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/2.1.1"
+                "reference": "tags/2.1.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.2.1.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-history.2.1.5.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -433,6 +433,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/simple-history/"
+        },
+        {
+            "name": "wpackagist-plugin/update-from-bottom",
+            "version": "1.0.3",
+            "source": {
+                "type": "svn",
+                "url": "http://plugins.svn.wordpress.org/update-from-bottom/",
+                "reference": "tags/1.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/update-from-bottom.1.0.3.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/update-from-bottom/"
         },
         {
             "name": "wpackagist-plugin/user-roles-and-capabilities",
