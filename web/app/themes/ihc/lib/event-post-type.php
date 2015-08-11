@@ -591,6 +591,7 @@ Required/Recommended            (required/recommended)
 Web Title                       (Title)
 Web Description                 (Body)
 RSVP URL                        (Registration URL)
+RSVP Embed                      (Reg. embed code)
 Location                        
 Ev_Prt_1_01_CnAdrPrf_Addrline1 
 Ev_Prt_1_01_CnAdrPrf_Addrline2 
