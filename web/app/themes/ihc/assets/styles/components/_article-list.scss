@@ -22,8 +22,11 @@
 
 // Event dates
 .article-date.flagged {
-  width: 50px;
+  width: auto;
+  float: right;
   color: $dk-blue;
+  margin-left: 25px;
+  position: relative;
   &::after {
     top: 100%;
     right: 0;
@@ -36,10 +39,22 @@
   }
 
   .month {
+    display: block;
     @include font-style1;
+    &.event-start {
+      &:after {
+        content: '';
+        height: 1px;
+        width: 10px;
+        display: block;
+        margin: 6px auto 7px;
+        background: $dk-blue;
+      }
+    }
   }
 
   .day {
+    display: block;
     font: 300 #{$xl}/30px $sans;
     letter-spacing: 0;
   }
