@@ -8,11 +8,11 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
   <main>
     <h2 class="flag"><?= $banner_text ?></h2>
     <time class="article-date flagged" datetime="<?= date('c', $event->event_start); ?>">
-    <?php if (date('d', $event->event_start) != date('d', $event->event_end)) { ?>
-      <span class="month event-start"><?= date('M', $event->event_start) ?> <?= date('d', $event->event_start) ?><?php // ($event->year != date('Y') ? '<span class="year">, '.$event->year.'</span>' : '') ?></span>
-      <span class="month event-end"><?= date('M', $event->event_end) ?> <?= date('d', $event->event_end) ?> <?php // ($event->year != date('Y') ? '<span class="year">, '.$event->year.'</span>' : '') ?></span>
+    <?php if (date('Y-m-d', $event->event_start) != date('Y-m-d', $event->event_end)) { ?>
+      <span class="month event-start"><?= date('M d', $event->event_start) ?></span>
+      <span class="month event-end"><?= date('M d', $event->event_end) ?></span>
     <?php } else { ?>
-      <span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?php // ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?>
+      <span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span> <?= ($event->year == date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?>
     <?php } ?>
     </time>
     <?php if ($thumb = \Firebelly\Media\get_post_thumbnail($post->ID, 'large')): ?>
@@ -46,8 +46,16 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
     <div id="map"></div>
     <div class="event-details">
       <h3>When:</h3>
-      <p><?= date('l, F j, Y', $event->event_start) ?>
-      <br><?= $event->time_txt ?></p>
+
+      <?php if ($event->multiple_days) { ?>
+        <p><?= date('l, F j, Y', $event->event_start) ?>
+        <br><em>through</em>
+        <br><?= date('l, F j, Y', $event->event_end) ?></p>
+        <p><?= $event->time_txt ?> Daily</p>
+      <?php } else { ?>
+        <p><?= date('l, F j, Y', $event->event_start) ?>
+        <br><?= $event->time_txt ?></p>
+      <?php } ?>
 
       <h3>Where:</h3>
       <p><?= $event->venue ?>

@@ -256,7 +256,7 @@ function get_events($options=[]) {
   $args = [
     'numberposts' => $options['num_posts'],
     'post_type' => 'event',
-    'meta_key' => '_cmb2_event_end',
+    'meta_key' => '_cmb2_event_start',
     'orderby' => 'meta_value_num',
   ];
   // Make sure we're only pulling upcoming or past events
@@ -470,9 +470,12 @@ function get_event_details($post) {
     'lng' => get_post_meta($post->ID, '_cmb2_lng', true),
     'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . current_time('timestamp'),
   ];
+  // Is this event multiple days?
+  $event['multiple_days'] = (date('Y-m-d', $event['event_start']) != date('Y-m-d', $event['event_end']));
   $event['start_time'] = date('g:iA', $event['event_start']);
-  if (!empty($event['event_end']) && $event['event_end'] != $event['event_start']) {
-    $event['time_txt'] = $event['start_time'] . '–' . date('g:iA', $event['event_end']);
+  $event['end_time'] = date('g:iA', $event['event_end']);
+  if ($event['start_time'] != $event['end_time']) {
+    $event['time_txt'] = $event['start_time'] . '–' . $event['end_time'];
   } else {
     $event['time_txt'] = $event['start_time'];
   }

@@ -11,10 +11,10 @@ $event_url = get_permalink($event_post);
     <?php endif; ?>
     <time class="article-date flagged" datetime="<?= date('c', $event->event_start); ?>">
     <?php if (date('d', $event->event_start) != date('d', $event->event_end)) { ?>
-      <span class="month event-start"><?= date('M', $event->event_start) ?> <?= date('d', $event->event_start) ?><?php // ($event->year != date('Y') ? '<span class="year">, '.$event->year.'</span>' : '') ?></span>
-      <span class="month event-end"><?= date('M', $event->event_end) ?> <?= date('d', $event->event_end) ?> <?php // ($event->year != date('Y') ? '<span class="year">, '.$event->year.'</span>' : '') ?></span>
+      <span class="month event-start"><?= date('M d', $event->event_start) ?></span>
+      <span class="month event-end"><?= date('M d', $event->event_end) ?></span>
     <?php } else { ?>
-      <span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?php // ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?>
+      <span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span><?= ($event->year < date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?>
     <?php } ?>
     </time>
     <div class="article-content-wrap"> 
