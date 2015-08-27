@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "630a51cfa7b6af8985eb244075dcb701",
+    "hash": "fd34543af6ab3db0275d6b95b2dd447f",
     "packages": [
         {
             "name": "composer/installers",
@@ -92,16 +92,16 @@
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.2.4",
+            "version": "4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "7ba0030c15a88c63b3ba2e8ebee1215e211aa9a1"
+                "reference": "2afe902599538caaa0f1fd7579895dd7cc0ac5f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/7ba0030c15a88c63b3ba2e8ebee1215e211aa9a1",
-                "reference": "7ba0030c15a88c63b3ba2e8ebee1215e211aa9a1",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/2afe902599538caaa0f1fd7579895dd7cc0ac5f7",
+                "reference": "2afe902599538caaa0f1fd7579895dd7cc0ac5f7",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "blog",
                 "cms"
             ],
-            "time": "2015-08-04 12:01:12"
+            "time": "2015-08-18 18:16:11"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -276,15 +276,15 @@
         },
         {
             "name": "wpackagist-plugin/accordion-shortcodes",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/accordion-shortcodes/",
-                "reference": "tags/2.2.3"
+                "reference": "tags/2.2.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.2.3.zip",
+                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.2.4.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -416,15 +416,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "2.1.5",
+            "version": "2.1.6",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/2.1.5"
+                "reference": "tags/2.1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.2.1.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-history.2.1.6.zip",
                 "reference": null,
                 "shasum": null
             },

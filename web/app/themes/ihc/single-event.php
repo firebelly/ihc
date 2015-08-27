@@ -31,7 +31,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
       </footer>
     </div>
 
-    <?php if (!empty($event->registration_embed)): ?>
+    <?php if (!($event->archived) && !empty($event->registration_embed)): ?>
       <div class="page-block registration-embed" id="register">
         <h2 class="flag">Register for Event</h2>
         <div class="entry-content user-content">
