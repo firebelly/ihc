@@ -29,7 +29,7 @@
   .event-details {
     @include clearfix;
     background: $white;
-    padding: 25px;
+    padding: 25px 25px 5px;
     margin-bottom: 60px;
 
     h3 {
@@ -43,6 +43,9 @@
       p {
         margin-bottom: 0;
       }
+    }
+    .actions {
+      margin-bottom: 20px;
     }
   }
 }
