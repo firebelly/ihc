@@ -66,27 +66,6 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
       <br><?= $event->address['city'] ?>, <?= $event->address['state'] ?> <?= $event->address['zip'] ?>
       </p>
 
-      <?php if (!empty($event->sponsor)): ?>
-        <div class="sponsors">
-          <h3>Sponsors:</h3>
-          <?= apply_filters('the_content', $event->sponsor); ?>
-        </div>
-      <?php endif; ?>
-
-      <?php if (!empty($event->partner)): ?>
-        <div class="partners">
-          <h3>Partners:</h3>
-          <?= apply_filters('the_content', $event->partner); ?>
-        </div>
-      <?php endif; ?>
-
-      <?php if (!empty($event->funder)): ?>
-        <div class="funders">
-          <h3>Funders:</h3>
-          <?= apply_filters('the_content', $event->funder); ?>
-        </div>
-      <?php endif; ?>
-
       <?php if (!($event->archived)): ?>
         <h3>Cost:</h3>
         <p class="cost">
@@ -108,6 +87,28 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
           <li><a class="add-to-calendar" href="<?= $event->add_to_calendar_url ?>">Add To My Calendar</a></li>
         </ul>
       <?php endif; ?>
+
+      <?php if (!empty($event->sponsor)): ?>
+        <div class="sponsors">
+          <h3>Sponsors:</h3>
+          <?= apply_filters('the_content', $event->sponsor); ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if (!empty($event->partner)): ?>
+        <div class="partners">
+          <h3>Partners:</h3>
+          <?= apply_filters('the_content', $event->partner); ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if (!empty($event->funder)): ?>
+        <div class="funders">
+          <h3>Funders:</h3>
+          <?= apply_filters('the_content', $event->funder); ?>
+        </div>
+      <?php endif; ?>
+
     </div>
 
     <div class="article-list">
