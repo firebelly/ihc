@@ -10,7 +10,7 @@ use Roots\Sage\ConditionalTagCheck;
 add_theme_support('soil-clean-up');         // Enable clean up from Soil
 add_theme_support('soil-relative-urls');    // Enable relative URLs from Soil
 add_theme_support('soil-nice-search');      // Enable nice search from Soil
-add_theme_support('soil-google-analytics', 'UA-63659858-1', 'wp_footer'); // Enable H5BP's Google Analytics snippet
+// add_theme_support('soil-google-analytics', 'UA-63659858-1', 'wp_footer'); // Enable H5BP's Google Analytics snippet
 add_theme_support('jquery-cdn');            // Enable to load jQuery from the Google CDN
 
 /**
