@@ -92,16 +92,16 @@
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.3",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "2afe902599538caaa0f1fd7579895dd7cc0ac5f7"
+                "reference": "cfcf25eb42baeb7316a61c7a64e9a1ab3e291f2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/2afe902599538caaa0f1fd7579895dd7cc0ac5f7",
-                "reference": "2afe902599538caaa0f1fd7579895dd7cc0ac5f7",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/cfcf25eb42baeb7316a61c7a64e9a1ab3e291f2f",
+                "reference": "cfcf25eb42baeb7316a61c7a64e9a1ab3e291f2f",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +125,7 @@
                 "blog",
                 "cms"
             ],
-            "time": "2015-08-18 18:16:11"
+            "time": "2015-09-15 15:01:23"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -336,15 +336,15 @@
         },
         {
             "name": "wpackagist-plugin/intuitive-custom-post-order",
-            "version": "3.0.6",
+            "version": "3.0.7",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/intuitive-custom-post-order/",
-                "reference": "trunk"
+                "reference": "tags/3.0.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/intuitive-custom-post-order.zip",
+                "url": "https://downloads.wordpress.org/plugin/intuitive-custom-post-order.3.0.7.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -396,15 +396,15 @@
         },
         {
             "name": "wpackagist-plugin/redirection",
-            "version": "2.3.16",
+            "version": "2.4.2",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/redirection/",
-                "reference": "tags/2.3.16"
+                "reference": "tags/2.4.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redirection.2.3.16.zip",
+                "url": "https://downloads.wordpress.org/plugin/redirection.2.4.2.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -416,15 +416,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "2.1.6",
+            "version": "2.2.4",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/2.1.6"
+                "reference": "tags/2.2.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.2.1.6.zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-history.2.2.4.zip",
                 "reference": null,
                 "shasum": null
             },
