@@ -33,7 +33,7 @@ function load_more_posts() {
   if ($post_type == 'event') {
     // if post type is event, make sure we're only pulling upcoming or past events
     $args['orderby'] = 'meta_value_num';
-    $args['meta_key'] = '_cmb2_event_end';
+    $args['meta_key'] = '_cmb2_event_start';
     $args['order'] = !empty($_REQUEST['past_events']) ? 'DESC' : 'ASC';
     $args['post_type'] = 'event';
     $args['meta_query'] = [
