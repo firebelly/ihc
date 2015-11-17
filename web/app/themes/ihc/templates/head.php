@@ -19,7 +19,7 @@
     </script>
     
     <?php wp_head(); ?>
-    
+
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -27,7 +27,14 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-63659858-1', 'auto');
-      ga('send', 'pageview');
 
+      <?php 
+        // Add Analytics dimension if viewing Blog Articles
+        if ( (is_single() && in_category('blog-article'))
+          || (is_category('blog-article')) ): ?>
+        ga('send', 'pageview', { 'dimension1': 'Blog Articles' });
+      <?php else: ?>
+        ga('send', 'pageview');
+      <?php endif; ?>
     </script>
   </head>
