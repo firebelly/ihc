@@ -29,12 +29,13 @@
       ga('create', 'UA-63659858-1', 'auto');
 
       <?php 
-        // Add Analytics dimension if viewing Blog Articles
-        if ( (is_single() && in_category('blog-article'))
-          || (is_category('blog-article')) ): ?>
-        ga('send', 'pageview', { 'dimension1': 'Blog Articles' });
-      <?php else: ?>
-        ga('send', 'pageview');
+      // Post Category Analytics dimension (blog or news)
+      if (is_single()): ?>
+        ga('set', 'dimension1', '<?= in_category('blog-article') ? 'blog' : 'news' ?>');
+      <?php elseif (is_category() || is_home()): ?>
+        ga('set', 'dimension1', '<?= is_category('blog-article') ? 'blog' : 'news' ?>');
       <?php endif; ?>
+
+      ga('send', 'pageview');
     </script>
   </head>
