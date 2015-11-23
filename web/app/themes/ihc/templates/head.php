@@ -29,11 +29,24 @@
       ga('create', 'UA-63659858-1', 'auto');
 
       <?php 
-      // Post Category Analytics dimension (blog or news)
-      if (is_single()): ?>
-        ga('set', 'dimension1', '<?= in_category('blog-article') ? 'blog' : 'news' ?>');
-      <?php elseif (is_category() || is_home()): ?>
-        ga('set', 'dimension1', '<?= is_category('blog-article') ? 'blog' : 'news' ?>');
+      // Post Category Analytics custom dimension
+      if (is_single()):
+        if (in_category('blog-article')): ?>
+          ga('set', 'dimension1', 'blog');
+        <?php else: ?>
+          ga('set', 'dimension1', '<?= $post->post_type != 'post' ? $post->post_type : 'news' ?>');
+        <?php endif; ?>
+
+      <?php elseif (is_home()): ?>
+          ga('set', 'dimension1', 'news');
+      <?php elseif (is_post_type_archive(['event'])): ?>
+        ga('set', 'dimension1', 'event');
+      <?php elseif (is_post_type_archive(['program'])): ?>
+        ga('set', 'dimension1', 'program');
+      <?php elseif (is_tax('focus_area')): ?>
+        ga('set', 'dimension1', 'focus_area');
+      <?php elseif (is_archive()): ?>
+        ga('set', 'dimension1', <?= is_category('blog-article') ? 'blog' : 'news' ?>);
       <?php endif; ?>
 
       ga('send', 'pageview');
