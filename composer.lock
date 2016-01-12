@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "fd34543af6ab3db0275d6b95b2dd447f",
+    "content-hash": "3151ddaf10a27222df72bfa212e93cbf",
     "packages": [
         {
             "name": "composer/installers",
@@ -92,16 +93,16 @@
         },
         {
             "name": "johnpbloch/wordpress",
-            "version": "4.3.1",
+            "version": "4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "cfcf25eb42baeb7316a61c7a64e9a1ab3e291f2f"
+                "reference": "85d6a8c16c7e8bb369e7530d3676d16618f68e24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/cfcf25eb42baeb7316a61c7a64e9a1ab3e291f2f",
-                "reference": "cfcf25eb42baeb7316a61c7a64e9a1ab3e291f2f",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/85d6a8c16c7e8bb369e7530d3676d16618f68e24",
+                "reference": "85d6a8c16c7e8bb369e7530d3676d16618f68e24",
                 "shasum": ""
             },
             "require": {
@@ -125,7 +126,7 @@
                 "blog",
                 "cms"
             ],
-            "time": "2015-09-15 15:01:23"
+            "time": "2016-01-06 18:46:15"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -188,16 +189,16 @@
         },
         {
             "name": "roots/soil",
-            "version": "3.4.0",
+            "version": "3.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/roots/soil.git",
-                "reference": "adaf4a0941224dfeab470a123d59dd925fc65004"
+                "reference": "8b534d4b271033d22b8fa0d055c740f7f9c4ca58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/roots/soil/zipball/adaf4a0941224dfeab470a123d59dd925fc65004",
-                "reference": "adaf4a0941224dfeab470a123d59dd925fc65004",
+                "url": "https://api.github.com/repos/roots/soil/zipball/8b534d4b271033d22b8fa0d055c740f7f9c4ca58",
+                "reference": "8b534d4b271033d22b8fa0d055c740f7f9c4ca58",
                 "shasum": ""
             },
             "require": {
@@ -221,34 +222,39 @@
                     "homepage": "https://github.com/retlehs"
                 }
             ],
-            "description": "Clean up WordPress markup, relative URLs, nice search",
+            "description": "A WordPress plugin which contains a collection of modules to apply theme-agnostic front-end modifications",
             "homepage": "https://roots.io/plugins/soil/",
             "keywords": [
                 "wordpress"
             ],
-            "time": "2015-04-29 04:46:56"
+            "time": "2015-12-24 19:42:34"
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v2.0.1",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "91064290f5b53a09bdff1b939d7f69fb0e7531b5"
+                "reference": "9caf304153dc2288e4970caec6f1f3b3bc205412"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/91064290f5b53a09bdff1b939d7f69fb0e7531b5",
-                "reference": "91064290f5b53a09bdff1b939d7f69fb0e7531b5",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/9caf304153dc2288e4970caec6f1f3b3bc205412",
+                "reference": "9caf304153dc2288e4970caec6f1f3b3bc205412",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": ">=5.3.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^4.8|^5.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Dotenv\\": "src/"
@@ -272,19 +278,19 @@
                 "env",
                 "environment"
             ],
-            "time": "2015-05-30 16:15:01"
+            "time": "2015-12-29 15:10:30"
         },
         {
             "name": "wpackagist-plugin/accordion-shortcodes",
-            "version": "2.2.4",
+            "version": "2.2.6",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/accordion-shortcodes/",
-                "reference": "tags/2.2.4"
+                "reference": "tags/2.2.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.2.4.zip",
+                "url": "https://downloads.wordpress.org/plugin/accordion-shortcodes.2.2.6.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -296,15 +302,15 @@
         },
         {
             "name": "wpackagist-plugin/akismet",
-            "version": "3.1.3",
+            "version": "3.1.7",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/akismet/",
-                "reference": "tags/3.1.3"
+                "reference": "tags/3.1.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.3.zip",
+                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.7.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -316,7 +322,7 @@
         },
         {
             "name": "wpackagist-plugin/cmb2",
-            "version": "2.1.0",
+            "version": "2.1.2",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/cmb2/",
@@ -396,15 +402,15 @@
         },
         {
             "name": "wpackagist-plugin/redirection",
-            "version": "2.4.2",
+            "version": "2.4.3",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/redirection/",
-                "reference": "tags/2.4.2"
+                "reference": "tags/2.4.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/redirection.2.4.2.zip",
+                "url": "https://downloads.wordpress.org/plugin/redirection.2.4.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -416,15 +422,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "2.2.4",
+            "version": "2.5",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/2.2.4"
+                "reference": "tags/2.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.2.2.4.zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-history.2.5.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -476,15 +482,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-super-cache",
-            "version": "1.4.4",
+            "version": "1.4.7",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/wp-super-cache/",
-                "reference": "tags/1.4.4"
+                "reference": "tags/1.4.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-super-cache.1.4.4.zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-super-cache.1.4.7.zip",
                 "reference": null,
                 "shasum": null
             },
