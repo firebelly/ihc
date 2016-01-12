@@ -13,6 +13,11 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       }
     }
 
+    p.callout a:hover {
+      background: $bg-color;
+      color: $dk-blue;
+    }
+
     #map.large .leaflet-tile-pane::after {
       box-shadow: inset 0 0 300px 200px $bg-color;
     }

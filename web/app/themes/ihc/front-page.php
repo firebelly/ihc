@@ -21,7 +21,7 @@ $secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><
       <h2 class="flag"><?= $header_banner_text ?></h2>
       <h1><?= $header_text ?></h1>
       <?php if ($secondary_header_text) { ?>
-        <p class="accent"><?= $secondary_header_text ?></p>
+        <p class="callout"><?= $secondary_header_text ?></p>
       <?php } ?>
     </div>
   </div>

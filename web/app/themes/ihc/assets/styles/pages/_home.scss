@@ -8,18 +8,25 @@
         margin-bottom: 0;
       }
     }
-    p.accent {
+  }
+  p.callout {
+    margin-bottom: 20px;
+    a {
+      display: inline-block;
       @include font-style1;
-      margin-bottom: 20px;
-
+      background: $dk-blue;
+      color: $white;
+      padding: 6px 20px 4px;
+      line-height: 20px !important;
+      transition: all $transition-speed;
       &::before {
         content: "\bb  ";
       }
-      @include tablet {
-        position: absolute;
-        bottom: 40px;
-        left: -12px;
-      }
+    }
+    @include tablet {
+      margin: 0 30px 20px 0;
+      position: absolute;
+      bottom: 40px;
     }
   }
   .button {
