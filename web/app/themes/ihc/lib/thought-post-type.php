@@ -91,6 +91,7 @@ function edit_columns($columns){
     '_cmb2_thought_of_the_day' => 'Thought of the Day?',
     '_cmb2_author' => 'Author',
     'taxonomy-focus_area' => 'Focus Area',
+    '_cmb2_shown_count' => 'Shown Count',
   );
   return $columns;
 }
@@ -137,8 +138,14 @@ function metaboxes(array $meta_boxes) {
           'type'    => 'text',
       ),
       array(
+          'name'    => 'Shown Count',
+          'desc'    => 'This is here just for testing, will remove when TOD is rotating.',
+          'id'      => $prefix . 'shown_count',
+          'type'    => 'text',
+      ),
+      array(
           'name'    => 'Thought of the Day',
-          'desc'    => 'When checked will clear out any previous Thought of the Day',
+          'desc'    => 'When checked will clear out previous Thought of the Day',
           'id'      => $prefix . 'thought_of_the_day',
           'type'    => 'checkbox',
       ),
@@ -150,9 +157,33 @@ function metaboxes(array $meta_boxes) {
 add_filter('cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes');
 
 /**
- * Get Thoughts
+ * Get Thought of the Day and output HTML
  */
 function get_thought_of_the_day() {
+  $thought_post = get_thought_of_the_day_post();
+  if (!$thought_post) return false;
+  $body = apply_filters('the_content', $thought_post->post_content);
+  $author = get_post_meta( $thought_post->ID, '_cmb2_author', true );
+
+  // hiding Focus Area, see http://issues.firebelly.co/issues/2067 6/11/15
+  // if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
+  //   $author .= '<br><a href="'.get_term_link($focus).'">'.$focus->name.'</a>';
+  // else
+  //   $author .= '<br>Humanities';
+
+  $output = <<<HTML
+   <article>
+     <blockquote>{$body}</blockquote>
+     <cite>{$author}</cite>
+   </article>
+HTML;
+  return $output;
+}
+
+/**
+ * Get Thought of the Day post
+ */
+function get_thought_of_the_day_post() {
   $args = array(
     'numberposts' => 1,
     'post_type' => 'thought',
@@ -167,24 +198,7 @@ function get_thought_of_the_day() {
 
   $thought_posts = get_posts($args);
   if (!$thought_posts) return false;
-  foreach ($thought_posts as $post):
-    $body = apply_filters('the_content', $post->post_content);
-    $author = get_post_meta( $post->ID, '_cmb2_author', true );
-
-    // hiding Focus Area, see http://issues.firebelly.co/issues/2067 6/11/15
-    // if ($focus = \Firebelly\Utils\get_first_term($post, 'focus_area'))
-    //   $author .= '<br><a href="'.get_term_link($focus).'">'.$focus->name.'</a>';
-    // else
-    //   $author .= '<br>Humanities';
-
-    $output = <<<HTML
-     <article>
-       <blockquote>{$body}</blockquote>
-       <cite>{$author}</cite>
-     </article>
-HTML;
-  endforeach;
-  return $output;
+  else return $thought_posts[0];
 }
 
 /**
@@ -283,25 +297,84 @@ add_action('wp_ajax_nopriv_thought_submission', __NAMESPACE__ . '\\thought_submi
 
 
 /**
- * Check if Thought of the Day is checked, clear out previous featured Thoughts if so
+ * Check if Thought of the Day is checked when saving Thought
  */
-function check_thought_of_day( $post_id ) {
-  global $wpdb;
-  if ( wp_is_post_revision( $post_id ) )
+function check_thought_of_day($post_id) {
+  if (wp_is_post_revision($post_id))
     return;
 
   if (!empty($_REQUEST['_cmb2_thought_of_the_day'])) {
-    $wpdb->query("DELETE FROM wp_postmeta WHERE meta_key='_cmb2_thought_of_the_day'");
-    $wpdb->query("INSERT INTO wp_postmeta SET meta_key='_cmb2_thought_of_the_day', meta_value='on', post_id={$post_id}");
+    set_thought_of_day($post_id);
   }
 }
 add_action('save_post', __NAMESPACE__ . '\check_thought_of_day');
 
+/**
+ * Set a post to TOD
+ */
+function set_thought_of_day($post_id) {
+  global $wpdb;
+  // Check if post is already TOD
+  $already_tod = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key='_cmb2_thought_of_the_day' AND meta_value='on' AND post_id={$post_id}");
+  if ($already_tod) return;
+
+  // Delete any other TOD and set post to TOD
+  $wpdb->query("DELETE FROM wp_postmeta WHERE meta_key='_cmb2_thought_of_the_day'");
+  $wpdb->query("INSERT INTO wp_postmeta SET meta_key='_cmb2_thought_of_the_day', meta_value='on', post_id={$post_id}");
+
+  // Update Shown Count for Thought
+  $wpdb->query("UPDATE wp_postmeta SET meta_value=meta_value+1 WHERE meta_key='_cmb2_shown_count' AND post_id={$post_id}");
+}
+
+/**
+ * Set initial shown_count of new Thought to lowest count of all Thought posts
+ */
+function init_shown_count($post_id, $post, $update) {
+  global $wpdb;
+  if (wp_is_post_revision($post_id) || $update || $post->post_type != 'thought')
+    return;
+  // Find lowest shown_count
+  $lowest_count = $wpdb->get_var("SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_cmb2_shown_count' ORDER BY meta_value ASC LIMIT 1");
+  update_post_meta($post_id, '_cmb2_shown_count', $lowest_count);
+}
+add_action('wp_insert_post', __NAMESPACE__ . '\init_shown_count', 10, 3);
+
+/**
+ * Cronjob to rotate Thought of the Day daily (preferably at midnight)
+ */
+add_action('wp', __NAMESPACE__ . '\init_rotate_thoughts');
+function init_rotate_thoughts() {
+  if (!wp_next_scheduled('rotate_thoughts')) {
+    wp_schedule_event(strtotime('midnight'), 'daily', 'rotate_thoughts');
+  }
+}
+add_action('rotate_thoughts', __NAMESPACE__ . '\rotate_thoughts');
+function rotate_thoughts() {
+  global $wpdb;
+
+  // Pull current TOD
+  $current_tod = get_thought_of_the_day_post();
+  if (!$current_tod) return; // Abort if there's no TOD
+  $author = get_post_meta($current_tod->ID, '_cmb2_author', true);
+
+  // Get lowest shown_count of all Thoughts
+  $low_count = $wpdb->get_var("SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_cmb2_shown_count' ORDER BY meta_value ASC LIMIT 1");
+
+  // Pull all Thoughts with lowest count
+  $tod_posts = $wpdb->get_results("SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_cmb2_shown_count' AND meta_value <= {$low_count}");
+  $tod_pool = [];
+  foreach ($tod_posts as $post)
+    $tod_pool[] = $post->post_id;
+
+  // Find random Thought in low_count pool, not matching the current TOD author name
+  $new_tod = $wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN (" . implode(',', $tod_pool) . ") AND meta_key = '_cmb2_author' AND meta_value != %s ORDER BY RAND() LIMIT 1", $author));
+  set_thought_of_day($new_tod);
+}
 
 /**
  * Handle AJAX response from CSV import form
  */
-add_action( 'wp_ajax_thought_csv_upload', __NAMESPACE__ . '\thought_csv_upload' );
+add_action('wp_ajax_thought_csv_upload', __NAMESPACE__ . '\thought_csv_upload');
 function thought_csv_upload() {
   global $wpdb;
   require_once 'import/thought-csv-importer.php';
