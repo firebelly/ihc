@@ -146,6 +146,12 @@ function metaboxes( array $meta_boxes ) {
           'id'      => $prefix . 'event_end',
           'type'    => 'text_datetime_timestamp',
       ),
+      array(
+          'name'    => 'Exhibition',
+          'desc'    => 'If checked, only shows in Ongoing Exhibitions and Past Events',
+          'id'      => $prefix . 'exhibition',
+          'type'    => 'checkbox',
+      ),
     ),
   );
 
@@ -253,6 +259,7 @@ add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 function get_events($options=[]) {
   if (empty($options['num_posts'])) $options['num_posts'] = get_option('posts_per_page');
   if (!empty($_REQUEST['past_events'])) $options['past_events'] = 1;
+  if (!empty($_REQUEST['exhibitions'])) $options['exhibitions'] = 1;
   $args = [
     'numberposts' => $options['num_posts'],
     'post_type' => 'event',
@@ -268,6 +275,14 @@ function get_events($options=[]) {
       'compare' => (!empty($options['past_events']) ? '<=' : '>')
     ]
   ];
+  // If not Past Events, either make sure Exhibition is or isn't checked
+  if (empty($options['past_events'])) {
+    $args['meta_query'][] = array(
+      'key' => '_cmb2_exhibition',
+      'value' => 'on',
+      'compare' => !empty($options['exhibitions']) ? '=' : 'NOT EXISTS',
+    );
+  }
   if (!empty($options['focus_area'])) {
     $args['tax_query'] = array(
         array(
@@ -442,6 +457,7 @@ function get_ical_date($time, $incl_time=true){
  */
 function add_query_vars_filter($vars){
   $vars[] = "past_events";
+  $vars[] = "exhibitions";
   $vars[] = "filter_program";
   $vars[] = "filter_focus_area";
   return $vars;

@@ -6,6 +6,7 @@
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $per_page = get_option('posts_per_page');
 $past_events = get_query_var('past_events', 0);
+$exhibitions = get_query_var('exhibitions', 0);
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
 $total_events = \Firebelly\PostTypes\Event\get_events([
@@ -26,7 +27,8 @@ $page_content = apply_filters('the_content', $post->post_content);
 
   <main>
     <ul class="flag-tabs">
-      <li><a class="<?= $past_events ? '' : 'active' ?>" href="/events/">Upcoming Events</a></li> 
+      <li><a class="<?= !$past_events && !$exhibitions ? 'active' : '' ?>" href="/events/">Upcoming Events</a></li> 
+      <li><a class="<?= $exhibitions ? 'active' : '' ?>" href="/events/?exhibitions=1">Ongoing Exhibitions</a></li> 
       <li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1">Past Events</a></li>  
     </ul>
 
