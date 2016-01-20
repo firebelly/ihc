@@ -601,6 +601,7 @@ Ev_Start_Date
 Ev_End_Date                    
 Ev_Start_Time                  
 Ev_End_Time                    
+Exhibition                      (yes/no)
 Ev_Event_ID                    
 Ev_Import_ID                   
 Attendee Cost                   (Cost)
