@@ -11,6 +11,7 @@ class EventCSVImporter {
     'Ev_End_Date'                    => null,
     'Ev_Start_Time'                  => null,
     'Ev_End_Time'                    => null,
+    'Exhibition'                     => null,
     'Ev_Event_ID'                    => null,
     'Ev_Import_ID'                   => null,
     'Attendee Cost'                  => null, // Cost
@@ -241,6 +242,11 @@ class EventCSVImporter {
             update_post_meta($post_id, $this->prefix.'rsvp_text', 'recommended');
           }
         }
+      }
+
+      // Exhibition?
+      if ($csv_data['Exhibition'] && preg_match('/yes/i',$csv_data['Exhibition'])) {
+        update_post_meta($post_id, $this->prefix.'exhibition', 'on');
       }
 
       // Get sponsor/partner/funder fields
