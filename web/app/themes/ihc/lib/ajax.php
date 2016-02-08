@@ -43,6 +43,15 @@ function load_more_posts() {
         'compare' => (!empty($_REQUEST['past_events']) ? '<=' : '>')
       ]
     ];
+    // If not Past Events, either make sure Exhibition is or isn't checked
+    if (empty($_REQUEST['past_events'])) {
+      $args['meta_query'][] = array(
+        'key' => '_cmb2_exhibition',
+        'value' => 'on',
+        'compare' => !empty($_REQUEST['exhibitions']) ? '=' : 'NOT EXISTS',
+      );
+    }
+
   }
   // Filter by Focus Area?
   if (!empty($_REQUEST['focus_area'])) {

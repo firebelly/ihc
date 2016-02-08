@@ -336,6 +336,7 @@ var IHC = (function($) {
       var past_events = (post_type==='event') ? parseInt($load_more.attr('data-past-events')) : 0;
       var focus_area = $load_more.attr('data-focus-area');
       var program = $load_more.attr('data-program');
+      var exhibitions = $load_more.attr('data-exhibitions');
       var more_container = $load_more.parents('section,main').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
 
@@ -357,6 +358,7 @@ var IHC = (function($) {
               per_page: per_page,
               past_events: past_events,
               focus_area: focus_area,
+              exhibitions: exhibitions,
               program: program
           },
           success: function(data) {

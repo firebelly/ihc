@@ -45,7 +45,7 @@ $page_content = apply_filters('the_content', $post->post_content);
     </div>
     
     <?php if ($total_pages>1): ?>
-      <div class="load-more" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+      <div class="load-more" data-exhibitions="<?= $exhibitions ?>" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
     <?php endif; ?>
   </main>
   <aside class="main">
