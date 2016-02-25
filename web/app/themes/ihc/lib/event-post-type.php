@@ -344,7 +344,7 @@ function geocode_address($post_id, $post='') {
    ));
 
   if (!empty($address['address-1'])):
-    $address_combined = $address['address-1'] . ' ' . $address['address-1'] . ' ' . $address['city'] . ', ' . $address['state'] . ' ' . $address['zip'];
+    $address_combined = $address['address-1'] . ' ' . $address['address-2'] . ' ' . $address['city'] . ', ' . $address['state'] . ' ' . $address['zip'];
     $request_url = "http://maps.google.com/maps/api/geocode/xml?sensor=false&address=" . urlencode($address_combined);
 
     $xml = simplexml_load_file($request_url);
