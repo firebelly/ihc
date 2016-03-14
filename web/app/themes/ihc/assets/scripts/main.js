@@ -112,8 +112,10 @@ var IHC = (function($) {
       if ($('form.filters select[name=prox_miles]').length) {
         if ($('form.filters select[name=prox_miles]').val() !== '' && $('form.filters input[name=prox_zip]').val() === '') {
           e.preventDefault();
-          alert('Please enter a zip code for distance search.');
+          alert('Please enter a zip code.');
           $('form.filters input[name=prox_zip]')[0].focus();
+        } else if ($('form.filters select[name=prox_miles]').val() === '' && $('form.filters input[name=prox_zip]').val() !== '') {
+          $('form.filters select[name=prox_miles]').val(1);
         }
       }
     });

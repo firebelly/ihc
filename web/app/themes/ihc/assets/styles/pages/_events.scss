@@ -104,9 +104,6 @@
   }
   .event-proximity {
     clear: left;
-    .select-wrapper {
-      margin-right: 30px;
-    }
     .input-wrapper {
       display: inline-block;
       input[type=text] {
@@ -115,11 +112,13 @@
         outline: none;
         color: $dk-blue;
         padding: 6px 10px;
-        line-height: 30px;
-        padding: 0 10px;
+        line-height: 14px;
+        padding: 0;
         text-transform: uppercase;
-        margin: 0 0 10px;
+        margin: 0 30px 10px 0;
+        width: 70px;
         border-radius: 0;
+        border-bottom: 1px solid $dk-blue;
       }
     }
   }

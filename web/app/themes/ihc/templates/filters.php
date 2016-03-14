@@ -64,7 +64,11 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
     </div>
 
   <?php if ($post_type=='event'): ?>
-    <div class="event-proximity">Distance: 
+    <div class="event-proximity">
+      <div class="input-wrapper">
+        <label for="prox_zip">ZIP CODE: <input type="text" name="prox_zip" value="<?= $prox_zip ?>" placeholder="Your Zip"></label>
+      </div>
+      Distance: 
       <div class="select-wrapper">
         <select name="prox_miles">
             <?php 
@@ -82,9 +86,6 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
             <option <?= $prox_val==$prox_miles ? 'selected' : '' ?> value="<?= $prox_val ?>"><?= $prox_title ?></option>
           <?php endforeach; ?>
         </select>
-      </div>
-      <div class="input-wrapper">
-        <label for="prox_zip">ZIP CODE: <input type="text" name="prox_zip" value="<?= $prox_zip ?>" placeholder="Your Zip"></label>
       </div>
     </div>
   <?php endif; ?>
