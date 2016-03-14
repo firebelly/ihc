@@ -299,6 +299,23 @@ function get_events($options=[]) {
       'compare' => 'IN',
     );
   }
+  // Geo query?
+  if (!empty($options['prox_zip']) && is_numeric($options['prox_zip'])) {
+    $prox_zip = (int)$options['prox_zip'];
+    $prox_miles = (int)$options['prox_miles'];
+    $close_events = get_event_ids_in_proximity($prox_zip,$prox_miles);
+    if ($close_events) {
+      $close_event_ids = [];
+      foreach($close_events as $close_event) {
+        $close_event_ids[] = $close_event->post_id;
+      }
+      $args['post__in'] = $close_event_ids;
+    } else {
+      $args['post__in'] = [0];
+    }
+  }
+
+
   if (!empty($options['countposts'])) {
 
     // Just count posts (used for load-more buttons)
@@ -330,6 +347,54 @@ function get_events($options=[]) {
   }
 }
 
+function get_event_ids_in_proximity($prox_zip,$prox_miles) {
+  global $wpdb;
+  $lat_lng = $wpdb->get_row( $wpdb->prepare("SELECT lat,lng FROM wp_zip_lat_lng WHERE zip=%d", $prox_zip) );
+  if (!$lat_lng)
+    return false;
+
+  $ids = $wpdb->get_results($wpdb->prepare("
+    SELECT
+      post_id, (
+        3959 * acos (
+        cos ( radians(%f) )
+        * cos( radians( lat ) )
+        * cos( radians( lng ) - radians(%f) )
+        + sin ( radians(%f) )
+        * sin( radians( lat ) )
+      )
+    ) AS distance
+    FROM wp_events_lat_lng
+    HAVING distance < %d
+    ORDER BY distance;
+    ", $lat_lng->lat, $lat_lng->lng, $lat_lng->lat, $prox_miles
+  ));
+  return $ids;
+}
+
+/**
+ * Update lookup table for events geodata, if post_id isn't sent, all posts are updates/inserted into wp_events_lat_lng
+ */
+function update_events_lat_lng($post_id='') {
+  global $wpdb;
+  $event_cache = [];
+  $post_id_sql = empty($post_id) ? '' : ' AND post_id='.(int)$post_id;
+  $event_posts = $wpdb->get_results("SELECT post_id, meta_key, meta_value FROM $wpdb->postmeta WHERE meta_key IN ('_cmb2_lat','_cmb2_lng') AND meta_value != '' {$post_id_sql} ORDER BY post_id");
+  if ($event_posts) {
+    foreach ($event_posts as $event) {
+      $event_cache[$event->post_id][$event->meta_key] = $event->meta_value;
+    }
+    foreach ($event_cache as $event_id=>$arr) {
+      $cnt = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(*) FROM wp_events_lat_lng WHERE post_id=%d", $event_id) );
+      if ($cnt>0) {
+        $wpdb->query( $wpdb->prepare("UPDATE wp_events_lat_lng SET lat=%s, lng=%s WHERE post_id=%d", $arr['_cmb2_lat'], $arr['_cmb2_lng'], $event_id) );
+      } else {
+        $wpdb->query( $wpdb->prepare("INSERT INTO wp_events_lat_lng (post_id,lat,lng) VALUES (%d,%s,%s)", $event_id, $arr['_cmb2_lat'], $arr['_cmb2_lng']) );
+      }
+    }
+  }
+}
+
 /**
  * Geocode address for event and save in custom fields
  */
@@ -354,6 +419,7 @@ function geocode_address($post_id, $post='') {
         $lng = $xml->result->geometry->location->lng;
         update_post_meta($post_id, '_cmb2_lat', (string)$lat);
         update_post_meta($post_id, '_cmb2_lng', (string)$lng);
+        update_events_lat_lng($post_id);
     endif;
   endif;
 }
@@ -460,6 +526,8 @@ function add_query_vars_filter($vars){
   $vars[] = "exhibitions";
   $vars[] = "filter_program";
   $vars[] = "filter_focus_area";
+  $vars[] = "prox_miles";
+  $vars[] = "prox_zip";
   return $vars;
 }
 add_filter( 'query_vars', __NAMESPACE__ . '\\add_query_vars_filter' );

@@ -9,14 +9,24 @@ $past_events = get_query_var('past_events', 0);
 $exhibitions = get_query_var('exhibitions', 0);
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
-$total_events = \Firebelly\PostTypes\Event\get_events([
-  'countposts' => 1,
+$prox_miles = get_query_var('prox_miles', '');
+$prox_zip = get_query_var('prox_zip', '');
+$args = [
   'past_events' => $past_events,
   'program' => $filter_program,
-  'focus_area' => $filter_focus_area
-]);
+  'focus_area' => $filter_focus_area,
+  'prox_miles' => $prox_miles,
+  'prox_zip' => $prox_zip,
+];
+
+// Get post count for load more
+$total_events = \Firebelly\PostTypes\Event\get_events(array_merge(['countposts' => 1], $args));
 $total_pages = ($total_events > 0) ? ceil($total_events / $per_page) : 1;
 
+// Actually pull posts
+$event_posts_output = \Firebelly\PostTypes\Event\get_events(array_merge(['show_images' => true], $args));
+
+// Get parent page for various content areas
 $post = get_page_by_path('/events');
 $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 $page_content = apply_filters('the_content', $post->post_content);
@@ -35,8 +45,8 @@ $page_content = apply_filters('the_content', $post->post_content);
     <?php include(locate_template('templates/filters.php')); ?>
 
     <div class="events load-more-container article-list masonry">
-      <?php if ($event_posts = \Firebelly\PostTypes\Event\get_events(['focus_area' => $filter_focus_area, 'program' => $filter_program, 'show_images' => true])): ?>
-        <?= $event_posts ?>
+      <?php if ($event_posts_output): ?>
+        <?= $event_posts_output ?>
       <?php else: ?>
         <div class="notice">
           <p>No posts found.</p>

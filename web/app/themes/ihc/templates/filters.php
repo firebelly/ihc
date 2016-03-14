@@ -6,6 +6,8 @@
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
 $past_events = get_query_var('past_events', 0);
+$prox_miles = get_query_var('prox_miles', 0);
+$prox_zip = get_query_var('prox_zip', 0);
 $post_type = is_post_type_archive('event') ? 'event' : 'post';
 ?>
   <form class="filters" action="/<?= $post_type == 'event' ? 'events' : 'news' ?>/" method="get">
@@ -32,13 +34,13 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
             $extra_where = '';
             // If filtering events, only match past events, or future events
             if ($post_type=='event') {
-              $event_posts = $wpdb->get_results(
+              $evt_post_ids = $wpdb->get_results(
                 "SELECT ID FROM {$wpdb->posts} p
                 INNER JOIN {$wpdb->postmeta} pm ON (pm.post_id=p.iD AND pm.meta_key='_cmb2_event_end')
                 WHERE p.post_type='event' AND pm.meta_value " . (!empty($_REQUEST['past_events']) ? '<=' : '>') . current_time('timestamp')
               );
               $event_ids = [];
-              foreach ($event_posts as $event)
+              foreach ($evt_post_ids as $event)
                 $event_ids[] = $event->ID;
               $extra_where = 'AND p2.ID IN (' . implode(',', $event_ids) . ') ';
             }
@@ -60,6 +62,31 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
         </select>
       </div>
     </div>
+
+  <?php if ($post_type=='event'): ?>
+    <div class="event-proximity">Proximity: 
+      <div class="select-wrapper">
+        <select name="prox_miles">
+            <?php 
+            $prox_arr = [
+              '1' => '1 Mile',
+              '2' => '2 Miles',
+              '5' => '5 Miles',
+              '10' => '10 Miles',
+              '20' => '20 Miles',
+              '50' => '50 Miles',
+            ];
+            foreach ($prox_arr as $prox_val => $prox_title):
+            ?>
+            <option <?= $prox_val==$prox_miles ? 'selected' : '' ?> value="<?= $prox_val ?>"><?= $prox_title ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="input-wrapper">
+        <label for="prox_zip">ZIP CODE: <input type="text" name="prox_zip" value="<?= $prox_zip ?>" placeholder="Your Zip"></label>
+      </div>
+    </div>
+  <?php endif; ?>
 
     <div class="actions">
       <button class="button" type="submit">Filter</button>
