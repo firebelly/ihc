@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fd34543af6ab3db0275d6b95b2dd447f",
-    "content-hash": "3151ddaf10a27222df72bfa212e93cbf",
+    "hash": "bbd42d5666a0c04ce4573ed706f3e106",
+    "content-hash": "9ddf819655af730ce6fbfbf24a747c04",
     "packages": [
         {
             "name": "composer/installers",
@@ -302,15 +302,15 @@
         },
         {
             "name": "wpackagist-plugin/akismet",
-            "version": "3.1.7",
+            "version": "3.1.8",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/akismet/",
-                "reference": "tags/3.1.7"
+                "reference": "tags/3.1.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.7.zip",
+                "url": "https://downloads.wordpress.org/plugin/akismet.3.1.8.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -322,7 +322,7 @@
         },
         {
             "name": "wpackagist-plugin/cmb2",
-            "version": "2.1.2",
+            "version": "2.2.1",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/cmb2/",
@@ -422,15 +422,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "2.5",
+            "version": "2.5.3",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/2.5"
+                "reference": "tags/2.5.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.2.5.zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-history.2.5.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -482,15 +482,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-super-cache",
-            "version": "1.4.7",
+            "version": "1.4.8",
             "source": {
                 "type": "svn",
                 "url": "http://plugins.svn.wordpress.org/wp-super-cache/",
-                "reference": "tags/1.4.7"
+                "reference": "tags/1.4.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-super-cache.1.4.7.zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-super-cache.1.4.8.zip",
                 "reference": null,
                 "shasum": null
             },

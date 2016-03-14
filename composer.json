@@ -36,7 +36,7 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "http://wpackagist.org"
+      "url": "https://wpackagist.org"
     },
     {
       "type": "package",
@@ -66,8 +66,8 @@
     "wpackagist-plugin/akismet": ">=3.1.1",
     "wpackagist-plugin/redirection": ">=2.3.16",
     "roots/soil": ">=3.0.0",
-    "wpackagist-plugin/simple-history": ">=2.1.1",
-    "wpackagist-plugin/wp-super-cache": ">=1.4.4",
+    "wpackagist-plugin/simple-history": ">=2.5.3",
+    "wpackagist-plugin/wp-super-cache": ">=1.4.7",
     "wpackagist-plugin/update-from-bottom": ">=1.0.3"
   },
   "extra": {
