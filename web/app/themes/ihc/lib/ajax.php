@@ -51,7 +51,21 @@ function load_more_posts() {
         'compare' => !empty($_REQUEST['exhibitions']) ? '=' : 'NOT EXISTS',
       );
     }
-
+    if (!empty($_REQUEST['prox_zip']) && is_numeric($_REQUEST['prox_zip']) && !empty($_REQUEST['prox_miles'])) {
+      $prox_zip = (int)$_REQUEST['prox_zip'];
+      $prox_miles = (int)$_REQUEST['prox_miles'];
+      $close_events = \Firebelly\PostTypes\Event\get_event_ids_in_proximity($prox_zip,$prox_miles);
+      if ($close_events) {
+        $close_event_ids = [];
+        foreach($close_events as $close_event) {
+          $close_event_ids[] = $close_event->post_id;
+        }
+        $args['post__in'] = $close_event_ids;
+      } else {
+        // No posts match within proximity
+        $args['post__in'] = [0];
+      }
+    }
   }
   // Filter by Focus Area?
   if (!empty($_REQUEST['focus_area'])) {
