@@ -64,6 +64,7 @@ var IHC = (function($) {
     _initMasonry();
     _initLoadMore();
     _initBigClicky();
+    _initFilters();
 
     // Esc handlers
     $(document).keyup(function(e) {
@@ -104,6 +105,18 @@ var IHC = (function($) {
       }
     });
 
+  } // end _init()
+
+  function _initFilters() {
+    $('form.filters').on('submit', function(e) {
+      if ($('form.filters select[name=prox_miles]').length) {
+        if ($('form.filters select[name=prox_miles]').val() !== '' && $('form.filters input[name=prox_zip]').val() === '') {
+          e.preventDefault();
+          alert('Please enter a zip code for distance search.');
+          $('form.filters input[name=prox_zip]')[0].focus();
+        }
+      }
+    });
   }
 
   function _initBigClicky() {

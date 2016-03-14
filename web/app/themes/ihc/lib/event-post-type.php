@@ -300,7 +300,7 @@ function get_events($options=[]) {
     );
   }
   // Geo query?
-  if (!empty($options['prox_zip']) && is_numeric($options['prox_zip'])) {
+  if (!empty($options['prox_zip']) && is_numeric($options['prox_zip']) && !empty($options['prox_miles'])) {
     $prox_zip = (int)$options['prox_zip'];
     $prox_miles = (int)$options['prox_miles'];
     $close_events = get_event_ids_in_proximity($prox_zip,$prox_miles);
@@ -311,6 +311,7 @@ function get_events($options=[]) {
       }
       $args['post__in'] = $close_event_ids;
     } else {
+      // No posts match within proximity
       $args['post__in'] = [0];
     }
   }

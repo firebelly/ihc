@@ -7,7 +7,7 @@ $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
 $past_events = get_query_var('past_events', 0);
 $prox_miles = get_query_var('prox_miles', 0);
-$prox_zip = get_query_var('prox_zip', 0);
+$prox_zip = get_query_var('prox_zip', '');
 $post_type = is_post_type_archive('event') ? 'event' : 'post';
 ?>
   <form class="filters" action="/<?= $post_type == 'event' ? 'events' : 'news' ?>/" method="get">
@@ -64,11 +64,12 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
     </div>
 
   <?php if ($post_type=='event'): ?>
-    <div class="event-proximity">Proximity: 
+    <div class="event-proximity">Distance: 
       <div class="select-wrapper">
         <select name="prox_miles">
             <?php 
             $prox_arr = [
+              '' => 'All',
               '1' => '1 Mile',
               '2' => '2 Miles',
               '5' => '5 Miles',
