@@ -7,7 +7,9 @@ $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
 $past_events = get_query_var('past_events', 0);
 $prox_miles = get_query_var('prox_miles', 0);
-$prox_zip = get_query_var('prox_zip', '');
+$prox_zip = (int)get_query_var('prox_zip', '');
+if ($prox_zip==0) $prox_zip = '';
+if (strlen($prox_zip) > 5) $prox_zip = substr($prox_zip, 0, 5);
 $post_type = is_post_type_archive('event') ? 'event' : 'post';
 ?>
   <form class="filters" action="/<?= $post_type == 'event' ? 'events' : 'news' ?>/" method="get">
