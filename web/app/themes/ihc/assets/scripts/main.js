@@ -101,7 +101,7 @@ var IHC = (function($) {
     // Scroll down to hash afer page load
     $(window).load(function() {
       if (window.location.hash) {
-        _scrollBody($(window.location.hash)); 
+        _scrollBody($(window.location.hash));
       }
     });
 
@@ -278,14 +278,13 @@ var IHC = (function($) {
       });
       // Add the array of point objects
       mapFeatureLayer.setGeoJSON(mapGeoJSON);
-      // Set bounds to markers
+
       if ($('#map').hasClass('large')) {
         // Larger map centers on IL
         map.setView([39.9, -90.5], 7);
       } else {
         // Smaller map zooms in on single point
-        map.fitBounds(mapFeatureLayer.getBounds());
-        map.setZoom(8);
+        map.setView([$mapPoints.first().data('lat'), $mapPoints.first().data('lng')], 13);
       }
     }
   }
