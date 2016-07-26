@@ -24,9 +24,9 @@
     </div>
     <ul class="contact-info">
       <li class="address">
-        <address class="vcard"> 
+        <address class="vcard">
           <span class="org">Illinois Humanities</span><br>
-          <a class="underline" target="_blank" href="https://goo.gl/maps/60el5"><span class="street-address">Suite 1400, 17 North State St.</span><br>
+          <a class="underline" target="_blank" href="https://goo.gl/maps/rW2FpGA92fN2"><span class="street-address">Suite 1400, 17 North State St.</span><br>
             <span class="locality">Chicago, IL</span>
             <span class="postal-code">60602-3296</span>
           </a>
