@@ -35,7 +35,7 @@
 
       <li class="contact">
         <span class="tel">312.422.5580</span> | <span class="tel">312.422.5588</span> FAX<br>
-        <a class="email underline" href="mailto:info@illinoishumanities.org">info@illinoishumanities.org</a>
+        <a class="email underline" href="mailto:info@ilhumanities.org">info@ilhumanities.org</a>
       </li>
 
       <li class="social">
