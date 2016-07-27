@@ -1,6 +1,9 @@
 // Support Us page
 
 .support-us.page {
+  .button {
+    white-space: normal;
+  }
   .grid {
     position: relative;
     margin: -2px -2px 60px;
@@ -37,4 +40,3 @@
     }
   }
 }
-  
