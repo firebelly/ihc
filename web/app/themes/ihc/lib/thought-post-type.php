@@ -241,7 +241,7 @@ function thought_submission() {
       if (akismet_get_key()) {
         global $akismet_api_host, $akismet_api_port;
 
-        $data = array( 
+        $data = array(
           'comment_author'        => $author,
           'comment_content'       => $thought,
           'user_ip'               => $_SERVER['REMOTE_ADDR'],
@@ -352,11 +352,6 @@ add_action('rotate_thoughts', __NAMESPACE__ . '\rotate_thoughts');
 function rotate_thoughts() {
   global $wpdb;
 
-  // Pull current TOD
-  $current_tod = get_thought_of_the_day_post();
-  if (!$current_tod) return; // Abort if there's no TOD
-  $author = get_post_meta($current_tod->ID, '_cmb2_author', true);
-
   // Get lowest shown_count of all Thoughts
   $low_count = $wpdb->get_var("SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_cmb2_shown_count' ORDER BY meta_value ASC LIMIT 1");
 
@@ -366,8 +361,16 @@ function rotate_thoughts() {
   foreach ($tod_posts as $post)
     $tod_pool[] = $post->post_id;
 
-  // Find random Thought in low_count pool, not matching the current TOD author name
-  $new_tod = $wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN (" . implode(',', $tod_pool) . ") AND meta_key = '_cmb2_author' AND meta_value != %s ORDER BY RAND() LIMIT 1", $author));
+  // Pull current TOD
+  $current_tod = get_thought_of_the_day_post();
+  if (!$current_tod) {
+    // No current TOD, just pull a random one
+    $new_tod = $wpdb->get_var("SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN (" . implode(',', $tod_pool) . ") ORDER BY RAND() LIMIT 1");
+  } else {
+    // Find random Thought in low_count pool, not matching the current TOD author name
+    $author = get_post_meta($current_tod->ID, '_cmb2_author', true);
+    $new_tod = $wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN (" . implode(',', $tod_pool) . ") AND meta_key = '_cmb2_author' AND meta_value != %s ORDER BY RAND() LIMIT 1", $author));
+  }
   set_thought_of_day($new_tod);
 }
 
