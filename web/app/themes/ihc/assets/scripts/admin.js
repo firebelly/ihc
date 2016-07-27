@@ -1,6 +1,5 @@
-/*
- * IL Humanities admin - Firebelly 2015
- */
+//IL Humanities admin - Firebelly 2015
+/*jshint latedef:false*/
 
 // Good design for good reason for good namespace
 var IHC_admin = (function($) {
