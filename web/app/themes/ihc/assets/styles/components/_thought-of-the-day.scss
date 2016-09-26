@@ -60,12 +60,18 @@
     color: $dk-blue;
     padding: 6px 10px;
     line-height: 30px;
+    min-height: 30px;
     padding: 0 10px;
     text-transform: uppercase;
     width: 100%;
     margin: 0 0 10px;
     border-radius: 0;
     background: $bg-pink;
+  }
+  select {
+    // go firefox!
+    -moz-appearance: none;
+    appearance: none;
   }
   h2.response {
     padding: 0 50px 0 0;
