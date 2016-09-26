@@ -1,4 +1,4 @@
-// IHC - Firebelly 2015
+// IL Humanities - Firebelly 2015
 /*jshint latedef:false*/
 
 // Good Design for Good Reason for Good Namespace
