@@ -68,11 +68,6 @@
     border-radius: 0;
     background: $bg-pink;
   }
-  select {
-    // go firefox!
-    -moz-appearance: none;
-    appearance: none;
-  }
   h2.response {
     padding: 0 50px 0 0;
   }
@@ -105,5 +100,13 @@
       display: block;
     }
     min-height: 300px;
+  }
+}
+
+// go firefox!
+@-moz-document url-prefix() {
+  .thought-of-the-day select {
+    -moz-appearance: none;
+    padding: 6px;
   }
 }

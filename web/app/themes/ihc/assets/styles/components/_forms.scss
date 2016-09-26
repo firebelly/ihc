@@ -61,6 +61,12 @@ form {
     background-color: $white;
   }
 }
+// go firefox!
+@-moz-document url-prefix() {
+  .filters .select-wrapper select {
+    -moz-appearance: none;
+  }
+}
 
 // Overrides for Blackbaud embedded forms
 #mongo-form,
