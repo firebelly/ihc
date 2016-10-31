@@ -35,8 +35,6 @@ bin
 .vagrant
 
 # Rbenv + rbenv-gemsets
-.ruby-version
-.rbenv-gemsets
 .gems
 
 # OSX junk
