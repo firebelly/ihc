@@ -375,6 +375,32 @@ function rotate_thoughts() {
 }
 
 /**
+ * Cronjob to make sure TOD is set every 5 minutes
+ */
+function add_cron_schedules($schedules){
+  if(!isset($schedules['5min'])) {
+    $schedules['5min'] = array(
+      'interval' => 5*60,
+      'display' => __('Once every 5 minutes'));
+  }
+  return $schedules;
+}
+add_filter('cron_schedules', __NAMESPACE__ . '\add_cron_schedules');
+add_action('wp', __NAMESPACE__ . '\init_check_TOD');
+function init_check_TOD() {
+  if (!wp_next_scheduled('check_TOD')) {
+    wp_schedule_event(strtotime('midnight'), '5min', 'check_TOD');
+  }
+}
+add_action('check_TOD', __NAMESPACE__ . '\check_TOD');
+function check_TOD() {
+  $current_tod = get_thought_of_the_day_post();
+  if (!$current_tod) {
+    rotate_thoughts();
+  }
+}
+
+/**
  * Handle AJAX response from CSV import form
  */
 add_action('wp_ajax_thought_csv_upload', __NAMESPACE__ . '\thought_csv_upload');
