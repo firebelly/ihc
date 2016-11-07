@@ -340,7 +340,7 @@ function init_shown_count($post_id, $post, $update) {
 add_action('wp_insert_post', __NAMESPACE__ . '\init_shown_count', 10, 3);
 
 /**
- * Cronjob to rotate Thought of the Day daily (preferably at midnight)
+ * Cronjob to rotate Thought of the Day daily
  */
 add_action('wp', __NAMESPACE__ . '\init_rotate_thoughts');
 function init_rotate_thoughts() {
@@ -352,11 +352,12 @@ add_action('rotate_thoughts', __NAMESPACE__ . '\rotate_thoughts');
 function rotate_thoughts() {
   global $wpdb;
 
-  // Get lowest shown_count of all Thoughts
-  $low_count = $wpdb->get_var("SELECT meta_value FROM {$wpdb->postmeta} WHERE meta_key = '_cmb2_shown_count' ORDER BY meta_value ASC LIMIT 1");
+  // Get lowest shown_count of all (non-Draft) Thoughts
+  $low_count = $wpdb->get_var("SELECT pm.meta_value FROM {$wpdb->postmeta} pm LEFT JOIN {$wpdb->posts} p ON (pm.post_id=p.id) WHERE p.post_status = 'publish' AND pm.meta_key = '_cmb2_shown_count' ORDER BY pm.meta_value ASC LIMIT 1");
 
-  // Pull all Thoughts with lowest count
-  $tod_posts = $wpdb->get_results("SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_cmb2_shown_count' AND meta_value <= {$low_count}");
+  // Pull all (non-Draft) Thoughts with lowest count
+  $tod_posts = $wpdb->get_results("SELECT pm.post_id FROM {$wpdb->postmeta} pm LEFT JOIN {$wpdb->posts} p ON (pm.post_id=p.id) WHERE p.post_status = 'publish' AND pm.meta_key = '_cmb2_shown_count' AND pm.meta_value <= {$low_count}");
+
   $tod_pool = [];
   foreach ($tod_posts as $post)
     $tod_pool[] = $post->post_id;
@@ -369,7 +370,11 @@ function rotate_thoughts() {
   } else {
     // Find random Thought in low_count pool, not matching the current TOD author name
     $author = get_post_meta($current_tod->ID, '_cmb2_author', true);
-    $new_tod = $wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN (" . implode(',', $tod_pool) . ") AND meta_key = '_cmb2_author' AND meta_value != %s ORDER BY RAND() LIMIT 1", $author));
+    if (count($tod_pool)>1) {
+      $new_tod = $wpdb->get_var($wpdb->prepare("SELECT post_id FROM {$wpdb->postmeta} WHERE post_id IN (" . implode(',', $tod_pool) . ") AND meta_key = '_cmb2_author' AND meta_value != %s ORDER BY RAND() LIMIT 1", $author));
+    } else {
+      $new_tod = $tod_pool[0];
+    }
   }
   set_thought_of_day($new_tod);
 }
