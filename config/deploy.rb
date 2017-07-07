@@ -19,7 +19,7 @@ set :log_level, :info
 
 # Apache users with .htaccess files:
 # it needs to be added to linked_files so it persists across deploys:
-set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess')
+set :linked_files, fetch(:linked_files, []).push('.env', 'web/.htaccess', 'web/php.ini')
 set :linked_dirs, fetch(:linked_dirs, []).push('web/app/uploads')
 
 namespace :deploy do
@@ -89,7 +89,7 @@ namespace :deploy do
       end
     end
   end
- 
+
   task :ungulp do
     run_locally do
       within fetch(:local_theme_path) do
@@ -97,10 +97,10 @@ namespace :deploy do
       end
     end
   end
- 
+
   task :copy_assets do
     invoke 'deploy:compile_assets'
- 
+
     on roles(:web) do
       upload! fetch(:local_theme_path).join('dist').to_s, release_path.join(fetch(:theme_path)), recursive: true
     end
@@ -108,5 +108,5 @@ namespace :deploy do
     invoke 'deploy:ungulp'
   end
 end
- 
+
 before "deploy:updated", "deploy:copy_assets"
