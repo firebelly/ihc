@@ -11,10 +11,12 @@
   "bugs": {
     "url": "https://github.com/roots/sage/issues"
   },
-  "licenses": [{
-    "type": "MIT",
-    "url": "http://opensource.org/licenses/MIT"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
   "scripts": {
     "build": "bower install && gulp",
     "jshint": "gulp jshint",
