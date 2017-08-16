@@ -10,7 +10,7 @@ html {
 
 body {
   background-color:$color-bg;
-  color: $dk-blue; 
+  color: $dk-blue;
   font-size: 100%;
   min-height: 100%;
   overflow-x: hidden;
@@ -62,7 +62,7 @@ body {
     display: block;
     height: 0;
     overflow: hidden;
-  } 
+  }
   &:after {
     clear: both;
   }
@@ -93,6 +93,7 @@ ul {
   margin: 0;
 }
 
+figure,
 img {
   max-width: 100%;
   height: auto;
