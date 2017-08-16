@@ -26,9 +26,9 @@
       <li class="address">
         <address class="vcard">
           <span class="org">Illinois Humanities</span><br>
-          <a class="underline" target="_blank" href="https://goo.gl/maps/rW2FpGA92fN2"><span class="street-address">Suite 1400, 17 North State St.</span><br>
+          <a class="underline" target="_blank" href="https://goo.gl/maps/rW2FpGA92fN2"><span class="street-address">Suite 650, 125 South Clark St.</span><br>
             <span class="locality">Chicago, IL</span>
-            <span class="postal-code">60602-3296</span>
+            <span class="postal-code">60603-5200</span>
           </a>
           <br><br><span class="tel">312.422.5580</span> | <span class="tel">312.422.5588</span> FAX<br>
           <a class="email underline" href="mailto:info@ilhumanities.org">info@ilhumanities.org</a>
