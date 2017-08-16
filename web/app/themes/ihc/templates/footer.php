@@ -26,7 +26,7 @@
       <li class="address">
         <address class="vcard">
           <span class="org">Illinois Humanities</span><br>
-          <a class="underline" target="_blank" href="https://goo.gl/maps/rW2FpGA92fN2"><span class="street-address">Suite 650, 125 South Clark St.</span><br>
+          <a class="underline" target="_blank" href="https://goo.gl/maps/V2HY5ApJVn62"><span class="street-address">Suite 650, 125 South Clark St.</span><br>
             <span class="locality">Chicago, IL</span>
             <span class="postal-code">60603-5200</span>
           </a>
