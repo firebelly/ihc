@@ -357,8 +357,8 @@ var IHC = (function($) {
       var more_container = $load_more.parents('section,main').find('.load-more-container');
       loadingTimer = setTimeout(function() { more_container.addClass('loading'); }, 500);
 
-      // Homepage has a funky load-more in events that is part of masonry until clicked
-      if (breakpoint_medium && $('.home.page').length && $('.events .events-buttons').length) {
+      // Homepage has a funky load-more div in events that is part of masonry until clicked
+      if (breakpoint_medium && $('.home.page').length && $(e.target).parents('.events-buttons').length) {
         var lm = $('.event-cal').addClass('loaded-more').find('.events .events-buttons');
         // Remove load-more from masonry and relayout
         $('.events').masonry('remove', lm);
