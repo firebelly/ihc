@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Events landing page
  */
@@ -9,12 +9,14 @@ $past_events = get_query_var('past_events', 0);
 $exhibitions = get_query_var('exhibitions', 0);
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
+$filter_division = get_query_var('filter_division', '');
 $prox_miles = get_query_var('prox_miles', '');
 $prox_zip = get_query_var('prox_zip', '');
 $args = [
   'past_events' => $past_events,
   'program' => $filter_program,
   'focus_area' => $filter_focus_area,
+  'division' => $filter_division,
   'prox_miles' => $prox_miles,
   'prox_zip' => $prox_zip,
 ];
@@ -37,9 +39,9 @@ $page_content = apply_filters('the_content', $post->post_content);
 
   <main>
     <ul class="flag-tabs">
-      <li><a class="<?= !$past_events && !$exhibitions ? 'active' : '' ?>" href="/events/">Upcoming Events</a></li> 
-      <li><a class="<?= $exhibitions ? 'active' : '' ?>" href="/events/?exhibitions=1">Ongoing Exhibitions</a></li> 
-      <li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1">Past Events</a></li>  
+      <li><a class="<?= !$past_events && !$exhibitions ? 'active' : '' ?>" href="/events/">Upcoming Events</a></li>
+      <li><a class="<?= $exhibitions ? 'active' : '' ?>" href="/events/?exhibitions=1">Ongoing Exhibitions</a></li>
+      <li><a class="<?= $past_events ? 'active' : '' ?> tab" href="/events/?past_events=1">Past Events</a></li>
     </ul>
 
     <?php include(locate_template('templates/filters.php')); ?>
@@ -53,9 +55,9 @@ $page_content = apply_filters('the_content', $post->post_content);
         </div>
       <?php endif; ?>
     </div>
-    
+
     <?php if ($total_pages>1): ?>
-      <div class="load-more" data-exhibitions="<?= $exhibitions ?>" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-prox-zip="<?= $prox_zip ?>" data-prox-miles="<?= $prox_miles ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+      <div class="load-more" data-exhibitions="<?= $exhibitions ?>" data-post-type="event" data-page-at="<?= $paged ?>" data-past-events="<?= $past_events ?>" data-division="<?= $filter_division ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-prox-zip="<?= $prox_zip ?>" data-prox-miles="<?= $prox_miles ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
     <?php endif; ?>
   </main>
   <aside class="main">

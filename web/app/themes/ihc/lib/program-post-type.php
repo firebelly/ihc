@@ -85,10 +85,11 @@ add_action('switch_theme', __NAMESPACE__ . 'add_capabilities');
 // Custom admin columns for post type
 function edit_columns($columns){
   $columns = array(
-    'cb' => '<input type="checkbox" />',
-    'title' => 'Title',
+    'cb'                  => '<input type="checkbox" />',
+    'title'               => 'Title',
     'taxonomy-focus_area' => 'Focus Area',
-    // 'featured_image' => 'Image',
+    'taxonomy-division'   => 'Division',
+    // 'featured_image'   => 'Image',
   );
   return $columns;
 }
@@ -152,7 +153,7 @@ function metaboxes( array $meta_boxes ) {
       'title'        => __( 'Page Blocks', 'cmb2' ),
       'priority'      => 'low',
       'object_types' => array( 'program', 'page', ),
-    ) 
+    )
   );
 
   $group_field_id = $cmb_group->add_field( array(
@@ -191,21 +192,30 @@ function metaboxes( array $meta_boxes ) {
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
 
 /**
- * Get Programs matching focus_area
+ * Get Programs matching focus_area or division
  */
-function get_programs($focus_area='') {
+function get_programs($opts=[]) {
   $output = '';
   $args = array(
     'numberposts' => -1,
     'post_type' => 'program',
     'orderby' => ['title' => 'ASC'],
     );
-  if ($focus_area != '') {
+  if (!empty($opts['focus_area'])) {
     $args['tax_query'] = array(
       array(
         'taxonomy' => 'focus_area',
         'field' => 'slug',
-        'terms' => $focus_area
+        'terms' => $opts['focus_area']
+      )
+    );
+  }
+  if (!empty($opts['division'])) {
+    $args['tax_query'] = array(
+      array(
+        'taxonomy' => 'division',
+        'field' => 'slug',
+        'terms' => $opts['division']
       )
     );
   }
@@ -283,12 +293,12 @@ function get_resources($post) {
 }
 
 /**
- * Redirect 404s for Programs to Archive page 
+ * Redirect 404s for Programs to Archive page
  */
 add_filter('404_template', __NAMESPACE__ . '\redirect_archived_programs');
 function redirect_archived_programs($template) {
   global $wp_query;
-  
+
   if (!is_404() || empty($wp_query->query_vars['program']))
     return $template;
 

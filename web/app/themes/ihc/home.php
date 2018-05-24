@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Blog landing page
  */
@@ -19,18 +19,18 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
 
     <div class="load-more-container masonry article-list">
       <?php if (have_posts()): ?>
-        <?php 
+        <?php
         while (have_posts()) : the_post();
           $news_post = $post;
           $show_images = true;
           include(locate_template('templates/article-news.php'));
-        endwhile; 
+        endwhile;
         ?>
       </div>
       <?php if ($total_pages>1): ?>
-        <div class="load-more" data-page-at="<?= $paged ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
+        <div class="load-more" data-page-at="<?= $paged ?>" data-division="<?= $filter_division ?>" data-focus-area="<?= $filter_focus_area ?>" data-program="<?= $filter_program ?>" data-per-page="<?= $per_page ?>" data-total-pages="<?= $total_pages ?>"><a class="no-ajaxy button" href="#">Load More</a></div>
       <?php endif ?>
-    <?php else: ?>    
+    <?php else: ?>
       <div class="notice">
         <p>No posts found.</p>
       </div>

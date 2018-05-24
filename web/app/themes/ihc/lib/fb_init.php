@@ -49,7 +49,7 @@ add_action('after_setup_theme', __NAMESPACE__ . '\setup');
  */
 function custom_nav_highlights($classes, $item) {
   // Focus Area taxonomy page should highlight "Our Work" and nothing else (was highlighting Events for some reason)
-  if (is_singular('program') || is_tax('focus_area')) {
+  if (is_singular('program') || is_tax('focus_area') || is_tax('division')) {
     if (in_array('menu-our-work', $classes))
       $classes[] = 'active';
     else
@@ -73,10 +73,10 @@ function body_class($classes ) {
   // Select random bg & accents for page
   $background = rand(1,6);
   $accent = rand(1,5);
-  
+
   // Set global var to use when creating treated backgrounds
   define('IHC_BACKGROUND', $background_array[$background-1]);
-  
+
   // Add to body_class()
   $classes[] = 'background-' . $background;
   $classes[] = 'accent-' . $accent;
@@ -100,7 +100,7 @@ function simplify_tinymce($settings) {
     $settings['formats'] = substr($settings['formats'],0,-1).",underline: { inline: 'u', exact: true} }";
   else
     $settings['formats'] = "{ underline: { inline: 'u', exact: true} }";
-  
+
   // What goes into the toolbars. Add 'wp_adv' to get the Toolbar toggle button back
   $settings['toolbar1'] = 'styleselect,bold,italic,underline,strikethrough,formatselect,bullist,numlist,blockquote,link,unlink,hr,wp_more,outdent,indent,AccordionShortcode,AccordionItemShortcode,fullscreen';
   $settings['toolbar2'] = '';
@@ -113,30 +113,30 @@ function simplify_tinymce($settings) {
   // Clear most formatting when pasting text directly in the editor
   $settings['paste_as_text'] = 'true';
 
-  $style_formats = array( 
-    // array( 
+  $style_formats = array(
+    // array(
     //   'title' => 'Two Column',
     //   'block' => 'div',
     //   'classes' => 'two-column',
     //   'wrapper' => true,
-    // ),  
-    array( 
+    // ),
+    array(
       'title' => 'Three Column',
       'block' => 'div',
       'classes' => 'three-column',
       'wrapper' => true,
     ),
-    array( 
+    array(
       'title' => 'Button',
       'block' => 'span',
       'classes' => 'button',
     ),
-    array( 
+    array(
       'title' => '» Arrow Link',
       'block' => 'span',
       'classes' => 'arrow-link',
     ),
- );  
+ );
   $settings['style_formats'] = json_encode($style_formats);
 
   return $settings;
@@ -200,7 +200,7 @@ add_action('admin_menu', __NAMESPACE__ . '\add_site_options');
  * Add link to Site Settings in main admin dropdown
  */
 add_action('admin_bar_menu', __NAMESPACE__ . '\add_link_to_admin_bar',999);
-function add_link_to_admin_bar($wp_admin_bar) {         
+function add_link_to_admin_bar($wp_admin_bar) {
   $wp_admin_bar->add_node(array(
     'parent' => 'site-name',
     'id'     => 'site-settings',

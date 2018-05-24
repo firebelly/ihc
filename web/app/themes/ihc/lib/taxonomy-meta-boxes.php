@@ -35,6 +35,7 @@ function cmb2_taxonomy_meta_initiate() {
     )
   );
 
-  $cats = new Taxonomy_MetaData_CMB2( 'focus_area', $meta_box, __( 'Category Settings', 'taxonomy-metadata' ) );
+  new Taxonomy_MetaData_CMB2( 'focus_area', $meta_box, __( 'Category Settings', 'taxonomy-metadata' ) );
+  new Taxonomy_MetaData_CMB2( 'division', $meta_box, __( 'Category Settings', 'taxonomy-metadata' ) );
 }
 cmb2_taxonomy_meta_initiate();

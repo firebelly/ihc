@@ -292,6 +292,15 @@ function get_events($options=[]) {
         )
     );
   }
+  if (!empty($options['division'])) {
+    $args['tax_query'] = array(
+        array(
+            'taxonomy' => 'division',
+            'field' => 'slug',
+            'terms' => $options['division'],
+        )
+    );
+  }
   if (!empty($options['program'])) {
     $args['meta_query'][] = array(
       'key' => '_cmb2_related_program',
@@ -527,6 +536,7 @@ function add_query_vars_filter($vars){
   $vars[] = "exhibitions";
   $vars[] = "filter_program";
   $vars[] = "filter_focus_area";
+  $vars[] = "filter_division";
   $vars[] = "prox_miles";
   $vars[] = "prox_zip";
   return $vars;
@@ -564,7 +574,7 @@ function get_event_details($post) {
   } else {
     $event['time_txt'] = $event['start_time'];
   }
-  
+
   $event['archived'] = empty($event['event_end']) ? ($event['event_start'] < current_time('timestamp')) : ($event['event_end'] < current_time('timestamp'));
   $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt']; // used in map pins
   $event['year'] = date('Y', $event['event_start']);
@@ -666,13 +676,13 @@ function import_csv_admin_form() {
 <pre>
 Ev_Type                         (Focus Area)
 Ev_Group                        (Related Program)
-Ev_Start_Date                  
-Ev_End_Date                    
-Ev_Start_Time                  
-Ev_End_Time                    
+Ev_Start_Date
+Ev_End_Date
+Ev_Start_Time
+Ev_End_Time
 Exhibition                      (yes/no)
-Ev_Event_ID                    
-Ev_Import_ID                   
+Ev_Event_ID
+Ev_Import_ID
 Attendee Cost                   (Cost)
 Attendee Cost Details           (Cost details)
 RSVP                            (yes/no)
@@ -681,25 +691,25 @@ Web Title                       (Title)
 Web Description                 (Body)
 RSVP URL                        (Registration URL)
 RSVP Embed                      (Reg. embed code)
-Location                        
-Ev_Prt_1_01_CnAdrPrf_Addrline1 
-Ev_Prt_1_01_CnAdrPrf_Addrline2 
-Ev_Prt_1_01_CnAdrPrf_City      
-Ev_Prt_1_01_CnAdrPrf_State     
-Ev_Prt_1_01_CnAdrPrf_ZIP       
-Ev_Prt_1_01_CnAdrPrf_County    
-Sponsoring Organization1        
-Sponsoring Organization2       
-Sponsoring Organization3       
-Sponsoring Organization4       
-Partner1                       
-Partner2                       
-Partner3                       
-Partner4                       
-Funder1                        
-Funder2                        
-Funder3                        
-Funder4                        
+Location
+Ev_Prt_1_01_CnAdrPrf_Addrline1
+Ev_Prt_1_01_CnAdrPrf_Addrline2
+Ev_Prt_1_01_CnAdrPrf_City
+Ev_Prt_1_01_CnAdrPrf_State
+Ev_Prt_1_01_CnAdrPrf_ZIP
+Ev_Prt_1_01_CnAdrPrf_County
+Sponsoring Organization1
+Sponsoring Organization2
+Sponsoring Organization3
+Sponsoring Organization4
+Partner1
+Partner2
+Partner3
+Partner4
+Funder1
+Funder2
+Funder3
+Funder4
 </pre>
   </div>
 <?php

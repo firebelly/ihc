@@ -51,6 +51,23 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
+  $meta_boxes['division'] = array(
+    'id'            => 'division',
+    'title'         => __( 'Division', 'cmb2' ),
+    'object_types'  => array( 'event', 'post', 'program', ),
+    'context'       => 'side',
+    'priority'      => 'default',
+    'show_names'    => false,
+    'fields'        => array(
+      array(
+          // 'name'     => 'Focus Area',
+          'id'       => $prefix . 'division',
+          'type'     => 'taxonomy_select',
+          'taxonomy' => 'division',
+      ),
+    ),
+  );
+
   $meta_boxes['focus_area'] = array(
     'id'            => 'focus_area',
     'title'         => __( 'Focus Area', 'cmb2' ),
@@ -82,8 +99,8 @@ function metaboxes( array $meta_boxes ) {
           'id'       => $prefix . 'related_program',
           'type'     => 'select',
           'show_option_none' => true,
-          // 'type'     => 'pw_multiselect', // currently multiple=true is causing issues with pw_multiselect -nate 4/30/15 
-          // 'multiple' => true, 
+          // 'type'     => 'pw_multiselect', // currently multiple=true is causing issues with pw_multiselect -nate 4/30/15
+          // 'multiple' => true,
           'options'  => \Firebelly\CMB2\get_post_options(['post_type' => 'program', 'numberposts' => -1]),
       ),
     ),
@@ -100,13 +117,19 @@ function remove_sub_menus() {
   remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=post_tag');
   remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=category');
   remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=focus_area');
+  remove_submenu_page('edit.php', 'edit-tags.php?taxonomy=division');
   remove_submenu_page('edit.php?post_type=event', 'edit-tags.php?taxonomy=focus_area&amp;post_type=event');
   remove_submenu_page('edit.php?post_type=thought', 'edit-tags.php?taxonomy=focus_area&amp;post_type=thought');
+  remove_submenu_page('edit.php?post_type=event', 'edit-tags.php?taxonomy=division&amp;post_type=event');
+  remove_submenu_page('edit.php?post_type=thought', 'edit-tags.php?taxonomy=division&amp;post_type=thought');
 }
 function remove_post_metaboxes() {
   remove_meta_box( 'focus_areadiv','event','normal' ); // hide default Focus Area UI
   remove_meta_box( 'focus_areadiv','program','normal' );
   remove_meta_box( 'focus_areadiv','post','normal' );
+  remove_meta_box( 'divisiondiv','event','normal' ); // hide default Focus Area UI
+  remove_meta_box( 'divisiondiv','program','normal' );
+  remove_meta_box( 'divisiondiv','post','normal' );
   remove_meta_box( 'tagsdiv-post_tag','post','normal' ); // hide Tags UI
   remove_meta_box( 'categorydiv','post','normal' ); // hide Category UI
 }
@@ -127,6 +150,18 @@ function news_filters($query){
           'taxonomy' => 'focus_area',
           'field' => 'slug',
           'terms' => get_query_var('filter_focus_area')
+        )
+      );
+      $query->set('tax_query', $tax_query);
+    }
+
+    // Filter by division?
+    if (get_query_var('filter_division')) {
+      $tax_query = array(
+        array(
+          'taxonomy' => 'division',
+          'field' => 'slug',
+          'terms' => get_query_var('filter_division')
         )
       );
       $query->set('tax_query', $tax_query);

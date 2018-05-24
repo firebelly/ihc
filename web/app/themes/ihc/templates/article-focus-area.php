@@ -5,8 +5,8 @@
     <div class="more"><a class="button" href="<?= get_term_link($focus_area) ?>">Learn More</a></div>
   </div>
   <div class="related">
-    <?php 
-    $related_programs = \Firebelly\PostTypes\Program\get_programs($focus_area->slug);
+    <?php
+    $related_programs = \Firebelly\PostTypes\Program\get_programs(['focus_area' => $focus_area->slug]);
     if ($related_programs):
     ?>
       <h3>Program(s):</h3>

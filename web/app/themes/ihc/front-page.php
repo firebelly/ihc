@@ -28,18 +28,18 @@ $secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><
 </header>
 
 <section class="focus-areas">
-  <h2 class="flag">Our Focus Areas</h2>
+  <h2 class="flag">Our Divisions</h2>
   <ul class="focus-list">
-    <?php 
-    $focus_areas = get_terms('focus_area');
-    foreach ($focus_areas as $focus_area) {
-      echo '<li><a href="' . get_term_link($focus_area) . '">' . $focus_area->name . '</a></li>';
+    <?php
+    $divisions = get_terms('division');
+    foreach ($divisions as $division) {
+      echo '<li><a href="' . get_term_link($division) . '">' . $division->name . '</a></li>';
     }
     ?>
   </ul>
 </section>
 
-<?php 
+<?php
 // homepage shows all current events on map
 echo \Firebelly\PostTypes\Event\get_events(['num_posts' => -1, 'map-points' => true]);
 ?>
@@ -58,7 +58,7 @@ echo \Firebelly\PostTypes\Event\get_events(['num_posts' => -1, 'map-points' => t
 <section class="news">
   <h2 class="flag">Blog &amp; News</h2>
   <div class="load-more-container article-list masonry">
-    <?php 
+    <?php
     // Recent Blog & News posts
     $news_posts = get_posts(['numberposts' => 4, 'category__not_in' => [9]]);
     if ($news_posts):
