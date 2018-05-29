@@ -85,13 +85,13 @@ function get_program($post) {
  */
 function get_article_tags($post) {
   $links = [];
-  if ($focus_areas = get_the_terms($post->ID, 'focus_area')) {
-    foreach($focus_areas as $focus_area)
-      $links[] = '<a href="'.get_term_link($focus_area).'">'.$focus_area->name.'</a>';
-  }
   if ($divisions = get_the_terms($post->ID, 'division')) {
     foreach($divisions as $division)
       $links[] = '<a href="'.get_term_link($division).'">'.$division->name.'</a>';
+  }
+  if ($focus_areas = get_the_terms($post->ID, 'focus_area')) {
+    foreach($focus_areas as $focus_area)
+      $links[] = '<a href="'.get_term_link($focus_area).'">'.$focus_area->name.'</a>';
   }
   if ($program = get_program($post)) {
     $links[] = '<a href="'.get_the_permalink($program).'">'.$program->post_title.'</a>';

@@ -22,10 +22,6 @@ if ($secondary_header_text)
   $header_class .= ' with-secondary-header';
 if (!$header_text)
   $header_class .= ' no-header-text';
-//
-if (!empty($post->post_type) && $post->post_type=='program') {
-  $article_tags = \Firebelly\Utils\get_article_tags($post);
-}
 ?>
 
 <header class="page-header <?= $header_class ?>">
@@ -45,7 +41,6 @@ if (!empty($post->post_type) && $post->post_type=='program') {
   <?php if ($secondary_header_text): ?>
     <div class="secondary-header-text">
       <?= $secondary_header_text ?>
-      <?php if (!empty($article_tags)): ?><div class="article-tags"><?= $article_tags ?></div><?php endif; ?>
     </div>
   <?php endif; ?>
 </header>
