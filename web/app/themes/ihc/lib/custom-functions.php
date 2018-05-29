@@ -211,7 +211,7 @@ function get_page_blocks($post) {
           if ($block_title) {
             $output .= '<h2 class="flag">' . $block_title . '</h2>';
           }
-          $output .= '<div class="user-content">' . $block_body . '</div>';
+          $output .= '<div class="user-content clearfix">' . $block_body . '</div>';
           $output .= '</div>';
         }
       }
