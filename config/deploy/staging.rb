@@ -1,5 +1,5 @@
 set :stage, :staging
-# set :application, 'ihc_staging'
+set :application, 'ilhumanities_staging'
 
 # Simple Role Syntax
 # ==================
@@ -9,7 +9,7 @@ set :stage, :staging
 
 # Extended Server Syntax
 # ======================
-server 'ihc.firebelly.co', user: fetch(:login), roles: %w{web app db}
+server 'staging.ilhumanities.org', user: fetch(:login), roles: %w{web app db}
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options

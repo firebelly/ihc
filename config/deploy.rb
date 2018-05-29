@@ -1,5 +1,5 @@
-set :application, 'ihc'
-set :login, 'firebelly'
+set :application, 'ilhumanities_staging'
+set :login, 'ilhumanities'
 set :repo_url, 'git@github.com:firebelly/ihc.git'
 
 # Branch options
