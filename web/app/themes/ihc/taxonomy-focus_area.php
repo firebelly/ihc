@@ -1,6 +1,6 @@
 <?php
 /**
- * Focus Area taxonomy page 
+ * Focus Area taxonomy page
  */
 
 $focus_area = get_queried_object();
@@ -35,8 +35,8 @@ $with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header
   </header>
 
   <main>
-    <?php 
-    $related_programs = \Firebelly\PostTypes\Program\get_programs($focus_area->slug);
+    <?php
+    $related_programs = \Firebelly\PostTypes\Program\get_programs(['focus_area' => $focus_area->slug]);
     if ($related_programs):
     ?>
       <h2 class="flag"><?= $focus_area->name ?> Programs:</h2>
