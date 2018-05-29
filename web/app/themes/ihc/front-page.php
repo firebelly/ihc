@@ -28,12 +28,12 @@ $secondary_header_text = strip_tags($secondary_header_text, '<u><strong><em><a><
 </header>
 
 <section class="focus-areas">
-  <h2 class="flag">Our Focus Areas</h2>
+  <h2 class="flag">Our Divisions</h2>
   <ul class="focus-list">
     <?php
-    $focus_areas = get_terms('focus_area');
-    foreach ($focus_areas as $focus_area) {
-      echo '<li><a href="' . get_term_link($focus_area) . '">' . $focus_area->name . '</a></li>';
+    $divisions = get_terms('division');
+    foreach ($divisions as $division) {
+      echo '<li><a href="' . get_term_link($division) . '">' . $division->name . '</a></li>';
     }
     ?>
   </ul>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Single Program
  */
@@ -23,7 +23,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
       <?= Utils\get_related_event_post($post) ?>
       <?= Utils\get_related_news_post($post) ?>
     </div>
-    
+
     <div class="sidebar-content">
     <?php if ($resources = \Firebelly\PostTypes\Program\get_resources($post)): ?>
       <h3>Resources</h3>

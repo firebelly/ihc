@@ -89,6 +89,10 @@ function get_article_tags($post) {
     foreach($focus_areas as $focus_area)
       $links[] = '<a href="'.get_term_link($focus_area).'">'.$focus_area->name.'</a>';
   }
+  if ($divisions = get_the_terms($post->ID, 'division')) {
+    foreach($divisions as $division)
+      $links[] = '<a href="'.get_term_link($division).'">'.$division->name.'</a>';
+  }
   if ($program = get_program($post)) {
     $links[] = '<a href="'.get_the_permalink($program).'">'.$program->post_title.'</a>';
   }
@@ -119,7 +123,7 @@ function get_total_pages($category, $per_page) {
  */
 function get_related_event_post($post_or_focus_area) {
   $output = $event = false;
-  
+
   if (is_object($post_or_focus_area)) {
     // If post_type is Program see if there's a directly related Event
     if ($post_or_focus_area->post_type == 'program') {
@@ -135,7 +139,7 @@ function get_related_event_post($post_or_focus_area) {
   // If we didn't find a directly related event above, try to find one by Focus Area
   if (!$event)
     $event = \Firebelly\PostTypes\Event\get_events(['num_posts' => 1, 'focus_area' => $focus_area, 'show_view_all_button' => true]);
-  
+
   if ($event) {
     $output = '<div class="related related-events">';
     $output .= '<h2 class="flag">Attend an Event</h2>';

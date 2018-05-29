@@ -5,6 +5,7 @@
 
 $filter_program = get_query_var('filter_program', '');
 $filter_focus_area = get_query_var('filter_focus_area', '');
+$filter_division = get_query_var('filter_division', '');
 $past_events = get_query_var('past_events', 0);
 $prox_miles = get_query_var('prox_miles', 0);
 $prox_zip = (int)get_query_var('prox_zip', '');
@@ -25,14 +26,26 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
       </div>
     </div>
 
-    <div class="program-topic">Program: 
+    <div class="division-topic">Division:
+      <div class="select-wrapper">
+        <select name="filter_division">
+          <option value="">ALL</option>
+            <?php $divisions = get_terms('division');
+            foreach ($divisions as $division): ?>
+            <option <?= $filter_division==$division->slug ? 'selected' : '' ?> value="<?= $division->slug ?>"><?= $division->name ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+    </div>
+
+    <div class="program-topic">Program:
       <?php if ($post_type==='event'): ?>
         <input type="hidden" name="past_events" value="<?= $past_events ?>">
       <?php endif ?>
       <div class="select-wrapper">
         <select name="filter_program">
           <option value="">ALL</option>
-            <?php 
+            <?php
             $extra_where = '';
             // If filtering events, only match past events, or future events
             if ($post_type=='event') {
@@ -50,10 +63,10 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
               // todo: also filter out posts that match focus_area first
             }
             $programs_related = $wpdb->get_results(
-              "SELECT p.ID,p.post_title FROM {$wpdb->postmeta} pm 
-              INNER JOIN {$wpdb->posts} p ON (p.ID=pm.meta_value) 
-              INNER JOIN {$wpdb->posts} p2 ON (p2.ID=pm.post_id) 
-              WHERE meta_key='_cmb2_related_program' AND p2.post_type='{$post_type}' 
+              "SELECT p.ID,p.post_title FROM {$wpdb->postmeta} pm
+              INNER JOIN {$wpdb->posts} p ON (p.ID=pm.meta_value)
+              INNER JOIN {$wpdb->posts} p2 ON (p2.ID=pm.post_id)
+              WHERE meta_key='_cmb2_related_program' AND p2.post_type='{$post_type}'
               {$extra_where}
               GROUP BY pm.meta_value ORDER BY p.post_title"
             );
@@ -70,10 +83,10 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
       <div class="input-wrapper">
         <label for="prox_zip">ZIP CODE: <input type="text" name="prox_zip" value="<?= $prox_zip ?>" placeholder="Your Zip"></label>
       </div>
-      Distance: 
+      Distance:
       <div class="select-wrapper">
         <select name="prox_miles">
-            <?php 
+            <?php
             $prox_arr = [
               '' => 'All',
               '1' => '1 Mile',

@@ -352,6 +352,7 @@ var IHC = (function($) {
       var prox_zip = (post_type==='event') ? parseInt($load_more.attr('data-prox-zip')) : '';
       var prox_miles = (post_type==='event') ? parseInt($load_more.attr('data-prox-miles')) : '';
       var focus_area = $load_more.attr('data-focus-area');
+      var division = $load_more.attr('data-division');
       var program = $load_more.attr('data-program');
       var exhibitions = $load_more.attr('data-exhibitions');
       var more_container = $load_more.parents('section,main').find('.load-more-container');
@@ -375,6 +376,7 @@ var IHC = (function($) {
               per_page: per_page,
               past_events: past_events,
               focus_area: focus_area,
+              division: division,
               exhibitions: exhibitions,
               program: program,
               prox_zip: prox_zip,
