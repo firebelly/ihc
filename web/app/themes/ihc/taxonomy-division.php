@@ -56,7 +56,7 @@ $with_secondary_header_class = ($secondary_header_text) ? 'with-secondary-header
 
     <?php if ($division_contacts): ?>
       <div class="contacts user-content">
-        <h3>Focus Area Contacts</h3>
+        <h3>Division Contacts</h3>
         <?= apply_filters('the_content', $division_contacts) ?>
       </div>
     <?php endif ?>
