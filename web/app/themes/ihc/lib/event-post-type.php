@@ -174,6 +174,26 @@ function metaboxes( array $meta_boxes ) {
           'type'    => 'address',
       ),
       array(
+          'name'    => 'Lat',
+          'id'      => $prefix . 'lat',
+          'type'    => 'text_small',
+        'save_field'  => false,
+        'attributes'  => array(
+          'readonly' => 'readonly',
+          'disabled' => 'disabled',
+        ),
+      ),
+      array(
+          'name'    => 'Lng',
+          'id'      => $prefix . 'lng',
+          'type'    => 'text_small',
+        'save_field'  => false,
+        'attributes'  => array(
+          'readonly' => 'readonly',
+          'disabled' => 'disabled',
+        ),
+      ),
+      array(
           'name'    => 'Sponsor Organization(s)',
           'id'      => $prefix . 'sponsor',
           'type'    => 'wysiwyg',
@@ -197,16 +217,6 @@ function metaboxes( array $meta_boxes ) {
             'textarea_rows' => 4,
           ),
       ),
-      // array(
-      //     'name'    => 'Lat',
-      //     'id'      => $prefix . 'lat',
-      //     'type'    => 'text_small',
-      // ),
-      // array(
-      //     'name'    => 'Lng',
-      //     'id'      => $prefix . 'lng',
-      //     'type'    => 'text_small',
-      // ),
     ),
   );
 
@@ -420,8 +430,7 @@ function geocode_address($post_id, $post='') {
 
   if (!empty($address['address-1'])):
     $address_combined = $address['address-1'] . ' ' . $address['address-2'] . ' ' . $address['city'] . ', ' . $address['state'] . ' ' . $address['zip'];
-    $request_url = "https://maps.google.com/maps/api/geocode/xml?sensor=false&address=" . urlencode($address_combined . '&key=' . getenv('GOOGLE_API_KEY'));
-
+    $request_url = "https://maps.googleapis.com/maps/api/geocode/xml?address=" . urlencode($address_combined) . '&key=' . getenv('GOOGLE_API_KEY');
     $xml = simplexml_load_file($request_url);
     $status = $xml->status;
     if(strcmp($status, 'OK')===0):
