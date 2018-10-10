@@ -256,22 +256,22 @@ var IHC = (function($) {
     if ($mapPoints.length) {
       // Any map-points on page? add to map
       $mapPoints.each(function() {
-        var event_id = $(this).data('id');
+        var event_id = $(this).attr('data-id');
         var $point = $(this).addClass('mapped').hover(function() {
           _highlightMapPoint(event_id);
         }, _unHighlightMapPoints);
-        if ($point.data('lng')) {
+        if ($point.attr('data-lng')) {
           mapGeoJSON.push({
               type: 'Feature',
               geometry: {
                   type: 'Point',
-                  coordinates: [ $point.data('lng'), $point.data('lat') ]
+                  coordinates: [ $point.attr('data-lng'), $point.attr('data-lat') ]
               },
               properties: {
-                  title: $point.data('title'),
-                  event_id: $point.data('id'),
-                  event_url: $point.data('url'),
-                  description: $point.data('desc'),
+                  title: $point.attr('data-title'),
+                  event_id: $point.attr('data-id'),
+                  event_url: $point.attr('data-url'),
+                  description: $point.attr('data-desc'),
                   icon: mapIconRed
               }
           });
@@ -285,7 +285,9 @@ var IHC = (function($) {
         map.setView([39.9, -90.5], 7);
       } else {
         // Smaller map zooms in on single point
-        map.setView([$mapPoints.first().data('lat'), $mapPoints.first().data('lng')], 13);
+        if ($mapPoints.first().attr.attr('data-lng')) {
+          map.setView([$mapPoints.first().attr('data-lat'), $mapPoints.first().attr('data-lng')], 13);
+        }
       }
     }
   }

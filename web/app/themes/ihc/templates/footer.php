@@ -37,12 +37,25 @@
 
       <li class="address">
         <address class="vcard">
+          <span class="org">Mannie Jackson Center for the Humanities</span><br>
           <a class="underline" target="_blank" href="https://goo.gl/maps/GRJf3bynoky"><span class="street-address">1210 North Main St.</span><br>
             <span class="locality">Edwardsville, IL</span>
             <span class="postal-code">62025-1030</span>
           </a>
           <br><br><span class="tel">618.468.5580</span><br>
           <a class="email underline" href="mailto:matt.meacham@ilhumanities.org">matt.meacham@ilhumanities.org</a>
+        </address>
+      </li>
+
+        <li class="address">
+        <address class="vcard">
+          <span class="org">Stony Island Arts Bank</span><br>
+          <a class="underline" target="_blank" href="https://goo.gl/maps/2GFzqKC6m5m"><span class="street-address">6760 South Stony Island Ave</span><br>
+            <span class="locality">Chicago, IL</span>
+            <span class="postal-code">60649-1026</span>
+          </a>
+          <br><br><span class="tel">872.244.8603</span><br>
+          <a class="email underline" href="mailto:chris.guzaitis@ilhumanities.org">chris.guzaitis@ilhumanities.org</a>
         </address>
       </li>
 
