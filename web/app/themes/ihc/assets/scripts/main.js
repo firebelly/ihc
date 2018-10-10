@@ -285,7 +285,7 @@ var IHC = (function($) {
         map.setView([39.9, -90.5], 7);
       } else {
         // Smaller map zooms in on single point
-        if ($mapPoints.first().attr.attr('data-lng')) {
+        if ($mapPoints.first().attr('data-lng')) {
           map.setView([$mapPoints.first().attr('data-lat'), $mapPoints.first().attr('data-lng')], 13);
         }
       }
