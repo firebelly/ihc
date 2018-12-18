@@ -61,16 +61,16 @@
     "wpackagist-plugin/cmb2": ">=2.0.5",
     "wpackagist-plugin/accordion-shortcodes": ">=2.2.0",
     "wpackagist-plugin/multiple-content-blocks": ">=3.2",
-    "wpackagist-plugin/user-roles-and-capabilities": ">=1.1",
+    "wpackagist-plugin/user-roles-and-capabilities": "^1.2.3",
     "mustardBees/cmb-field-select2": ">=2.0.4",
     "wpackagist-plugin/akismet": ">=4.1.0",
     "wpackagist-plugin/redirection": ">=3.6.0",
     "roots/soil": ">=3.0.0",
-    "wpackagist-plugin/simple-history": ">=2.5.3",
     "wpackagist-plugin/wp-super-cache": ">=1.4.7",
     "wpackagist-plugin/update-from-bottom": ">=1.0.3",
     "wpackagist-plugin/tablepress": ">=1.8",
-    "wpackagist-plugin/disable-gutenberg": "^1.5"
+    "wpackagist-plugin/disable-gutenberg": "^1.5",
+    "wpackagist-plugin/simple-history": "^2.28"
   },
   "extra": {
     "installer-paths": {

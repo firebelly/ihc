@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d6de451bd8caeafab1b7a36675b0593",
+    "content-hash": "91138382b491f79221b9c939be48135c",
     "packages": [
         {
             "name": "composer/installers",
@@ -546,15 +546,15 @@
         },
         {
             "name": "wpackagist-plugin/user-roles-and-capabilities",
-            "version": 1000,
+            "version": "1.2.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/user-roles-and-capabilities/",
-                "reference": "tags/1000"
+                "reference": "tags/1.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/user-roles-and-capabilities.1000.zip",
+                "url": "https://downloads.wordpress.org/plugin/user-roles-and-capabilities.1.2.3.zip",
                 "reference": null,
                 "shasum": null
             },
