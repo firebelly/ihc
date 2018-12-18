@@ -60,7 +60,6 @@
     "wpackagist-plugin/intuitive-custom-post-order": "*",
     "wpackagist-plugin/cmb2": ">=2.0.5",
     "wpackagist-plugin/accordion-shortcodes": ">=2.2.0",
-    "wpackagist-plugin/multiple-content-blocks": ">=3.2",
     "wpackagist-plugin/user-roles-and-capabilities": "^1.2.3",
     "mustardBees/cmb-field-select2": ">=2.0.4",
     "wpackagist-plugin/akismet": ">=4.1.0",
