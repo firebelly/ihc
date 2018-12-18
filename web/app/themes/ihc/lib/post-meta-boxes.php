@@ -106,6 +106,93 @@ function metaboxes( array $meta_boxes ) {
     ),
   );
 
+  // Custom fields on Support Us page
+  $meta_boxes['support_us_blocks'] = array(
+    'id'            => 'support_us_blocks',
+    'title'         => __( 'Support Us Blocks', 'cmb2' ),
+    'object_types'  => array( 'page', ),
+    'show_slugs'    => array( 'support-us' ),
+    'show_on_cb'    => __NAMESPACE__ . '\\cmb2_show_for_slugs',
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true,
+    'fields'        => array(
+      array(
+        'id'      => '_mcb-support-us-page-block-1',
+        'name'    => __( 'Support Us Block 1', 'cmb2' ),
+        'type'    => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 10,
+        ),
+      ),
+      array(
+        'id'      => '_mcb-support-us-page-block-2',
+        'name'    => __( 'Support Us Block 2', 'cmb2' ),
+        'type'    => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 10,
+        ),
+      ),
+      array(
+        'id'      => '_mcb-support-us-page-block-3',
+        'name'    => __( 'Support Us Block 3', 'cmb2' ),
+        'type'    => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 10,
+        ),
+      ),
+      array(
+        'name'    => __( 'Support Us Sidebar', 'cmb2' ),
+        'id'      => '_mcb-support-us-sidebar',
+        'type'    => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 10,
+        ),
+      ),
+    ),
+  );
+
+  // Custom fields on Our Work page
+  $meta_boxes['our_work_blocks'] = array(
+    'id'            => 'our_work_blocks',
+    'title'         => __( 'Our Work Blocks', 'cmb2' ),
+    'object_types'  => array( 'page', ),
+    'show_slugs'    => array( 'our-work' ),
+    'show_on_cb'    => __NAMESPACE__ . '\\cmb2_show_for_slugs',
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true,
+    'fields'        => array(
+      array(
+        'id'      => '_mcb-our-work-sidebar',
+        'name'    => __( 'Our Work Sidebar', 'cmb2' ),
+        'type'    => 'wysiwyg',
+      ),
+    ),
+  );
+
+  // Custom sidebar field for all pages
+  $meta_boxes['general_page_blocks'] = array(
+    'id'            => 'general_page_blocks',
+    'title'         => __( 'Page Blocks', 'cmb2' ),
+    'object_types'  => array( 'page', ),
+    'exclude_slugs' => array( 'our-work', 'support-us' ), // hide on pages that have custom sidebars (holdover from old multiple content blocks setup)
+    'show_on_cb'    => __NAMESPACE__ . '\\cmb2_exclude_for_slugs',
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true,
+    'fields'        => array(
+      array(
+        'id'      => '_mcb-sidebar-content',
+        'name'    => __( 'Page Sidebar', 'cmb2' ),
+        'type'    => 'wysiwyg',
+        'options' => array(
+          'textarea_rows' => 10,
+        ),
+      ),
+    ),
+  );
+
   return $meta_boxes;
 }
 add_filter( 'cmb2_meta_boxes', __NAMESPACE__ . '\metaboxes' );
@@ -181,3 +268,27 @@ function news_filters($query){
   }
 }
 add_action('pre_get_posts', __NAMESPACE__ . '\\news_filters');
+
+/**
+ * Exclude metabox on specific slugs
+ * @param  object $cmb CMB2 object
+ * @return bool        True/false whether to show the metabox
+ */
+function cmb2_exclude_for_slugs( $cmb ) {
+  $slugs_to_exclude = $cmb->prop( 'exclude_slugs', array() );
+  $post_slug = get_post_field( 'post_name', $cmb->object_id() );
+  $excluded = in_array( $post_slug, $slugs_to_exclude, true );
+  return ! $excluded;
+}
+
+/**
+ * Show metabox on specific slugs
+ * @param  object $cmb CMB2 object
+ * @return bool        True/false whether to show the metabox
+ */
+function cmb2_show_for_slugs( $cmb ) {
+  $slugs_to_show = $cmb->prop( 'show_slugs', array() );
+  $post_slug = get_post_field( 'post_name', $cmb->object_id() );
+  $show = in_array( $post_slug, $slugs_to_show, true );
+  return $show;
+}

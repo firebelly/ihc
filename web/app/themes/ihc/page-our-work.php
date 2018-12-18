@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Template Name: Our Work
  */
@@ -6,6 +6,7 @@
 $content_banner_text = get_post_meta($post->ID, '_cmb2_content_banner_text', true);
 $body_content = apply_filters('the_content', $post->post_content);
 $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
+$our_work_sidebar = get_post_meta($post->ID, '_mcb-our-work-sidebar', true);
 ?>
 <div class="content-wrap <?= $with_image_class ?>">
 
@@ -14,7 +15,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
   <main>
     <h2 class="flag">Our Focus Areas</h2>
     <ul class="focus-list-large">
-      <?php 
+      <?php
       $focus_areas = get_terms('focus_area');
       foreach ($focus_areas as $focus_area) {
         include(locate_template('templates/article-focus-area.php'));
@@ -26,7 +27,7 @@ $with_image_class = (has_post_thumbnail($post->ID)) ? 'with-image' : '';
   <aside class="main">
     <?php include(locate_template('templates/thought-of-the-day.php')); ?>
     <div class="sidebar-content user-content dark">
-      <?= get_the_block('Our Work Sidebar') ?>
+      <?= apply_filters('the_content', $our_work_sidebar) ?>
     </div>
   </aside>
 
