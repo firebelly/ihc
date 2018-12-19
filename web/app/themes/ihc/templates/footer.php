@@ -38,7 +38,7 @@
       <li class="address">
         <address class="vcard">
           <span class="org">Stony Island Arts Bank</span><br>
-          <a class="underline" target="_blank" href="https://goo.gl/maps/2GFzqKC6m5m"><span class="street-address">6760 South Stony Island Ave</span><br>
+          <a class="underline" target="_blank" href="https://goo.gl/maps/2GFzqKC6m5m"><span class="street-address">6760 South Stony Island Ave.</span><br>
             <span class="locality">Chicago, IL</span>
             <span class="postal-code">60649</span>
           </a>
