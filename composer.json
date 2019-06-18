@@ -41,12 +41,12 @@
     {
       "type": "package",
       "package": {
-        "name": "mustardBees/cmb-field-select2",
+        "name": "mustardbees/cmb-field-select2",
         "version": "2.0.4",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
-          "url": "https://github.com/mustardBees/cmb-field-select2/archive/master.zip"
+          "url": "https://github.com/mustardbees/cmb-field-select2/archive/master.zip"
         }
       }
     }
@@ -61,7 +61,7 @@
     "wpackagist-plugin/cmb2": ">=2.0.5",
     "wpackagist-plugin/accordion-shortcodes": ">=2.2.0",
     "wpackagist-plugin/user-roles-and-capabilities": "^1.2.3",
-    "mustardBees/cmb-field-select2": ">=2.0.4",
+    "mustardbees/cmb-field-select2": ">=2.0.4",
     "wpackagist-plugin/akismet": ">=4.1.0",
     "wpackagist-plugin/redirection": ">=3.6.0",
     "roots/soil": ">=3.0.0",
@@ -73,7 +73,7 @@
   },
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin", "roots/soil", "wpackagist-plugin/cmb2", "mustardBees/cmb-field-select2", "wpackagist-plugin/akismet"],
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin", "roots/soil", "wpackagist-plugin/cmb2", "mustardbees/cmb-field-select2", "wpackagist-plugin/akismet"],
       "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
       "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },
