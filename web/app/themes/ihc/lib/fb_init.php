@@ -256,3 +256,31 @@ function allow_script_tags() {
  );
 }
 add_action('init', __NAMESPACE__.'\allow_script_tags', 10);
+
+/**
+ * Redirect 404s if we can find a suitable new home
+ */
+function redirect_old_posts(){
+  if( is_404() ){
+    global $wp,$wpdb;
+    $request_url = $wp->request;
+
+    // If a news posts, strip out date
+    if (preg_match('#^news/#', $request_url)) {
+      $slug = preg_replace('#^news/[\d]+/[\d]+/#', '', $request_url);
+    } else {
+      $slug = $request_url;
+    }
+
+    // See if we can find a matching post by slug
+    $id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE post_name = %s", $slug));
+    if($id) {
+      $wp_query->is_404 = false;
+      $new_url = get_permalink($id);
+      wp_redirect($new_url, 301);
+      exit;
+    }
+
+  }
+}
+add_action('template_redirect', __NAMESPACE__.'\\redirect_old_posts');
