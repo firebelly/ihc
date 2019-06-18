@@ -12,7 +12,7 @@ $article_tags = \Firebelly\Utils\get_article_tags($post);
       <span class="month event-start"><?= date('M d', $event->event_start) ?></span>
       <span class="month event-end"><?= date('M d', $event->event_end) ?></span>
     <?php } else { ?>
-      <span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span> <?= ($event->year == date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?>
+      <span class="month"><?= date('M', $event->event_start) ?></span> <span class="day"><?= date('d', $event->event_start) ?></span> <?= ($event->year != date('Y') ? ' <span class="year">'.$event->year.'</span>' : '') ?>
     <?php } ?>
     </time>
     <?php if ($thumb = \Firebelly\Media\get_post_thumbnail($post->ID, 'large')): ?>
