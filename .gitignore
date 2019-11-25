@@ -43,3 +43,4 @@ bin
 # Cache
 web/app/cache
 web/app/wp-cache-config.php
+log/

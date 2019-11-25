@@ -1,13 +1,13 @@
 set :application, 'ilhumanities_staging'
 set :login, 'ilhumanities'
 set :repo_url, 'git@github.com:firebelly/ihc.git'
+set :domain, 'staging.ilhumanities.org'
 
-# Branch options
-# Prompts for the branch name (defaults to current branch)
-#ask :branch, -> { `git rev-parse --abbrev-ref HEAD`.chomp }
+# For wpcli db command search-replace
+set :wpcli_remote_url, "https://#{fetch(:domain)}"
+set :wpcli_local_url, "http://ihc.localhost"
 
-# Hardcodes branch to always be master
-# This could be overridden in a stage config file
+# This can be overridden in a stage config file to pull from a different branch
 set :branch, :master
 
 set :deploy_to, -> { "/home/#{fetch(:login)}/webapps/#{fetch(:application)}" }

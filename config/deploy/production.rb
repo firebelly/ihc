@@ -1,6 +1,9 @@
 set :stage, :production
 set :application, 'ih_wp'
 set :login, 'ilhumanities'
+set :domain, 'www.ilhumanities.org'
+
+set :wpcli_remote_url, "https://#{fetch(:domain)}"
 
 # Simple Role Syntax
 # ==================
