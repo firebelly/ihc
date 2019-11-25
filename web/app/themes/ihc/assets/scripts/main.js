@@ -102,7 +102,7 @@ var IHC = (function($) {
     // Scroll down to hash afer page load
     $(window).load(function() {
       if (window.location.hash) {
-        _scrollBody($(window.location.hash));
+        _scrollBody($(window.location.hash), 500, 250);
       }
     });
 
@@ -145,11 +145,18 @@ var IHC = (function($) {
     } else {
       wpOffset = 0;
     }
-    element.velocity("scroll", {
+    // defaults
+    if (typeof duration === 'undefined') {
+      duration = 500;
+    }
+    if (typeof delay === 'undefined') {
+      duration = 0;
+    }
+    element.velocity('scroll', {
       duration: duration,
       delay: delay,
       offset: -wpOffset
-    }, "easeOutSine");
+    }, 'easeOutSine');
   }
 
   function _initSearch() {
