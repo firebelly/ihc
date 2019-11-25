@@ -140,7 +140,7 @@ var IHC = (function($) {
   }
 
   function _scrollBody(element, duration, delay) {
-    var wpOffset = 30;
+    var wpOffset = 80;
     if ($('#wpadminbar').length) {
       wpOffset += $('#wpadminbar').height();
     }
