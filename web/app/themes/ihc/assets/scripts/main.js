@@ -140,11 +140,11 @@ var IHC = (function($) {
   }
 
   function _scrollBody(element, duration, delay) {
+    var wpOffset = 30;
     if ($('#wpadminbar').length) {
-      wpOffset = $('#wpadminbar').height();
-    } else {
-      wpOffset = 0;
+      wpOffset += $('#wpadminbar').height();
     }
+
     // defaults
     if (typeof duration === 'undefined') {
       duration = 500;
