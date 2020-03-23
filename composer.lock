@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21fe6e06af44a2e5d3200cd3aa0f83f9",
+    "content-hash": "7420a92ed340458da7e9aebaed587361",
     "packages": [
         {
             "name": "composer/installers",
@@ -646,22 +646,22 @@
             "homepage": "https://wordpress.org/plugins/user-roles-and-capabilities/"
         },
         {
-            "name": "wpackagist-plugin/wp-super-cache",
+            "name": "wpackagist-plugin/wpfront-notification-bar",
             "version": "1.7.1",
             "source": {
                 "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-super-cache/",
+                "url": "https://plugins.svn.wordpress.org/wpfront-notification-bar/",
                 "reference": "tags/1.7.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-super-cache.1.7.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/wpfront-notification-bar.1.7.1.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-super-cache/"
+            "homepage": "https://wordpress.org/plugins/wpfront-notification-bar/"
         }
     ],
     "packages-dev": [],
