@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dc35d51c466d70a8676451f55543c0bd",
+    "content-hash": "21fe6e06af44a2e5d3200cd3aa0f83f9",
     "packages": [
         {
             "name": "composer/installers",
@@ -503,15 +503,15 @@
         },
         {
             "name": "wpackagist-plugin/disable-gutenberg",
-            "version": "1.9",
+            "version": "2.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/disable-gutenberg/",
-                "reference": "tags/1.9"
+                "reference": "tags/2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/disable-gutenberg.1.9.zip"
+                "url": "https://downloads.wordpress.org/plugin/disable-gutenberg.2.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
