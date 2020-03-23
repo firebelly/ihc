@@ -155,7 +155,7 @@ function site_options() {
     <div class="wrap">
         <h2>Site Options</h2>
 
-        <form method="post">
+        <form method="post" action="options.php">
           <?php wp_nonce_field('update-options') ?>
           <table class="form-table">
               <tr>
