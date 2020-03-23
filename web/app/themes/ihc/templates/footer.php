@@ -60,10 +60,11 @@
       </li>
 
       <li class="social">
-        <p>follow us:</p>
-        <a target="_blank" href="https://www.facebook.com/<?php echo get_option( 'facebook_id', 'ILhumanities' ); ?>"><span class="icon-facebook"></span></a>
-        <a target="_blank" href="https://twitter.com/<?php echo get_option( 'twitter_id', 'ilhumanities' ); ?>"><span class="icon-twitter"></span></a>
-        <a target="_blank" href="https://instagram.com/<?php echo get_option( 'instagram_id', 'ilhumanities' ); ?>"><span class="icon-instagram"></span></a>
+        <p>Follow Us:</p>
+        <a title="Facebook" target="_blank" href="https://www.facebook.com/<?php echo get_option( 'facebook_id', 'ILhumanities' ); ?>"><span class="icon-facebook"></span></a>
+        <a title="Twitter" target="_blank" href="https://twitter.com/<?php echo get_option( 'twitter_id', 'ilhumanities' ); ?>"><span class="icon-twitter"></span></a>
+        <a title="Instagram" target="_blank" href="https://instagram.com/<?php echo get_option( 'instagram_id', 'ilhumanities' ); ?>"><span class="icon-instagram"></span></a>
+        <a title="YouTube" target="_blank" href="<?php echo get_option( 'youtube_url', 'ilhumanities' ); ?>"><span class="icon-youtube"></span></a>
       </li>
 
       <li class="source-org copyright">

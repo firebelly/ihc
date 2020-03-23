@@ -155,7 +155,7 @@ function site_options() {
     <div class="wrap">
         <h2>Site Options</h2>
 
-        <form method="post" action="options.php">
+        <form method="post">
           <?php wp_nonce_field('update-options') ?>
           <table class="form-table">
               <tr>
@@ -169,6 +169,10 @@ function site_options() {
               <tr>
                 <th scope="row"><label for="instagram_id">Instagram Account:</label></th>
                 <td><input type="text" id="instagram_id" name="instagram_id" size="45" value="<?php echo get_option('instagram_id'); ?>" /></td>
+              </tr>
+              <tr>
+                <th scope="row"><label for="youtube_url">YouTube URL:</label></th>
+                <td><input type="text" id="youtube_url" name="youtube_url" size="45" value="<?php echo get_option('youtube_url'); ?>" /></td>
               </tr>
               <tr>
                 <th scope="row"><label for="media_contact">Media Contact:</label></th>
@@ -189,7 +193,7 @@ function site_options() {
           <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes" /></p>
 
           <input type="hidden" name="action" value="update" />
-          <input type="hidden" name="page_options" value="twitter_id,facebook_id,instagram_id,media_contact,thought_of_day_email,thought_of_day_response" />
+          <input type="hidden" name="page_options" value="twitter_id,facebook_id,instagram_id,youtube_url,media_contact,thought_of_day_email,thought_of_day_response" />
         </form>
     </div>
 <?php
