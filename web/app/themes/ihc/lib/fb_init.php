@@ -148,12 +148,12 @@ add_filter('tiny_mce_before_init', __NAMESPACE__ . '\simplify_tinymce');
  * Custom Site Options page for various fields
  */
 function add_site_options() {
-  add_options_page('Site Settings', 'Site Settings', 'manage_options', 'functions', __NAMESPACE__ . '\site_options');
+  add_options_page('Site Settings', 'Site Settings', 'manage_options', 'site_settings', __NAMESPACE__ . '\site_options');
 }
 function site_options() {
 ?>
     <div class="wrap">
-        <h2>Site Options</h2>
+        <h2>Site Settings</h2>
 
         <form method="post" action="options.php">
           <?php wp_nonce_field('update-options') ?>
