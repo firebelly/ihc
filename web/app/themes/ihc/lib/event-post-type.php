@@ -575,9 +575,9 @@ function get_event_details($post) {
     'add_to_calendar_url' => admin_url('admin-ajax.php') . "?action=event_ics&amp;id={$post->ID}&amp;nc=" . current_time('timestamp'),
   ];
   // Is this event multiple days?
-  $event['multiple_days'] = (date('Y-m-d', $event['event_start']) != date('Y-m-d', $event['event_end']));
-  $event['start_time'] = date('g:iA', $event['event_start']);
-  $event['end_time'] = date('g:iA', $event['event_end']);
+  $event['multiple_days'] = (date('Y-m-d', (int)$event['event_start']) != date('Y-m-d', (int)$event['event_end']));
+  $event['start_time'] = date('g:iA', (int)$event['event_start']);
+  $event['end_time'] = date('g:iA', (int)$event['event_end']);
   if ($event['start_time'] != $event['end_time']) {
     $event['time_txt'] = $event['start_time'] . '–' . $event['end_time'];
   } else {
@@ -585,8 +585,8 @@ function get_event_details($post) {
   }
 
   $event['archived'] = empty($event['event_end']) ? ($event['event_start'] < current_time('timestamp')) : ($event['event_end'] < current_time('timestamp'));
-  $event['desc'] = date('M d, Y @ ', $event['event_start']) . $event['time_txt']; // used in map pins
-  $event['year'] = date('Y', $event['event_start']);
+  $event['desc'] = date('M d, Y @ ', (int)$event['event_start']) . $event['time_txt']; // used in map pins
+  $event['year'] = date('Y', (int)$event['event_start']);
 
   $address = get_post_meta($post->ID, '_cmb2_address', true);
   $event['address'] = wp_parse_args($address, array(
