@@ -10,7 +10,7 @@ set :wpcli_local_url, "http://ihc.localhost"
 # This can be overridden in a stage config file to pull from a different branch
 set :branch, :master
 
-set :deploy_to, -> { "/home/#{fetch(:login)}/webapps/#{fetch(:application)}" }
+set :deploy_to, -> { "/home/#{fetch(:login)}/apps/#{fetch(:application)}" }
 
 set :tmp_dir, -> { "/home/#{fetch(:login)}/tmp" }
 
@@ -76,7 +76,7 @@ set :local_theme_path, fetch(:local_app_path).join(fetch(:theme_path))
 namespace :deploy do
   before :starting, :map_composer_command do
       on roles(:app) do |server|
-          SSHKit.config.command_map[:composer] = "php72 /home/#{fetch(:login)}/bin/composer.phar"
+          SSHKit.config.command_map[:composer] = "php74 /home/#{fetch(:login)}/bin/composer.phar"
       end
   end
 end
