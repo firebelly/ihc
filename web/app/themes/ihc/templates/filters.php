@@ -57,7 +57,9 @@ $post_type = is_post_type_archive('event') ? 'event' : 'post';
               $event_ids = [];
               foreach ($evt_post_ids as $event)
                 $event_ids[] = $event->ID;
-              $extra_where = 'AND p2.ID IN (' . implode(',', $event_ids) . ') ';
+              if (!empty($event_ids)) {
+                $extra_where = 'AND p2.ID IN (' . implode(',', $event_ids) . ') ';
+              }
             }
             if (!empty($_REQUEST['filter_focus_area'])) {
               // todo: also filter out posts that match focus_area first
