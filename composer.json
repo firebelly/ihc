@@ -64,7 +64,7 @@
     "mustardbees/cmb-field-select2": ">=2.0.4",
     "wpackagist-plugin/akismet": ">=4.1.0",
     "wpackagist-plugin/redirection": ">=3.6.0",
-    "roots/soil": ">=3.0.0",
+    "roots/soil": "^3.0.0",
     "wpackagist-plugin/update-from-bottom": ">=1.0.3",
     "wpackagist-plugin/tablepress": ">=1.8",
     "wpackagist-plugin/disable-gutenberg": "^2.0",
