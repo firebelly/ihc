@@ -7,6 +7,39 @@ form {
   }
 }
 
+// Password protect form
+.post-password {
+  padding: 20px;
+  margin: 30px 0 80px;
+}
+.post-password-form {
+  background: $white;
+  min-height: 70px;
+  padding: 30px #{$column-width/2 * 22/15};
+  margin-bottom: 30px;
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  input[type=password],
+  select {
+    @include font-style1;
+    color: $dk-blue;
+    padding: 6px 10px;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    width: 100%;
+    margin: 0 0 10px;
+    border-radius: 0;
+    background: $bg-pink;
+  }
+  input[type=submit] {
+    @extend .button;
+  }
+}
+
 // Custom select styles
 .select-wrapper {
   margin: 0;

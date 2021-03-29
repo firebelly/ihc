@@ -43,7 +43,9 @@ $bg-colors: $bg-blue $bg-green $bg-pink $bg-beige $bg-grey $bg-peach;
       border-bottom-color: $bg-color;
     }
 
-    // TOD
+    // TOD / password forms
+
+    .post-password-form,
     .thought-of-the-day {
       input[type=text],
       select {

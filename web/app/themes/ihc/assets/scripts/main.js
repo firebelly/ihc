@@ -61,7 +61,7 @@ var IHC = (function($) {
     _initThoughtSubmit();
     _initNav();
     _initSearch();
-    _initMap();
+    // _initMap();
     _initMasonry();
     _initLoadMore();
     _initBigClicky();
@@ -376,7 +376,7 @@ var IHC = (function($) {
       }
 
       $.ajax({
-          url: wp_ajax_url,
+          url: wp_ajax_url[0],
           method: 'post',
           data: {
               action: 'load_more_posts',
@@ -433,7 +433,7 @@ var IHC = (function($) {
       var $form = $(this);
       var data = $form.addClass('working').serialize();
       $.ajax({
-          url: wp_ajax_url,
+          url: wp_ajax_url[0],
           method: 'post',
           data: data,
           success: function(response) {

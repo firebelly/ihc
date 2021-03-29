@@ -11,6 +11,8 @@ $has_header_text_class = get_post_meta($post->ID, '_cmb2_header_text', true) ? '
 ?>
 <div class="content-wrap<?= $with_image_class ?><?= $has_header_text_class ?>">
 
+<?php if (!post_password_required($post)): ?>
+
   <?php get_template_part('templates/page', 'image-header'); ?>
 
   <main>
@@ -36,5 +38,13 @@ $has_header_text_class = get_post_meta($post->ID, '_cmb2_header_text', true) ? '
       </div>
     </aside>
   <?php endif; ?>
+
+<?php else: ?>
+
+  <div class="password-form" style="padding: 20px; margin: 30px 0 50px;">
+    <?= get_the_password_form() ?>
+  </div>
+
+<?php endif; ?>
 
 </div>
