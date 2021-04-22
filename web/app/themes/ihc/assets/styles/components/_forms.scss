@@ -169,6 +169,13 @@ form {
     border-radius: 0;
   }
 
+  .BBFormPriceDescription {
+    float: none;
+    font-weight: 600;
+    text-transform: none;
+    word-break: break-all;
+  }
+
   // Radio buttons
   .BBFormRadioButton:checked + label {
     color: $white;
