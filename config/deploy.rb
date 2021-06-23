@@ -8,7 +8,7 @@ set :wpcli_remote_url, "https://#{fetch(:domain)}"
 set :wpcli_local_url, "http://ihc.localhost"
 
 # This can be overridden in a stage config file to pull from a different branch
-set :branch, :master
+set :branch, :main
 
 set :deploy_to, -> { "/home/#{fetch(:login)}/apps/#{fetch(:application)}" }
 
