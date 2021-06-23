@@ -49,8 +49,7 @@
 
       <li class="address">
         <address class="vcard">
-          <span class="org">Mannie Jackson Center for the Humanities</span><br>
-          <a class="underline" target="_blank" href="https://goo.gl/maps/GRJf3bynoky"><span class="street-address">1210 North Main St.</span><br>
+          <a class="underline" target="_blank" href="https://goo.gl/maps/WFK4JVa9F96dN99j6"><span class="street-address">600 Troy Road<br> N4, Room 207</span><br>
             <span class="locality">Edwardsville, IL</span>
             <span class="postal-code">62025</span>
           </a>
